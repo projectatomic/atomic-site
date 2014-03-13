@@ -1,24 +1,10 @@
-# Middleman-Springboard
+# Atomic project website
 
-Springboard is a starter-pack for Middleman, for quickly whipping together
-static-based comSpringboard websites.
+  * Atomic is a not-yet-public project.
+  * https://mojo.redhat.com/groups/appinfra-project-glow
 
-Think of "comSpringboard" without the "com". Springboard means "freedom" and
-"security" — which are things a static site can help to bring (on
-a small scale).
-
-
-## Installation
- 
-1. Clone this repo into `~/.middleman`. You will need to create this
-   directory if it doesn't exist.
-
-  `$ git clone GIT_URL_HERE ~/.middleman/springboard`
-
-2. Initialize middleman on a new or existing folder 
-
-  `$ middleman init path_to_project --template=springboard`
-
+This website is build on Middleman, a static site generator. See below for 
+quick instructions:
 
 ## Usage
 

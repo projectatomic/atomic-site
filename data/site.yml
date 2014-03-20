@@ -1,6 +1,6 @@
-name: Springboard for Middleman
-subhead: Static site construction kit
-domain: yourdomain.org
+name: Project Atomic
+subhead: Deploy and run Docker containers at scale on a rock solid seamless foundation
+domain: atomic.io
 
 # Optional logo. If commented out, it will not be used.
 logo: logo.png
@@ -10,10 +10,10 @@ logo: logo.png
 
 # Owner is used for the automatic copyright string.
 # If no owner is specified, then copyright will default to site name.)
-#owner: Your Name or Company
+owner: Red Hat, Inc.
 
 # The year your site was established (for the copyright)
-#founding_year: 2013 # Defaults to current year if commented
+founding_year: 2014 # Defaults to current year if commented
 
 # Manual copyright string, to override the automatic one
 #copyright: "&copy; 2013 YOUR_NAME_HERE"
@@ -34,6 +34,12 @@ keywords:
   - Middleman
   - Springboard
   - Static site
+  - docker.io
+  - docker
+  - linux
+  - container
+  - virtualization
+  - hosting
 
 ##
 # Deployment: OpenShift
@@ -51,7 +57,7 @@ keywords:
 # add your user@host contained within your git repo. (You may also use
 # the entire git repo line).
 
-#openshift: 12fea2b4c1b98683b3eae078@site-user.rhcloud.com
+openshift: 5328040a25535dfac900014c@atomic-tigert.itos.redhat.com
 
 # If you'd rather use OpenShift via git instead of rsync, comment out
 # the above line and add your git URL as a 'production' remote.

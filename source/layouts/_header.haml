@@ -1,15 +1,20 @@
-%header#branding.masthead.hidden-print(role="banner")
-  %section.hgroup
-    %h1
-      = link_to "/" do
-        - if data.site.logo
-          = image_tag data.site.logo, id: "rhlogo", class: "logo", alt: data.site.name
-        - else
-          = data.site.name
+= link_to "/" do
+  - if data.site.logo
+    = image_tag data.site.logo, id: "logo", class: "logo img-responsive", alt: data.site.name
+  - else
+    = data.site.name
 
-    - if data.site.subhead
-      %h2#site-title
-        = data.site.subhead
+%hr 
 
-  #access
-    = partial :nav, locals: { source: "navigation", nav_class: "nav-pills" }
+#access
+  = partial :nav, locals: { source: "navigation", nav_class: "nav-stacked" }
+
+  %hr
+
+#social
+  %a( href="http://www.twitter.com/TBD" ) 
+    %img( src="/images/account-twitter-symbolic.png") 
+  %a( href="http://www.facebook.com/TBD" ) 
+    %img( src="/images/account-facebook-symbolic.png") 
+  %a( href="http://plus.google.com/TBD" )
+    %img( src="/images/account-google-symbolic.png") 

@@ -1,1 +1,102 @@
 /**/
+
+body
+  background: #777
+  color: #ccc
+  background-repeat: repeat
+  background-image: url("/images/background.png")
+
+.container#page-wrap
+  background: #000
+  color: #666
+  @import compass/css3
+  +box-shadow(rgba(black, 0.16) 0 0 35px, rgba(black, 0.5) 0 0 6px)
+
+#sidebar
+  padding-left: 32px
+  padding-right: 32px
+
+  hr
+    margin-top: 40px
+    margin-bottom: 40px
+    padding: 0
+    border: none
+    border-top: 1px solid #333
+    color: #222
+    text-align: center
+
+  hr:after
+    color: #555
+    content: "\00269B"
+    display: inline-block
+    position: relative
+    top: -0.7em
+    font-size: 2em
+    padding: 0 0.25em
+    background: #000
+
+#content
+  background: white
+  color: #666
+  padding: 32px
+
+#logo
+  margin-left: auto
+  margin-right: auto
+
+#access
+  a
+    @import "compass/typography/links/link-colors"
+    +link-colors(#eee, #46d200, #46d200, #ddd, #46d200)
+    font-family: "League Gothic", sans-serif
+    font-weight: regular
+    font-size: 32px
+    padding: 0
+    margin-left: -32px
+    margin-right: -32px
+    padding-left: 32px
+    padding-right: 32px
+
+  a:hover
+    background: #222
+    color: #fff
+    @import compass/css3
+    +text-shadow(rgba(228,210,187, .3) 0 0 8px)
+    
+#social
+  a
+    img
+      margin-bottom: 16px
+      margin-right: 16px
+      opacity: 0.1
+      background: transparent
+  a:hover
+    img
+      opacity: 0.2
+    text-decoration: none
+
+.container .jumbotron
+  border-radius: 0
+  margin: -32px -32px 32px -32px
+  @import compass
+  background-image: radial-gradient(ellipse at center top, rgba(48,58,48,0.8) 20%, rgba(0,0,0,0) 80%)
+  background: -webkit-radial-gradient(center top, ellipse cover, rgba(48,58,48,0.8) 20%,rgba(0,0,0,0) 100%)
+
+  p 
+    font-size: 60%
+    font-weight: 400
+
+  p.lead
+    font-size: 100%
+    font-weight: 300
+
+#content .container
+  margin: 16px
+
+#footer
+  padding: 24px
+  font-size: 80%
+  color: rgba(white, 0.4)
+  background-image: radial-gradient(ellipse at center top, rgba(black,0.6) 20%, rgba(black,0) 80%)
+  background: -webkit-radial-gradient(center top, ellipse cover, rgba(48,58,48,0.8) 20%,rgba(0,0,0,0) 100%)
+

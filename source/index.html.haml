@@ -1,23 +1,73 @@
 ---
 pageable: true
+layout: atomic
 ---
+.jumbotron
+  %h1
+    Runs
+    %a{:href => "http://docker.io"} Docker
+    containers.
+  %p.lead
+    Project Atomic provides a bare-bones minimal OS that is designed to host containers 
+    effectively and with minimum overhead. We provide atomic updates, so you can rely 
+    on running a tested and tried software distribution underneath.
 
-- content_for :head do
-  %link(href="/blog/feed.xml" rel="alternate" title="Atom feed" type="application/atom+xml")
+  %p
+    Cloud images are available for download, supporting VirtualBox, QEMU/KVM and OpenStack. Support for
+    bare metal installation is coming.
+   
+  %h2
+    %a{:href => "/download" }  &raquo; Get Started Now!
 
-- if defined? page_number && page_number < 2
-
-  -# First-page only stuff here
-  -# (If a blog is included below, then it may paginate)
-
-.row
-
-  %section.blog-posts
-
-    %section.container
-
-      %h2
-        = data.site.name
-        News
-
-      = partial :blog_posts, locals: locals
+.container
+  .row
+    .col-md-7
+      %h2.featurette-heading Red Hat Enterprise Linux, smaller and faster
+      %p.lead
+        While Atomic Controller is a slimmed down
+        system designed to run Docker containers, it derives from
+        the upstream Red Hat Enterprise Linux RPMs.  It will closely
+        track any errata in the RPMs, while still providing clients
+        with fully atomic upgrades.
+    .col-md-5
+      %img.featurette-image.img-responsive{:alt => "Generic placeholder image", "data-src" => "holder.js/500x500/auto"}/
+  %hr/
+  .row
+    .col-md-5
+      %img.featurette-image.img-responsive{:alt => "Generic placeholder image", "data-src" => "holder.js/500x500/auto"}/
+    .col-md-7
+      %h2.featurette-heading Compatible filesystem layout, with writable /etc
+      %p.lead
+        Many "image" based operating system upgrade
+        tools take the simple model of having state in a separate
+        partition.  This interacts poorly with the traditional Unix
+        of
+        = succeed "." do
+          %tt /etc
+          With the OSTree base, configuration
+          management tools like Puppet can write to
+          %tt /etc
+          as
+          they always have, while still allowing atomic upgrades.
+    %hr/
+    .row
+      .col-md-7
+        %h2.featurette-heading SELinux in enforcing mode
+        %p.lead
+          Because the underlying rpm-ostree technology
+          is an evolution of Fedora and RPM, Controller takes
+          advantage of all of the work that's been put into things
+          like Security-Enhanced Linux.  This allows it to confine
+          Docker containers with strong mandatory access control.
+      .col-md-5
+        %img.featurette-image.img-responsive{:alt => "Generic placeholder image", "data-src" => "holder.js/500x500/auto"}/
+    %hr/
+    .row
+      .col-md-5
+        %img.featurette-image.img-responsive{:alt => "Generic placeholder image", "data-src" => "holder.js/500x500/auto"}/
+      .col-md-7
+        %h2.featurette-heading Extensible by privileged containers
+        %p.lead
+          You can extend Atomic Controller with additional software
+          such as monitoring agents by creating privileged containers
+          which can access the host system.

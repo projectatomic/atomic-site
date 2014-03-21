@@ -6,6 +6,18 @@
 This website is build on Middleman, a static site generator. See below for 
 quick instructions:
 
+To get started, you need to have Ruby and Ruby Gems installed, as well
+as "bundler".
+
+## Initial setup
+
+```
+sudo yum install -y ruby-devel rubygems gcc-c++ curl-devel rubygem-bundler
+git clone git@gitlab.osas.lab.eng.rdu2.redhat.com:osas/atomic-site.git
+cd atomic-site
+bundle install
+```
+
 ## Usage
 
 ### View locally

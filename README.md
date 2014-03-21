@@ -22,7 +22,7 @@ bundle install
 
 ### View locally
 
-1. Start up Middleman by typing `bundle exec middleman` (or if you have
+1. Start up Middleman by typing `bundle exec middleman server` (or if you have
    it in your path, just `middleman` works).
    
    Middleman will start up a development server. 

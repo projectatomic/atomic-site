@@ -365,12 +365,17 @@ directory_index: false
   # Option 1:
   # Rewrite "www.example.com -> example.com".
 
-  <IfModule mod_rewrite.c>
-    RewriteCond %{HTTPS} !=on
-    RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
-    RewriteRule ^ http://%1%{REQUEST_URI} [R=301,L]
-  </IfModule>
-
+  #  
+  # Do not uncomment that line. We cannot have hosting of projectatomic.io directly
+  # on openshift due to DNS restriction ( projectatomic.io cannot point to something 
+  # else than a A record, and openshift hosting requires a CNAME redirection
+  # 
+  #  <IfModule mod_rewrite.c>
+  #    RewriteCond %{HTTPS} !=on
+  #    RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+  #    RewriteRule ^ http://%1%{REQUEST_URI} [R=301,L]
+  #  </IfModule>
+  #
   # ----------------------------------------------------------------------
 
   # Option 2:

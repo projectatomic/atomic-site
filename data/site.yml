@@ -1,6 +1,6 @@
 name: Project Atomic
 subhead: Deploy and run Docker containers at scale on a rock solid seamless foundation
-domain: projectatomic.io
+domain: www.projectatomic.io
 
 # Be sure to set up and install Juvia before enabling!
 #has_comments: true

@@ -1,6 +1,6 @@
 name: Project Atomic
 subhead: Deploy and run Docker containers at scale on a rock solid seamless foundation
-domain: atomic.io
+domain: projectatomic.io
 
 # Optional logo. If commented out, it will not be used.
 logo: logo.png

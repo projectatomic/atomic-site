@@ -8,9 +8,10 @@ layout: atomic
     %a{:href => "http://docker.io"} Docker
     containers.
   %p.lead
-    Project Atomic provides a bare-bones minimal OS that is designed to host containers 
-    effectively and with minimum overhead. We provide atomic updates, so you can rely 
-    on running a tested and tried software distribution underneath.
+    Project Atomic provides a bare-bones, minimal operating system that is designed 
+    to host Docker containers effectively and with minimum overhead. We provide atomic 
+    updates to the host OS, so you can rely on running a tested and tried software 
+    distribution underneath.
 
   %p
     Cloud images are available for download, supporting VirtualBox, QEMU/KVM and OpenStack. Support for
@@ -22,13 +23,15 @@ layout: atomic
 .container
   .row
     .col-md-7
-      %h2.featurette-heading Red Hat Enterprise Linux, smaller and faster
+      %h2.featurette-heading Making the distribution smaller and faster
       %p.lead
         While Atomic Controller is a slimmed down
-        system designed to run Docker containers, it derives from
-        the upstream Red Hat Enterprise Linux RPMs.  It will closely
+        system designed to run Docker containers, it's built from
+        the upstream CentOS or Fedora Linux RPMs. It will closely
         track any errata in the RPMs, while still providing clients
-        with fully atomic upgrades.
+        with fully atomic upgrades. This ensures the best of both worlds:
+        an update model suited to container deployments, from a Linux 
+        distribution you know and trust.
     .col-md-5
       %img.featurette-image.img-responsive{:alt => "Generic placeholder image", "data-src" => "holder.js/500x500/auto"}/
   %hr/
@@ -41,14 +44,14 @@ layout: atomic
         Many "image" based operating system upgrade
         tools take the simple model of having state in a separate
         partition.  This interacts poorly with the traditional Unix
-        of
+        model of writing to 
         = succeed "." do
-          %tt /etc
+          %tt /etc.
           With the OSTree base, configuration
           management tools like Puppet can write to
           %tt /etc
-          as
-          they always have, while still allowing atomic upgrades.
+          as they always have, while still allowing 
+          atomic upgrades.
     %hr/
     .row
       .col-md-7

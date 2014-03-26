@@ -40,7 +40,7 @@ set :markdown_engine, :redcarpet
 
 # Add an AsciiDoc filter to HAML
 # (Use ':asciidoc' for AsciiDoctor-powered blocks in HAML)
-Haml::Filters.register_tilt_filter "AsciiDoc"
+#Haml::Filters.register_tilt_filter "AsciiDoc"
 
 set :asciidoctor,
   :toc => true,

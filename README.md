@@ -53,4 +53,4 @@ Simply add a new `gem 'some-gem-here'` line in the `Gemfile` and run
 ## More info
 
 For more information, please check the excellent 
-[Middleman documentation](http://middlemanapp.com/getting-started/).
+[Middleman documentation](http://middlemanapp.com/basics/getting-started/)

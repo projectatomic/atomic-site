@@ -13,19 +13,19 @@ body
   +box-shadow(rgba(black, 0.16) 0 0 35px, rgba(black, 0.5) 0 0 6px)
 
 #sidebar
-  padding-left: 32px
-  padding-right: 32px
+  padding-left: 16px
+  padding-right: 16px
 
   hr
-    margin-top: 40px
-    margin-bottom: 40px
+    margin-top: 20px
+    margin-bottom: 20px
     padding: 0
     border: none
     border-top: 1px solid #333
     color: #222
     text-align: center
 
-  hr:after
+/*  hr:after
     color: #555
     content: "\00269B"
     display: inline-block
@@ -33,7 +33,7 @@ body
     top: -0.7em
     font-size: 2em
     padding: 0 0.25em
-    background: #000
+    background: #000 */
 
 #content
   background: white
@@ -41,10 +41,11 @@ body
   padding: 32px
 
 #logo
+  padding: 0
   margin-left: auto
   margin-right: auto
 
-#access
+#access /* navigation on left */
   a
     @import "compass/typography/links/link-colors"
     +link-colors(#eee, #46d200, #46d200, #ddd, #46d200)

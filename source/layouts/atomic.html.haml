@@ -41,10 +41,10 @@
   %body{:class => (page_classes || 'page') + " source-#{current_page.source_file.split('.').last}" }
     .container#page-wrap
       .row
-        .col-sm-4.col-xs-12#sidebar
+        .col-sm-3.col-xs-12#sidebar
           - unless data.page.hide_header
             = partial "header"
-        .col-sm-8.col-xs-12#content
+        .col-sm-9.col-xs-12#content
 
           -# Show a warning for those using < IE6 or lower
           /[if lt IE 7]

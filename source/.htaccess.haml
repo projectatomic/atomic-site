@@ -549,3 +549,22 @@ directory_index: false
   <IfModule php5_module>
     php_value session.cookie_httponly true
   </IfModule>
+
+  Order deny,allow
+  Deny from All
+
+  # EMEA
+  # SetEnvIf X-Client-IP  ^209\.132\.186\..*$  internal
+
+  # only in the internal openshift
+  SetEnvIf X-Client-IP  ^10\..*$             internal
+
+  Allow from env=internal
+
+  AuthType Basic
+  AuthName "Restricted access, contact OSAS for password"
+  AuthUserFile ../app-root/runtime/passwd
+  Require valid-user
+
+  Satisfy any
+

@@ -1,24 +1,26 @@
-%footer#footer.text-center
+.row
+  .col-md-offset-3.col-md-9.col-lg-offset-2.col-lg-10#footer
+    %footer
 
-  %hr.visible-print
+      %hr.visible-print
 
-  - if data.site.footer_links
-    %ul.footer-nav-list
-      - data.site.footer_links.each do |name, url|
-        %li= link_to name.strip, url.strip, target: "_blank"
+      - if data.site.footer_links
+        %ul.footer-nav-list
+          - data.site.footer_links.each do |name, url|
+            %li= link_to name.strip, url.strip, target: "_blank"
 
-  =# data.site.founding_year
-  - founding = data.site.founding_year
-  - year_string = if founding && founding.to_i < Time.now.year
-    - founding.to_s + '&ndash;' + Time.now.year.to_s
-  - else
-    - Time.now.year.to_s
+      =# data.site.founding_year
+      - founding = data.site.founding_year
+      - year_string = if founding && founding.to_i < Time.now.year
+        - founding.to_s + '&ndash;' + Time.now.year.to_s
+      - else
+        - Time.now.year.to_s
 
-  = data.site.copyright || "&copy; #{year_string} #{data.site.owner || data.site.name}"
+      = data.site.copyright || "&copy; #{year_string} #{data.site.owner || data.site.name}"
 
-  .last-modified
-    - modified_time = IO.popen(['git', 'log', '--pretty=format:%ai', current_page.source_file]).read.split(/\n/).first rescue nil
+      -# .last-modified
+        - modified_time = IO.popen(['git', 'log', '--pretty=format:%ai', current_page.source_file]).read.split(/\n/).first rescue nil
 
-    - if modified_time
-      Page last modified
-      = Time.parse(modified_time).utc.strftime('%a %-d %b %Y %H:%M %Z')
+        - if modified_time
+          Page last modified
+          = Time.parse(modified_time).utc.strftime('%a %-d %b %Y %H:%M %Z')

@@ -6,7 +6,7 @@ domain: www.projectatomic.io
 #has_comments: true
 
 # Optional logo. If commented out, it will not be used.
-logo: logo.png
+# logo: logo.png
 
 # optional, set to true if your site uses SSL by default
 #ssl: true

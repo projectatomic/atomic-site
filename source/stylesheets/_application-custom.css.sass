@@ -1,20 +1,317 @@
 /**/
 
-body
-  background: #777
-  color: #ccc
-  background-repeat: repeat
-  background-image: url("/images/background.png")
-
 .container#page-wrap
-  background: #000
-  color: #666
-  @import compass/css3
-  +box-shadow(rgba(black, 0.16) 0 0 35px, rgba(black, 0.5) 0 0 6px)
+  background: #fff
+
+  @media screen and (min-width: $screen-md)
+    background: #2b2b2b
+
+  .jumbotron
+    background-image: url(/images/bg-jumbotron.png)
+    background-repeat: no-repeat
+    background-size: auto 100%
+    background-position: -250px 100%
+    border-radius: 0
+    font-size: $font-size-base
+    margin: 0 ($grid-gutter-width / -2)
+    padding-bottom: 100px
+    padding-top: 120px
+    position: relative
+
+    @media screen and (min-width: $screen-sm)
+      padding-bottom: 100px
+      padding-top: 140px
+
+    @media screen and (min-width: $screen-md)
+      padding: 200px 60px 140px
+      h1
+        font-size: $font-size-base * 3.4285 // 48px
+
+    .btn-default
+      background: transparent
+      border: 1px solid #fff
+      color: #fff
+      font-family: $headings-font-family
+      font-size: 22px
+      margin: 15px 0 0
+      text-transform: uppercase
+
+      &:hover
+        color: $brand-primary
+
+      .fa-long-arrow-right
+        margin: 0 0 0 10px
+
+      .fa-rocket
+        color: $brand-primary
+        margin: 0 9px 0 0
+        position: relative
+
+    .buttons
+      position: relative
+
+      &:after
+        background: #fff
+        content: ''
+        position: absolute
+        height: 2px
+        left: 0
+        bottom: -50px
+        width: 60px
+
+    h1
+      position: relative
+
+      @media screen and (max-width: $screen-md)
+        font-size: $font-size-base * 3 // 42px
+
+      &:after
+        background: #fff
+        content: ''
+        left: 0
+        position: absolute
+        height: 2px
+        top: -44px
+        width: 60px
+
+    p.lead
+      font-size: $font-size-large
+      font-weight: 300
+
+
+#content
+  background: #fff
+
+  @media screen and (min-width: $screen-md)
+    padding-left: $grid-gutter-width
+    padding-right: $grid-gutter-width
+    .index & 
+      padding-left: $grid-gutter-width/2
+      padding-right: $grid-gutter-width/2
+
+
+.featurette
+  position: relative
+
+  &:before
+    border: 20px solid transparent
+    border-bottom-width: 0
+    border-left-width: 40px
+    border-right-width: 40px
+    border-top-color: #fff
+    bottom: -20px
+    content: ''
+    left: 50%
+    margin: 0 0 0 -40px
+    position: absolute
+    z-index: 10
+
+  &:last-child:before
+    display: none
+
+  &:nth-child(2n)
+    background: $gray-lighter
+
+    &:before
+      border-top-color: $gray-lighter
+
+  .col-md-5, .col-md-7
+    padding-right: 20px
+
+    &:first-child
+      padding-left: 20px
+      padding-right: ($grid-gutter-width / 2)
+
+  @media screen and (max-width: $screen-sm)
+    .col-md-5, .col-md-7
+      padding-bottom: 40px
+      padding-top: 20px
+
+      &:first-child
+        padding-bottom: 0
+        padding-top: 40px
+
+  @media screen and (min-width: $screen-sm)
+    .col-md-5, .col-md-7
+      padding-bottom: 40px
+      padding-right: 40px
+      padding-top: 40px
+
+      &:first-child
+        padding-left: 40px
+
+  @media screen and (min-width: $screen-md)
+    .col-md-5, .col-md-7
+      padding-bottom: 60px
+      padding-right: 60px
+      padding-top: 60px
+
+      &:first-child
+        padding-left: 60px
+
+  h2
+    margin-top: 0
+
+#footer
+  background: $gray-lighter
+  font-size: $font-size-small
+  padding-bottom: 20px
+  padding-top: 20px
+  
+  @media screen and (min-width: $screen-md)
+    padding-left: $grid-gutter-width
+    padding-right: $grid-gutter-width
+
+  .index &
+    padding-left: 20px
+    padding-right: 20px
+
+    @media screen and (min-width: $screen-sm)
+      padding-left: 40px
+      padding-right: 40px
+
+    @media screen and (min-width: $screen-md)
+      padding-left: 60px
+      padding-right: 60px
+
+#logo
+  padding: 0
+  margin-left: auto
+  margin-right: auto
+
+#nav-primary
+  .navbar-brand
+    background: url(/images/logo-horizontal.svg) no-repeat
+    height: 39px
+    margin-bottom: 20px
+    margin-top: 20px
+    padding: 0
+    text-indent: -9999px
+    width: 144px
+
+    @media (min-width: $screen-sm) and (max-width: $screen-md - 1)
+      margin-left: $grid-gutter-width/2
+
+      .index & 
+        margin-left: $grid-gutter-width
+
+    @media (min-width: $screen-md)
+      background-image: url(/images/logo.svg)
+      background-size: auto 100%
+      background-position: center top
+      height: 120px
+      margin-bottom: 30px
+      margin-top: 25px
+      width: 100%
+
+
+  .navbar-default
+    background: transparent
+    border: 0
+    font-family: $headings-font-family
+    margin: 0
+
+    .nav > li
+      @media (min-width: $screen-md), (max-width: $screen-sm)
+        float: none
+
+        > a
+          border-bottom:  1px solid transparent
+          border-top:  1px solid transparent
+          padding: 5px 0 5px 36px
+          position: relative
+
+          &:before
+            color: #080808
+            color: rgba(0,0,0,.8)
+            font-family: FontAwesome
+            font-size: $font-size-base * 1.4
+            left: 5px
+            position: absolute
+            top: 5px
+
+          &:hover
+            background: #222
+            border-top-color: #191919
+            border-bottom-color: #363636
+
+            &:before
+              color: $brand-primary
+
+        &:nth-child(1) > a:before
+          content: '\f135'
+
+        &:nth-child(2) > a:before
+          content: '\f0c5'
+          font-size: $font-size-base * 1.3
+
+        &:nth-child(3) > a:before
+          content: '\f085'
+          font-size: $font-size-base * 1.3
+
+        &:nth-child(4) > a:before
+          content: '\f09b'
+          font-size: $font-size-base * 1.5
+
+        &:nth-child(5) > a:before
+          content: '\f09e'
+          font-size: $font-size-base * 1.3
+          margin-left: 3px
+
+      @media (min-width: $screen-md)
+        > a
+          padding-left: 68px
+
+          &:before
+            left: 40px
+
+      @media (min-width: $screen-lg)
+        > a
+          padding-left: 48px
+          &:before
+            left: 20px
+      > a
+        font-size: $font-size-base * 1.5
+
+    @media screen and (max-width: $grid-float-breakpoint)
+      .navbar-collapse
+        border-color: #000
+        margin-bottom: $grid-gutter-width/4
+
+    .navbar-toggle
+      margin-top: 23px
+
+      &:focus, &:hover
+        border-color: #fff
+        outline: none
+        .icon-bar
+          background-color: $brand-primary
+
+
+  @media screen and (min-width: $screen-md)
+    .navbar-collapse
+      border-top: 1px solid #363636
+      padding: 20px 0 0
+
+
+    .navbar-nav
+      float: none
+
+    .navbar-header
+      border-bottom: 1px solid #1b1b1b
+      float: none
+
+  @media (min-width: $screen-sm) and (max-width: $screen-md - 1)
+    .navbar-nav
+      margin-left: 20px
+      margin-top: 27px
 
 #sidebar
-  padding-left: 16px
-  padding-right: 16px
+  background: #2b2b2b
+
+  @media screen and (min-width: $grid-float-breakpoint)
+    padding-left: 0
+    padding-right: 0
 
   hr
     margin-top: 20px
@@ -25,79 +322,35 @@ body
     color: #222
     text-align: center
 
-/*  hr:after
-    color: #555
-    content: "\00269B"
-    display: inline-block
-    position: relative
-    top: -0.7em
-    font-size: 2em
-    padding: 0 0.25em
-    background: #000 */
-
-#content
-  background: white
-  color: #666
-  padding: 32px
-
-#logo
-  padding: 0
-  margin-left: auto
-  margin-right: auto
-
-#access /* navigation on left */
-  a
-    @import "compass/typography/links/link-colors"
-    +link-colors(#eee, #46d200, #46d200, #ddd, #46d200)
-    font-family: "League Gothic Webfont", sans-serif
-    font-weight: regular
-    font-size: 32px
-    padding: 0
-    margin-left: -32px
-    margin-right: -32px
-    padding-left: 32px
-    padding-right: 32px
-
-  a:hover
-    background: #222
-    color: #fff
-    @import compass/css3
-    +text-shadow(rgba(228,210,187, .3) 0 0 8px)
-    
 #social
+  font-size: 24px
+  line-height: 1
+  position: absolute
+  right: 40px
+  text-align: center
+  top: 40px
+
   a
-    img
-      margin-bottom: 16px
-      margin-right: 16px
-      opacity: 0.1
-      background: transparent
-  a:hover
-    img
-      opacity: 0.2
-    text-decoration: none
+    color: #6d6d6d
 
-.container .jumbotron
-  border-radius: 0
-  margin: -32px -32px 32px -32px
-  @import compass
-  background-image: radial-gradient(ellipse at center top, rgb(48,58,48) 20%, rgb(0,0,0) 80%)
-  background: -webkit-radial-gradient(center top, ellipse cover, rgb(48,58,48) 20%,rgb(0,0,0) 100%)
+    &:hover
+      text-decoration: none
 
-  p 
-    font-size: 60%
-    font-weight: 400
+  .label
+    display: none
 
-  p.lead
-    font-size: 100%
-    font-weight: 300
+  li
+    float: left
+    height: 28px
+    margin: 0 0 0 5px
+    width: 28px
 
-#content .container
-  margin: 16px
+    &.facebook a:hover
+      color: #46629e
 
-#footer
-  padding: 24px
-  font-size: 80%
-  color: rgba(white, 0.4)
-  background-image: radial-gradient(ellipse at center top, rgba(black,0.6) 20%, rgba(black,0) 80%)
-  background: -webkit-radial-gradient(center top, ellipse cover, rgba(48,58,48,0.8) 20%,rgba(0,0,0,0) 100%)
+    &.google a:hover
+      color: #dd4b39
+
+    &.twitter a:hover
+      color: #158eb9
 

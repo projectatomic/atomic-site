@@ -82,12 +82,12 @@
       - else
         = article.title
 
-    %header.post-meta
+    %p.post-meta
       - if article.data.author
         %span.byline
           by
-          %span.author.vcard
-            = author_link article.data.author
+        %span.author.vcard
+          = author_link article.data.author
 
       &ndash;
 
@@ -126,8 +126,8 @@
         Tags:
 
         %ul.taglist
-        - tags.sort {|a,b| a.downcase <=> b.downcase}.each do |tag|
-          %li= link_to tag, tag_path(tag)
+          - tags.sort {|a,b| a.downcase <=> b.downcase}.each do |tag|
+            %li= link_to tag, tag_path(tag)
 
     - if article_view && author_card(author)
 

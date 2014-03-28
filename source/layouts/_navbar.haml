@@ -51,9 +51,10 @@
           = brand
 
     .collapse.navbar-collapse.navbar-ex1-collapse
-      - data[data_source].each do |item|
 
-        %ul.nav.navbar-nav
+      %ul.nav.navbar-nav
+
+        - data[data_source].each do |item|
 
           - if item.is_a?(String)
 

@@ -1,20 +1,2 @@
-= link_to "/" do
-  - if data.site.logo
-    = image_tag data.site.logo, id: "logo", class: "logo img-responsive", alt: data.site.name
-  - else
-    = data.site.name
-
-%hr 
-
-#access
-  = partial :nav, locals: { source: "navigation", nav_class: "nav-stacked" }
-
-  %hr
-
-#social
-  %a( href="http://www.twitter.com/TBD" ) 
-    %img( src="/images/account-twitter-symbolic.png") 
-  %a( href="http://www.facebook.com/TBD" ) 
-    %img( src="/images/account-facebook-symbolic.png") 
-  %a( href="http://plus.google.com/TBD" )
-    %img( src="/images/account-google-symbolic.png") 
+#nav-primary
+  = partial :navbar, locals: { brand: data.site.name }

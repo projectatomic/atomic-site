@@ -59,6 +59,10 @@ gem "bootstrap-sass", "3.0.0"
 
 
 #####
+# Font Awesome
+gem 'font-awesome-middleman'
+
+#####
 # Formats
 
 # less (css)

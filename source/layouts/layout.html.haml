@@ -39,16 +39,12 @@
       = stylesheet_link_tag "global", data.page.stylesheet
 
   %body{:class => (page_classes || 'page') + " source-#{current_page.source_file.split('.').last}" }
-
-    - unless data.page.hide_header
-      = partial "header"
-
-
-    %section#page-wrap.container
-
-      %section#page
-
-        %section#content.content{class: data.page.no_container.nil? ? 'container' : '' }
+    .container#page-wrap
+      .row
+        .col-sm-3.col-xs-12#sidebar
+          - unless data.page.hide_header
+            = partial "header"
+        .col-sm-9.col-xs-12#content
 
           -# Show a warning for those using < IE6 or lower
           /[if lt IE 7]
@@ -59,8 +55,9 @@
           -# Render actual page content
           = yield
 
-    - unless data.page.hide_footer
-      = partial "footer"
+    .container
+      - unless data.page.hide_footer
+        = partial "footer"
 
     = javascript_include_tag 'application'
 

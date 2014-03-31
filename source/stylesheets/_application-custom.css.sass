@@ -10,7 +10,9 @@ body
   background: #000
   color: #666
   @import compass/css3
-  +box-shadow(rgba(black, 0.16) 0 0 35px, rgba(black, 0.5) 0 0 6px)
+  +box-shadow(rgba(black, 0.16) 0 0 35px, rgba(black, 0.7) 0 0 6px)
+  @import "compass/utilities"
+  @include border-bottom-radius(16px)
 
 #sidebar
   padding-left: 16px
@@ -39,6 +41,9 @@ body
   background: white
   color: #666
   padding: 32px
+  @import compass/css3
+  @import "compass/utilities"
+  @include border-bottom-right-radius(16px)
 
 #logo
   padding: 0
@@ -46,34 +51,38 @@ body
   margin-right: auto
 
 #access /* navigation on left */
+  padding: 0
+  margin: 0
+  background: transparent
   a
     @import "compass/typography/links/link-colors"
-    +link-colors(#eee, #46d200, #46d200, #ddd, #46d200)
+    +link-colors(#999, #46d200, #46d200, #777, #46d200)
     font-family: "League Gothic Webfont", sans-serif
     font-weight: regular
     font-size: 32px
+    @media (max-width: 992px)
+      font-size: 24px
     padding: 0
-    margin-left: -32px
-    margin-right: -32px
-    padding-left: 32px
-    padding-right: 32px
 
   a:hover
-    background: #222
+    background: transparent
     color: #fff
     @import compass/css3
     +text-shadow(rgba(228,210,187, .3) 0 0 8px)
     
 #social
   a
+    font-size: 24px
+    @media (max-width: 992px)
+      font-size: 18px
     img
-      margin-bottom: 16px
-      margin-right: 16px
-      opacity: 0.1
+      padding: 4px
+      width: 24px
+      opacity: 0.8
       background: transparent
   a:hover
     img
-      opacity: 0.2
+      opacity: 1.0
     text-decoration: none
 
 .container .jumbotron
@@ -98,6 +107,4 @@ body
   padding: 24px
   font-size: 80%
   color: rgba(white, 0.4)
-  background-image: radial-gradient(ellipse at center top, rgba(black,0.6) 20%, rgba(black,0) 80%)
-  background: -webkit-radial-gradient(center top, ellipse cover, rgba(48,58,48,0.8) 20%,rgba(0,0,0,0) 100%)
 

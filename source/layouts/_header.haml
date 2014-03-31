@@ -4,17 +4,30 @@
   - else
     = data.site.name
 
-%hr 
+.navbar-header.navbar-inverse#access
 
-#access
-  = partial :nav, locals: { source: "navigation", nav_class: "nav-stacked" }
+  %button(type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse")
+    %span(class="sr-only") Toggle navigation
+    %span(class="icon-bar")
+    %span(class="icon-bar")
+    %span(class="icon-bar")
 
-  %hr
+  .collapse.navbar-collapse
+    = partial :nav, locals: { source: "navigation", nav_class: "nav-stacked" }
+ 
+    .dummy &nbsp;
 
-#social
-  %a( href="http://www.twitter.com/TBD" ) 
-    %img( src="/images/account-twitter-symbolic.png") 
-  %a( href="http://www.facebook.com/TBD" ) 
-    %img( src="/images/account-facebook-symbolic.png") 
-  %a( href="http://plus.google.com/TBD" )
-    %img( src="/images/account-google-symbolic.png") 
+    #social
+      %div
+        %a( href="http://www.twitter.com/TBD" ) 
+          %img( src="/images/account-twitter-symbolic.png") 
+          twitter
+      %div
+        %a( href="http://www.facebook.com/TBD" ) 
+          %img( src="/images/account-facebook-symbolic.png") 
+          facebook
+      %div
+        %a( href="http://plus.google.com/TBD" )
+          %img( src="/images/account-google-symbolic.png") 
+          google
+

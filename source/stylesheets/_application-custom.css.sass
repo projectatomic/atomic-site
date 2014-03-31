@@ -27,6 +27,12 @@
       h1
         font-size: $font-size-base * 3.4285 // 48px
 
+    a
+      color: $brand-primary
+
+      &:hover
+        color:  lighten($brand-primary, 7.5%)
+
     .btn-default
       background: transparent
       border: 1px solid #fff
@@ -331,7 +337,7 @@
   top: 40px
 
   a
-    color: #6d6d6d
+    color: #6d6d6d !important
 
     &:hover
       text-decoration: none
@@ -346,10 +352,10 @@
     width: 28px
 
     &.facebook a:hover
-      color: #46629e
+      color: #46629e !important
 
     &.google a:hover
-      color: #dd4b39
+      color: #dd4b39 !important
 
     &.twitter a:hover
-      color: #158eb9
+      color: #158eb9 !important

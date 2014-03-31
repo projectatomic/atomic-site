@@ -1,5 +1,8 @@
 # This is the navigation for Documentation browser
-- Section Title:
-  Document Title: /documentation/
-- Another Section:
-  Foo Bar: /documentation/foo/  
+- Getting Started:
+  Introduction: /docs/introduction
+  Quick Start Guide: /docs/quickstart
+- Tutorials:
+  Packaging Containers: /docs/tutorials/packaging  
+  Managing Controllers: /docs/tutorials/managing
+- (I live in data/docs.yml)

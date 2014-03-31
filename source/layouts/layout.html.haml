@@ -28,9 +28,10 @@
     -# App Icons
     %link(rel="shortcut icon" href="/images/favicon.ico")
     %link(rel="apple-touch-icon-precomposed" href="/images/apple-touch-icon-precomposed.png")
-    %link(rel="apple-touch-icon-precomposed" sizes="57x57" href="/images/apple-touch-icon-57x57-precomposed.png")
-    %link(rel="apple-touch-icon-precomposed" sizes="72x72" href="/images/apple-touch-icon-72x72-precomposed.png")
-    %link(rel="apple-touch-icon-precomposed" sizes="114x114" href="/images/apple-touch-icon-114x114-precomposed.png")
+    %link(rel="apple-touch-icon-precomposed" sizes="57x57" href="/images/apple-touch-icon-57-precomposed.png")
+    %link(rel="apple-touch-icon-precomposed" sizes="72x72" href="/images/apple-touch-icon-72-precomposed.png")
+    %link(rel="apple-touch-icon-precomposed" sizes="114x114" href="/images/apple-touch-icon-114-precomposed.png")
+    %link(rel="apple-touch-icon-precomposed" sizes="114x114" href="/images/apple-touch-icon-144-precomposed.png")
 
     = stylesheet_link_tag "application"
     = stylesheet_link_tag "print", media: "print"
@@ -39,16 +40,12 @@
       = stylesheet_link_tag "global", data.page.stylesheet
 
   %body{:class => (page_classes || 'page') + " source-#{current_page.source_file.split('.').last}" }
-
-    - unless data.page.hide_header
-      = partial "header"
-
-
-    %section#page-wrap.container
-
-      %section#page
-
-        %section#content.content{class: data.page.no_container.nil? ? 'container' : '' }
+    .container#page-wrap
+      .row
+        .col-md-3.col-lg-2#sidebar
+          - unless data.page.hide_header
+            = partial "header"
+        .col-md-9.col-lg-10#content
 
           -# Show a warning for those using < IE6 or lower
           /[if lt IE 7]
@@ -59,8 +56,8 @@
           -# Render actual page content
           = yield
 
-    - unless data.page.hide_footer
-      = partial "footer"
+      - unless data.page.hide_footer
+        = partial "footer"
 
     = javascript_include_tag 'application'
 

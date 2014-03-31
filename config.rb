@@ -42,10 +42,11 @@ set :markdown_engine, :redcarpet
 # (Use ':asciidoc' for AsciiDoctor-powered blocks in HAML)
 #Haml::Filters.register_tilt_filter "AsciiDoc"
 
+set :asciidoc_attributes, %w(source-highlighter=coderay imagesdir=images)
+
 set :asciidoctor,
   :toc => true,
   :numbered => true
-
 
 # Set directories
 set :css_dir, 'stylesheets'
@@ -129,8 +130,8 @@ page "*.xml", :layout => false
 
 # Docs all have the docs layout
 with_layout :docs do
-  page "/documentation/*"
-  page "/documentation*"
+  page "/docs/*"
+  page "/docs*"
 end
 
 # Don't make these URLs have pretty URLs

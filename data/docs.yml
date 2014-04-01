@@ -1,8 +1,8 @@
 # This is the navigation for Documentation browser
-- Getting Started:
+- First Steps:
   Introduction: /docs/introduction
   Quick Start Guide: /docs/quickstart
-- Tutorials:
-  Packaging Containers: /docs/tutorials/packaging  
-  Managing Controllers: /docs/tutorials/managing
+  Getting Started Guide: /docs/gettingstarted
+- Contributing:
+  How to Contribute: /docs/howtocontribute  
 - (I live in data/docs.yml)

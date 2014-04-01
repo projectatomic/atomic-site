@@ -4,10 +4,6 @@
 
 ## Quick Start Guide
 
-## Tutorials
-
-### Packaging Containers
-
-### Managing Project Atomic Controllers
+## Getting Started Guide
 
 ## How to Contribute

@@ -319,7 +319,8 @@ body
 
 #sidebar
   background: #2b2b2b
-
+  @import compass
+  +background-image(linear-gradient(center top, rgba(black, 0.42), rgba(black, 0)))
   @media screen and (min-width: $grid-float-breakpoint)
     padding-left: 0
     padding-right: 0

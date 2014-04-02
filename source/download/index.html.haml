@@ -1,52 +1,59 @@
 ---
-title: Get Started with Atomic
+title: Get Started with Project Atomic
 ---
 
 %h1 Getting Started
 
 %p.lead 
 
-  Project Atomic can run on most virtualization platforms and providers. "Bare
-  metal" installations on your own hardware are also possible.
+  Atomic can run on most virtualization platforms and cloud providers. "Bare
+  metal" installation on your own hardware is also possible.
 
-%p
+%p.lead
 
-  Naturally the most convenient way to get started is the technology
-  you already use. Below are the most common choices:
+  Usually the most convenient way to get started is the technology you
+  already use, so we try to provide appliance images and install
+  media for the most common cases. Hopefully you find something that
+  fits your needs.
 
 .row
 
   .col-md-4.col-sm-12
-    %h2 Virtual Platforms
+    %h2 Virtual Machines
 
     %p
- 
-      Virtual machines on your own computer are an easy option to get
-      started, but they are useful for container development as well.
+      Virtualization on your own computer is an easy option to get
+      started, but it also works great for container development.
 
-    %h4 Select your platform for more information:
+    %p
+      We have images and instructions for the most common platforms:
+      KVM/QEmu, OpenStack, VMWare and Vagrant. 
 
-    %ul
-      %li 
-        %a LibVirt
-        \- applies to oVirt, RHEV and Boxes on Fedora/Ubuntu
-      %li 
-        %a OpenStack
-      %li 
-        %a VMWare
-      %li 
-        %a Vagrant
+    %p
+
+      If there is no ready-to-run appliance image for your platform,
+      as a fallback you can install Atomic with the installer ISO
+      image.
+
+    %p 
+      %a( href="download/virtualization" ) &raquo; Read more...
 
   .col-md-4.col-sm-12
     %h2 Public Cloud Providers
-    %p Project Atomic images are available on most common public cloud providers, ready to be launched.
 
-    %h4 Read more about deployment on each platform:
-    %ul
-      %li 
-        %a Amazon EC2
-      %li 
-        %a Rackspace 
+    %p
+
+      Project Atomic images are available on most common public cloud
+      providers, ready to run.
+
+    %p
+ 
+      We have preloaded images available for Amazon EC2 and Rackspace
+      cloud. For other compatible cloud providers you can upload the
+      provided image yourself, or use the installer ISO.
+
+    %p 
+      %a( href="download/cloud" ) &raquo; Read more...
 
   .col-md-4.col-sm-12
     %h2 Your own hardware
@@ -55,13 +62,21 @@ title: Get Started with Atomic
       Atomic can be installed on most 64 bit X86 computers. Actual
       hardware requirements depend on your use case.
 
+    %p
+
+      If we must give a number to compare against, I would guess 256
+      megabytes of memory would be a minimum for testing and
+      experimenting with Atomic.
+
     %p 
-      %a(href="") More information and installation images can be found here.
+      %a(href="download/metal") Read more...
 
-%h2 Quick Start Guide
+%h2 
+  %a( name="quickstart")
+  Quick Start Guide
 
-%p Now that you got Project Atomic installed, it's time to put it to work. And we have to write this quickstart guide so you can follow it.
+%p Now that you got Project Atomic installed, it's time to put it to work. And we have to write this quickstart guide so you can follow it. Basically the purpose of this section is to get your newly installed Atomic controller to do something useful and to make you understand how it works, how to install containers and how to do common deployments.
 
-%h2 Getting the sources
+%h2 Done? Join the Community!
 
-%h3 Git repositories on Github
+%p Explain our community and how to get in touch, what it is about and why one should get involved.

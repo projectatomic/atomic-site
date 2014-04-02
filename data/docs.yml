@@ -5,4 +5,4 @@
   Getting Started Guide: /docs/gettingstarted
 - Contributing:
   How to Contribute: /docs/howtocontribute  
-- (I live in data/docs.yml)
+- (This navigation lives in data/docs.yml, documentation Markdown lives in source/docs/)

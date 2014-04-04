@@ -3,6 +3,10 @@
   Introduction: /docs/introduction
   Quick Start Guide: /docs/quickstart
   Getting Started Guide: /docs/gettingstarted
+- In depth:
+  Filesystems: /docs/filesystems
+  Storage Recommendations: /docs/docker-storage-recommendation
+  Building RHEL images: /docs/docker-building-rhel-images
 - Contributing:
   How to Contribute: /docs/howtocontribute  
 - (This navigation lives in data/docs.yml, documentation Markdown lives in source/docs/)

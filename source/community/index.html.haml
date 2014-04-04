@@ -10,9 +10,28 @@ title: Welcome to the Atomic community
   around the various components needed to compose, deploy and manage
   Atomic controllers and applications inside.
 
-%p.lead
+%p
 
-  @@todo
+  As a result, the Atomic project relies on a variety of open source
+  projects as the building blocks used for the project. For the controllers
+  it relies heavilly on
+  %a( href="http://kernel.org/") linux kernel
+  features, the
+  %a( href="http://www.freedesktop.org/wiki/Software/systemd/" ) systemd
+  system and service manager,
+  %a( href="https://wiki.gnome.org/Projects/OSTree" ) OSTree
+  and
+  %a( href="http://rpm-ostree.cloud.fedoraproject.org/" ) rpm-ostree
+  for updates, 
+  %a( href="https://www.docker.io/" ) Docker
+  for application deployment, and of course the various targetted Linux
+  distributions.
+  The Atomic community will work toward development of the Atomic project
+  in an inclusive way by contributing to the related upstream projects,
+  solving integration issue in the various distributions being used and
+  developping the specific management tools needed for management and
+  system updates.
+
 
 .row
 
@@ -20,16 +39,19 @@ title: Welcome to the Atomic community
     %h2 Discussions
 
     %p
-      The project a couple of mailing lists for
+      The project host a few mailing lists, one for
+      %a( href="http://lists.projectatomic.io/mailman/listinfo/atomic" ) general discussions
+      on the project and user feedback, a
+      %a( href="http://lists.projectatomic.io/mailman/listinfo/atomic-devel" )technical discussions
+      as well as patches exchanges and reviews and a low traffic list for
+      %a( href="http://lists.projectatomic.io/mailman/listinfo/atomic-announce" )announces
+      \.
 
     %p
-      We also have a couple of mailing lists for
-      %a( href="http://lists.projectatomic.io/mailman/listinfo/atomic" )technical discussions
-      like patches exchanges and reviews and a low traffic
-      %a( href="http://lists.projectatomic.io/mailman/listinfo/atomic-announce" )announce list.
+      A dedicated
+      %a( href="http://ask.projectatomic.io" ) forum
+      is also available for sharing questions and answers.
 
-      %a( href="http://forum.projectatomic.io" ) Forums
-      for general discussions about the project.
   .col-md-4.col-sm-12
     %h2 Report issues
 
@@ -37,7 +59,7 @@ title: Welcome to the Atomic community
 
       To report issues and get community help it is a good idea to first
       consult the
-      %a( href="http://ask.projectatomic.io/en/questions/" ) related forums
+      %a( href="http://ask.projectatomic.io/en/questions/" ) related forum
 
     %p
 
@@ -54,7 +76,12 @@ title: Welcome to the Atomic community
     %p
 
       The code source and build recipe used to generate Atomic controllers
-      are hosted on the atomic project on GitHub
+      are hosted on the 
+      %a( href="https://github.com/projectatomic/" ) projectatomic
+      on GitHub.
+      The source to build this web site is also available
+      %a( href="https://github.com/projectatomic/atomic-site" ) there
+      \!
 
 %h2
   %a( name="quickstart")

@@ -4,7 +4,7 @@
  
 The RHEL Atomic is a minimal RHEL distribution specifically purposed for hosting lxc/Docker containers.  RHEL Atomic is distributed on a 8.5Gb image to keep it's footprint small. That amount of storage doesn't support building and storing lots of Docker images.  It is expected practice that external storage of sufficient size will be attached to the RHEL Atomic host  in order to provide enough space to build and storage Docker images . Docker depends on `/usr/lib/docker` as the default directory where all docker related files, including the images, are stored. If you use the default `/var/lib/docker` provided in the RHEL Atomic image then it will fill up fast and soon Docker and the host will become unusable.
  
-This document/section provides instructions on the recommend steps on how to use an attached volume with your RHEL Atomic host so that you build and host lots of Docker images.
+This document/section provides instructions on the recommended steps on how to use an attached volume with your RHEL Atomic host so that you can build and store lots of Docker images.
  
 ## PRELIMINARY STEPS
  

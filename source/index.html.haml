@@ -7,10 +7,10 @@ pageable: true
     %a{:href => "http://docker.io"} Docker
     containers.
   %p.lead
-    Project Atomic provides a bare-bones, minimal operating system that is designed 
-    to host Docker containers effectively and with minimum overhead. We provide atomic 
-    updates to the host OS, so you can rely on running a tested and tried software 
-    distribution underneath.
+    Project Atomic provides a template for a minimal operating system 
+    (Atomic Controller) that is designed to host Docker containers effectively and 
+    with reduced overhead. We provide atomic updates to the host OS, so you can rely 
+    on running a tested and tried software distribution underneath.
 
   %p
     Cloud images are available for download, supporting VirtualBox, QEMU/KVM and OpenStack. Support for
@@ -26,51 +26,43 @@ pageable: true
 
 .row.featurette
   .col-sm-7.col-md-7
-    %h2 Making the distribution smaller and faster
+    %h2 Making the Distribution Smaller and Faster
     %p
-      While Atomic Controller is a slimmed down
-      system designed to run Docker containers, it's built from
-      the upstream CentOS or Fedora Linux RPMs. It will closely
-      track any errata in the RPMs, while still providing clients
-      with fully atomic upgrades. This ensures the best of both worlds:
-      an update model suited to container deployments, from a Linux 
-      distribution you know and trust.
+      An Atomic Controller is a slimmed-down system designed to run Docker 
+      containers, built from upstream CentOS, Fedora, or Red Hat Enterprise 
+      Linux RPMs. It provides the benefits of the original distribution, plus 
+      the ability to perform atomic upgrades and rollbacks &mdash; giving the best 
+      of both worlds: A modern update model from a Linux distribution you know 
+      and trust.
   .col-sm-5.col-md-5
     %img.img-responsive{:alt => "Speeding things up!", "src" => "/images/speedboat.svg"}/
 .row.featurette
   .col-sm-5.col-md-5
     %img.img-responsive{:alt => "Generic placeholder image", "src" => "http://place-hoff.com/326/150"}/
   .col-sm-7.col-md-7
-    %h2 Compatible filesystem layout, with writable /etc
+    %h2 A Cockpit View of the Containers and OS
     %p
-      Many "image" based operating system upgrade
-      tools take the simple model of having state in a separate
-      partition.  This interacts poorly with the traditional Unix
-      model of writing to 
-      = succeed "." do
-        %tt /etc.
-        With the OSTree base, configuration
-        management tools like Puppet can write to
-        %tt /etc
-        as they always have, while still allowing 
-        atomic upgrades.
+      Cockpit enables administration of Linux servers via a Web browser, letting 
+      admins manage storage, services, and inspect journals straight from the browser 
+      &mdash; but it doesn't preclude using other management tools or doing it straight 
+      from the terminal. Cockpit has been extended to help you manage containers as well, 
+      giving you full control over your IT resources.
 .row.featurette
   .col-sm-7.col-md-7
-    %h2 SELinux in enforcing mode
+    %h2 Enforcing Strict Security for Containers
     %p
-      Because the underlying rpm-ostree technology
-      is an evolution of Fedora and RPM, Controller takes
-      advantage of all of the work that's been put into things
-      like Security-Enhanced Linux.  This allows it to confine
-      Docker containers with strong mandatory access control.
+      Atomic Controllers use SELinux to confine Docker containers with strong 
+      mandatory access control to provide multi-tenant Docker systems with strong 
+      security.
   .col-sm-5.col-md-5
     %img.img-responsive{:alt => "Generic placeholder image", "src" => "http://place-hoff.com/325/150"}/
 .row.featurette
   .col-sm-5.col-md-5
     %img.img-responsive{:alt => "Generic placeholder image", "src" => "http://place-hoff.com/324/151"}/
   .col-sm-7.col-md-7
-    %h2 Extensible by privileged containers
+    %h2 Integrated <em>and</em> Portable
     %p
-      You can extend Atomic Controller with additional software
-      such as monitoring agents by creating privileged containers
-      which can access the host system.
+      Atomic taps GearD to install and link Docker containers into systemd and 
+      coordinate these containers across hosts. What's more, you can extend Atomic 
+      Controller with additional software such as monitoring agents by creating 
+      privileged containers which can access the host system.

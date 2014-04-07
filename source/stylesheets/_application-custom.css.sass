@@ -20,6 +20,10 @@
     padding-top: 120px
     position: relative
 
+    // nasty hack to make text render better in firefox
+    p
+      text-shadow: 0 0 0.1px rgba(white, 0.2)
+
     @media screen and (min-width: $grid-float-breakpoint)
       padding-bottom: 100px
       padding-top: 140px
@@ -210,8 +214,8 @@
       background-image: url(/images/logo.svg)
       background-size: auto 100%
       background-position: center top
-      height: 120px
-      margin-bottom: 30px
+      height: 160px
+      margin-bottom: 20px
       margin-top: 25px
       width: 100%
 

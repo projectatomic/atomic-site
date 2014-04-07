@@ -24,28 +24,28 @@ Docker allows you to build images using a Dockerfile.  The Dockerfile describes 
 
 There are two approaches to building Docker images.   
 
-Consider the following example: An administrator would like to deploy a new simple website using Docker container technology. 
+Consider the following example: an administrator would like to deploy a new simple website using Docker container technology. 
 
-The administrator decides their image needs three components:
+The administrator decides the image needs three components:
 
-* RHEL 7 base image
+* RHEL base image
 * Apache Web server
 * The addition of their own web site content.
 
 There are two ways the administrator can build the require image:
 
-* Create a Dockerfile that will build a the image and the web-site
-* Interactively by running the RHEL 7 base image and in a bash shell yum install httpd and its dependencies and then save the image
+* Create a Dockerfile that will build the image with the web-site included
+* Interactively by running the RHEL base image and in a bash shell yum install httpd and its dependencies and then save the image
 
-The first approach would be to build a Dockerfile that uses the base RHEL image and installs the needed Apache packages an then ADDs the necessary files. That way the entire website is complete in one build. We will examine this approach a little later. The administrator decides that the RHEL 7 + Apache web server layered image is reusable for other future web sites. So an Apache Web server image based on RHEL 7 is what is first required. 
+The first approach would be to build a Dockerfile that uses the base RHEL image and installs the needed Apache packages an then ADDs the necessary files. That way the entire website is complete in one build. We will examine this approach a little later. The administrator decides that the RHEL + Apache web server layered image is reusable for other future web sites. So an Apache Web server image based on RHEL is what is first required. 
 
-### Interactively from a Running RHEL 7 Container
+### Interactively from a Running RHEL Container
 
-Assuming an image called `rhel7` in a Docker registry, run the following Docker command on a Docker host machine:
+Assuming there is an image called `rhel` (the latest RHEL version) in a Docker registry, run the following Docker command on a Docker host machine:
 
-    # docker run -i -t rhel7 bash
+    # docker run -i -t rhel bash
 
-This returns a shell prompt. Inside the container shell run a couple of normal `yum` commands to get the latest updates for RHEL 7 and install Apache httpd:
+This returns a shell prompt. Inside the container shell run a couple of normal `yum` commands to get the latest updates for RHEL and install Apache httpd:
 
     # yum update -y
     # yum install -y httpd
@@ -54,22 +54,22 @@ This returns a shell prompt. Inside the container shell run a couple of normal `
 From the host machine save the new image by first finding the container ID and then committing it to a new image name:
 
     # docker ps -a
-    # docker commit c16378f943fe rhel7-httpd
+    # docker commit c16378f943fe rhel-httpd
 
 Now push the image to the registry using the image ID. In this example the registry is on registry-host and listening on port 5000. Default Docker commands will push to the default `docker.io` registry. Instead push to the local registry which is on a host called registry-host. In order to do this tag the image with the host name, or IP address, and port of the registry: 
 
-    # docker tag rhel7-httpd registry-host:5000/myadmin/rhel7-httpd
-    # docker push registry-host:5000/myadmin/rhel7-httpd
+    # docker tag rhel-httpd registry-host:5000/myadmin/rhel-httpd
+    # docker push registry-host:5000/myadmin/rhel-httpd
 
 You can check that this worked by running:
 
     # docker images
 
-You should see both `rhel7-httpd` and `registry-host:5000/myadmin/rhel7-httpd` listed.
+You should see both `rhel-httpd` and `registry-host:5000/myadmin/rhel-httpd` listed.
 
 Now the administrator has a new image that contains a Apache Web server. The adminstrator can build a Dockerfile based on that image and add the appropriate files. Docker will automatically untar/unzip the files in a source tar/zip file into the target directory. Here is the Dockerfile:
 
-    FROM registryhost:5000/whenry/rhel7-httpd
+    FROM registryhost:5000/whenry/rhel-httpd
     MAINTAINER A D Ministator email: admin@mycorp.com
 
     # Add the tar file of the web site 
@@ -91,7 +91,9 @@ Simply build and run from the directory where the Dockerfile and content is loca
 
 This approach is a great way to learn about Docker and building images. It is also a great way for trouble shooting are protyping.  It is how `docker.io` teaches you about Docker in their Getting Started web page.
 
-### Using One Docker file form a Base Image
+Recommendation: It would be good to expose port 80 and define the entry point in the `rhel-httpd` image and then merely add the files in the final Dockefile. That way the application only has to worry about the files needed for the new website.  
+
+### Using a Single Dockerfile 
 
 Alternatively the administrator may decide that building interactively is a bit tedious and perhaps error prone. Instead the administrator could build a single Dockerfile that layers on the Apache Web server and the web site content in one build. 
 
@@ -101,9 +103,9 @@ A good practice is to make a subdirectory with a related name and create a Docke
     # cd httpd
     # cp mysite.tar .
 
-Create the Dockerfile. This Dockerfile assumes a base image called rhel7:
+Create the Dockerfile. This Dockerfile assumes a base image called rhel:
 
-    FROM rhel7
+    FROM rhel
     MAINTAINER A D Ministator email: admin@mycorp.com
 
     # Update the image with the latest packages (recommended)
@@ -145,7 +147,7 @@ If the user is satisfied with a specific image that has been build using the int
 
 Now that you understand how Docker layers images, it raises some questions on how best to deploy Docker in your environment. Docker supports several different file system formats. How these work and which one you choose for all or part of your deployment will greatly effect your performance and efficiency.
 
-For information and recommendations on file systems please see <link to Alex page>
+For information and recommendations on file systems please see [Docker and Filesystems](http://www.projectatomic.io/docs/filesystems/)
 
-In many use cases it is beneficial to attach and mount a separate file system for Docker's use.  This file system will be mounted on /dev/lib/docker. For information on how to mount /var/lib/docker on a separate file system see <link William's mount /var/lib/docker page>
+In many use cases it is beneficial to attach and mount a separate file system for Docker's use.  This file system will be mounted on /dev/lib/docker. For information on how to mount /var/lib/docker on a separate file system see [Storage Reccomendations](http://www.projectatomic.io/docs/docker-storage-recommendation/)
 

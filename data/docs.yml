@@ -7,6 +7,7 @@
   Filesystems: /docs/filesystems
   Storage Recommendations: /docs/docker-storage-recommendation
   Building RHEL images: /docs/docker-building-rhel-images
+  Image Author Guidance: /docs/docker-image-author-guidance
 - Contributing:
   How to Contribute: /docs/howtocontribute  
 - (This navigation lives in data/docs.yml, documentation Markdown lives in source/docs/)

@@ -11,7 +11,7 @@ document to help image authors create images for which the answer is 'yes' acros
 
 ## Learn about creating images with Dockerfiles
 
-There are essentially two ways to create a docker image:
+There are two ways to create a docker image:
 
 1. Create a container and alter its state by running commands in it; create an image with
    `docker commit`
@@ -152,9 +152,8 @@ The default user in a `Dockerfile` is the user of the parent image.  For example
 derived from an image that uses a non-root user `swuser`, then `RUN` commands in your
 `Dockerfile` will run as `swuser`.
 
-We suggest handling this situation by changing the user to root at the beginning of a 
-`Dockerfile` to perform actions that require root access, then changing back to the correct user
-with another `USER` instruction:
+If you need to run as root, you should change the user to root at the beginning of your
+`Dockerfile` then change back to the correct user with another `USER` instruction:
 
     USER root
     RUN yum install -y <some package>

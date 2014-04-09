@@ -5,7 +5,7 @@ called `rpm-ostree`.  In the default model, the RPMs are composed on a
 server into an OSTree repository, and client systems can replicate in
 an image-like fashion, including incremental updates.
 
-Unlike traditional operating system update mechanisms, 
+Unlike traditional operating system update mechanisms, it
 will automatically keep the previous version of the OS, always
 available for rollback.
 
@@ -14,7 +14,7 @@ available for rollback.
 Simply invoke `rpm-ostree upgrade`.  It checks the repository URL
 specified in `/ostree/repo/config` to check for an updated version.
 
-If a new version is found, 
+If a new version is found,
 
 After an update is prepared, you should `systemctl reboot` to cause
 the updates to take effect.

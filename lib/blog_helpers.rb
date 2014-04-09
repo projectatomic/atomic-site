@@ -34,7 +34,7 @@ class BlogHelpers < Middleman::Extension
     end
 
     def word_unwrap content
-      content.to_s.gsub(/\n\n/, '!ಠ_ಠ!').gsub(/\n/, ' ').squeeze(' ').gsub(/!ಠ_ಠ!/, "\n\n")
+      content.to_s.gsub(/\n\n/, "!\u0CA0_\u0CA0!").gsub(/\n/, ' ').squeeze(' ').gsub(/!\u0CA0_\u0CA0!/, "\n\n")
     end
 
     def markdown_to_html content

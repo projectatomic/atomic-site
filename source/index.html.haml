@@ -26,11 +26,11 @@ pageable: true
 
 .row.featurette
   .col-sm-7.col-md-7
-    %h2 Making the Distribution Smaller and Faster
+    %h2 Making Distributions Smaller and Faster
     %p
-      An Atomic Controller is a slimmed-down system designed to run Docker 
+      An Atomic Controller is a lean operating system designed to run Docker 
       containers, built from upstream CentOS, Fedora, or Red Hat Enterprise 
-      Linux RPMs. It provides the benefits of the original distribution, plus 
+      Linux RPMs. It provides all the benefits of the upstream distribution, plus 
       the ability to perform atomic upgrades and rollbacks &mdash; giving the best 
       of both worlds: A modern update model from a Linux distribution you know 
       and trust.
@@ -40,44 +40,59 @@ pageable: true
 
   .col-sm-5.col-md-5
     %img.img-responsive{:alt => "Speeding things up!", "src" => "/images/speedboat.svg"}/
+
 .row.featurette
   .col-sm-5.col-md-5
     %img.img-responsive{:alt => "Generic placeholder image", "src" => "http://place-hoff.com/325/150"}/
   .col-sm-7.col-md-7
-    %h2 Enforcing Strict Security for Containers
+    %h2 Secure Production Containers
     %p
-      Atomic Controllers use SELinux to confine Docker containers with strong 
-      mandatory access control to provide multi-tenant Docker systems with strong 
-      security.
+      Running containers in production systems demands strong safeguards &mdash; especially
+      in multi-tenant environments. Atomic Controllers use SELinux to protect and 
+      confine Docker containers with strict mandatory access control inside Linux
+      Container namespaces.
 
     %p 
       This will be a chapter that ties all this to SELinux and the rest.
 
 .row.featurette
   .col-sm-7.col-md-7
-    %h2 A Cockpit View of the Containers and OS
+    %h2 Integrated and Portable
     %p
-      Cockpit enables administration of Linux servers via a Web browser, letting 
-      admins manage storage, services, and inspect journals straight from the browser 
-      &mdash; but it doesn't preclude using other management tools or doing it straight 
-      from the terminal. Cockpit has been extended to help you manage containers as well, 
-      giving you full control over your IT resources.
+      Docker containers can easily move across environments &mdash; from a developers laptop to
+      a production host, or even across operating systems.  When combined with #{link_to "systemd", "/docs/systemd"}, 
+      administrators can be certain those containers run on startup, restart when they crash, and are 
+      audited, logged, and securely managed. Atomic taps #{link_to "geard", "/docs/geard"} to install and link 
+      Docker containers into systemd and coordinate these containers across hosts.
+
+    %p
+      This to-be-written chapter ties the above to GearD and systemd.  Link to systemd should be to the
+      "Integrating Docker and Systemd" article Clayton hasn't written yet
+
+  .col-sm-5.col-md-5
+    %img.img-responsive{:alt => "Generic placeholder image", "src" => "http://place-hoff.com/324/151"}/
+
+.row.featurette
+  .col-sm-5.col-md-5
+    %img.img-responsive{:alt => "Generic placeholder image", "src" => "http://place-hoff.com/326/150"}/
+
+  .col-sm-7.col-md-7
+    %h2 Unified Management from Containers to the OS
+    %p
+      Containers are elastic and dynamic, and you need management that is just as
+      dynamic. #{link_to "Cockpit", "/docs/cockpit"} enables administration of Linux servers via a Web browser, letting 
+      admins manage storage, services, and inspect journals straight from the browser, and
+      directly inspect your containers and images. Atomic also makes it easy to integrate
+      your existing monitoring infrastructure in privileged containers.
 
     %p 
       This will be a chapter that ties all this to Cockpit and stuff, linking for more info
 
-  .col-sm-5.col-md-5
-    %img.img-responsive{:alt => "Generic placeholder image", "src" => "http://place-hoff.com/326/150"}/
 .row.featurette
-  .col-sm-5.col-md-5
-    %img.img-responsive{:alt => "Generic placeholder image", "src" => "http://place-hoff.com/324/151"}/
-  .col-sm-7.col-md-7
-    %h2 Integrated <strong>and</strong> Portable
-    %p
-      Atomic taps GearD to install and link Docker containers into systemd and 
-      coordinate these containers across hosts. What's more, you can extend Atomic 
-      Controller with additional software such as monitoring agents by creating 
-      privileged containers which can access the host system.
-
-    %p
-      This to-be-written chapter ties the above to GearD and systemd.
+  .col-sm-12.col-md-12
+    %p.text-center Ready to try Atomic?
+    %p.text-center.buttons
+      %a.btn.btn-default{:href => "/download"}
+        %i.fa.fa-rocket
+        Get Started
+        %i.fa.fa-long-arrow-right

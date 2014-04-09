@@ -1,7 +1,7 @@
 ## Docker and filesystems
 
-A core part of the docker model is the efficient use of layered images
-and containers based on images. To implement this docker relies
+A core part of the Docker model is the efficient use of layered images
+and containers based on images. To implement this Docker relies
 heavily on various filesystem features in the kernel. This document
 will explain how this works and give some advice in how to best use it.
 
@@ -33,13 +33,13 @@ that image are applied to the newly mounted filesystem.
 Containers are a bit more complicated. Each containers has two layers,
 one (called the "init" layer), which is based on an image layer and a
 child of that which contains the actual container content. The init
-layer contains a few files that must always exist in docker containers
+layer contains a few files that must always exist in Docker containers
 (e.g. `/.dockerinit)`. Commiting a container (and thus creating an
 image) involves finding all the changes from the init layer to the
 container layer and applying those to a new layer based on the same
 image the container used.
 
-### The 'vfs' backend
+### The `vfs` backend
 
 The vfs backend is a very simple fallback that has no copy-on-write
 support. Each layer is just a separate directory. Creating a new layer
@@ -69,9 +69,9 @@ copy-on-write snapshot of a device, producing a new device.
 On first startup Docker creates a base device on the thin pool,
 containing a empty ext4 filesystem. All other layers are (directly or
 indirectly) snapshots of this base layer. The filesystem has a fixed
-size, which means that all the images and containers have a maximal
+size, which means that all the images and containers have a maximum
 size. By default this size is 10GB, although due to the thin
-provisioning the devices doesn't use much space on the pool.
+provisioning each device tends to use only less space in the pool.
 
 In order to set up a thin pool you need two block devices, which is
 not always something users want to deal with. So, by default Docker
@@ -92,7 +92,7 @@ pool to use real block devices. For best performance the metadata
 device should be on a SSD driver, or at least on a different spindle
 from the data device.
 
-In order to support multiple docker instances on a system the thin
+In order to support multiple Docker instances on a system the thin
 pool will be named something like `docker-0:33-19478248-pool`, where
 the `0:30` part is the minor/major device nr and `19478248` is the
 inode number of the /var/lib/docker/devicemapper directory. The same
@@ -101,21 +101,26 @@ prefix is used for the actual thin devices.
 ### The `btrfs` backend
 
 The brtfs backend requires `/var/lib/docker` to be on a btrfs filesystem
-and uses the filesystem level snapshotting  to implement layers.
+and uses the filesystem level snapshotting to implement layers.
 
 Each layer is stored as a btrfs subvolume inside
 `/var/lib/docker/btrfs/subvolumes` and start out as a snapshot of the
 parent subvolume (if any).
 
-This backend is pretty fast, however btrfs has historically had
-stability issues. You might want to have /var/lib/docker on a
-different filesystem than the rest of your system to mitigate this.
+This backend is pretty fast, however btrfs is still maturing and is not
+considered production ready for heavy write loads. Mounting /var/lib/docker 
+on a different filesystem than the rest of your system is recommended in 
+order to limit the impact of filesystem corruption. You would also want to 
+mount the volume directory `/var/lib/docker/vfs/` on a standard XFS or EXT4 
+filesystem to ensure container data is protected.
 
 ### The `aufs` backend
 
 The aufs backend uses the aufs union filesystem. This is not supported
 on the upstream kernel and most distributions (including any from Red
-Hat), and thus it is not generally useful.
+Hat), and thus is not recommended as a production filesystem. It
+is the original backend for Docker and commonly used on Ubuntu based
+distributions.
 
 The backend stores each layer as an regular directory, containing
 regular files and special aufs metadata. This makes up for all the files

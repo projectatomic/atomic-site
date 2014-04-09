@@ -2,15 +2,13 @@
 
 Project Atomic facilitates application-centric IT architecture by providing an end-to-end solution for deploying containerized applications quickly and reliably, with "atomic" update and rollback for application and host alike.
 
-At the core of the project is the Project Atomic Controller, a lightweight operating system assembled from upstream RPM content and designed to run applications in Docker containers. Controllers based on Red Hat Enterprise Linux or Fedora are available now, with CentOS-based Controllers available soon. 
+The core of Project Atomic is the Project Atomic Controller. This is a lightweight operating system that has been assembled out of upstream RPM content. It isdesigned to run applications in Docker containers. Controllers based on Red Hat Enterprise Linux and Fedora are available now. Controllers based on CentOS will be available soon. 
+ 
+Project Atomic controllers inherit the full features and advantages of their base distributions. This includes systemd, which provides container-dependency managment and fault recovery. It also includes journald, which provides secure aggregation and attribution of container logs. Project Atomic builds on these features, using the following components, which have been tailored for containerized-application management:
 
-Project Atomic controllers inherit the full features and advantages of their base distributions, such as systemd for managing container dependencies and fault recovery, and journald for secure aggregation and attribution of container logs. Project Atomic builds on these features with components tailored to managing containerized applications:
-
-* [Docker](https://www.docker.io/), an open-source project to easily create lightweight, portable, self-sufficient containers from any application. 
-* [geard](https://github.com/smarterclayton/geard), a client and daemon for installing and linking Docker containers into systemd and coordinating those across hosts.  geard is the core of the next-generation of OpenShift.
-* [rpm-OSTree](http://rpm-ostree.cloud.fedoraproject.org/#/), a tool for managing bootable, immutable, versioned filesystem trees from upstream RPM content. 
-* [systemd](http://www.freedesktop.org/wiki/Software/systemd/), a system and service manager for Linux. 
+* [Docker](https://www.docker.io/), an open-source project for creating lightweight, portable, self-sufficient application containers. 
+* [geard](https://github.com/smarterclayton/geard), an open-source project for installing and linking Docker containers into systemd, and for coordinating those Docker containers across hosts.  geard is the core of the next-generation of OpenShift.
+* [rpm-OSTree](http://rpm-ostree.cloud.fedoraproject.org/#/), an open-source tool for managing bootable, immutable, versioned filesystem trees from upstream RPM content. 
+* [systemd](http://www.freedesktop.org/wiki/Software/systemd/), an open-source system and service manager for Linux. 
 
 ## Understanding Atomic Updates
-
-

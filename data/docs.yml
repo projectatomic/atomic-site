@@ -4,6 +4,7 @@
   Quick Start Guide: /docs/quickstart
   Getting Started Guide: /docs/gettingstarted
 - In depth:
+  rpm-ostree OS Update System: /docs/os-updates
   Filesystems: /docs/filesystems
   Storage Recommendations: /docs/docker-storage-recommendation
   Building RHEL images: /docs/docker-building-rhel-images

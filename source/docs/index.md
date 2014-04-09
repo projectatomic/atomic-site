@@ -24,3 +24,5 @@
 
 
 ### rpm-ostree Man Pages
+
+* rpm-ostree

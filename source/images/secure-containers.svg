@@ -19,19 +19,29 @@
    sodipodi:docname="secure-containers.svg">
   <defs
      id="defs6354">
-    <filter
+    <linearGradient
        inkscape:collect="always"
-       style="color-interpolation-filters:sRGB"
-       id="filter4620"
-       x="-0.022302339"
-       width="1.0446047"
-       y="-0.17646943"
-       height="1.3529389">
-      <feGaussianBlur
-         inkscape:collect="always"
-         stdDeviation="1.6544009"
-         id="feGaussianBlur4622" />
-    </filter>
+       id="linearGradient5510">
+      <stop
+         style="stop-color:#3cc205;stop-opacity:1"
+         offset="0"
+         id="stop5512" />
+      <stop
+         style="stop-color:#3cc104;stop-opacity:1"
+         offset="1"
+         id="stop5514" />
+    </linearGradient>
+    <radialGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient5510"
+       id="radialGradient5516"
+       cx="239.28571"
+       cy="612.00549"
+       fx="239.28571"
+       fy="612.00549"
+       r="158.005"
+       gradientTransform="matrix(1,0,0,0.24682758,0,490.25443)"
+       gradientUnits="userSpaceOnUse" />
   </defs>
   <sodipodi:namedview
      id="base"
@@ -50,7 +60,7 @@
      fit-margin-left="0"
      fit-margin-right="0"
      fit-margin-bottom="0"
-     inkscape:snap-global="false"
+     inkscape:snap-global="true"
      inkscape:snap-page="true"
      showborder="true"
      inkscape:showpageshadow="false"
@@ -293,7 +303,7 @@ wEhERCTCwEhERCTCwEhERCTCwEhERCTy/wKQejAFf5srAAAAAElFTkSuQmCC
        height="126.29973"
        width="286.70038" />
     <rect
-       style="color:#000000;color-interpolation:sRGB;color-interpolation-filters:linearRGB;fill:#5c3566;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:161.38876343;marker:none;visibility:visible;display:inline;overflow:visible;isolation:auto;mix-blend-mode:normal;enable-background:accumulate;clip-rule:nonzero;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto"
+       style="color:#000000;color-interpolation:sRGB;color-interpolation-filters:linearRGB;fill:#555753;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:161.38876343;marker:none;visibility:visible;display:inline;overflow:visible;isolation:auto;mix-blend-mode:normal;enable-background:accumulate;clip-rule:nonzero;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto"
        id="rect4332"
        width="156"
        height="22.000475"
@@ -309,43 +319,22 @@ wEhERCTCwEhERCTCwEhERCTCwEhERCTy/wKQejAFf5srAAAAAElFTkSuQmCC
        height="22.000475"
        width="156"
        id="rect4334"
-       style="color:#000000;color-interpolation:sRGB;color-interpolation-filters:linearRGB;fill:#5c3566;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:161.38876343;marker:none;visibility:visible;display:inline;overflow:visible;isolation:auto;mix-blend-mode:normal;enable-background:accumulate;clip-rule:nonzero;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto" />
-    <path
-       inkscape:connector-curvature="0"
-       id="path4277"
-       d="m 397.28571,615.42119 c 0,-1.94004 -1.56191,-3.50195 -3.50195,-3.50195 l -308.9961,0 c -1.94004,0 -3.50195,1.56191 -3.50195,3.50195 l 0,48.49805 316,0 z"
-       style="color:#000000;color-interpolation:sRGB;color-interpolation-filters:linearRGB;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:161.38876343;marker:none;visibility:visible;display:inline;overflow:visible;isolation:auto;mix-blend-mode:normal;enable-background:accumulate;clip-rule:nonzero;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto"
-       sodipodi:nodetypes="ssssccs" />
+       style="color:#000000;color-interpolation:sRGB;color-interpolation-filters:linearRGB;fill:#555753;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:161.38876343;marker:none;visibility:visible;display:inline;overflow:visible;isolation:auto;mix-blend-mode:normal;enable-background:accumulate;clip-rule:nonzero;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto" />
+    <rect
+       style="color:#000000;color-interpolation:sRGB;color-interpolation-filters:linearRGB;fill:url(#radialGradient5516);fill-opacity:1;fill-rule:nonzero;stroke:#ffffff;stroke-width:0;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;isolation:auto;mix-blend-mode:normal;enable-background:accumulate;clip-rule:nonzero;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto"
+       id="rect5508"
+       width="316"
+       height="77.989983"
+       x="81.285713"
+       y="611.92426"
+       rx="3.4962294"
+       ry="3.4962294" />
     <path
        inkscape:connector-curvature="0"
        id="path4279"
        d="m 397.28571,663.91924 -316,0 0,23.28906 c 0,1.50232 1.20862,2.71094 2.71094,2.71094 l 310.57812,0 c 1.50232,0 2.75232,-1.20919 2.71094,-2.71094 z"
-       style="color:#000000;color-interpolation:sRGB;color-interpolation-filters:linearRGB;fill:#eeeeec;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:161.38876343;marker:none;visibility:visible;display:inline;overflow:visible;isolation:auto;mix-blend-mode:normal;enable-background:accumulate;clip-rule:nonzero;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto"
+       style="color:#000000;color-interpolation:sRGB;color-interpolation-filters:linearRGB;fill:#000000;fill-opacity:0.2326203;fill-rule:nonzero;stroke:none;stroke-width:161.38876343;marker:none;visibility:visible;display:inline;overflow:visible;isolation:auto;mix-blend-mode:normal;enable-background:accumulate;clip-rule:nonzero;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto"
        sodipodi:nodetypes="ccssssc" />
-    <text
-       sodipodi:linespacing="127%"
-       id="text4360"
-       y="647.159"
-       x="240.15912"
-       style="font-size:30px;font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;text-align:start;line-height:126.99999809%;writing-mode:lr-tb;text-anchor:start;opacity:0.44800002;color:#000000;color-interpolation:sRGB;color-interpolation-filters:linearRGB;fill:#ad7fa8;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:161.38876343;marker:none;visibility:visible;display:inline;overflow:visible;isolation:auto;mix-blend-mode:normal;filter:url(#filter4620);enable-background:accumulate;clip-rule:nonzero;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;font-family:Source Sans Pro;-inkscape-font-specification:Source Sans Pro Semi-Bold"
-       xml:space="preserve"><tspan
-         style="font-size:22.5px;font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;text-align:center;text-anchor:middle;fill:#ad7fa8;font-family:Open Sans;-inkscape-font-specification:Open Sans Semi-Bold"
-         y="647.159"
-         x="240.15912"
-         id="tspan4362"
-         sodipodi:role="line">Your Application</tspan></text>
-    <text
-       xml:space="preserve"
-       style="font-size:30px;font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;text-align:start;line-height:126.99999809%;writing-mode:lr-tb;text-anchor:start;color:#000000;color-interpolation:sRGB;color-interpolation-filters:linearRGB;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:161.38876343;marker:none;visibility:visible;display:inline;overflow:visible;isolation:auto;mix-blend-mode:normal;enable-background:accumulate;clip-rule:nonzero;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;font-family:Source Sans Pro;-inkscape-font-specification:Source Sans Pro Semi-Bold"
-       x="240.15912"
-       y="647.159"
-       id="text4291"
-       sodipodi:linespacing="127%"><tspan
-         sodipodi:role="line"
-         id="tspan4293"
-         x="240.15912"
-         y="647.159"
-         style="font-size:22.5px;font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;text-align:center;text-anchor:middle;fill:#000000;font-family:Open Sans;-inkscape-font-specification:Open Sans Semi-Bold">Your Application</tspan></text>
     <text
        sodipodi:linespacing="127%"
        id="text4299"
@@ -360,7 +349,7 @@ wEhERCTCwEhERCTCwEhERCTCwEhERCTy/wKQejAFf5srAAAAAElFTkSuQmCC
          sodipodi:role="line">DOCKER + HOST</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:30px;font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;text-align:start;line-height:126.99999809%;writing-mode:lr-tb;text-anchor:start;color:#000000;color-interpolation:sRGB;color-interpolation-filters:linearRGB;fill:#ad7fa8;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:161.38876343;marker:none;visibility:visible;display:inline;overflow:visible;isolation:auto;mix-blend-mode:normal;enable-background:accumulate;clip-rule:nonzero;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;font-family:Source Sans Pro;-inkscape-font-specification:Source Sans Pro Semi-Bold"
+       style="font-size:30px;font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;text-align:start;line-height:126.99999809%;writing-mode:lr-tb;text-anchor:start;color:#000000;color-interpolation:sRGB;color-interpolation-filters:linearRGB;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:161.38876343;marker:none;visibility:visible;display:inline;overflow:visible;isolation:auto;mix-blend-mode:normal;enable-background:accumulate;clip-rule:nonzero;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;font-family:Source Sans Pro;-inkscape-font-specification:Source Sans Pro Semi-Bold"
        x="158.79437"
        y="730.85242"
        id="text4336"
@@ -369,15 +358,15 @@ wEhERCTCwEhERCTCwEhERCTCwEhERCTy/wKQejAFf5srAAAAAElFTkSuQmCC
          id="tspan4338"
          x="158.79437"
          y="730.85242"
-         style="font-size:12.5px;font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;text-align:center;text-anchor:middle;fill:#ad7fa8;font-family:Open Sans;-inkscape-font-specification:Open Sans Semi-Bold">LOGGING</tspan></text>
+         style="font-size:12.5px;font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;text-align:center;text-anchor:middle;fill:#ffffff;font-family:Open Sans;-inkscape-font-specification:Open Sans Semi-Bold">LOGGING</tspan></text>
     <text
        sodipodi:linespacing="127%"
        id="text4340"
        y="730.85242"
        x="321.79437"
-       style="font-size:30px;font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;text-align:start;line-height:126.99999809%;writing-mode:lr-tb;text-anchor:start;color:#000000;color-interpolation:sRGB;color-interpolation-filters:linearRGB;fill:#ad7fa8;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:161.38876343;marker:none;visibility:visible;display:inline;overflow:visible;isolation:auto;mix-blend-mode:normal;enable-background:accumulate;clip-rule:nonzero;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;font-family:Source Sans Pro;-inkscape-font-specification:Source Sans Pro Semi-Bold"
+       style="font-size:30px;font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;text-align:start;line-height:126.99999809%;writing-mode:lr-tb;text-anchor:start;color:#000000;color-interpolation:sRGB;color-interpolation-filters:linearRGB;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:161.38876343;marker:none;visibility:visible;display:inline;overflow:visible;isolation:auto;mix-blend-mode:normal;enable-background:accumulate;clip-rule:nonzero;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;font-family:Source Sans Pro;-inkscape-font-specification:Source Sans Pro Semi-Bold"
        xml:space="preserve"><tspan
-         style="font-size:12.5px;font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;text-align:center;text-anchor:middle;fill:#ad7fa8;font-family:Open Sans;-inkscape-font-specification:Open Sans Semi-Bold"
+         style="font-size:12.5px;font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;text-align:center;text-anchor:middle;fill:#ffffff;font-family:Open Sans;-inkscape-font-specification:Open Sans Semi-Bold"
          y="730.85242"
          x="321.79437"
          id="tspan4342"
@@ -386,7 +375,7 @@ wEhERCTCwEhERCTCwEhERCTCwEhERCTy/wKQejAFf5srAAAAAElFTkSuQmCC
        id="g4352"
        transform="translate(0,-1)">
       <rect
-         style="color:#000000;color-interpolation:sRGB;color-interpolation-filters:linearRGB;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:#ffffff;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;marker:none;visibility:visible;display:inline;overflow:visible;isolation:auto;mix-blend-mode:normal;enable-background:accumulate;clip-rule:nonzero;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto"
+         style="color:#000000;color-interpolation:sRGB;color-interpolation-filters:linearRGB;fill:none;stroke:#ffffff;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;marker:none;visibility:visible;display:inline;overflow:visible;isolation:auto;mix-blend-mode:normal;enable-background:accumulate;clip-rule:nonzero;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto"
          id="rect4350"
          width="4.999989"
          height="7.4999895"
@@ -409,12 +398,24 @@ wEhERCTCwEhERCTCwEhERCTCwEhERCTy/wKQejAFf5srAAAAAElFTkSuQmCC
        id="text4356"
        y="681.85242"
        x="238.95662"
-       style="font-size:30px;font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;text-align:start;line-height:126.99999809%;writing-mode:lr-tb;text-anchor:start;color:#000000;color-interpolation:sRGB;color-interpolation-filters:linearRGB;fill:#555753;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:161.38876343;marker:none;visibility:visible;display:inline;overflow:visible;isolation:auto;mix-blend-mode:normal;enable-background:accumulate;clip-rule:nonzero;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;font-family:Source Sans Pro;-inkscape-font-specification:Source Sans Pro Semi-Bold"
+       style="font-size:30px;font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;text-align:start;line-height:126.99999809%;writing-mode:lr-tb;text-anchor:start;color:#000000;color-interpolation:sRGB;color-interpolation-filters:linearRGB;fill:#d6fec5;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:161.38876343;marker:none;visibility:visible;display:inline;overflow:visible;isolation:auto;mix-blend-mode:normal;enable-background:accumulate;clip-rule:nonzero;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;font-family:Source Sans Pro;-inkscape-font-specification:Source Sans Pro Semi-Bold"
        xml:space="preserve"><tspan
-         style="font-size:12.5px;font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;text-align:center;text-anchor:middle;fill:#555753;font-family:Open Sans;-inkscape-font-specification:Open Sans Semi-Bold"
+         style="font-size:12.5px;font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;text-align:center;text-anchor:middle;fill:#d6fec5;fill-opacity:1;font-family:Open Sans;-inkscape-font-specification:Open Sans Semi-Bold"
          y="681.85242"
          x="238.95662"
          id="tspan4358"
          sodipodi:role="line">Required Libraries</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:30px;font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;text-align:start;line-height:126.99999809%;writing-mode:lr-tb;text-anchor:start;color:#000000;color-interpolation:sRGB;color-interpolation-filters:linearRGB;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:161.38876343;marker:none;visibility:visible;display:inline;overflow:visible;isolation:auto;mix-blend-mode:normal;enable-background:accumulate;clip-rule:nonzero;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;font-family:Source Sans Pro;-inkscape-font-specification:Source Sans Pro Semi-Bold"
+       x="240.15912"
+       y="647.159"
+       id="text4291"
+       sodipodi:linespacing="127%"><tspan
+         sodipodi:role="line"
+         id="tspan4293"
+         x="240.15912"
+         y="647.159"
+         style="font-size:22.5px;font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;text-align:center;text-anchor:middle;fill:#ffffff;font-family:Open Sans;-inkscape-font-specification:Open Sans Semi-Bold">Your Application</tspan></text>
   </g>
 </svg>

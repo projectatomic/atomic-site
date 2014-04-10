@@ -20,3 +20,5 @@ Cockpit also makes it easy to monitor and administer Docker containers running o
  * Adjust CPU shares
  * Assign memory limits
  * More CGroup policy controls to come
+* Stop, Start, Delete and Commit container instances
+* Run and Delete container images

@@ -13,4 +13,3 @@
   Inter-container networking: /docs/inter-container-networking
 - Contributing:
   How to Contribute: /docs/#contribute
-- (This navigation lives in data/docs.yml, documentation Markdown lives in source/docs/)

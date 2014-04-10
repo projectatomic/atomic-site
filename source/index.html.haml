@@ -25,7 +25,7 @@ pageable: true
 
 .row.featurette
   .col-sm-7.col-md-7
-    %h2 Making Distributions Smaller and Faster
+    %h2 Trusted Distributions, Atomic Updates
     %p
 
       An Atomic Controller is a lean operating system designed to run Docker
@@ -37,7 +37,7 @@ pageable: true
 
     %p
 
-      This will be a chapter that ties all this to OSTree with links
+      #{link_to "Learn how rpm-ostree brings atomicity to your favorite Linux distributions.", "/docs/os-updates"}
 
   .col-sm-5.col-md-5
     .text-center
@@ -58,7 +58,7 @@ pageable: true
 
     %p
 
-      This will be a chapter that ties all this to SELinux and the rest.
+      #{link_to "Find out how SELinux and Docker work together to keep your applications secure.", "/docs/docker-and-selinux"}
 
 .row.featurette
   .col-sm-7.col-md-7
@@ -66,15 +66,14 @@ pageable: true
     %p
 
       Docker containers can easily move across environments &mdash; from a developers laptop to
-      a production host, or even across operating systems.  When combined with #{link_to "systemd", "/docs/systemd"},
+      a production host, or even across operating systems.  When combined with systemd,
       administrators can be certain those containers run on startup, restart when they crash, and are
-      audited, logged, and securely managed. Atomic taps #{link_to "geard", "/docs/geard"} to install and link
+      audited, logged, and securely managed. Atomic taps geard to install and link
       Docker containers into systemd and coordinate these containers across hosts.
 
     %p
 
-      This to-be-written chapter ties the above to GearD and systemd.  Link to systemd should be to the
-      "Integrating Docker and Systemd" article Clayton hasn't written yet
+      #{link_to "Learn about how geard brings systemd and Docker together.", "/docs/geard"}
 
   .col-sm-5.col-md-5
     %img.img-responsive{:alt => "Generic placeholder image", "src" => "http://place-hoff.com/324/151"}/

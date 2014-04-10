@@ -10,6 +10,7 @@
   Building RHEL images: /docs/docker-building-rhel-images
   Image Author Guidance: /docs/docker-image-author-guidance
   About SELinux: /docs/docker-and-selinux
+  Inter-container networking: /docs/inter-container-networking
 - Contributing:
-  How to Contribute: /docs/howtocontribute  
+  How to Contribute: /docs/howtocontribute
 - (This navigation lives in data/docs.yml, documentation Markdown lives in source/docs/)

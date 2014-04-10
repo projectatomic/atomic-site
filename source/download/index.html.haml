@@ -2,23 +2,83 @@
 title: Get Started with Project Atomic
 ---
 
-%h1 Getting Started
+%h1 Get Started with Atomic
 
-%img.img-responsive.pull-right.hidden-xs( src="/images/platforms.png")
+%img.img-responsive.pull-right.hidden-md( src="/images/platforms.png" style="margin-top: -65px;")
 %p.lead 
 
-  Atomic can run on most virtualization platforms and cloud providers. "Bare
-  metal" installation on your own hardware is also possible.
+  Atomic can run on the same platforms and clouds as the distributions it is based on.
+%p  Download an Atomic Fedora 20 VM now
 
-%p.lead
+%p.buttons
+  %a.btn.btn-default{:href => "/downloads/vbox"} VirtualBox (Win, Mac)
+  %a.btn.btn-default{:href => "/downloads/qemu"} QEMU (Linux)
+%p Stay tuned for more distributions and optimized images for cloud environments.
 
-  Usually the most convenient way to get started is the technology you
-  already use, so we try to provide appliance images and install
-  media for the most common cases. Hopefully you find something that
-  fits your needs.
+.row{:style => 'clear:both'}
+  .col-md-6.col-sm-12
+    %h2 Atomic Upgrades
+
+    %p
+      From a running host, start an upgrade with:
+    %pre
+      $ rpm-ostree upgrade
+      $ systemctl reboot
+    %p
+      On the boot screen you'll see your new version. Hold down the
+      SHIFT key there to rollback to your previous tree.
+
+    %p 
+      %a( href="/docs/os-updates" ) &raquo; More on atomic upgrades with OSTree...
+
+  .col-md-6.col-sm-12
+    %h2 Docker Containers
+
+    %p
+      Host applications on Atomic with #{link_to "Docker", "https://www.docker.io"}
+    %pre
+      :preserve
+        $ docker run fedora /bin/echo "hello world"
+    %p
+      Get familiar with the #{link_to "Docker tutorial", "https://www.docker.io/gettingstarted/#"}, then
+      learn how you can build reusable images and run Docker in production on Atomic hosts.
+
+    %p 
+      %a( href="/docs/#docker" ) &raquo; Read about Docker in production...
 
 .row
+  .col-md-6.col-sm-12
+    %h2 Try the new UI for your Server
 
+    %p
+      Administer the services on your system with Cockpit
+    %pre
+      :preserve
+        $ systemctl enable cockpit-ws.socket
+        # visit http://localhost:21064 in a browser
+    %p
+      Cockpit is perfect for new sysadmins, allowing them to easily perform simple tasks such as storage 
+      administration, inspecting journals and starting and stopping services.
+
+    %p 
+      %a( href="http://cockpit-project.org" ) &raquo; Visit cockpit-project.org...
+
+  .col-md-6.col-sm-12
+    %h2 Cluster your Containers
+
+    %p
+      Setup and link containers across hosts
+    %pre
+      :preserve
+        $ gear deploy simple_web.json localhost
+    %p
+      Install containers to systemd and link them across a cluster with geard, the new core
+      of OpenShift.
+
+    %p 
+      %a( href="https://openshift.github.io/geard" ) &raquo; Learn about geard...
+
+-#.row{:style => 'clear:both'}
   .col-md-4.col-sm-12
     %h2 Virtual Machines
 
@@ -73,11 +133,25 @@ title: Get Started with Project Atomic
     %p 
       %a(href="download/metal") Read more...
 
-%h2 
+%h2
+  %a( name="documentation")
+  Documentation
+
+%p
+  Still have questions? Read an #{link_to "Introduction to Atomic", "/docs/introduction"} and the #{link_to "documentation section", "/docs/"}.
+
+-#%h2 
   %a( name="quickstart")
   Quick Start Guide
 
-%p Now that you got Project Atomic installed, it's time to put it to work. And we have to write this quickstart guide so you can follow it. Basically the purpose of this section is to get your newly installed Atomic controller to do something useful and to make you understand how it works, how to install containers and how to do common deployments.
+-#%p Now that you got Project Atomic installed, it's time to put it to work. And we have to write this quickstart guide so you can follow it. Basically the purpose of this section is to get your newly installed Atomic controller to do something useful and to make you understand how it works, how to install containers and how to do common deployments.
+
+
+-#%h2 
+  %a( name="quickstart")
+  Quick Start Guide
+
+-#%p Now that you got Project Atomic installed, it's time to put it to work. And we have to write this quickstart guide so you can follow it. Basically the purpose of this section is to get your newly installed Atomic controller to do something useful and to make you understand how it works, how to install containers and how to do common deployments.
 
 %h2 Done? Join the Community!
 

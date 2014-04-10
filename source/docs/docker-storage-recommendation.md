@@ -1,4 +1,4 @@
-# RHEL Atomic Storage Recommendation for Docker
+# Setting Up Storage
 
 ## INTRODUCTION
  
@@ -72,3 +72,9 @@ Another test is to build an image. Here is a simple example `Dockerfile`:
 ## Looking Forward
 
 In the future it is likely that the recommended mounting for /var/lib/docker will be more granular depending on the performance needs of various sub-directories of `/var/lib/docker`.  Watch this space.
+
+## Filesystem Considerations
+
+Docker supports several different filesystem formats. How these work and which one you choose for all or part of your deployment will greatly effect your performance and efficiency.
+
+For information and recommendations on supported filesystems please see [Supported Filesystems](http://www.projectatomic.io/docs/filesystems/).

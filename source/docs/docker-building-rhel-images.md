@@ -12,7 +12,7 @@ Docker is known primarily for the following features:
 
 Resource management and process isolation come from Linux Containers (LXC). Some security is built into resource management and process isolation. The added security of SELinux is also separate from Docker. The first three features demonstrate the value of containers. Docker, however, provides extra tooling beyond lxc-tools.  
 
-One of the more important features of Docker is *image content managment*, or *image layering*. Docker's layered approach to images (or content) provides a very powerful abstraction for building up application containers. 
+One of the more important features of Docker is *image content management*, or *image layering*. Docker's layered approach to images (or content) provides a very powerful abstraction for building up application containers. 
 
 Docker allows you to build images using a Dockerfile.  The Dockerfile describes a base image, from which the image can be built using the `FROM` instruction. `FROM` implicitly uses a image registry from which the base image is pulled. This can be `docker.io` or some other (perhaps internal) registry. Extra packages can be installed using the `RUN` instruction and the Linux distribution's package installation tool. For Fedora and Red Hat Enterprise Linux this tool is `yum`.  Other content can be added by using the `ADD` instruction.  These three instructions are the basics for building images using the Dockerfile. A simple example:
 
@@ -89,7 +89,7 @@ Build and run from the directory where the Dockerfile and content is located.  T
     # docker build -rm --tag=mysite .
     # docker run -d mysite
 
-This approach is a great way to learn about Docker and building images. It is also good for troubleshooting and protyping.  It is how `docker.io` teaches you about Docker in their Getting Started web page.
+This approach is a great way to learn about Docker and building images. It is also good for troubleshooting and prototyping.  It is how `docker.io` teaches you about Docker in their Getting Started web page.
 
 Recommendation: It would be good to expose port 80 and define the entry point in the `rhel-httpd` image and then merely add the files in the final Dockefile. That way the application only has to worry about the files needed for the new website.  
 
@@ -97,7 +97,7 @@ Recommendation: It would be good to expose port 80 and define the entry point in
 
 The administrator may decide that building interactively is tedious and error-prone. Instead the administrator could build a single Dockerfile that layers on the Apache Web server and the web site content in one build. 
 
-A good practice is to make a subdirectory with a related name and create a Dockerfile in that directory. E.g. a directory called mongo may contain a Dockerfile for a MongoDB image, or a directory called httpd may container an Dockerfile for an Apache web server. Copy or create all other content that you wish to add to the image into the new directory.  
+A good practice is to make a sub-directory with a related name and create a Dockerfile in that directory. E.g. a directory called mongo may contain a Dockerfile for a MongoDB image, or a directory called httpd may container an Dockerfile for an Apache web server. Copy or create all other content that you wish to add to the image into the new directory.  
 
     # mkdir httpd
     # cd httpd
@@ -133,21 +133,21 @@ It's worth noting from the above that in order to reduce the amount of temporary
  
 ## Which Approach is Right?
 
-This basically dependends on *why* the user is building the image.
+The approach to building images depends on *why* the user is building the image.
 
 ### Prototyping and Troubleshooting
 
-If prototyping and trouble shooting then the user probably wants to do an interactive, "*inside the container*" approach. Using this apprach the user can take notes of the history of commands used that make sense and what external files may be missing or need changes. These can be ADDed to the Dockerfile.
+If prototyping and trouble shooting then the user probably wants to do an interactive, "*inside the container*" approach. Using this approach the user can take notes of the history of commands used that make sense and what external files may be missing or need changes. These can be ADDed to the Dockerfile.
 
 ### Complete Satisfactory Single Build
 
-If the user is satisfied with a specific image that has been build using the interactive approach and they believe it might be reused elsewhere, then it is reocommeded to use the single Dockerfile approach that builds it all in one build.
+If the user is satisfied with a specific image that has been build using the interactive approach and they believe it might be reused elsewhere, then it is recommended to use the single Dockerfile approach that builds it all in one build.
 
-## File System Considerations
+## Filesystem Considerations
 
 Now that you understand how Docker layers images, it raises some questions on how best to deploy Docker in your environment. Docker supports several different file system formats. How these work and which one you choose for all or part of your deployment will greatly effect your performance and efficiency.
 
-For information and recommendations on file systems please see [Docker and Filesystems](http://www.projectatomic.io/docs/filesystems/)
+For information and recommendations on supported filesystems please see [Supported Filesystems](http://www.projectatomic.io/docs/filesystems/).
 
-In many use cases it is beneficial to attach and mount a separate file system for Docker's use.  This file system will be mounted on /dev/lib/docker. For information on how to mount /var/lib/docker on a separate file system see [Storage Reccomendations](http://www.projectatomic.io/docs/docker-storage-recommendation/)
+In many use cases it is beneficial to attach and mount a separate filesystem for Docker's use.  This file system will be mounted on /dev/lib/docker. For information on how to mount /var/lib/docker on a separate file system see [Setting Up Storage](http://www.projectatomic.io/docs/docker-storage-recommendation/).
 

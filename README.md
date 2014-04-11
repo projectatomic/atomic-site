@@ -1,15 +1,14 @@
 # Atomic project website
 
-  * Atomic is a not-yet-public project.
-  * https://mojo.redhat.com/groups/appinfra-project-glow
-
-This website is build on Middleman, a static site generator. See below for 
+This website is build on Middleman, a static site generator. See below for
 quick instructions:
 
 To get started, you need to have Ruby and Ruby Gems installed, as well
 as "bundler".
 
 ## Initial setup
+
+On an rpm nased distribution:
 
 ```
 sudo yum install -y ruby-devel rubygems gcc-c++ curl-devel rubygem-bundler

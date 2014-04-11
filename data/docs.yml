@@ -5,8 +5,8 @@
   Getting Started Guide: /docs/gettingstarted
 - In depth:
   rpm-ostree OS Update System: /docs/os-updates
-  Filesystems: /docs/filesystems
-  Storage Recommendations: /docs/docker-storage-recommendation
+  Setting up Storage: /docs/docker-storage-recommendation
+  Supported Filesystems: /docs/filesystems
   Building RHEL images: /docs/docker-building-rhel-images
   Image Author Guidance: /docs/docker-image-author-guidance
   About SELinux: /docs/docker-and-selinux

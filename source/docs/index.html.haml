@@ -1,0 +1,131 @@
+---
+title: Project Atomic Documentation
+---
+%h1 Learning more
+
+%img.img-responsive.pull-right( src="/images/documentation.png")
+
+%p.lead
+
+  Please have a look to the
+  %a( href="/docs/introduction/" ) Introduction to Project Atomic
+  to get a first idea about the goals and scope of the project.
+
+%h2 Getting started
+
+%p
+
+  To quickly get Atomic up and running please follow the instructions
+  from our
+  %a( href="/docs/quickstart/" ) Quick Start Guide
+  \.
+
+%p
+
+  Then check our
+  %a( href="/docs/gettingstarted/" ) Getting Started Guide
+  to make your first steps with your new Atomic setup.
+
+%h2 More in-depth documentation
+
+.row
+
+  .col-md-4.col-sm-12
+    %h3 Building new images
+
+    %p
+      The
+      %a( href="/docs/docker-building-rhel-images" ) Building Docker Images
+      provides guidelines on how to build new Docker images for your
+      application deployments, and the
+      %a( href="/docs/docker-image-author-guidance" ) Docker Image Author Guidance
+      gives a set of explanations and tips which will help authoring new
+      Docker images.
+
+
+  .col-md-4.col-sm-12
+    %h3 Updating the Atomic controller
+
+    %p
+
+      Atomic use a new way to manage updates of the base
+      operating system, the
+      %a( href="/docs/os-updates" ) Operating System upgrades via rpm-ostree
+      provides some details about it, see also the online pages for the
+      %a( href="http://rpm-ostree.cloud.fedoraproject.org/" ) rpm-ostree
+      project and the
+      %a( href="http://live.gnome.org/Projects/OSTree" ) OSTree
+      library.
+
+  .col-md-4.col-sm-12
+    %h3 Managing storage
+
+    %p
+      To setup additional storage for /var/lib/docker see
+      %a( href="/docs/docker-storage-recommendation" ) Setting Up Storage
+      and when considering alternative filesystems see
+      %a( href="/docs/filesystems" ) Supported Filesystems
+      \.
+
+.row
+
+  .col-md-4.col-sm-12
+    %h3 Containment and Security
+
+    %p
+      Beyond the isolation provided by containers, Atomic relies on
+      Security-Enhanced Linux to improve the security of the host and
+      between containers, see
+      %a( href="/docs/docker-and-selinux" ) Docker and SELinux
+      for details of the increased protection available.
+
+  .col-md-4.col-sm-12
+    %h3 Networking
+
+    %p
+      When an application is composed using multiple containers
+      it can be a bit complex to make those communicate without
+      loosing flexibility, the
+      %a( href="/docs/inter-container-networking" ) Inter-container networking
+      provide a solution for such setups.
+
+%h2
+  %a( name="contribute")
+  How to contribute to the documentation
+
+%p
+
+  Atomic is a Work in Progress, and documentation need to follow the
+  pace of the developments.
+
+%p
+  To help achieve this, the documentation (as well as the whole
+  web site) is available from the 
+  %a( href="https://github.com/projectatomic/atomic-site/" ) atomic-site
+  repository on GitHub as part of the
+  %a( href="https://github.com/projectatomic/" ) projectatomic
+  framework.
+  Most of the documents are simply written in the
+  %a( href="http://en.wikipedia.org/wiki/Markdown" ) Markdown
+  plain text formatting syntax, they are as a result easy to edit and
+  extend, simply clone the atomic site and edit them under the
+  %code sources/docs/
+  directory. If you add a new file please also register it in
+  %code data/docs.yml
+  \. Then send us a pull request on GitHub or the resulting patch to the
+  %a( href="http://lists.projectatomic.io/mailman/listinfo/atomic-devel" ) atomic-devel
+  mailing-list if you prefer. Thanks !
+
+%p
+  The web site itself is available in the
+  %a( href="https://github.com/projectatomic/atomic-site/" ) atomic-site
+  repository on GitHub, it is build using
+  %a( href="http://middlemanapp.com/" ) Middleman
+  framework, see the
+  %code README.md
+  at the top of the git checkout for informations. It also uses
+  %a( href="http://haml.info/" ) Haml
+  for more complex formatting of some pages, check the
+  %a( href="http://haml.info/tutorial.html" ) Tutorial
+  to get started editing some of the haml pages.
+

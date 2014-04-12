@@ -6,21 +6,24 @@
 
   li
     $nav-padding-x: 20px
-    $nav-padding-y: 10px
-    $selected-bar: 5px
-    padding-right: 2ex
+    $nav-padding-y: 3px
+    $selected-bar: 8px
+    padding-right: 1ex
 
     a
       padding: $nav-padding-y $nav-padding-x
 
       &:hover
-        background-color: rgba($component-active-bg, 0.1)
+        text-decoration: underline
+        background: transparent
 
     &.active
       a
-        background-color: rgba($component-active-bg, 0.2)
-        padding-right: $nav-padding-x - $selected-bar
-        border-right: $selected-bar solid rgba($component-active-bg, 0.3)
+        @import compass
+        background-color: rgba(adjust-saturation($brand-primary, -50), 0.1)
+        padding-left: $nav-padding-x - $selected-bar
+        border-left: $selected-bar solid rgba(adjust-saturation($brand-primary, -20), 0.7)
+        +border-radius(3px)
 
     &.disabled
       font-size: 12pt

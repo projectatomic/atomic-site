@@ -12,7 +12,7 @@ Before setting up the `/var/lib/docker` directory to use the external volume it 
  
     # lvcreate --size 30GB --name extra-disk-for-rhel-atomic
  
-Attach the volume to the RHEL Atomic Controller virtual machine in virt-manager. Reboot the virtual machine. On the RHEL atomic controller, ensure the device is available.
+Attach the volume to the RHEL Atomic host virtual machine in virt-manager. Reboot the virtual machine. On the RHEL Atomic host, ensure the device is available.
  
     # fdisk -l
  

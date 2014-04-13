@@ -54,8 +54,8 @@ title: Get Started with Project Atomic
       Administer the services on your system with Cockpit
     %pre
       :preserve
-        $ systemctl enable cockpit-ws.socket
-        # visit http://localhost:21064 in a browser
+        $ systemctl enable cockpit.socket
+        # visit http://&lt;ipaddress&gt;:21064 in a browser
     %p
       Cockpit is perfect for new sysadmins, allowing them to easily perform simple tasks such as storage 
       administration, inspecting journals and starting and stopping services.

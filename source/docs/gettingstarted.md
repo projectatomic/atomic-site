@@ -33,8 +33,9 @@ There is only one package shipped that is not in Fedora, which is a
 patched `shadow-utils`.  For more information, see
 https://lists.fedoraproject.org/pipermail/devel/2014-April/197783.html
 
-Other important components are `docker`, `rpm-ostree`, `ostree`.  The
-source packages are available in the Fedora package tree.
+Other important components are `docker`, `geard`, `rpm-ostree`,
+`ostree`.  The source packages are available in the Fedora package
+tree.
 
 == Installing Atomic
 

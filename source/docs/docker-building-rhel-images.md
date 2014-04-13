@@ -91,8 +91,6 @@ Build and run from the directory where the Dockerfile and content is located.  T
 
 This approach is a great way to learn about Docker and building images. It is also good for troubleshooting and prototyping.  It is how `docker.io` teaches you about Docker in their Getting Started web page.
 
-Recommendation: It would be good to expose port 80 and define the entry point in the `rhel-httpd` image and then merely add the files in the final Dockefile. That way the application only has to worry about the files needed for the new website.  
-
 ### Using a Single Dockerfile 
 
 The administrator may decide that building interactively is tedious and error-prone. Instead the administrator could build a single Dockerfile that layers on the Apache Web server and the web site content in one build. 

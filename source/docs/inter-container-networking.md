@@ -1,5 +1,4 @@
-Inter-container Software Defined Networking using iptables
-====================================================
+# Inter-Container Software-Defined Networking using iptables
 
 Geard uses iptables to enable containers to connect to each other.
 Network namespaces allows adding iptables rules to the network namespace
@@ -37,7 +36,4 @@ Two advantages of this approach are:
   doesn't have to change for all instances of the application container.
 * The database container could be moved to any host and the application
   would just have to flush and rerun gear link to point to the new location.
-
-
-
 

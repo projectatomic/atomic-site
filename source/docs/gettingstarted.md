@@ -16,7 +16,7 @@ disk space for the OS, containers, and data.
 There are builds of Atomic available using Fedora, and a CentOS base
 is coming soon.
 
-#### Fedora
+### Fedora
 
 At the moment, only pregenerated disk images suitable for use in a
 virtualization platform such as `virt-manager` or `VirtualBox` are
@@ -28,7 +28,7 @@ bare metal.
 You can download disk images from here:
 http://rpm-ostree.cloud.fedoraproject.org/project-atomic/images/
 
-#### Source
+### Source
 
 There is only one package shipped that is not in Fedora, which is a
 patched `shadow-utils`.  For more information, see
@@ -49,7 +49,7 @@ base images available from the upstream distribution and the upstream
 Docker registry.  For more information, see:
 [Image Author Guidance](/docs/docker-image-author-guidance/).
 
-== Configuring and Managing Atomic Host
+## Configuring and Managing Atomic Host
 
 It's important to note that on an Atomic system, the `/etc` and `/var`
 directories are writable as they are on a traditional yum or dpkg
@@ -64,7 +64,7 @@ respectively).
 See [geard](/docs/geard) for more information on managing container
 lifecycle.
 
-== Use Cases
+## Use Cases
 
 If you are developer of an application which is in a Docker Container,
 you can use Project Atomic to as a deployment target.

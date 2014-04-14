@@ -1,5 +1,6 @@
-Building Docker Images
-====================== 
+# Building Docker Images
+
+Building Docker images is a key feature for DevOps. Here's how to accomplish this task.
 
 ## Containers Versus Images
 

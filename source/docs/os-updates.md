@@ -1,4 +1,4 @@
-## Operating System upgrades via rpm-ostree
+# Operating System Upgrades via rpm-ostree
 
 Project Atomic features a new update system for operating systems
 called `rpm-ostree`.  In the default model, the RPMs are composed on a
@@ -9,7 +9,7 @@ Unlike traditional operating system update mechanisms, it
 will automatically keep the previous version of the OS, always
 available for rollback.
 
-### Upgrading a machine with rpm-ostree
+## Upgrading a Machine with rpm-ostree
 
 Simply invoke `rpm-ostree upgrade`.  It checks the repository URL
 specified in `/ostree/repo/config` to check for an updated version.
@@ -21,7 +21,7 @@ new `/etc` as a base, and applying your changes on top.
 After an update is prepared, you should `systemctl reboot` to cause
 the updates to take effect.
 
-### Rollback to the previous tree
+## Rollback to the Previous Tree
 
 If something goes wrong, by default, you always have a previous
 tree (operating system snapshot) installed.  It will be available

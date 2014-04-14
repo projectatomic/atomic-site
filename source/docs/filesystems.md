@@ -1,12 +1,12 @@
-Supported Filesystems
-=====================
+# Supported Filesystems
+
 
 A core part of the Docker model is the efficient use of layered images
 and containers based on images. To implement this Docker relies
 heavily on various filesystem features in the kernel. This document
 will explain how this works and give some advice in how to best use it.
 
-## Storage backends
+## Storage Backends
 
 The basis of the filesystem use in Docker is the storage backend
 abstraction. A storage backend allows you to store a set of layers
@@ -40,7 +40,7 @@ image) involves finding all the changes from the init layer to the
 container layer and applying those to a new layer based on the same
 image the container used.
 
-## The `vfs` backend
+## The vfs Backend
 
 The vfs backend is a very simple fallback that has no copy-on-write
 support. Each layer is just a separate directory. Creating a new layer
@@ -53,7 +53,7 @@ practical backend. However, it still has its uses, for instance to
 verify other backends against, or if you need a super robust (if slow)
 backend that works everywhere.
 
-## The `devicemapper` backend
+## The devicemapper Backend
 
 The devicemapper backend uses the device-mapper thin provisioning
 module (dm-thinp) to implement layers. Device-mapper is the kernel
@@ -99,7 +99,7 @@ the `0:30` part is the minor/major device nr and `19478248` is the
 inode number of the /var/lib/docker/devicemapper directory. The same
 prefix is used for the actual thin devices.
 
-## The `btrfs` backend
+## The btrfs Backend
 
 The brtfs backend requires `/var/lib/docker` to be on a btrfs filesystem
 and uses the filesystem level snapshotting to implement layers.
@@ -115,7 +115,7 @@ order to limit the impact of filesystem corruption. You would also want to
 mount the volume directory `/var/lib/docker/vfs/` on a standard XFS or EXT4 
 filesystem to ensure container data is protected.
 
-## The `aufs` backend
+## The aufs Backend
 
 The aufs backend uses the aufs union filesystem. This is not supported
 on the upstream kernel and most distributions (including any from Red
@@ -130,7 +130,7 @@ removed from the previous layer. It then relies on the aufs filesystem
 to combine all the layers into a single mountpoint. Any changes to
 this mountpoint goes into the topmost layer.
 
-## Comparison of the backends
+## Comparison of the Backends
 
 All backends except the vfs one shares diskspace between base
 images. However, they work on different levels, so the behaviour is

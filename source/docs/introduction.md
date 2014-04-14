@@ -11,7 +11,7 @@ Project Atomic hosts inherit the full features and advantages of their base dist
 * [systemd](http://www.freedesktop.org/wiki/Software/systemd/), an open-source system and service manager for Linux.
 * [geard](https://github.com/smarterclayton/geard), an open-source project for installing and linking Docker containers into systemd, and for coordinating those Docker containers across hosts.  geard is the core of the next-generation of OpenShift.
 
-## How can Project Atomic Help me?
+## How Can Project Atomic Help Me?
 
 * The traditional enterprise OS model with a single runtime environment controlled by the OS and shared by all applications does not meet the requirements of modern application-centric IT.
 * The complexity of the software stack, the amount of different stacks, and the speed of change have overwhelmed the ability of a single monolithic stack to deliver in a consistent way.

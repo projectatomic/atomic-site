@@ -3,13 +3,13 @@
   Introduction: /docs/introduction
   Quick Start Guide: /docs/quickstart
   Getting Started Guide: /docs/gettingstarted
-- In depth:
+- In Depth:
   rpm-ostree OS Update System: /docs/os-updates
-  Setting up Storage: /docs/docker-storage-recommendation
+  Setting Up Storage: /docs/docker-storage-recommendation
   Supported Filesystems: /docs/filesystems
-  Building RHEL images: /docs/docker-building-rhel-images
+  Building RHEL Images: /docs/docker-building-rhel-images
   Image Author Guidance: /docs/docker-image-author-guidance
   About SELinux: /docs/docker-and-selinux
-  Inter-container networking: /docs/inter-container-networking
+  Inter-container Networking: /docs/inter-container-networking
 - Contributing:
   How to Contribute: /docs/#contribute

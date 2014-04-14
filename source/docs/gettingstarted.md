@@ -13,7 +13,8 @@ disk space for the OS, containers, and data.
 
 == Downloading Atomic
 
-There are builds of Atomic available using Fedora and CentOS bases.
+There are builds of Atomic available using Fedora, and a CentOS base
+is coming soon.
 
 ==== Fedora
 
@@ -43,7 +44,12 @@ At the moment, only pregenerated disk images are available.  A future
 release will have Anaconda support and thus support all installation
 scenarios that Anaconda does, including bare metal.
 
-== Configuring and Managing Atomic
+Once you have a machine with an Atomic Host, there should be Docker
+base images available from the upstream distribution and the upstream
+Docker registry.  For more information, see:
+[Image Author Guidance](/docs/docker-image-author-guidance/).
+
+== Configuring and Managing Atomic Host
 
 It's important to note that on an Atomic system, the `/etc` and `/var`
 directories are writable as they are on a traditional yum or dpkg
@@ -54,6 +60,9 @@ At present, the primary expected method to install software locally is
 via Docker containers.  You can also use `/usr/local` or `/opt` (in
 the OSTree model, these are really `/var/usrlocal` and `/var/opt`,
 respectively).
+
+See [geard](/docs/geard) for more information on managing container
+lifecycle.
 
 == Use Cases
 

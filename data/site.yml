@@ -13,7 +13,7 @@ domain: www.projectatomic.io
 
 # Owner is used for the automatic copyright string.
 # If no owner is specified, then copyright will default to site name.)
-owner: Red Hat, Inc.
+owner: Project Atomic. Sponsored by Red Hat, Inc.
 
 # The year your site was established (for the copyright)
 founding_year: 2014 # Defaults to current year if commented

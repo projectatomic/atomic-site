@@ -12,12 +12,20 @@ title: Get Started with Project Atomic
 %p.lead
   Download an Atomic Fedora 20 VM now
 
-%p.buttons.btn-group.btn-group-lg
-  %a.btn.btn-primary{:href => "http://rpm-ostree.cloud.fedoraproject.org/project-atomic/images/f20/vbox"} VirtualBox (Win, Mac)
-  %a.btn.btn-primary{:href => "http://rpm-ostree.cloud.fedoraproject.org/project-atomic/images/f20/qemu"} QEMU (Linux)
+.clearfix
+
+%p.buttons.hidden-xs
+  %a.btn.btn-primary.btn-lg{:href => "http://rpm-ostree.cloud.fedoraproject.org/project-atomic/images/f20/vbox"} VirtualBox (Win, Mac)
+  %a.btn.btn-primary.btn-lg{:href => "http://rpm-ostree.cloud.fedoraproject.org/project-atomic/images/f20/qemu"} QEMU (Linux)
+%p.buttons.visible-xs
+  %a.btn.btn-primary.btn-block{:href => "http://rpm-ostree.cloud.fedoraproject.org/project-atomic/images/f20/vbox"} VirtualBox (Win, Mac)
+  %a.btn.btn-primary.btn-block{:href => "http://rpm-ostree.cloud.fedoraproject.org/project-atomic/images/f20/qemu"} QEMU (Linux)
+
 %p Stay tuned for more distributions and optimized images for cloud environments.
 
-.row{:style => 'clear:both'}
+.clearfix
+
+.row
   .col-md-6.col-sm-12
     %h2 Atomic Upgrades
 

@@ -3,7 +3,7 @@ author: jzb
 comments: true
 layout: post
 title: "Announcing Project Atomic: An Operating System Concept for Running Docker Containers"
-date: 2014-04-15 17:00 UTC
+date: 2014-04-15 12:00 UTC
 tags:
 - Atomic
 categories:
@@ -12,7 +12,7 @@ categories:
 
 As most folks know, Red Hat has [already been working hard on Docker support](http://developerblog.redhat.com/2013/11/26/rhel6-5-ga/) in Red Hat Enterprise Linux. Today we're taking the wraps off a new operating system concept for running Docker containers called [Project Atomic](http://www.projectatomic.io/). This concept, known as an Atomic Host, will provide users with a familiar host environment for Docker containers that allows atomic updates to the host OS as well as containerized applications.
 
-The [CentOS Project](http://centos.org), [Fedora Project](http://fedoraproject.org), and [Red Hat](http://redhat.com/) will be taking the technologies developed under Project Atomic to deliver Atomic Hosts for running containerized applications. [Red Hat Enterprise Linux Atomic Host](FIXME) and the Fedora Project's [Atomic Initiative](http://rpm-ostree.cloud.fedoraproject.org/#/) have evaluation builds available today, with CentOS images coming soon.
+The [CentOS Project](http://centos.org), [Fedora Project](http://fedoraproject.org), and [Red Hat](http://redhat.com/) will be taking the technologies developed under Project Atomic to deliver Atomic Hosts for running containerized applications. The Fedora Project's [Atomic Initiative](http://rpm-ostree.cloud.fedoraproject.org/#/) has evaluation builds available today, with CentOS images coming soon.
 
 ## The Elements of Atomic
 

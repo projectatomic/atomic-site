@@ -2,17 +2,17 @@
 
 ## Introduction
  
-The Atomic Controller is a minimal Linux distribution specifically purposed for hosting lxc/Docker containers. Atomic Controller is distributed on a 8.5Gb image to keep it's footprint small. That amount of storage doesn't support building and storing lots of Docker images.  It is expected practice that external storage of sufficient size will be attached to the Atomic Controller host in order to provide enough space to build and store Docker images . Docker depends on `/var/lib/docker` as the default directory where all docker related files, including the images, are stored. If you use the default `/var/lib/docker` provided in the Atomic Controller image then it will fill up fast and soon Docker and the host will become unusable.
+The Atomic Host is a minimal Linux distribution specifically purposed for hosting lxc/Docker containers. Atomic Host is distributed on a 8.5Gb image to keep it's footprint small. That amount of storage doesn't support building and storing lots of Docker images.  It is expected practice that external storage of sufficient size will be attached to the Atomic Host host in order to provide enough space to build and store Docker images . Docker depends on `/var/lib/docker` as the default directory where all docker related files, including the images, are stored. If you use the default `/var/lib/docker` provided in the Atomic Host image then it will fill up fast and soon Docker and the host will become unusable.
  
-This document/section provides instructions on the recommended steps on how to use an attached volume with your Atomic Controller host so that you can build and store lots of Docker images.
+This document/section provides instructions on the recommended steps on how to use an attached volume with your Atomic Host host so that you can build and store lots of Docker images.
  
 ## Preliminary Steps
 
-Before setting up the `/var/lib/docker` directory to use the external volume it is assumed you have attached that volume to your host. Here is an example of setting up a 30Gb external volume to a Atomic Controller virtual machine.
+Before setting up the `/var/lib/docker` directory to use the external volume it is assumed you have attached that volume to your host. Here is an example of setting up a 30Gb external volume to a Atomic Host virtual machine.
  
     # lvcreate --size 30GB --name extra-disk-for-atomic-controller
  
-Attach the volume to the Atomic Controller host virtual machine in virt-manager. Reboot the virtual machine. On the Atomic Controller host, ensure the device is available.
+Attach the volume to the Atomic Host host virtual machine in virt-manager. Reboot the virtual machine. On the Atomic Host host, ensure the device is available.
  
     # fdisk -l
  
@@ -20,13 +20,13 @@ Create a partition using the new device discovered using the above command. E.g.
  
     # fdisk /dev/sdb1
  
-Now create a file system on the new partition, or start using lvm here. The preferred file systems types for Atomic Controller are ext4 and xfs.
+Now create a file system on the new partition, or start using lvm here. The preferred file systems types for Atomic Host are ext4 and xfs.
  
     # mkfs.xfs /dev/sdb1
  
 ## Setting Up /var/lib/docker
 
-Before setting up the external volume consider if there are already important images or containers already in use on this host.  It is unlikely due to the size of the image and it is preferred to do these recommended steps before building or pulling down images. i.e. it is not recommended to use Atomic Controller before attaching an external volume. But if there is important information in `/var/lib/docker` then it is best to copy this to a backup directory now.
+Before setting up the external volume consider if there are already important images or containers already in use on this host.  It is unlikely due to the size of the image and it is preferred to do these recommended steps before building or pulling down images. i.e. it is not recommended to use Atomic Host before attaching an external volume. But if there is important information in `/var/lib/docker` then it is best to copy this to a backup directory now.
 
     # cp -r  /var/lib/docker  /my-backupd-dir
 

@@ -14,7 +14,7 @@ Here's how to get started with Atomic on your machine using virt-manager on Linu
 
 1. Download the virt-manager image.
 
-2. Run `xd -d [filename]` to uncompress the downloaded image.
+2. Run `xz -d [filename]` to uncompress the downloaded image.
 
 3. Start virt-manager.
 

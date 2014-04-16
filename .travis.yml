@@ -3,7 +3,7 @@ rvm:
 - 2.0.0
 install:
 - sudo apt-get update -qq
-- sudo apt-get install -y bundler ruby-dev git make gcc
+- sudo apt-get install -y ruby-dev git make gcc
 - bundle install
 script: bundle exec middleman build
  

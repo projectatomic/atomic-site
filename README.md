@@ -12,7 +12,7 @@ On an rpm based distribution:
 
 ```
 sudo yum install -y ruby-devel rubygems gcc-c++ curl-devel rubygem-bundler
-git clone git@gitlab.osas.lab.eng.rdu2.redhat.com:osas/atomic-site.git
+git clone http://github.com/projectatomic/atomic-site.git
 cd atomic-site
 bundle install
 ```

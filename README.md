@@ -1,6 +1,6 @@
 # Atomic project website
 
-This website is build on Middleman, a static site generator. See below for
+This website is built on Middleman, a static site generator. See below for
 quick instructions:
 
 To get started, you need to have Ruby and Ruby Gems installed, as well

@@ -50,13 +50,7 @@ Here's how to get started with Atomic on your machine using VirtualBox on Window
 
 6. Adjust the VM's RAM if needed and click Next. The Hard Drive page in the Create Virtual Machine dialog will appear.
 
-7. Select the Create a virtual hard drive now option and click Create. The Create Virtual Hard Drive dialog will open.
-
-8. Select the option you want to use and click Next. The Storage on physical hard drive page will appear.
-
-9. Choose the type of file allocation you want and click Next. The File location and size page will appear.
- 
-10. Select the location and size of the disk you need and click Create. The virtual hard drive will be created and the virtual machine will be ready.
+7. Select the Use an existing virtual hard drive option, browse to the file location, and click Create. The virtual machine will be created and the virtual machine will be ready.
 
 ## Configure Your Atomic Machine
 

@@ -10,7 +10,15 @@ title: Get Started with Project Atomic
   Atomic can run on the same platforms and clouds as the distributions it is based on.
 
 %p.lead
-  Download an Atomic Fedora 20 VM now
+  Download an Atomic Fedora 20 VM now.
+
+%p 
+  The "QEMU" image works on Linux KVM virtualization, for example 
+  <a href="http://openstack.redhat.com/">RDO</a> (OpenStack), 
+  <a href="http://ovirt.org">oVirt</a>, 
+  <a href="http://virt-manager.org/">virt-manager</a> and
+  the "Boxes" virtual machine application available on 
+  <a href="http://fedoraproject.org/">Fedora 20</a>.
 
 .clearfix
 
@@ -26,6 +34,27 @@ title: Get Started with Project Atomic
 .clearfix
 
 .row
+  .col-md-12.sm-12
+    %h2 First Boot
+
+    %p Atomic boots to a text console, asking you to log in:
+    %pre
+    
+      Localhost login: root <span class="text-muted">[press enter]</span>
+
+    %p
+      There is no password by default.
+
+    %p
+      Even though remote login via ssh is disabled with a blank password,
+      it makes sense to set one now:
+
+    %pre
+      \# passwd root
+      Changing password for user root.
+      New password: <span class="text-muted">[enter a new password ]</span>
+      Retype new password: <span class="text-muted">[ enter the password again ]</span>
+     
   .col-md-6.col-sm-12
     %h2 Atomic Upgrades
 

@@ -28,6 +28,6 @@ tree (operating system snapshot) installed.  It will be available
 as a bootloader entry; hold down SHIFT during OS bootup to cause
 the bootloader to prompt.
 
-If you boot into the new tree and detemrine something is wrong,
+If you boot into the new tree and determine something is wrong,
 you can invoke `rpm-ostree rollback`.
 

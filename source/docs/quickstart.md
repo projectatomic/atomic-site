@@ -74,7 +74,7 @@ After the Atomic virtual machine is created, it will be ready to use, though the
 
 ## Readying More Space For Containers
 
-Docker is ready to go at this point, but there's another fairly important bit of config to do, if you're going to be testing out more than a couple containers--you need to add a bigger drive for `/var/docker`.
+Docker is ready to go at this point, but there's another fairly important bit of config to do, if you're going to be testing out more than a couple containers--you need to add a bigger drive for `/var/lib/docker`.
 
 ### Add A New Drive in virt-manager
 

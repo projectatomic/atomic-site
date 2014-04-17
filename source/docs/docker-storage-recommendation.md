@@ -26,14 +26,13 @@ Now create a file system on the new partition, or start using lvm here. The pref
  
 ## Setting Up /var/lib/docker
 
-Before setting up the external volume consider if there are already important images or containers already in use on this host.  It is unlikely due to the size of the image and it is preferred to do these recommended steps before building or pulling down images. i.e. it is not recommended to use Atomic Host before attaching an external volume. But if there is important information in `/var/lib/docker` then it is best to copy this to a backup directory now.
+Before setting up the external volume consider if there are already important images or containers already in use on this host.  It is unlikely due to the size of the image and it is preferred to do these recommended steps before building or pulling down images. i.e. it is not recommended to use Atomic Host before attaching an external volume. But if there is important information in `/var/lib/docker` then it is best to move this to a temporary location until it can be placed on the external volume.
 
-    # cp -r  /var/lib/docker  /my-backupd-dir
+    # mv /var/lib/docker  /my-backupd-dir
 
-Stop the docker service and remove the `/var/lib/docker` directory and it's contents:
+Stop the docker service.
 
     # systemctl stop docker
-    # rm -rf /var/lib/docker
 
 Now, getting back to the new device, get the UUID from the device.
  
@@ -54,15 +53,16 @@ The volume is ready to be mounted and used by Docker. Mount the device:
 
     # mount -a
  
-If you did backup any information from `/var/lib/docker` then now is a good time to restore it. Copy the backup to the new volume. Then restart the docker service:
+If you did move any data from `/var/lib/docker` then now is a good time to move it to then new volume. Then restart the docker service:
  
     # systemctl start docker
 
-If the provided `/var/lib/docker` was not backed up and restored then it is easy to check if everything worked.  After the docker service has started you should see the following files in the `/var/lib/docker` with ls :
+If the provided `/var/lib/docker` was not moved as descrbed above then it is easy to check if everything worked.  After the docker service has started you should see the following files in the `/var/lib/docker` with ls :
 
     containers  devicemapper  execdriver  graph  init  linkgraph.db  
     lxc-start-unconfined  repositories-devicemapper  vfs  volumes
 
+If you moved the original contents of `/var/lib/docker` ensure this directory contains the data you expect.
 Another test is to build an image. Here is a simple example `Dockerfile`:
 
     FROM fedora

@@ -4,15 +4,15 @@ We recommend reading the Getting Started Guide and Concepts Guide if you're enti
 
 ## What You Need
 
-* **A virtualization client.** [Virtual Machine Manager](http://virt-manager.org/) is a very good KVM-based client for Linux systems. Windows and OS X users can give [VirtualBox](https://www.virtualbox.org/) a try. Be sure your virtualization client is properly configured to access the Internet.
+* **A virtualization client.** [Virtual Machine Manager](http://virt-manager.org/) (virt-manager) is a very good KVM-based client for Linux systems. Windows and OS X users can give [VirtualBox](https://www.virtualbox.org/) a try. Be sure your virtualization client is properly configured to access the Internet.
 
 * **A virtual machine image.** Images for Atomic based on Fedora 20 can be found at the [rpm-ostree project](http://rpm-ostree.cloud.fedoraproject.org/project-atomic/images/) for [VirtualBox](http://rpm-ostree.cloud.fedoraproject.org/project-atomic/images/f20/vbox) and [KVM/QEMU](http://rpm-ostree.cloud.fedoraproject.org/project-atomic/images/f20/qemu) images for virt-manager.
 
 ## Step by Step on virt-manager
 
-Here's how to get started with Atomic on your machine using virt-manager on Linux.
+Here's how to get started with Atomic on your machine using virt-manager on Linux. The instructions below are for running virt-manager on Fedora 20. The steps may vary slightly when running older distributions of virt-manager.
 
-1. Download the virt-manager image.
+1. Download the KVM/QEMU image.
 
 2. Run `xz -d [filename]` to uncompress the downloaded image.
 
@@ -30,9 +30,11 @@ Here's how to get started with Atomic on your machine using virt-manager on Linu
 
 9. In the New VM dialog, select Linux for the OS type, Fedora 20 (or later) for the Version, and click Forward. The next page in the New VM dialog will appear.
 
-10. Adjust the VM's RAM and CPU settings, if needed and click Forward. The next page in the New VM dialog will appear.
+10. Adjust the VM's RAM and CPU settings (if needed) and click Forward. The next page in the New VM dialog will appear.
 
 11. Assign a new name to the VM and click Finish. The Atomic instance will boot.
+
+Note: When running virt-manager on Red Hat Enterprise Linux 6 or CentOS 6, the VM will not boot until the disk storage format is changed from raw to qcow2.
 
 ## Step by Step on VirtualBox
 

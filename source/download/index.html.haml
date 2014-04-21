@@ -118,7 +118,7 @@ title: Get Started with Project Atomic
       Setup and link containers across hosts
     %pre
       :preserve
-        $ gear install pmorie/sti-html-app web --ports="8080:0" --start
+        $ gear install pmorie/sti-html-app html -p 8080:0 --start
     %p
       Install containers to systemd and link them across a cluster with geard, the new core
       of OpenShift.

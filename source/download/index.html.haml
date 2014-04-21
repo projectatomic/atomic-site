@@ -45,7 +45,7 @@ title: Get Started with Project Atomic
 
     %h3 Extremely Quick Start Guide For the Impatient
 
-    %p Atomic boots to a text console, asking you to log in:
+    %p From here in, we'll refer to the Atomic VM as the "host," even though it's actually a VM. Atomic boots to a text console, asking you to log in:
     %pre
     
       Localhost login: root <span class="text-muted">[press enter]</span>
@@ -69,8 +69,8 @@ title: Get Started with Project Atomic
     %p
       From a running host, start an upgrade with:
     %pre
-      $ rpm-ostree upgrade
-      $ systemctl reboot
+      \# rpm-ostree upgrade
+      \# systemctl reboot
     %p
       On the boot screen you'll see your new version. Hold down the
       SHIFT key there to rollback to your previous tree.
@@ -85,7 +85,7 @@ title: Get Started with Project Atomic
       Host applications on Atomic with #{link_to "Docker", "https://www.docker.io"}
     %pre
       :preserve
-        $ docker run fedora /bin/echo "hello world"
+        # docker run fedora /bin/echo "hello world"
     %p
       Get familiar with the #{link_to "Docker tutorial", "https://www.docker.io/gettingstarted/#"}, then
       learn how you can build reusable images and run Docker in production on Atomic hosts.
@@ -118,7 +118,7 @@ title: Get Started with Project Atomic
       Setup and link containers across hosts
     %pre
       :preserve
-        $ gear install pmorie/sti-html-app html -p 8080:0 --start
+        # gear install pmorie/sti-html-app html -p 8080:0 --start
     %p
       Install containers to systemd and link them across a cluster with geard, the new core
       of OpenShift.

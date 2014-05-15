@@ -80,7 +80,7 @@ Say that you have a wrapper script to that starts a process for a server of some
 your container (using `docker run -i`), which runs the wrapper script, which in turn starts your
 process.  Now say that you want to kill your container with `CTRL+C`.  If your wrapper script used
 `exec` to start the server process, docker will send `SIGINT` to the server process, and everything
-will be work as you expect.  If you didn't use `exec` in your wrapper script, docker will send 
+will work as you expect.  If you didn't use `exec` in your wrapper script, docker will send 
 `SIGINT` to the process for the wrapper script - and your process will keep running like nothing
 happened.
 
@@ -100,8 +100,8 @@ For more information about ports and docker, please check out the
 
 ## Use Volumes Appropriately
  
-The `VOLUME` instruction and the `-v` option tell docker to store files in a directory on the host
-instead in the container's file system.  Volumes give you a couple of key benefits:
+The `VOLUME` instruction and the `-v` option to `docker run` tell docker to store files in a directory on the host
+instead of in the container's file system.  Volumes give you a couple of key benefits:
 
 * Volumes can be shared between containers using `--volumes-from`
 * Changes to large files are faster

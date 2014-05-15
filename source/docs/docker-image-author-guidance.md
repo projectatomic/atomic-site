@@ -76,7 +76,7 @@ the script's process is replaced by your software.  If you do not use `exec`, th
 docker will go to your wrapper script instead of your software's process.  This is not what you
 want - as illustrated by the following example:
 
-Say that you have a wrapper script to that starts a process for a server of some kind.  You start
+Say that you have a wrapper script that starts a process for a server of some kind.  You start
 your container (using `docker run -i`), which runs the wrapper script, which in turn starts your
 process.  Now say that you want to kill your container with `CTRL+C`.  If your wrapper script used
 `exec` to start the server process, docker will send `SIGINT` to the server process, and everything

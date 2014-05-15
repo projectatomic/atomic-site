@@ -66,5 +66,5 @@ lifecycle.
 
 ## Use Cases
 
-If you are developer of an application which is in a Docker Container,
-you can use Project Atomic to as a deployment target.
+If you are a developer of an application which is in a Docker Container,
+you can use Project Atomic as a deployment target.

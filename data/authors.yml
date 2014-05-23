@@ -10,6 +10,8 @@ admin:
 jzb:
   name: Joe Brockmeier
   twitter: jzb
+  gravatar: 39606c0c942bb877967b5b54b29a9d66
+  description: Works on Red Hat's Open Source and Standards team. Music junkie, and artist-in-training. Vim lover. Fan of polar bears and cats. Enjoys beer.
 
 bkp:
   name: Brian Proffitt
@@ -20,3 +22,6 @@ walters:
 
 jzb-lars:
   name: Joe Brockmeier, Lars Herrmann
+
+stef:
+  name: Stef Walter

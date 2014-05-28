@@ -144,7 +144,7 @@ systemctl reboot
 
 ## Tree-Building Time
 
-Upon reboot, the rpm-ostree-autobuilder service should start, and begin looking, in the `/srv/rpm-ostree` directory, for a `products.json` file to defines the trees and images to build.
+Upon reboot, the rpm-ostree-autobuilder service should start, and begin looking, in the `/srv/rpm-ostree` directory, for a `products.json` file to define the trees and images to build.
 
 A products.json that corresponds to the initial Project Atomic images is available [in this gist](https://gist.github.com/jasonbrooks/10749644). A products.json that produces multiple images (based on rawhide) is available in Colin Walters' [Fedora Atomic Initiative repository](https://github.com/cgwalters/fedora-atomic/blob/master/products.json).
 

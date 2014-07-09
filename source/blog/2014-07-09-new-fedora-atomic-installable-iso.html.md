@@ -24,8 +24,8 @@ It contains a cache of the tree content inside it, similar to how the Fedora DVD
 
 To get updates after installation, you'll need to run a few commands:
 
-    # ostree remote add fedora-atomic http://rpm-ostree.cloud.fedoraproject.org/repo`
-    # atomic rebase fedora-atomic:`
+    # ostree remote add fedora-atomic http://rpm-ostree.cloud.fedoraproject.org/repo
+    # atomic rebase fedora-atomic:
 
 Let me explain those two commands a bit more.  The first adds a new "remote" with the location of the current (hopefully temporary) OSTree repository.  (For more information on the temporary part, see: [https://lists.fedoraproject.org/pipermail/infrastructure/2014-June/014447.html](https://lists.fedoraproject.org/pipermail/infrastructure/2014-June/014447.html).
 

@@ -24,6 +24,6 @@ Case in point: yesterday Red Hat's [Derek Carr](https://github.com/derekwaynecar
 
 Kubernetes is just one of the orchestration tools that will be included in Atomic for container management, and the inclusion of Vagrant support is a key move to get more developer involvement. While developers have long coded Linux applications, many programmers prefer Apple's hardware for their needs. Vagrant is very useful tool enabling them to have the best of both worlds.
 
-Specifically, Kubernetes users will be able to manage a [Vagrant](http://www.vagrantup.com/) cluster running a single master with *N* minions. Kubernetes will reuse existing Salt configuration scripts to provision master and minions. Carr has also added support to run on Red Hat-based operating systems, where systemd manages installed services. 
+Specifically, Kubernetes users will be able to spin up a local [Vagrant](http://www.vagrantup.com/) cluster of Fedora machines running a single master with *N* minions. Kubernetes will reuse existing Salt configuration scripts to provision master and minions. Carr has also added support to run on Red Hat-based operating systems, where systemd manages installed services. 
 
-Carr has tested this on Vagrant 1.6.2, and it is recommended that users who want to test this feature use the current versions of Vagrant. Head on over to GitHub and test this new feature today.
+Carr has tested this on Vagrant 1.6.2, and it is recommended that users who want to test this feature use this version or higher of Vagrant. Head on over to GitHub and test this new feature today.

@@ -92,11 +92,9 @@ With the kickstart file described above, the installation proceeds automatically
 
 To receive updates for your Fedora Atomic installation, specify the location of the remote OSTree repository. Execute:
 
-    # ostree remote add fedora-atomic http://rpm-ostree.cloud.fedoraproject.org/repo
+    # ostree remote add --set=gpg-verify=false fedora-atomic http://dl.fedoraproject.org/pub/alt/fedora-atomic/repo/
 
-Here, *fedora-atomic* is used as a name for the remote repository. The URL is stored in the */etc/ostree/remotes.d/fedora-atomic.conf* configuration file. Today, it is required to disable GPG verification for the remote repository to update Fedora Atomic successfully. To do so, add the following text to */etc/ostree/remotes.d/fedora-atomic.conf*:
-
-    gpg-verify=false 
+Here, *fedora-atomic* is used as a name for the remote repository. The URL is stored in the */etc/ostree/remotes.d/fedora-atomic.conf* configuration file. Today, it is required to disable GPG verification for the remote repository to update Fedora Atomic successfully. Therefore the *--set=gpg-verify=false* option above. Alternatively, you can disable GPG by appending `gpg-verify=false` to */etc/ostree/remotes.d/fedora-atomic.conf*.
 
 Now you are able to update your system with the following command:
 
@@ -115,10 +113,11 @@ To revert to a previous installation, execute the following commands:
     # rpm-ostree rollback
     # systemctl reboot
 
+<!---
 ## Uninstalling Fedora Atomic
 
 To remove Fedora Atomic from your computer, you must remove its boot loader information from your master boot record (MBR) and remove any partitions that contain the operating system. Please do not forget to back up any data you want to keep before proceeding.
 
 The removal process varies depending on whether Fedora Atomic is the only operating system installed, or whether the computer is configured to dual-boot Fedora Atomic and another operating system. Fedora Installation guide describes both the [stand-alone](http://docs.fedoraproject.org/en-US/Fedora/20/html/Installation_Guide/ch-x86-uninstall.html#sn-x86-uninstall-single) and [dual-boot](http://docs.fedoraproject.org/en-US/Fedora/20/html/Installation_Guide/sn-x86-uninstall-dual.html) case for Fedora, and these instructions are applicable to Fedora Atomic too.
 
-
+-->

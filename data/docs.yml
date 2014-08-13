@@ -3,6 +3,7 @@
   Introduction: /docs/introduction
   Quick Start Guide: /docs/quickstart
   Getting Started Guide: /docs/gettingstarted
+  Bare Metal Installation: /docs/fedora_atomic_bare_metal_installation
 - In Depth:
   rpm-ostree OS Update System: /docs/os-updates
   Setting Up Storage: /docs/docker-storage-recommendation

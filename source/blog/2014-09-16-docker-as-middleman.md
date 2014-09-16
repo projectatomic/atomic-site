@@ -3,7 +3,7 @@ author: jbrooks
 comments: true
 layout: post
 title: "Docker as Development Middleman"
-date: 2014-09-15
+date: 2014-09-16
 tags:
 - Atomic
 - Docker
@@ -13,7 +13,7 @@ categories:
 
 When compared to dynamic sites based on WordPress or Drupal, staticly generated blog and Web sites (like this one) can go a long way toward simplifying deployment and maintenance. There's no database or server-side code to maintain, and, when paired with a service like Github or Gitlab, you can accept posts or other contributions from anyone, via pull request.
 
-However, while simplifying certain areas, static sites introduce a bit more complexity in other areas. Among the handful of Middleman-based static sites that our team at Red Hat help maintain, we've seen the specter of "works on my laptop" arise. 
+However, while simplifying certain areas, static sites introduce a bit more complexity in other areas. Among the handful of [Middleman](http://middlemanapp.com/)-based static sites that [our team](http://community.redhat.com/) at Red Hat help maintain, we've seen the specter of &quot;it works on *my* laptop&quot; arise. 
 
 With Middleman, authors preview content on their local machine, using Middleman's built-in development server. There isn't much setup required to run this development server, but when the same Middleman code runs on different machines, with different operating systems, and different assortments of Ruby gems, things don't always work as expected.
 
@@ -56,5 +56,6 @@ To build and run the container, simply run:
 ````
 sh docker.sh
 ````
-After a short time (shorter, naturally, if you have an image already cached on your machine), the Middleman development server will be running on your machine at http://0.0.0.0:4567. When you add to or edit the posts and other files within the source directory in your checked-out repo, you can refresh the page in your browser to see your changes.
+After a short time (shorter, naturally, if you have an image already cached on your machine), the Middleman development server will be running on your machine at http://0.0.0.0:4567. 
 
+When you add to or edit the posts and other files within the source directory in your checked-out repo, you can refresh the page in your browser to see your changes.

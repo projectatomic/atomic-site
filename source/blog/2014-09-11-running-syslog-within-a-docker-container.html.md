@@ -42,7 +42,7 @@ After making these changes rsyslogd will start listening on `/dev/log` within th
 If you wanted to logging messages to go to the host logger, you could "volume" mount `/dev/log` into the container.
 
 ``` 
-# docker run -v/dev/log:/dev/log -it --rm rhel /bin/bash
+# docker run -v /dev/log:/dev/log -it --rm rhel /bin/bash
 # logger "this is a test"
 ``` 
 

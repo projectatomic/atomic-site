@@ -48,7 +48,7 @@ The first approach involves the administrator using the Docker CLI to instantiat
 
 The second approach involves building a Dockerfile that uses the base Fedora image,  installs the needed Apache packages, and then adds the necessary content. This ensures that the entire web site is complete in one build.  The image created by this build will only serve a single web site and content changes would require a rebuild. 
 
-### Interactively from a Running Fedora Container
+### Interactively Building a Fedora Container
 
 There is a semi-official image called `fedora` (the latest Fedora version) in the public Docker registry.  For more information on this image and the options available, check [the repository page](https://registry.hub.docker.com/_/fedora/).
 
@@ -73,7 +73,9 @@ Check that this worked by running:
 
 You should see both `fedora-httpd` and `fedora` listed.
 
-The administrator now has a new image that contains a Apache Web server. The adminstrator can build a Dockerfile based on that image and add the appropriate files. Given the relative path to a tarball of the site content, Docker automatically untars or unzips the files in a source tar or zip file into the target directory. Here is the Dockerfile:
+The administrator now has a new image that contains a Apache Web server. The adminstrator can build a Dockerfile based on that image and add the appropriate files. Given the relative path to a tarball of the site content, Docker automatically untars or unzips the files in a source tar or zip file into the target directory. Create a simple index.html and add it to a tarball called `mysite.tar` in the current directory.  
+
+Here is the Dockerfile to add the web site content to the new base image and launch Apache on port 80:
 
     FROM fedora-httpd
     MAINTAINER A D Ministator email: admin@corp.example.com
@@ -91,7 +93,7 @@ The administrator now has a new image that contains a Apache Web server. The adm
 
 The administrator can use this simple Dockerfile as a template for building other web sites. 
 
-Docker build context passed to the daemon requires the Dockerfile and the content for the site.  The path for this build is ` . `, but in practice you should create separate build contexts for each container.  Using `-P` in the run command will automatically connect the EXPOSEd port to a random port available to Docker.
+The Docker build context passed to the daemon requires both the Dockerfile and the content for the site.  The path for this build is ` . `, but in practice you should create separate build contexts for each container.  Using `-P` in the run command will automatically connect the EXPOSEd port to a random port available to Docker on the Project Atomic host. 
 
     # docker build -rm -t mysite .
     # docker run -d -P mysite
@@ -103,7 +105,7 @@ Use the `docker ps` command to determine the port activated and then use `curl` 
 
 This approach is a great way to learn about Docker and building images. It is also good for troubleshooting and prototyping.  It is how `docker.io` teaches you about Docker in their Getting Started web page.
 
-### Using a Dockerfile to build the container
+### Using a Dockerfile to Build a Fedora Container
 
 The administrator may decide that building interactively is tedious and error-prone. Instead the administrator could create a Dockerfile that layers on the Apache Web server and the web site content in one build. 
 

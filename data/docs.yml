@@ -8,7 +8,7 @@
   rpm-ostree OS Update System: /docs/os-updates
   Setting Up Storage: /docs/docker-storage-recommendation
   Supported Filesystems: /docs/filesystems
-  Building RHEL Images: /docs/docker-building-rhel-images
+  Building Images: /docs/docker-building-images
   Image Author Guidance: /docs/docker-image-author-guidance
   About SELinux: /docs/docker-and-selinux
   Inter-container Networking: /docs/inter-container-networking

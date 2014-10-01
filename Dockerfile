@@ -9,6 +9,8 @@ ADD data /tmp/data
 ADD Gemfile  /tmp/Gemfile
 ADD Gemfile.lock /tmp/Gemfile.lock
 ADD lib /tmp/lib
+#ADD source /tmp/source
+ 
 RUN bundle install 
 
 EXPOSE 4567

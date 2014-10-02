@@ -15,6 +15,8 @@ On a running Atomic system that you can boot into, you have two options for roll
 
 There may be a time when you have an issue with the Atomic host and need to enter rescue mode to fix an issue.  In this article, we will explore how to do just that. 
 
+READMORE
+
 ## Obtain the media and boot the system.
 
 * Boot your system to the Atomic ISO image and follow the instructions to enter rescue mode.

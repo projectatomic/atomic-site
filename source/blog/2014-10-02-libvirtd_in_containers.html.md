@@ -1,7 +1,7 @@
 ---
 author: Brent Baude, Scott Collier
 title:  Running libvirtd in a container
-date: 2014-09-29
+date: 2014-10-02
 tags:
 - Atomic
 - Docker
@@ -9,13 +9,15 @@ categories:
 - Blog
 ---
 
+An Atomic host is a minimal system that is [designed to run containers](http://www.projectatomic.io/docs/introduction/).  On an Atomic host, you don’t install additional software via the traditional package management tools.  The software running on the host is provided by composed upstream RPM content.  
 
-## Introduction
-An Atomic host is a minimal system that is [designed to run containers](http://www.projectatomic.io/docs/introduction/).  On an Atomic host, you don’t install additional software via the traditional package management tools.  The software running on the host is provided by composed upstream RPM content.  Because of this, everything running on an Atomic host should be running inside a container.  In this article we are going to show you how to deploy both  libvirtd and libvirtd-client onto a Atomic host and how you can deploy virtual machines with that configuration.
-
+Because of this, everything running on an Atomic host should be running inside a container.  In this article we are going to show you how to deploy both  libvirtd and libvirtd-client onto a Atomic host and how you can deploy virtual machines with that configuration.
 
 ## Scenario 1: libvirtd in a container
+
 A libvirt installation on a single node, like a laptop, has become rather trivial theses days.  Users can, for example, issue a reasonably simple yum command and install a KVM environment that only needs a few tweaks to become runnable.  That simplification has masked the primary components of KVM like libvirtd, libvirt-client, virsh, and qemu.  The basic Atomic deployment has none of these. 
+
+READMORE
 
 The first step to setting up a containerized KVM environment is to set up libvirtd in its own container without the libvirt-client.  Our libvirtd container will consist of the the [Red Hat Base Image](https://access.redhat.com/search/browse/docker-images#?) as illustrated below.
 
@@ -132,9 +134,9 @@ By default libvirtd and its client use a unix socket to communicate.  But now th
 <li>auth_tcp = "none" </li>
 </ul>
 
-The libvirtd service is being started by the the _/usr/bin/init_ CMD that was provided by the Dockerfile during the image build process. We had to make a slight alteration to that systemd file to appropriately change permissions of the /dev/kvm device which is normally done by a udev rule.  And finally, the combination of the _mkdir -p /var/lib/libvirt/images_ and the volume mounts creates a shared volume between the host and container.
+The libvirtd service is being started by the the `/usr/bin/init` CMD that was provided by the Dockerfile during the image build process. We had to make a slight alteration to that systemd file to appropriately change permissions of the /dev/kvm device which is normally done by a udev rule.  And finally, the combination of the `mkdir -p /var/lib/libvirt/images` and the volume mounts creates a shared volume between the host and container.
 
-Depending on your setup, you may also need to configure a few items on your host.  For example, if you want network access, then using _brctl_ to define a new bridge device would be required.
+Depending on your setup, you may also need to configure a few items on your host.  For example, if you want network access, then using `brctl` to define a new bridge device would be required.
 
 ### Building the libvirtd container
 
@@ -177,7 +179,7 @@ Removing intermediate container a92838248486
 Successfully built 8de6992bbdf1
 ````
 
-To verify the build and image name, we can issue use the command _docker images_:
+To verify the build and image name, we can issue use the command `docker images`:
 
 ````
 $ sudo docker images
@@ -190,10 +192,12 @@ libvirtd            latest              8de6992bbdf1        3 minutes ago       
 Now that the libvirtd image has been built, we are ready to start it.  The docker run command we use to start the container is:
 
 ````
-$ sudo docker run --rm --privileged --net=host -ti -e 'container=docker' -v /proc/modules:/proc/modules -v /var/lib/libvirt/:/var/lib/libvirt/ -v /sys/fs/cgroup:/sys/fs/cgroup:rw libvirtd
+$ sudo docker run --rm --privileged --net=host -ti -e 'container=docker' \
+-v /proc/modules:/proc/modules -v /var/lib/libvirt/:/var/lib/libvirt/ \
+-v /sys/fs/cgroup:/sys/fs/cgroup:rw libvirtd
 ````
 
-Because of the _-i_ (interactive) switch, this console will be consumed with this running container. For the next scenario, be prepared to open another terminal. The resulting output should look like the following:
+Because of the `-i` (interactive) switch, this console will be consumed with this running container. For the next scenario, be prepared to open another terminal. The resulting output should look like the following:
 
 ````
 Welcome to Red Hat Enterprise Linux Server 7.0 (Maipo)!
@@ -215,7 +219,7 @@ Cannot add dependency job for unit display-manager.service, ignoring: Unit displ
 [ INFO ] Update UTMP about System Reboot/Shutdown is not active.
 ````
 
-We can verify if the libvirtd service is running by issuing a simple _virsh_ command.  Remember that the Atomic image does not contain the libvirt-client packages, so for this first test, we will run virsh from our workstation:
+We can verify if the libvirtd service is running by issuing a simple `virsh` command.  Remember that the Atomic image does not contain the libvirt-client packages, so for this first test, we will run virsh from our workstation:
 
 
 ````
@@ -230,7 +234,7 @@ Building upon Scenario 1, our next step is to add a container to the Atomic host
 
 <img src="../../../../images/libvirtd-wclient_cropped.png">
 
-By nature, it will be a smaller container because it does not need all the daemons and qemu-related software.  Let’s take a look at the (Dockerfile)[https://github.com/projectatomic/docker-image-examples/blob/master/rhel-libvirt/libvirt-client/Dockerfile] in the _libvirtd/libvirt-client_ directory.  Note we install very little extra software on top of RHBPI but we do add systemd, virt-install -- which is handy for initiating new guests;  libvirt-client, and of course any dependencies that are brought in by yum.  The one key change that is noteworthy is we add the default URL for qemu to point at the docker bridge IP address.  This ensures that by default all libvirt-client commands will point to the libvirtd running in the other container.
+By nature, it will be a smaller container because it does not need all the daemons and qemu-related software.  Let’s take a look at the (Dockerfile)[https://github.com/projectatomic/docker-image-examples/blob/master/rhel-libvirt/libvirt-client/Dockerfile] in the `libvirtd/libvirt-client` directory.  Note we install very little extra software on top of RHBPI but we do add systemd, virt-install -- which is handy for initiating new guests;  libvirt-client, and of course any dependencies that are brought in by yum.  The one key change that is noteworthy is we add the default URL for qemu to point at the docker bridge IP address.  This ensures that by default all libvirt-client commands will point to the libvirtd running in the other container.
 
 ### Building the libvirt-client container
 
@@ -296,17 +300,24 @@ We have now proven that the libvirt communication now works between the containe
 ````
 $ sudo mkdir /var/lib/libvirt/images
 
-$ sudo docker run -it --rm -v /var/lib/libvirt:/var/lib/libvirt --net host libvirt-client curl -o /var/lib/libvirt/images/fedora.qcow2 http://fedora.osuosl.org/linux/releases/20/Images/x86_64/Fedora-x86_64-20-20131211.1-sda.qcow2
+$ sudo docker run -it --rm -v /var/lib/libvirt:/var/lib/libvirt \
+--net host libvirt-client curl -o /var/lib/libvirt/images/fedora.qcow2 \
+http://fedora.osuosl.org/linux/releases/20/Images/x86_64/Fedora-x86_64-20-20131211.1-sda.qcow2
+
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
  11  204M   11 23.8M    0     0  2512k      0  0:01:23  0:00:09  0:01:14 2145k
+
 ````
 You might question why we are bind mounting volumes in with the libvirt-client container.  The above example is a good reason why.  Without it, the libvirt-client container would not have storage space it shares with the libvirtd container.  Moreover, when used in this fashion, it will most likely retain the correct permissions when interacting with files.
 
 To boot the image, we can use virt-install in the libvirt-client container.  
 
 ````
-$ sudo docker run -it --rm -v /var/lib/libvirt:/var/lib/libvirt libvirt-client virt-install --name fedora_test --ram 4096 --vcpus 2 --disk path=/var/lib/libvirt/images/fedora.qcow2,format=qcow2,bus=virtio,size=15 --network bridge=virbr0 --import
+$ sudo docker run -it --rm -v /var/lib/libvirt:/var/lib/libvirt \
+libvirt-client virt-install --name fedora_test --ram 4096 --vcpus 2 \
+--disk path=/var/lib/libvirt/images/fedora.qcow2,format=qcow2,bus=virtio,size=15 \
+--network bridge=virbr0 --import
 
 Starting install...
 Creating domain...                                                                             |    0 B  00:00:00     
@@ -341,7 +352,7 @@ $ ps ax | grep qemu-kvm
  10578 ?        Sl     0:12 /usr/libexec/qemu-kvm -name fedora_test <output edited out by author> 
 ````
 
-We can also see which containers are currently running use the _docker ps_ command:
+We can also see which containers are currently running use the `docker ps` command:
 
 ````
 $ sudo docker ps
@@ -350,7 +361,7 @@ eed398122a78        libvirt-client:latest   "virt-install --name   32 minutes ag
 1b1cdb5bfe7e        libvirtd:latest         "/usr/sbin/init"       37 minutes ago      Up 37 minutes                           agitated_nobel      
 ````
 
-Notice how we see both the libvirtd and libvirt-client containing are active.  And if you look at your console session for the cloud-init guest we ran earlier, it is just sitting at a console login.  If you want to escape from that console session, you can issue a _ctrl-]_ and you will exit the virsh console session.  If we re-run the _docker ps_ command, you will notice a change:
+Notice how we see both the libvirtd and libvirt-client containing are active.  And if you look at your console session for the cloud-init guest we ran earlier, it is just sitting at a console login.  If you want to escape from that console session, you can issue a `ctrl-]` and you will exit the virsh console session.  If we re-run the `docker ps` command, you will notice a change:
 
 ````
 $ sudo docker ps
@@ -360,10 +371,11 @@ CONTAINER ID        IMAGE               COMMAND             CREATED             
 
 The libvirt-client container is no longer running.  That is because you escaped the virsh console session which was being provided by the libvirt-client container.  Therefore, with the virt-install command having completed and the console being exited, the container stopped itself.
 
-You can reconnect to the console of the fedora_test guest using the libclient-client image as well with a a command like:
+You can reconnect to the console of the fedora_test guest using the libclient-client image as well with a command like:
 
 ````
-$ sudo docker run -it --rm -v /var/lib/libvirt:/var/lib/libvirt libvirt-client virsh console fedora_test
+$ sudo docker run -it --rm -v /var/lib/libvirt:/var/lib/libvirt \ 
+libvirt-client virsh console fedora_test
 Connected to domain fedora_test
 Escape character is ^]
 
@@ -371,8 +383,8 @@ Fedora release 20 (Heisenbug)
 Kernel 3.11.10-301.fc20.x86_64 on an x86_64 (ttyS0)
 
 dhcp-119 login: 
-````
 
+````
 
 ## Scenario 3: 
 
@@ -380,13 +392,17 @@ In this scenario, we will build upon scenario two by showing you how to prepare 
 
 ### Starting the Fedora installation
 
-From the atomic host, we can use the libvirt-client to begin the installation of Fedora.  In this case, we will use virt-install with the -l argument which allows you to install Fedora from a remote host without downloading any media first.  We do, however, need to manually create a directory for the -l downloaded images to temporarily reside in which by default is _var/lib/libvirt/boot_ .
+From the atomic host, we can use the libvirt-client to begin the installation of Fedora.  In this case, we will use `virt-install` with the `-l` argument which allows you to install Fedora from a remote host without downloading any media first.  We do, however, need to manually create a directory for the -l downloaded images to temporarily reside in which by default is `var/lib/libvirt/boot`.
 
 
 ````
 $ sudo mkdir /var/lib/libvirt/boot
 
-$ sudo docker run -it --rm -v /var/lib/libvirt:/var/lib/libvirt --net=host libvirt-client virt-install --name fedora_vnc --ram 4096 --vcpus 2 --disk path=/var/lib/libvirt/images/fedora_test.qcow2,format=qcow2,bus=virtio,size=15 --network bridge=virbr0 -l http://fedora.osuosl.org/linux/releases/20/Fedora/x86_64/os/ --graphics vnc,port=5910,listen=0.0.0.0 --noautoconsole
+$ sudo docker run -it --rm -v /var/lib/libvirt:/var/lib/libvirt \
+--net=host libvirt-client virt-install --name fedora_vnc --ram 4096 \
+--vcpus 2 --disk path=/var/lib/libvirt/images/fedora_test.qcow2,format=qcow2,bus=virtio,size=15 \
+--network bridge=virbr0 -l http://fedora.osuosl.org/linux/releases/20/Fedora/x86_64/os/ \
+--graphics vnc,port=5910,listen=0.0.0.0 --noautoconsole
 
 Starting install...
 Retrieving file .treeinfo...                                                                   | 2.2 kB  00:00:00 !!! 
@@ -398,9 +414,10 @@ Allocating 'fedora_test.qcow2'                                                  
 Creating domain...                                                                             |    0 B  00:00:00     
 Domain installation still in progress. You can reconnect to 
 the console to complete the installation process.
+
 ````
 
-_Author Note: In some of our tests, we observed a python traceback when using virt-install with the -l parameter.  However, the command did complete successfully._
+_Author Note: In some of our tests, we observed a python traceback when using `virt-install` with the `-l` parameter.  However, the command did complete successfully._
 
 It would be worthwhile to look at a few of the arguments in the install command we used:
 
@@ -415,7 +432,8 @@ It would be worthwhile to look at a few of the arguments in the install command 
 In the example command we used to start virt-install, we did specifically define port of 5910.  That port will default to :10 for connecting your vnc client, but we can also verify using the virsh command and the libvirt-client container like so:
 
 ````
-$ sudo docker run -it --rm -v /var/lib/libvirt:/var/lib/libvirt libvirt-client virsh vncdisplay fedora_vnc
+$ sudo docker run -it --rm -v /var/lib/libvirt:/var/lib/libvirt \
+libvirt-client virsh vncdisplay fedora_vnc
 :10
 ````
 
@@ -423,9 +441,7 @@ On your laptop or another client, you can then connect to the VNC session with a
 
 ````
 # vncviewer<atomic_host>:10
+
 ````
-
-
 Once connected with vnc, you can complete the Fedora install which is outside the scope of this blog post.
-
 

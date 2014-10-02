@@ -22,6 +22,8 @@ From the [Docker installation documentation regarding Fedora](http://docs.docker
 
 Luckily this documentation is somewhat wrong, you still need to add users to the `docker` group in order for them to use `docker` from a non-root account.  I would hope that all Distributions have this policy.
 
+READMORE
+
 On Fedora and RHEL we have the following permissions on the `docker.sock`:
 
 ```

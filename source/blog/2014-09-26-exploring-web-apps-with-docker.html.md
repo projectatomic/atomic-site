@@ -16,6 +16,8 @@ Rather than tax your speedy but space-constrained notebook SSD with a library of
 
 When WordPress hit its big 4.0 release earlier this month, I fired up an instance of the new [Fedora 21 Atomic image alpha](http://fedoraproject.org/en/get-prerelease#cloud) on my notebook to check out the new WordPress release, in Dockerized form.
 
+READMORE
+
 Now, for a popular app like WordPress, you can expect to find a ready-to-deploy image in the [Docker Registry](https://registry.hub.docker.com/_/wordpress/). However, I prefer to choose my own image operating system, and to have a clearer view into the components behind the application at hand. 
 
 Anyway, WordPress is super easy to install, and the projects behind my OSes of choice, [Fedora](https://github.com/fedora-cloud/Fedora-Dockerfiles) and [CentOS](https://github.com/CentOS/CentOS-Dockerfiles), maintain sets of base component Dockerfiles for things like databases and Web servers that I can quickly plug together with the WordPress source.

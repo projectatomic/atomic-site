@@ -1,14 +1,22 @@
 ---
 title: Containerized Directory Services with Docker and FreeIPA
 author: jbrooks
-date: 2014-10-10 21:32:44.000000000 Z
-published: false
+date: 2014-10-15 
+layout: post
 comments: true
+categories: 
+- Blog
+tags: 
+- CentOS 
+- FreeIPA
+- Docker
 ---
 
 I've tried out a lot of different software applications in my time, so I've come to appreciate projects and products that make it easy to get up and running quickly and without the need for assembling a whole labful of equipment.
 
 In this vein, the various components that comprise [oVirt](http://www.ovirt.org/Home), the open source virtualization management project, can be piled onto a single piece of hardware in form that works well enough to credibly kick the project's tires. 
+
+READMORE
 
 Well, mostly. In order to really get your oVirt on, you need to hook up a directory service of some sort. FreeIPA is an obvious choice to provide oVirt with directory services, but due to conflicts between their package sets, oVirt's management engine can't be installed on the same host as FreeIPA.
 

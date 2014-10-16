@@ -54,19 +54,9 @@ Here's how to get started with Atomic on your machine using VirtualBox on Window
 
 7. Select the Use an existing virtual hard drive option, browse to the file location, and click Create. The virtual machine will be created and the virtual machine will be ready.
 
-## Configure Your Atomic Machine
+## Logging In To Your Atomic Machine
 
-After the Atomic virtual machine is created, it will be ready to use, though there will be some steps to take to prepare the VM for more efficient use.
-
-1. Start the VM. On boot, the login prompt will appear.
-
-2. Login as root, with no password.
-
-3. Run `passwd` and set a password for your account.
-
-4. Run `rpm-ostree upgrade` to upgrade rpm-ostree to the latest version.
-
-5. Reboot your system to apply the upgrade.
+You will need to create a metadata ISO.  For example instructions on creating one, see: <a href="https://www.technovelty.org//linux/running-cloud-images-locally.html">this blog entry</a>.
 
 ## Readying More Space For Containers
 

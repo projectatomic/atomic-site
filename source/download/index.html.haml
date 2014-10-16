@@ -43,24 +43,12 @@ title: Get Started with Project Atomic
 
     %h3 Extremely Quick Start Guide For the Impatient
 
-    %p From here in, we'll refer to the Atomic VM as the "host," even though it's actually a VM. Atomic boots to a text console, asking you to log in:
-    %pre
-    
-      Localhost login: root <span class="text-muted">[press enter]</span>
-
     %p
-      There is no password by default.
+      From here in, we'll refer to the Atomic VM as the "host," even though it's actually a VM. Atomic boots to a text console, asking you to log in.
+      You need to create a metadata ISO for use with <a href="http://cloudinit.readthedocs.org/en/latest/">cloud-init</a>.
 
-    %p
-      Even though remote login via ssh is disabled with a blank password,
-      it makes sense to set one now:
+      For example instructions on creating one, see: <a href="https://www.technovelty.org//linux/running-cloud-images-locally.html">this blog entry</a>.
 
-    %pre
-      \# passwd root
-      Changing password for user root.
-      New password: <span class="text-muted">[enter a new password ]</span>
-      Retype new password: <span class="text-muted">[ enter the password again ]</span>
-     
   .col-md-6.col-sm-12
     %h2 Atomic Upgrades
 

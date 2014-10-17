@@ -19,6 +19,8 @@ Mark Lamourine is working on an excellent series of posts that demonstrate how y
 
 The most recent post explores creating the subsidiary services for a [Pulp](http://www.pulpproject.org/) service within a Kubernetes cluster:
 
+READMORE
+
 > As mentioned elsewhere, Kubernetes is a service which is designed to bind together a cluster of container hosts, which can be regular hosts running the etcd and kubelet daemons or they can be specialized images like Atomic or CoreOS.  They can be private or public services such as Google Cloud
 
 > For Pulp, I need to place a MongoDB and a QPID container within a Kubernetes cluster and create the infrastructure so that clients can find it and connect to it.  For each of these I need to create a Kubernetes Service and a Pod (group of related containers).

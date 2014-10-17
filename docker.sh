@@ -7,4 +7,4 @@ chcon -Rt svirt_sandbox_file_t source/
 
 # requires docker and being in the right group
 docker build -t middleman .
-docker run -d -p 4567:4567 -v "$(pwd)"/source:/tmp/source:ro --name localsite middleman
+docker run -p 4567:4567 -v "$(pwd)"/source:/tmp/source:ro middleman 

@@ -17,6 +17,8 @@ I see people rushing to set up Web sites and PaaS Servers that allow random peop
 ## Containers Do Not Contain
  
 As I stated in [my posts](http://opensource.com/business/14/7/docker-security-selinux) [on OpenSource.com](https://opensource.com/business/14/9/security-for-docker), not all of the operating system is namespaced. Parts that are not namespaced can potentially allow containers to attack each other, or the host, or at the very least will allow leakage of information into the containers.
+
+READMORE
  
 ## Another Example  
  

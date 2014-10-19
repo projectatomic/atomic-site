@@ -9,7 +9,6 @@ Project Atomic hosts inherit the full features and advantages of their base dist
 * [Docker](https://www.docker.io/), an open-source project for creating lightweight, portable, self-sufficient application containers.
 * [rpm-OSTree](http://rpm-ostree.cloud.fedoraproject.org/#/), an open-source tool for managing bootable, immutable, versioned filesystem trees from upstream RPM content.
 * [systemd](http://www.freedesktop.org/wiki/Software/systemd/), an open-source system and service manager for Linux.
-* [geard](https://github.com/smarterclayton/geard), an open-source project for installing and linking Docker containers into systemd, and for coordinating those Docker containers across hosts.  geard is the core of the next-generation of OpenShift.
 
 ## How Can Project Atomic Help Me?
 

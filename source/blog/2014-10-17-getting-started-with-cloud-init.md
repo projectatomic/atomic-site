@@ -31,7 +31,7 @@ local-hostname: atomic-host-001
 
 One important note about making iterative changes during testing.  If you change the user-data or meta-data files and rebuild the ISO, you will need to update the instance-id.  This is how `cloud-init` knows if this is the first boot of a specific instantiated host.
 
-For our user-data file, I'm going to set a password and inject a ssh key for the default user 'fedora'.  I don't want to use my normal key here, so I'll build one for this example.  I've also set ssh up to accept a password.  You can skip that if you want key online authentication.  
+For our user-data file, I'm going to set a password and inject a ssh key for the default user 'fedora'.  I don't want to use my normal key here, so I'll build one for this example.  I've also set ssh up to accept a password.  You can skip that if you want key only authentication.  
 
 ```
 $ ssh-keygen -f atomic_rsa

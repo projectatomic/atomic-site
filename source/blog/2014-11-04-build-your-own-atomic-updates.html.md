@@ -44,6 +44,12 @@ _The CentOS sig-atomic-buildscripts repo currently includes some key packages bu
 
 The compose step will take some time to complete. When it's done, you can run the following command to start up a web server in the container. 
 
+````
+# sh /run-apache.sh
+````
+
+Now, you should be able to visit $YOURHOSTIP/repo and see your new rpm-ostree repo. 
+
 #### For Fedora 21:
 
 The master branch of the fedora-atomic repo contains the definitions required to compose a rawhide-based Fedora Atomic host. If you'd rather compose a f21-based Fedora Atomic host, you'll need to:
@@ -60,15 +66,13 @@ If you'd like to add some more packages to your tree, add them in the file `fedo
 # rpm-ostree compose tree --repo=/srv/rpm-ostree/repo fedora-atomic-docker-host.json
 ````
 
-#### For both Fedora and CentOS:
- 
 The compose step will take some time to complete. When it's done, you can run the following command to start up a web server in the container. 
 
 ````
 # sh /run-apache.sh
 ````
 
-Now, you should be able to visit $YOURHOSTIP:10080/repo and see your new rpm-ostree repo. 
+Now, you should be able to visit $YOURHOSTIP/repo and see your new rpm-ostree repo. 
 
 To configure an Atomic host to receive updates from your build machine, edit (as root) the file `/etc/ostree/remotes.d/centos-atomic.conf` or `sudo vi /etc/ostree/remotes.d/fedora-atomic.conf` and add a section like this:
 

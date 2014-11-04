@@ -10,7 +10,7 @@ title: Get Started with Project Atomic
   Atomic can run on the same platforms and clouds as the distributions it is based on.
 
 %p.lead
-  There is now a Fedora 21 Atomic Cloud image available as part of the <a href="http://fedoraproject.org/get-prerelease#cloud">Fedora 21 Alpha Cloud</a> release.
+  There is now a Fedora 21 Atomic Cloud image available as part of the <a href="http://fedoraproject.org/get-prerelease#cloud">Fedora 21 Beta Cloud</a> release.
  
   The previous Fedora 20 prototype VM here was just a demonstration.
 
@@ -90,7 +90,7 @@ title: Get Started with Project Atomic
       :preserve
         # systemctl enable cockpit.socket
         # systemctl start cockpit.socket
-        # visit http://&lt;ipaddress&gt;:1001 in a browser
+        # visit http://&lt;ipaddress&gt;:9090 in a browser
     %p
       Cockpit is perfect for new sysadmins, allowing them to easily perform simple tasks such as storage 
       administration, inspecting journals and starting and stopping services.
@@ -104,19 +104,19 @@ title: Get Started with Project Atomic
       %a( href="http://cockpit-project.org" ) &raquo; Visit cockpit-project.org...
 
   .col-md-6.col-sm-12
-    %h2 Cluster Your Containers
+    %h2 Learn about Kubernetes
 
     %p
-      Setup and link containers across hosts
-    %pre
-      :preserve
-        # gear install pmorie/sti-html-app html -p 8080:0 --start
+      If you're looking to work with orchestration, you'll want to get started with Kubernetes.
+
     %p
-      Install containers to systemd and link them across a cluster with geard, the new core
-      of OpenShift.
+      Scott Collier has been keeping a guide to getting started with Kubernetes on Fedora
+      which shows how to get a simple master and minion setup going. 
 
     %p 
-      %a( href="https://openshift.github.io/geard" ) &raquo; Learn about geard...
+      The Getting Started on Fedora guide will walk you through installing the required packages,
+      setting up the configuration, and more. 
+      %a( href="https://github.com/GoogleCloudPlatform/kubernetes/blob/master/docs/getting-started-guides/fedora/fedora_manual_config.md" ) &raquo; Learn more about Kubernetes...
 
 -#.row{:style => 'clear:both'}
   .col-md-4.col-sm-12

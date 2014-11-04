@@ -6,7 +6,7 @@ comments: true
 published: true
 ---
 
-Over the past several weeks, teams within the [CentOS](http://wiki.centos.org/SpecialInterestGroup/Atomic) and Fedora projects have been establishing the processes needed to produce "Atomic Host" variants of their respective distributions. If you haven't already done so, you can check out the latest pre-release [Fedora Atomic](http://fedoraproject.org/get-prerelease#cloud) and [CentOS Atomic](http://cloud.centos.org/centos/7/devel/) images.
+Over the past several weeks, teams within the [CentOS](http://wiki.centos.org/SpecialInterestGroup/Atomic) and [Fedora projects](http://fedoraproject.org/wiki/Cloud_SIG) have been establishing the processes needed to produce "Atomic Host" variants of their respective distributions. If you haven't already done so, you can check out the latest pre-release [Fedora Atomic](http://fedoraproject.org/get-prerelease#cloud) and [CentOS Atomic](http://cloud.centos.org/centos/7/devel/) images.
 
 Now, consuming an OS that partakes in the hotness of atomic system and application management while consisting of pre-built packages from a distribution you already know and trust is the point of Project Atomic, but you still might want to take the reins and produce your own Atomic updates or add new RPMs of your choosing.
 

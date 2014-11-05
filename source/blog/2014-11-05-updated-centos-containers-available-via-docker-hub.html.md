@@ -1,7 +1,6 @@
 ---
 author: jzb
-layout: blog
-title: Updated CentOS Containers Availble via Docker Hub
+title: Updated CentOS Containers Available via Docker Hub
 date: 2014-11-05 17:08 UTC
 tags:
 - Docker

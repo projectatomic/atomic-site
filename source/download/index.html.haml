@@ -7,10 +7,10 @@ title: Get Started with Project Atomic
 %img.pull-right( src="/images/platforms.png")
 
 %p.lead 
-  Atomic can run on the same platforms and clouds as the distributions it is based on.
+  Atomic Host images are now available from Fedora and the CentOS Project. 
 
 %p.lead
-  There is now a Fedora 21 Atomic Cloud image available as part of the <a href="http://fedoraproject.org/get-prerelease#cloud">Fedora 21 Beta Cloud</a> release.
+  Fedora 21 Atomic Cloud is available as part of the <a href="http://fedoraproject.org/get-prerelease#cloud">Fedora 21 Beta Cloud</a> release. The <a href="http://wiki.centos.org/SpecialInterestGroup/Atomic">CentOS Atomic SIG</a> has <a href="http://buildlogs.centos.org/monthly/7/">also produced an alpha image</a> with nightly updates forthcoming.
  
   The previous Fedora 20 prototype VM here was just a demonstration.
 
@@ -19,15 +19,18 @@ title: Get Started with Project Atomic
   <a href="http://openstack.redhat.com/">RDO</a> (OpenStack), 
   <a href="http://ovirt.org">oVirt</a>, 
   <a href="http://virt-manager.org/">virt-manager</a> and
-  the "Boxes" virtual machine application available on 
-  <a href="http://fedoraproject.org/">Fedora 20</a>.
+  the "Boxes" virtual machine application available in 
+  <a href="http://fedoraproject.org/">Fedora</a> and <a href="http://centos.org/">CentOS 7</a>.
 
 .clearfix
 
 %p.buttons.hidden-xs
-  %a.btn.btn-primary.btn-lg{:href => "http://fedoraproject.org/get-prerelease#cloud"} QEMU/OpenStack/AWS
+  %a.btn.btn-primary.btn-lg{:href => "http://fedoraproject.org/get-prerelease#cloud"} Fedora 21 
 
-%p Stay tuned for more distributions and optimized images for cloud environments.
+%p.buttons.hidden-xs
+  %a.btn.btn-primary.btn-lg{:href => "http://buildlogs.centos.org/rolling/7/"} CentOS Atomic Host (testing)
+
+%p An older bare metal installer based on Fedora 21 is <a href="http://rpm-ostree.cloud.fedoraproject.org/project-atomic/install/rawhide/20140708.0/boot.iso">available</a>.
 
 .clearfix
 

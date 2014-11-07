@@ -11,7 +11,7 @@ tags:
 categories:
 - Blog
 ---
-The CentOS Atomic SIG is pleased to announce that we have a CentOS Atomic Host image ready for testing. The image is currently being built in CentOS infrastructure, but not yet fully integrated into CentOS build systems.
+The CentOS Atomic SIG is pleased to announce that [we have a CentOS Atomic Host image ready for testing](http://buildlogs.centos.org/rolling/7/). The image is currently being built in CentOS infrastructure, but not yet fully integrated into CentOS build systems.
 
 The image should be considered **alpha** quality, ready for testing, patches, and feedback. It's more or less package-complete but we still have a ways to go before calling the CentOS Atomic Host ready for any production workloads:
 
@@ -27,6 +27,8 @@ READMORE
  * Slice, dice, and make Julienne fries.
 
 You get the idea. We want to get a lot of hands-on testing and feedback from folks who are putting containers into production. For ideas about what to test/try out, see the Project Atomic [download](http://www.projectatomic.io/download/) and [quick start](http://www.projectatomic.io/docs/quickstart/) pages.
+
+We actually have two downloads: the [qcow2](http://buildlogs.centos.org/rolling/7/CentOS-7-x86_64-AtomicHost-20141029_02.qcow2) with no compression (for direct import into OpenStack, *etc.*) and the [gzipped image](http://buildlogs.centos.org/rolling/7/CentOS-7-x86_64-AtomicHost-20141029_02.qcow2.gz) for faster downloads if you don't need to import the image directly. The [directory also has sha256 sums](http://buildlogs.centos.org/rolling/7/) so you can verify the images.
 
 The image comes pre-configured with an atomic update repository, but if you're interested in building your own updates for the image, check out [this howto](http://www.projectatomic.io/blog/2014/11/build-your-own-atomic-updates/) on the Project Atomic blog.
 

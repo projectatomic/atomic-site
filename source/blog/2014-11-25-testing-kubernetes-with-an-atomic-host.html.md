@@ -12,6 +12,8 @@ Atomic hosts include [Kubernetes](http://kubernetes.io/) for orchestration and m
 
 First, boot into [CentOS Atomic](http://buildlogs.centos.org/rolling/7/) host. You ought to be able to use [Fedora Atomic](http://fedoraproject.org/get-prerelease#cloud) as well, but currently, Atomic Fedora comes with an earlier version of kubernetes, so for each of the `kubectl` commands in this howto, there's a different `kubecfg` command, for now.
 
+READMORE
+
 Due to [a bug](https://bugs.centos.org/view.php?id=7917) in CentOS Atomic (not necessary in Fedora Atomic), you must:
 
 ````
@@ -236,4 +238,4 @@ When all of these elements are Running, you should be able to visit port 8000 on
 
 ### Till Next Time
 
-If you run into trouble following this walkthrough, Iâ€™ll be happy to help you get up and running or get pointed in the right direction. Ping me at jbrooks in #atomic on freenode irc or [@jasonbrooks](https://twitter.com/jasonbrooks) on Twitter. Also, be sure to check out the [Project Atomic Q&A site](http://ask.projectatomic.io/en/questions/).
+If you run into trouble following this walkthrough, I'll be happy to help you get up and running or get pointed in the right direction. Ping me at jbrooks in #atomic on freenode irc or [@jasonbrooks](https://twitter.com/jasonbrooks) on Twitter. Also, be sure to check out the [Project Atomic Q&A site](http://ask.projectatomic.io/en/questions/).

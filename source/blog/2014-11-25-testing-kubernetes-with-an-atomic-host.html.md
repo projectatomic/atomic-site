@@ -2,7 +2,7 @@
 title: Testing Kubernetes with an Atomic Host
 author: jbrooks
 date: 2014-11-25 14:00:00.000000000 Z
-published: false
+published: true 
 comments: true
 ---
 

@@ -10,7 +10,7 @@ tags:
 categories:
 - Blog
 ---
-Docker has released two CVE's with the newest version (docker-1.3.2) regarding two privilege escalation flaws. They are only an issue when running untrusted images.
+<img src="/images/dan-yawning.jpb"> Docker has released two CVE's with the newest version (docker-1.3.2) regarding two privilege escalation flaws. They are only an issue when running untrusted images.
 
 ##Yawn!!!
 

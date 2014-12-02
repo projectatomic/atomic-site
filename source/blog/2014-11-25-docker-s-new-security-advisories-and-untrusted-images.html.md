@@ -10,14 +10,16 @@ tags:
 categories:
 - Blog
 ---
-<img src="/images/dan-yawning.jpb"> Docker has released two CVE's with the newest version (docker-1.3.2) regarding two privilege escalation flaws. They are only an issue when running untrusted images.
+<img src="/images/dan-yawning.jpb"> Docker has released two CVEs with the newest version (docker-1.3.2) regarding two privilege escalation flaws. They are only an issue when running untrusted images.
 
 ##Yawn!!!
 
-I question whether they should be CVE's at all. People need to realize that installing a Docker image is the equivalent of installing an RPM or a Debian .deb package.
+I question whether they should be CVE's at all. People need to realize that installing a Docker image is the equivalent of installing an RPM or a Debian .deb package. 
 
 * If you install an RPM or Debian package from an untrusted source on your machine, then you should expect your machine will get owned.  
 * If you install a Docker image from an untrusted source on your machine, then you should expect your machine will get owned.
+
+That lesson has to be painfully learned, at first. For most users, it's not obvious that `docker pull` is in the same class as `yum install`.
 
 My fear with these CVEs is that people will start to assume Docker is unsafe or full of vulnerabilties. Check out [this article](http://www.theregister.co.uk/2014/11/25/docker_vulnerabilities/) on The Register, for example.
 

@@ -56,7 +56,14 @@ Here's how to get started with Atomic on your machine using VirtualBox on Window
 
 ## Logging In To Your Atomic Machine
 
-You will need to create a metadata ISO.  For example instructions on creating one, see: <a href="https://www.technovelty.org//linux/running-cloud-images-locally.html">this blog entry</a>.
+You will need to create a metadata ISO. This will contain two files, a `user-data` and a `meta-data` file. This allows you to supply user and other system data when your host boots. For example instructions using virt-manager on how to create one, see: <a href="https://www.technovelty.org//linux/running-cloud-images-locally.html">this blog entry</a>.
+
+Instructions for Virtualbox are similar to virt-manager, except you’ll need to attach the ISO as a disk in Virtualbox.
+
+1. After creating a `user-data` and `meta-data` file, generate an ISO: `$ genisoimage -output init.iso -volid cidata -joliet -rock user-data meta-data`
+2. In the VirtualBox GUI, click *Settings* for you atomic virtual machine.
+3. On the *Storage* tab, for the IDE Controller, *Add CD/DVD Device*.
+4. Select *Choose Disk*, and select the `init.iso` you created in step #1.
 
 ## Readying More Space For Containers
 

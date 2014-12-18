@@ -64,6 +64,7 @@ Instructions for Virtualbox are similar to virt-manager, except you’ll need to
 2. In the VirtualBox GUI, click *Settings* for you atomic virtual machine.
 3. On the *Storage* tab, for the IDE Controller, *Add CD/DVD Device*.
 4. Select *Choose Disk*, and select the `init.iso` you created in step #1.
+5. Boot your machine with the disk attached and cloud-init will populate your user information with the password you provided. **For a fedora image, the user is `fedora`, for CentOS the user is `centos`.**
 
 ## Readying More Space For Containers
 

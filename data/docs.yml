@@ -11,6 +11,7 @@
   Building Images: /docs/docker-building-images
   Image Author Guidance: /docs/docker-image-author-guidance
   About SELinux: /docs/docker-and-selinux
+  Managing Contaners: /docs/kubernetes
   Inter-container Networking: /docs/inter-container-networking
 - Contributing:
   How to Contribute: /docs/#contribute

@@ -23,4 +23,6 @@ You can see all the packages updated by using `atomic db diff commit1 commit2`. 
 
 Going to [DevConf.cz](http://www.devconf.cz/)? Or just happen to be close to the Czech Republic and have a strong interest in Cockpit? You can learn how to hack on Cockpit, build plugins or prototypes, and much more! 
 
-The Hackfest will be held in Room A113, Brno University of Technology, on [Friday 6 February from 2:10 to 5:10 CET](http://community.redhat.com/events/#devconfcz). Hope to see you there! 
+The Hackfest will be held in Room A113, Brno University of Technology, on [Friday 6 February from 2:10 to 5:10 CET](http://community.redhat.com/events/#devconfcz). Of course, you should check out DevConf.cz too, it's free to attend and you'll have dozens of fantastic presentations to choose from related to free software. Also, keep an eye on [Red Hat's Community Calendar](http://community.redhat.com/events/) for other free and open source related events that may be of interest.
+
+Hope to see you there! 

@@ -66,6 +66,8 @@ Instructions for Virtualbox are similar to virt-manager, except you’ll need to
 4. Select *Choose Disk*, and select the `init.iso` you created in step #1.
 5. Boot your machine with the disk attached and cloud-init will populate your user information with the password you provided. **For a fedora image, the user is `fedora`, for CentOS the user is `centos`.**
 
+Now that you've booted and logged in to your machine, you can update the system software with `$ sudo rpm-ostree upgrade` to pull in any updates.
+
 ## Readying More Space For Containers
 
 Docker is ready to go at this point, but there's another fairly important bit of config to do, if you're going to be testing out more than a couple containers--you need to add a bigger drive for `/var/lib/docker`.

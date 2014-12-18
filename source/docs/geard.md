@@ -1,3 +1,7 @@
+** Project Atomic has switched to using [Kubernetes](http://kubernetes.io/) for conainer management **
+** The following should be considered deprecated and is left here for historical reference **
+
+
 geard 
 =====
 

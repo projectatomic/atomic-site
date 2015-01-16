@@ -2,8 +2,14 @@
 title: Deploying a Containerized Gitlab Instance with Kubernetes
 author: jbrooks
 date: 2015-01-15 23:42:33 UTC
-tags: docker, kubernetes, centos, gitlab
-published: false
+tags: 
+- docker 
+- kubernetes 
+- centos
+- gitlab
+categories:
+- Blog
+published: true
 comments: true
 ---
 

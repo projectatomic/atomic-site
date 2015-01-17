@@ -56,15 +56,44 @@ Here's how to get started with Atomic on your machine using VirtualBox on Window
 
 ## Logging In To Your Atomic Machine
 
-You will need to create a metadata ISO. This will contain two files, a `user-data` and a `meta-data` file. This allows you to supply user and other system data when your host boots. For example instructions using virt-manager on how to create one, see: <a href="https://www.technovelty.org//linux/running-cloud-images-locally.html">this blog entry</a>.
+You will need to create a metadata ISO to supply data through [**cloud-init**](http://cloudinit.readthedocs.org/en/latest/) when your host boots. 
 
-Instructions for Virtualbox are similar to virt-manager, except you’ll need to attach the ISO as a disk in Virtualbox.
+1. Create a ```meta-data``` file with your desired hostname and any instance-id.
 
-1. After creating a `user-data` and `meta-data` file, generate an ISO: `$ genisoimage -output init.iso -volid cidata -joliet -rock user-data meta-data`
-2. In the VirtualBox GUI, click *Settings* for you atomic virtual machine.
-3. On the *Storage* tab, for the IDE Controller, *Add CD/DVD Device*.
-4. Select *Choose Disk*, and select the `init.iso` you created in step #1.
-5. Boot your machine with the disk attached and cloud-init will populate your user information with the password you provided. **For a fedora image, the user is `fedora`, for CentOS the user is `centos`.**
+  ```
+  $ cat meta-data
+  instance-id: id-local01
+  local-hostname: samplehost.example.org
+  ```
+2. Create a ```user-data``` file. The #cloud-config directive at the beginning of the file is mandatory.
+  ```
+  $ cat user-data
+  #cloud-config
+  password: mypassword 
+  ssh_pwauth: True
+  chpasswd: { expire: False }
+  
+  ssh_authorized_keys: 
+    - ssh-rsa ... foo@bar.baz (insert ~/.ssh/id_rsa.pub here)
+  ```
+3. After creating the `user-data` and `meta-data` files, generate an ISO. Make sure the user running libvirt has the proper permissions to read the generated image.
+
+  ```$ genisoimage -output init.iso -volid cidata -joliet -rock user-data meta-data```
+
+#### virt-manager
+
+1. In the virt-manager GUI, click to open your Atomic machine. Then on the top bar click *View > Details*
+2. Click on *Add Hardware* on the bottom left corner.
+3. Choose *Storage*, and *Select managed or other existing storage*. Browse and select the `init.iso` image you created. Click on *Finish* to create and attach this storage.
+4. Go to *Boot Options* and check the box next to the name of the recently created device, under the *Boot device order* menu. This will make your system boots using the cloud-init ISO.
+5. You should be able to boot your machine and use the password or SSH keys specified in your `user-data` file.
+
+#### VirtualBox
+
+1. In the VirtualBox GUI, click *Settings* for you Atomic virtual machine.
+2. On the *Storage* tab, for the IDE Controller, *Add CD/DVD Device*.
+3. Select *Choose Disk*, and select the `init.iso` you created.
+4. Boot your machine with the disk attached and cloud-init will populate your user information with the password you provided. **For a Fedora image, the user is `fedora`, for CentOS the user is `centos`.**
 
 Now that you've booted and logged in to your machine, you can update the system software with `$ sudo rpm-ostree upgrade` to pull in any updates.
 

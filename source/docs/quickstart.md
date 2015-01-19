@@ -66,6 +66,7 @@ You will need to create a metadata ISO to supply data through [**cloud-init**](h
   local-hostname: samplehost.example.org
   ```
 2. Create a ```user-data``` file. The #cloud-config directive at the beginning of the file is mandatory.
+
   ```
   $ cat user-data
   #cloud-config
@@ -74,8 +75,9 @@ You will need to create a metadata ISO to supply data through [**cloud-init**](h
   chpasswd: { expire: False }
   
   ssh_authorized_keys: 
-    - ssh-rsa ... foo@bar.baz (insert ~/.ssh/id_rsa.pub here)
+  ssh-rsa ... foo@bar.baz (insert ~/.ssh/id_rsa.pub here)
   ```
+
 3. After creating the `user-data` and `meta-data` files, generate an ISO. Make sure the user running libvirt has the proper permissions to read the generated image.
 
   ```$ genisoimage -output init.iso -volid cidata -joliet -rock user-data meta-data```

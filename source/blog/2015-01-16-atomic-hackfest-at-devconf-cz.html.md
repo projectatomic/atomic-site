@@ -10,7 +10,7 @@ tags:
 categories:
 - Blog
 ---
-Interested in Project Atomic? Looking to help make Fedora and CentOS Atomic Hosts even better? Join us for a half-day workshop at [DevConf.cz](http://devconf.cz/) in Brno on Saturday, 7 January 2015. 
+Interested in Project Atomic? Looking to help make Fedora and CentOS Atomic Hosts even better? Join us for a half-day workshop at [DevConf.cz](http://devconf.cz/) in Brno on Saturday, 7 February 2015. 
 
 After lunch, we'll meet to work on the Atomic Host Definition, plans for Fedora and CentOS Atomic Host, and projects that are essential to Project Atomic.
 

@@ -34,7 +34,7 @@ Here's how to get started with Atomic on your machine using virt-manager on Linu
 
 11. Assign a new name to the VM and click Finish. The Atomic instance will boot.
 
-Note: When running virt-manager on Red Hat Enterprise Linux 6 or CentOS 6, the VM will not boot until the disk storage format is changed from raw to qcow2.
+**Note**: When running virt-manager on Red Hat Enterprise Linux 6 or CentOS 6, the VM **will not boot** until the disk storage format is changed from raw to qcow2.
 
 ## Step by Step on VirtualBox
 

@@ -34,7 +34,7 @@ There is only one package shipped that is not in Fedora, which is a
 patched `shadow-utils`.  For more information, see
 https://lists.fedoraproject.org/pipermail/devel/2014-April/197783.html
 
-Other important components are `docker`, `geard`, `rpm-ostree`,
+Other important components are `docker`, `rpm-ostree`,
 `ostree`.  The source packages are available in the Fedora package
 tree.
 
@@ -61,8 +61,8 @@ via Docker containers.  You can also use `/usr/local` or `/opt` (in
 the OSTree model, these are really `/var/usrlocal` and `/var/opt`,
 respectively).
 
-See [geard](/docs/geard) for more information on managing container
-lifecycle.
+See [kubernetes](https://github.com/googlecloudplatform/kubernetes) for
+more information on managing container lifecycle.
 
 ## Use Cases
 

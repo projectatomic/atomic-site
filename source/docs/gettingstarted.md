@@ -13,30 +13,29 @@ disk space for the OS, containers, and data.
 
 ## Downloading Atomic
 
-There are builds of Atomic available using Fedora, and a CentOS base
-is coming soon.
+Want to try out Project Atomic? We've got what you need to get
+started.
 
-### Fedora
+### Fedora Atomic Host
 
-At the moment, only pregenerated disk images suitable for use in a
-virtualization platform such as `virt-manager` or `VirtualBox` are
-provided.
+Fedora 21 shipped Atomic images for use with Virt-Manager, KVM, and
+private cloud environments, as well as AMIs for Amazon Web Services.
 
-In the near future, Anaconda support will allow installation to
-bare metal.
+For more info on Fedora 21 Atomic Host, see the [Download page for
+Fedora 21 Cloud](https://getfedora.org/en/cloud/download/).
 
-You can download disk images from here:
-http://rpm-ostree.cloud.fedoraproject.org/project-atomic/images/
+### CentOS Atomic Host
 
-### Source
+CentOS Atomic Host builds are now being provided by the CentOS
+[Atomic SIG](http://wiki.centos.org/SpecialInterestGroup/Atomic). 
 
-There is only one package shipped that is not in Fedora, which is a
-patched `shadow-utils`.  For more information, see
-https://lists.fedoraproject.org/pipermail/devel/2014-April/197783.html
+All of the CentOS Atomic Host images are currently available via
+[buildlogs.centos.org](http://buildlogs.centos.org/rolling/7/isos/x86_64/).
 
-Other important components are `docker`, `rpm-ostree`,
-`ostree`.  The source packages are available in the Fedora package
-tree.
+You can grab gzipped or uncompressed qcow2 images for use with KVM,
+VirtManager, OpenStack, etc. 
+
+Bare metal installers and Vagrant Boxes are coming soon.
 
 ## Installing Atomic
 

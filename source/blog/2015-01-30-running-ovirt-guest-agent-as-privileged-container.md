@@ -28,9 +28,10 @@ I started with a Dockerfile defining my ovirt-guest-agent container:
 FROM centos:centos7
 MAINTAINER Jason Brooks <jbrooks@redhat.com>
 
-RUN yum -y update; yum clean all
-RUN yum -y install epel-release; yum clean all
-RUN yum -y install ovirt-guest-agent-common; yum clean all
+RUN yum -y update; \
+yum -y install epel-release; \
+yum -y install ovirt-guest-agent-common; \
+yum clean all
 
 CMD /usr/bin/python /usr/share/ovirt-guest-agent/ovirt-guest-agent.py
 ````
@@ -51,8 +52,11 @@ Both `CMD` lines seemed to work in my tests, but this could stand some more test
 Dan's post includes a variety of examples of host resources that a super privileged container may need to access, and the `docker run` arguments required to enable them. After experimenting with different run commands, the simplest set of arguments required appeared to be:
 
 ````
-sudo docker run --privileged -dt --name ovirt-agent \
---net=host -v /dev:/dev $USER/ovirt-guest
+sudo docker run --privileged -dt --name ovirt-agent --net=host \
+-v /dev/virtio-ports/com.redhat.rhevm.vdsm:/dev/virtio-ports/com.redhat.rhevm.vdsm \
+-v /dev/virtio-ports/com.redhat.spice.0:/dev/virtio-ports/com.redhat.spice.0 \
+-v /dev/virtio-ports/org.qemu.guest_agent.0:/dev/virtio-ports/org.qemu.guest_agent.0 \
+$USER/ovirt-guest
 ````
 
 ### Setting the container to auto-start
@@ -75,12 +79,6 @@ WantedBy=multi-user.target
 ````
 
 I saved this file at `/etc/systemd/system/ovirt-agent.service` and ran `sudo systemctl enable ovirt-agent` to direct systemd to start it up following a reboot.
-
-### TODO
-
-With the container built, running, and set to auto-start as I described above, the ovirt guest agent seems to work as expected. There's one more, *temporary*, item to consider: the dread `setenforce 0`.
-
-I found that once my ovirt-guest container was running, I was unable to ssh to my VM. Login attempts triggered the error `PTY allocation request failed on channel 0`, and I haven't yet figured a way around this error, other than by putting SELinux into permissive mode in the config file `/etc/selinux/config`. When I get this bit figured out, I'll update my post.
 
 ### Till next time
 

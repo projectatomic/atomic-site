@@ -234,7 +234,7 @@ Once all of your services are started, the networking should look something like
 
 Once you've created all the minions for your cluster, you can check to make sure the kubernetes cluster is communicating properly.  On the kubernetes master, check to the visibility of the minions.  This means you should be ready to start scheduling your first pod.
     
-    [fedora@atomic-master ~]$ sudo kubectl get minions
+    [fedora@atomic-master ~]$ kubectl get minions
 
 ## Exploring Kubernetes
 There are several ways to get started using kubernetes pods to create workloads.  The kubernetes upstream project publishes a Redis guestbook example that works to show off most of the components and use cases.  You can download just the JSON files from the [ Github repo ](https://github.com/GoogleCloudPlatform/kubernetes/tree/master/examples/guestbook) to the master Atomic host.  Once you've got the files, it's a simple matter to use kubectl to create the pod, service, and replication controller.  Follow along starting with [Step One] (https://github.com/GoogleCloudPlatform/kubernetes/tree/master/examples/guestbook#step-one-turn-up-the-redis-master) in the guide, or skip ahead and run the following commands:

@@ -167,22 +167,32 @@ To set up flanneld, we just need to point the local flannel service to the etcd 
     [fedora@atomic01 ~]$ sudo vi /etc/sysconfig/flanneld 
     FLANNEL_ETCD="http://192.168.122.10:4001"
 
-To get docker using the flanneld overlay, we'll change the networking config to use the flanneld provided bridge IP and MTU settings.  We'll also change the unit definition to wait for flanneld to start.  That way the environment file created by flanneld is available and will provide a usable address for the docker0 bridge.
+To get docker using the flanneld overlay, we'll change the networking config to use the flanneld provided bridge IP and MTU settings.  We'll also change the unit definition to wait for flanneld to start.  That way the environment file created by flanneld is available and will provide a usable address for the docker0 bridge.  
 
-    [fedora@atomic01 ~]$ sudo cp /usr/lib/systemd/system/docker.service /etc/systemd/system/
-    [fedora@atomic01 ~]$ sudo vi /etc/systemd/system/docker.service 
+Using a systemd drop-in file allows us to override the distributed systemd unit file without making direct modifications.  The blank `ExecStart=` line erases all previously defined `ExecStart` directives and only subsequent `ExecStart` lines will be used by systemd.
+
+    [fedora@atomic01 ~]$ sudo mkdir -p /etc/systemd/system/docker.service.d/
+    [fedora@atomic01 ~]$ sudo vi /etc/systemd/system/docker.service.d/10-flanneld-network.conf 
+    
+    [Unit]
     After=flanneld.service
     Requires=flanneld.service
 
+    [Service]
     EnvironmentFile=/run/flannel/subnet.env
     ExecStartPre=-/usr/sbin/ip link del docker0
+    ExecStart=
     ExecStart=/usr/bin/docker -d --bip=${FLANNEL_SUBNET} --mtu=${FLANNEL_MTU} $OPTIONS $DOCKER_STORAGE_OPTIONS
 
 ### Configuring Kubernetes minions
-As of kubernetes-0.7.0, the kubelet systemd unit file has a dependency on the docker.socket systemd unit.  This unit was deprecated in favor of docker.service.  A fix has been submitted and is available in kubernetes-0.9.1.  If you have an earlier version of kubernetes, you can use the new systemd unit for docker with the following change.
 
-    [fedora@atomic01 ~]$ sudo cp /usr/lib/systemd/system/kubelet.service /etc/systemd/system/
-    [fedora@atomic01 ~]$ sudo vi /etc/systemd/system/kubelet.service 
+***NOTE:***
+As of kubernetes-0.7.0, the kubelet systemd unit file has a dependency on the docker.socket systemd unit.  This unit was deprecated in favor of docker.service.  A fix has been submitted and is available in kubernetes-0.9.1.  If you have an earlier version of kubernetes, you can use the following systemd drop-in config as a workaround.
+
+    [fedora@atomic01 ~]$ sudo mkdir -p /etc/systemd/system/kubelet.service.d
+    [fedora@atomic01 ~]$ sudo vi /etc/systemd/system/kubelet.service.d/10-kubelet-docker-workaround.conf
+
+    [Unit]
     After=docker.service cadvisor.service
     Requires=docker.service
 

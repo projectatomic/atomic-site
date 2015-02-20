@@ -211,17 +211,17 @@ Set the location of the etcd server, here we've got the single service on the ma
     # Comma seperated list of nodes in the etcd cluster
     KUBE_ETCD_SERVERS="--etcd_servers=http://192.168.122.10:4001"
 
-Reload systemd to pick up our workaround and start the minion services.
+Reload systemd to pick up our workaround and enable the minion services.  Reboot the minion to make sure everything start on boot correctly.
 
     [fedora@atomic01 ~]$ sudo systemctl daemon-reload
 
-    [fedora@atomic01 ~]$ sudo systemctl enable flanneld docker kubelet kube-proxy
-    [fedora@atomic01 ~]$ sudo systemctl stop flanneld docker kubelet kube-proxy
-    [fedora@atomic01 ~]$ sudo systemctl start flanneld docker kubelet kube-proxy
+    [fedora@atomic01 ~]$ sudo systemctl enable flanneld kubelet kube-proxy
+    {fedora@atomic01 ~]$ sudo systemctl reboot
 
 ### Confirm network configuration and cluster health
 Once all of your services are started, the networking should look something like what's below.  You'll see the flannel device that shows the selected range for this host and the docker0 bridge that has a specific subnet assigned.
 
+    [fedora@atomic01 ~]$ sudo systemctl status flanneld docker kubelet kube-proxy
     [fedora@atomic01 ~]$ ip a
     2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9001 qdisc pfifo_fast state UP group default qlen 1000
         link/ether 0a:45:46:8d:6a:de brd ff:ff:ff:ff:ff:ff
@@ -239,6 +239,7 @@ Once all of your services are started, the networking should look something like
         link/ether 56:84:7a:fe:97:99 brd ff:ff:ff:ff:ff:ff
         inet 172.16.36.1/24 scope global docker0
            valid_lft forever preferred_lft forever
+    
 
 [ Repeat on all minions ]
 

@@ -1,7 +1,7 @@
 # Project Atomic Getting Started Guide
 
 ## About the Project
-Project Atomic provides a platform to deploy and manage containers on bare-metal, virtual, or cloud-based servers.  Project Atomic hosts are designed to be minimal hosts focused on the delivery of container services.  The Atomic host is built using OStree, which delivers a set of file system objects rather than RPM packages.  OStree makes these file system objects immutable, rendering updates an atomic operation for easy update and rollback.  Container runtime is provided via docker, and container cluster management is provided by kubernetes.  
+Project Atomic provides a platform to deploy and manage containers on bare-metal, virtual, or cloud-based servers.  Project Atomic hosts are designed to be minimal hosts focused on the delivery of container services.  The Atomic host is built using OStree, which delivers a set of file system objects rather than RPM packages.  OStree makes these file system objects immutable, rendering updates an atomic operation for easy update and rollback.  Container runtime is provided via docker, and container cluster management is provided by Kubernetes.  
 
 ## Prerequisites 
 * **A virtualization client.** Virtual Machine Manager (virt-manager) is a very good KVM-based client for Linux systems. Windows and OS X users can give VirtualBox a try. Be sure your virtualization client is properly configured to access the Internet.  An Atomic host can be run under OpenStack or EC2 as well.
@@ -22,25 +22,19 @@ See the [Quick Start Guide] (http://www.projectatomic.io/docs/quickstart/) for i
 ### Using VirtualBox
 See the [Quick Start Guide] (http://www.projectatomic.io/docs/quickstart/) for instructions on how to launch an Atomic host using VirtualBox.  Be sure to create a new ISO for each host with an updated meta-data file with an incremented instance-id and correct local-hostname.
 
-## Configuring and Managing Atomic Host
-Atomic hosts are minimal systems similar to hypervisors.  Some tools that would normally be used to manage packages and the system may not exist.  Therefore, we will set up a separate server to act as a master for the Atomic hosts, providing etcd services, kubernetes master controller duties, and admin configuration access.
+## Configuring and managing Atomic Host
+Atomic hosts are minimal systems similar to hypervisors.  Some tools that would normally be used to manage packages and the system may not exist.  Therefore, we will set up a separate server to act as a master for the Atomic hosts, providing etcd services, Kubernetes master controller duties, and admin configuration access.
 
-It's important to note that on an Atomic system, the `/etc` and `/var`
-directories are writable as they are on a traditional yum or dpkg
-managed system.  Any changes made to /etc are propagated forwards.
-The OSTree upgrade system does not ever change /var in any way.
+It's important to note that on an Atomic system, the `/etc` and `/var` directories are writable as they are on a traditional yum or dpkg managed system.  Any changes made to /etc are propagated forwards. The OSTree upgrade system does not ever change /var in any way.
 
-At present, the primary expected method to install software locally is
-via docker containers.  You can also use `/usr/local` or `/opt` (in
-the OSTree model, these are really `/var/usrlocal` and `/var/opt`,
-respectively).
+At present, the primary expected method to install software locally is via docker containers.  You can also use `/usr/local` or `/opt` (in the OSTree model, these are really `/var/usrlocal` and `/var/opt`, respectively).
 
 ## Atomic fleet concepts
-Clusters of Atomic hosts under control of a kubernetes master server is the expected operating arrangement of an Atomic environment.  Kubernetes distributes and orchestrates the construction of pods on the Atomic hosts.  Pods are collections of docker containers that logically separate services in an application.  The principle of single responsibility is an important design pattern when looking at building scalable applications with kubernetes.  
+Clusters of Atomic hosts under control of a Kubernetes master server is the expected operating arrangement of an Atomic environment.  Kubernetes distributes and orchestrates the construction of pods on the Atomic hosts.  Pods are collections of docker containers that logically separate services in an application.  The principle of single responsibility is an important design pattern when looking at building scalable applications with Kubernetes.  
 
-Flannel provides a distributed, tunneled overlay network for Atomic hosts.  This overlay network is used for inter-container networking only, while a kubernetes proxy service provides for service level access to the host IP space. Etcd is used to distribute configurations for both kubernetes and flannel.
+Flannel provides a distributed, tunneled overlay network for Atomic hosts.  This overlay network is used for inter-container networking only, while a Kubernetes proxy service provides for service level access to the host IP space. Etcd is used to distribute configurations for both Kubernetes and Flannel.
 
-One host should be nominated to be the Atomic kubernetes master server, with the other Atomic hosts providing minion container services.  Since kubernetes and flannel use etcd as the distributed store, multiple Atomic clusters would need to replicate a complete cluster to separate workloads.  For this guide, we're using 1 master host and 4 minions in the cluster.
+One host should be nominated to be the Atomic Kubernetes master server, with the other Atomic hosts providing minion container services.  Since Kubernetes and Flannel use etcd as the distributed store, multiple Atomic clusters would need to replicate a complete cluster to separate workloads.  For this guide, we're using 1 master host and 4 minions in the cluster.
 
 Assumptions for IP addressing for following examples:
 
@@ -48,13 +42,13 @@ Assumptions for IP addressing for following examples:
     atomic0[1-4] 192.168.122.1[1-4] kubernetes minions
 
 ## Building the fleet boss
-Launch an Atomic host to act as the master node for the cluster.  We'll be installing the local docker cache, the etcd source, and the kubernetes master services here.  As a good practice, update to the latest available Atomic tree. 
+Launch an Atomic host to act as the master node for the cluster.  We'll be installing the local docker cache, the etcd source, and the Kubernetes master services here.  As a good practice, update to the latest available Atomic tree. 
 
     [fedora@atomic-master ~]$ sudo atomic upgrade
     [fedora@atomic-master ~]$ sudo systemctl reboot
 
 ### Local Docker registry
-Create a caching-only local registry mirror for use by the kubernetes cluster.  This uses a local volume for persistence, need to explore data container for persistence.  Each kubernetes cluster will have it's own local cache.
+Create a caching-only local registry mirror for use by the Kubernetes cluster.  This uses a local volume for persistence, need to explore data container for persistence.  Each Kubernetes cluster will have it's own local cache.
 
     [fedora@atomic-master ~]$ sudo systemctl enable docker
     [fedora@atomic-master ~]$ sudo systemctl start docker
@@ -95,9 +89,9 @@ Since we want to make sure the local cache is always up, we'll create a systemd 
     [fedora@atomic-master ~]$ sudo systemctl start local-registry
 
 ### Configuring Kubernetes master
-We're using a single etcd server, not a replicating cluster in this guide.  This makes etcd simple, as it will work as needed out of the box.  No need to modify the etcd config file, just enable and start the daemon with all the rest of the kubernetes services.
+We're using a single etcd server, not a replicating cluster in this guide.  This makes etcd simple, as it will work as needed out of the box.  No need to modify the etcd config file, just enable and start the daemon with all the rest of the Kubernetes services.
 
-For kubernetes, there's a few config files in /etc/kubernetes we need to set up for this host to act as a master.  First off is setting up the etcd store that kubernetes will use.  We're using a single local etcd service, so we'll point that at the master on the standard port.
+For Kubernetes, there's a few config files in /etc/kubernetes we need to set up for this host to act as a master.  First off is setting up the etcd store that Kubernetes will use.  We're using a single local etcd service, so we'll point that at the master on the standard port.
 
     [fedora@atomic-master ~]$ sudo vi /etc/kubernetes/config 
     KUBE_ETCD_SERVERS="--etcd_servers=http://192.168.122.10:4001"
@@ -116,7 +110,7 @@ The controller manager service needs to how to locate it's minions.  We're using
     # Comma seperated list of minions
     KUBELET_ADDRESSES="--machines=192.168.122.11,192.168.122.12,192.168.122.13,192.168.122.14"
 
-Enable and start the kubernetes services.
+Enable and start the Kubernetes services.
 
     [fedora@atomic-master ~]$ sudo systemctl enable etcd kube-apiserver kube-controller-manager kube-scheduler
     [fedora@atomic-master ~]$ sudo systemctl start etcd kube-apiserver kube-controller-manager kube-scheduler
@@ -149,7 +143,7 @@ Just to make sure we have the right config, we'll pull it via curl and parse the
     }
 
 ## Atomic Minions
-Launch your first Atomic host to act as a minion node for the cluster.  We'll be installing the kubernetes minion services and configuring docker to use flannel and our cache.  These nodes will act as the workers and run Pods and containers.  You can repeat this on as many nodes as you like to provide resources to the cluster.  In our master example, we've set up 4 minions.  As a good practice, update to the latest available Atomic tree. 
+Launch your first Atomic host to act as a minion node for the cluster.  We'll be installing the Kubernetes minion services and configuring docker to use Flannel and our cache.  These nodes will act as the workers and run Pods and containers.  You can repeat this on as many nodes as you like to provide resources to the cluster.  In our master example, we've set up 4 minions.  As a good practice, update to the latest available Atomic tree. 
 
     [fedora@atomic01 ~]$ sudo atomic upgrade
     [fedora@atomic01 ~]$ sudo systemctl reboot
@@ -187,7 +181,7 @@ Using a systemd drop-in file allows us to override the distributed systemd unit 
 ### Configuring Kubernetes minions
 
 ***NOTE:***
-As of kubernetes-0.7.0, the kubelet systemd unit file has a dependency on the docker.socket systemd unit.  This unit was deprecated in favor of docker.service.  A fix has been submitted and is available in kubernetes-0.9.1.  If you have an earlier version of kubernetes, you can use the following systemd drop-in config as a workaround.
+As of kubernetes-0.7.0, the kubelet systemd unit file has a dependency on the docker.socket systemd unit.  This unit was deprecated in favor of docker.service.  A fix has been submitted and is available in kubernetes-0.9.1.  If you have an earlier version of Kubernetes, you can use the following systemd drop-in config as a workaround.
 
     [fedora@atomic01 ~]$ sudo mkdir -p /etc/systemd/system/kubelet.service.d
     [fedora@atomic01 ~]$ sudo vi /etc/systemd/system/kubelet.service.d/10-kubelet-docker-workaround.conf
@@ -219,7 +213,7 @@ Reload systemd to pick up our workaround and enable the minion services.  Reboot
     {fedora@atomic01 ~]$ sudo systemctl reboot
 
 ### Confirm network configuration and cluster health
-Once all of your services are started, the networking should look something like what's below.  You'll see the flannel device that shows the selected range for this host and the docker0 bridge that has a specific subnet assigned.
+Once all of your services are started, the networking should look something like what's below.  You'll see the Flannel device that shows the selected range for this host and the docker0 bridge that has a specific subnet assigned.
 
     [fedora@atomic01 ~]$ sudo systemctl status flanneld docker kubelet kube-proxy
     [fedora@atomic01 ~]$ ip a
@@ -243,12 +237,12 @@ Once all of your services are started, the networking should look something like
 
 [ Repeat on all minions ]
 
-Once you've created all the minions for your cluster, you can check to make sure the kubernetes cluster is communicating properly.  On the kubernetes master, check to the visibility of the minions.  This means you should be ready to start scheduling your first pod.
+Once you've created all the minions for your cluster, you can check to make sure the Kubernetes cluster is communicating properly.  On the Kubernetes master, check to the visibility of the minions.  This means you should be ready to start scheduling your first pod.
     
     [fedora@atomic-master ~]$ kubectl get minions
 
 ## Exploring Kubernetes
-There are several ways to get started using kubernetes pods to create workloads.  The kubernetes upstream project publishes a Redis guestbook example that works to show off most of the components and use cases.  You can download just the JSON files from the [ Github repo ](https://github.com/GoogleCloudPlatform/kubernetes/tree/master/examples/guestbook) to the master Atomic host.  Once you've got the files, it's a simple matter to use kubectl to create the pod, service, and replication controller.  Follow along starting with [Step One] (https://github.com/GoogleCloudPlatform/kubernetes/tree/master/examples/guestbook#step-one-turn-up-the-redis-master) in the guide, or skip ahead and run the following commands:
+There are several ways to get started using Kubernetes pods to create workloads.  The Kubernetes upstream project publishes a Redis guestbook example that works to show off most of the components and use cases.  You can download just the JSON files from the [ Github repo ](https://github.com/GoogleCloudPlatform/kubernetes/tree/master/examples/guestbook) to the master Atomic host.  Once you've got the files, it's a simple matter to use kubectl to create the pod, service, and replication controller.  Follow along starting with [Step One] (https://github.com/GoogleCloudPlatform/kubernetes/tree/master/examples/guestbook#step-one-turn-up-the-redis-master) in the guide, or skip ahead and run the following commands:
 
     [fedora@atomic-master ~]$ kubectl create -f redis-master.json
     [fedora@atomic-master ~]$ kubectl get pod redis-master
@@ -296,4 +290,4 @@ Then you can create this service.
 
     [fedora@atomic-master ~]$ kubectl create -f frontend-service.json
 
-Once this service starts, pull up the guestbook in a web browser at the IP you assigned in the publicIPs list, as well as on all minions on port 8000.  You can make a change in any of these and see it replicated everywhere.  You've now created and scheduled your first kubernetes pod.  You can explore the kubernetes documentation for more information on how to build pods and services.
+Once this service starts, pull up the guestbook in a web browser at the IP you assigned in the publicIPs list, as well as on all minions on port 8000.  You can make a change in any of these and see it replicated everywhere.  You've now created and scheduled your first Kubernetes pod.  You can explore the Kubernetes documentation for more information on how to build pods and services.

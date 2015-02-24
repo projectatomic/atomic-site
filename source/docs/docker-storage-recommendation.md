@@ -124,7 +124,7 @@ For example, if you add a new device to host and to the `DEVS` line, the `docker
     [fedora@atomic-host-002 ~]$ sudo vi /etc/sysconfig/docker-storage-setup
     DEVS="/dev/vdb /dev/vdc"
 
-     [fedora@atomic-host-002 ~]$ sudo docker-storage-setup
+    [fedora@atomic-host-002 ~]$ sudo docker-storage-setup
     0
     /dev/vdb has partitions: vdb1
 

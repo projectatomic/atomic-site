@@ -304,8 +304,4 @@ Then you can create this service.
 
     [fedora@atomic-master ~]$ kubectl create -f frontend-service.json
 
-<<<<<<< HEAD
-Once this service starts, pull up the guestbook in a web browser at the IP you assigned in the publicIPs list, as well as on all minions on port 8000.  You can make a change in any of these and see it replicated everywhere.  You've now created and scheduled your first Kubernetes pod.  You can explore the Kubernetes documentation for more information on how to build pods and services.
-=======
-Once this service starts, pull up the guestbook in a web browser at the IP you assigned in the publicIPs list on port 8000.  You've now created and scheduled your first kubernetes pod.  You can explore the kubernetes documentation for more information on how to build pods and services.
->>>>>>> b8ba37f... Change flannel key to be more cluster friendly, updates to upstream Kubernetes guestbook examples reflected
+Once this service starts, pull up the guestbook in a web browser at the IP you assigned in the publicIPs listening on port 8000.  You've now created and scheduled your first kubernetes pod.  You can explore the kubernetes documentation for more information on how to build pods and services.

@@ -8,7 +8,7 @@ Docker uses `/var/lib/docker` as the default directory where all docker related 
  
 This document provides instructions for using an attached device with your Atomic host so that you can build and store lots of Docker images.  The basic procedure is the same as extending any other LVM volume.  Add the new device to the host, create a physical volume using the new device, add the physical volume to the volume group, and then extend the LVM volumes.  Since we are directly accessing the thin pool within docker, we won't need to create or extend a filesystem or mount the LVM volumes.
  
-## Using the `docker-storage-setup` LVM helper
+## Using the docker-storage-setup LVM helper
 _In this example, we'll be using a virt-manager installed Atomic host_.  
 Create a new VirtIO drive for use by the virtual machine and attach the volume to the Atomic host virtual machine in virt-manager.  On the Atomic host, ensure the device is available.  You may need to reboot the virtual machine.  Make sure no partitions are listed on the device, as we'll be adding this as a physical volume in LVM and get the appropriate device name.  
 

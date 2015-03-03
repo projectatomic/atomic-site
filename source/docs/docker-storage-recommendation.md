@@ -2,7 +2,7 @@
 
 ## Introduction
  
-The Atomic host is a minimal distribution and as such is distributed on a 6Gb image to keep the footprint small. However, that amount of storage doesn't support building and storing lots of Docker images.  It is an expected practice that external storage of sufficient size will be attached to the Atomic Host host in order to provide enough space to build and store Docker images. 
+The Atomic host is a minimal distribution and as such is distributed on a 6GB image to keep the footprint small. However, that amount of storage doesn't support building and storing lots of Docker images.  It is an expected practice that external storage of sufficient size will be attached to the Atomic Host host in order to provide enough space to build and store Docker images. 
 
 Docker uses `/var/lib/docker` as the default directory where all docker related files, including the images, are stored.  Atomic hosts however use direct LVM volumes via the devicemapper backend to store Docker images and metadata `/dev/atomicos/docker-data` and `/dev/atomicos/docker-meta`.  Adding storage to an Atomic hosts therefore requires a different procedure to grow the LVM volume than adding more storage to a device mounted at `/var/lib/docker`.   
  
@@ -12,7 +12,7 @@ This document provides instructions for using an attached device with your Atomi
 _In this example, we'll be using a virt-manager installed Atomic host_.  
 Create a new VirtIO drive for use by the virtual machine and attach the volume to the Atomic host virtual machine in virt-manager.  On the Atomic host, ensure the device is available.  You may need to reboot the virtual machine.  Make sure no partitions are listed on the device, as we'll be adding this as a physical volume in LVM and get the appropriate device name.  
 
-In the example, you can see a new 5GiB volume available at `/dev/vdb`.  This is the disk we'll add to the available pool.
+In the example, you can see a new 5GB volume available at `/dev/vdb`.  This is the disk we'll add to the available pool.
  
     [fedora@atomic-host-001 ~]$ sudo fdisk -l
 
@@ -39,6 +39,7 @@ In the example, you can see a new 5GiB volume available at `/dev/vdb`.  This is 
 Atomic hosts are delivered with a helper script to configure the direct LVM storage, `docker-storage-setup`.  The script reads from configuration options in `/etc/sysconfig/docker-storage-setup`.
 
 We'll set up a very basic configuration file to add the new device to the docker data storage pool.  The two options we'll deal with is `DEVS` and `VG`.  
+
 The `DEVS` option is a space separated list of the devices you want to add to the pool.  The `docker-storage-setup` script will automatically calculate the required amount of meta-data space from the overall size of the volume group, grow that volume, and then grow the data volume with the remaining space.
 
 The `VG` option allows you to control the volume group used for docker storage.  By default, Atomic uses the same volume group as the root device.  This means that you can set or change the root volume size with this utility as well.  You can also change the group if you so choose.

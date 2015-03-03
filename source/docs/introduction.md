@@ -6,9 +6,10 @@ The core of Project Atomic is the Project Atomic Host. This is a lightweight ope
 
 Project Atomic hosts inherit the full features and advantages of their base distributions. This includes systemd, which provides container-dependency management and fault recovery. It also includes journald, which provides secure aggregation and attribution of container logs. Project Atomic builds on these features, using the following components, which have been tailored for containerized-application management:
 
-* [Docker](https://www.docker.io/), an open-source project for creating lightweight, portable, self-sufficient application containers.
-* [rpm-OSTree](http://rpm-ostree.cloud.fedoraproject.org/#/), an open-source tool for managing bootable, immutable, versioned filesystem trees from upstream RPM content.
-* [systemd](http://www.freedesktop.org/wiki/Software/systemd/), an open-source system and service manager for Linux.
+* [Docker](https://www.docker.io/), an open source project for creating lightweight, portable, self-sufficient application containers.
+* [Kubernetes](http://kubernetes.io/), an open source project that allows you to manage a cluster of Linux containers as a single system.
+* [rpm-ostree](http://www.projectatomic.io/docs/os-updates/), an open source tool for managing bootable, immutable, versioned filesystem trees from upstream RPM content.
+* [systemd](http://www.freedesktop.org/wiki/Software/systemd/), an open source system and service manager for Linux.
 
 ## How Can Project Atomic Help Me?
 

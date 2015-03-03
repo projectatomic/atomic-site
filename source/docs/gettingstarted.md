@@ -127,16 +127,18 @@ Flanneld provides a tunneled network configuration via etcd.  To push the desire
       }
     }
 
-    [fedora@atomic-master ~]$ curl -L http://localhost:4001/v2/keys/coreos.com/network/config -XPUT --data-urlencode value@flanneld-conf.json
+We'll create a keyname specific to this cluster to store the network configuration.  While we're using a single etcd server in a single cluster for this example, setting non-overlapping keys allows us to have a cluster of etcd servers for several Atomic clusters.
+
+    [fedora@atomic-master ~]$ curl -L http://localhost:4001/v2/keys/atomic01/network/config -XPUT --data-urlencode value@flanneld-conf.json
 
 Just to make sure we have the right config, we'll pull it via curl and parse the JSON return.
 
-    [fedora@atomic-master ~]$ curl -L http://localhost:4001/v2/keys/coreos.com/network/config | python -m json.tool  
+    [fedora@atomic-master ~]$ curl -L http://localhost:4001/v2/keys/atomic01/network/config | python -m json.tool  
     {
         "action": "get",
         "node": {
             "createdIndex": 11,
-            "key": "/coreos.com/network/config",
+            "key": "/atomic01/network/config",
             "modifiedIndex": 11,
             "value": "{\n  \"Network\": \"172.16.0.0/12\",\n  \"SubnetLen\": 24,\n  \"Backend\": {\n    \"Type\": \"vxlan\"\n  }\n}\n\n"
         }
@@ -156,10 +158,16 @@ Add the local cache registry running on the master to the docker options that ge
     OPTIONS='--registry-mirror=http://192.168.122.10:5000 --selinux-enabled'
 
 ### Configuring Docker to use the Flannel overlay
-To set up flanneld, we just need to point the local flannel service to the etcd service on the master serving up the config.
+To set up flanneld, we just need to point the local flannel service to the etcd service on the master serving up the config from the right key for the cluster.
 
     [fedora@atomic01 ~]$ sudo vi /etc/sysconfig/flanneld 
+    # etcd url location.  Point this to the server where etcd runs
     FLANNEL_ETCD="http://192.168.122.10:4001"
+
+    # etcd config key.  This is the configuration key that flannel queries
+    # For address range assignment
+    FLANNEL_ETCD_KEY="/atomic01/network"
+
 
 To get docker using the flanneld overlay, we'll change the networking config to use the flanneld provided bridge IP and MTU settings.  We'll also change the unit definition to wait for flanneld to start.  That way the environment file created by flanneld is available and will provide a usable address for the docker0 bridge.  
 
@@ -244,25 +252,31 @@ Once you've created all the minions for your cluster, you can check to make sure
 ## Exploring Kubernetes
 There are several ways to get started using Kubernetes pods to create workloads.  The Kubernetes upstream project publishes a Redis guestbook example that works to show off most of the components and use cases.  You can download just the JSON files from the [ Github repo ](https://github.com/GoogleCloudPlatform/kubernetes/tree/master/examples/guestbook) to the master Atomic host.  Once you've got the files, it's a simple matter to use kubectl to create the pod, service, and replication controller.  Follow along starting with [Step One] (https://github.com/GoogleCloudPlatform/kubernetes/tree/master/examples/guestbook#step-one-turn-up-the-redis-master) in the guide, or skip ahead and run the following commands:
 
-    [fedora@atomic-master ~]$ kubectl create -f redis-master.json
-    [fedora@atomic-master ~]$ kubectl get pod redis-master
+    [fedora@atomic-master ~]$ kubectl create -f redis-master-controller.json
+    [fedora@atomic-master ~]$ kubectl get replicationController redis-master-controller
+    [fedora@atomic-master ~]$ kubectl get pods -l name=redis-master
 
     [fedora@atomic-master ~]$ kubectl create -f redis-master-service.json 
     [fedora@atomic-master ~]$ kubectl get service redis-master
 
     [fedora@atomic-master ~]$ kubectl create -f  redis-slave-controller.json 
-    [fedora@atomic-master ~]$ kubectl get replicationController redisSlaveController
+    [fedora@atomic-master ~]$ kubectl get replicationController redis-slave-controller
+    [fedora@atomic-master ~]$ kubectl get pods -l name=redis-master
+
+    [fedora@atomic-master ~]$ kubectl create -f redis-slave-service.json 
+    [fedora@atomic-master ~]$ kubectl get service redisslave
 
 To check the status of the containers using `kubectl get`.  You can also check on services and replication controllers with the `get` command.  At this point, the Redis cluster and associated containers will be downloaded and running on your minions.
 
-    [fedora@atomic-master ~]$ kubectl get pods
-    NAME                                   IMAGE(s)                                 HOST                LABELS                                       STATUS
-    47ff8f10-ad6e-11e4-8166-5254009a8482   brendanburns/redis-slave                 192.168.122.11/     name=redisslave,uses=redis-master            Running
-    4800f1d1-ad6e-11e4-8166-5254009a8482   brendanburns/redis-slave                 192.168.122.13/     name=redisslave,uses=redis-master            Running
-    4e7ce88c-ad6e-11e4-8166-5254009a8482   kubernetes/example-guestbook-php-redis   192.168.122.13/     name=frontend,uses=redisslave,redis-master   Running
-    4e7d7a77-ad6e-11e4-8166-5254009a8482   kubernetes/example-guestbook-php-redis   192.168.122.12/     name=frontend,uses=redisslave,redis-master   Running
-    4e80004b-ad6e-11e4-8166-5254009a8482   kubernetes/example-guestbook-php-redis   192.168.122.11/     name=frontend,uses=redisslave,redis-master   Running
-    redis-master                           dockerfile/redis                         192.168.122.12/     name=redis-master                            Running
+    [fedora@atomic-master ~]$ kubectl get pods 
+    POD                                    IP                  CONTAINER(S)        IMAGE(S)                                 HOST                LABELS                                                     STATUS
+    22341c61-bdeb-11e4-892b-525400fa2bea   172.17.0.2          redis-master        dockerfile/redis                         192.168.122.14/     app=redis,name=redis-master                                Running
+    720081b3-bdeb-11e4-892b-525400fa2bea   172.17.0.2          redis-slave         brendanburns/redis-slave                 192.168.122.13/     app=redis,name=redis-slave,uses=redis-master               Running
+    7200bf0a-bdeb-11e4-892b-525400fa2bea   172.17.0.2          redis-slave         brendanburns/redis-slave                 192.168.122.11/     app=redis,name=redis-slave,uses=redis-master               Running
+    4a933de8-bdee-11e4-892b-525400fa2bea   172.17.0.3          php-redis           kubernetes/example-guestbook-php-redis   192.168.122.12/     app=frontend,name=frontend,uses=redis-slave,redis-master   Running
+    4a93f6ff-bdee-11e4-892b-525400fa2bea   172.17.0.3          php-redis           kubernetes/example-guestbook-php-redis   192.168.122.14/     app=frontend,name=frontend,uses=redis-slave,redis-master   Running
+    4a9515dd-bdee-11e4-892b-525400fa2bea   172.17.0.3          php-redis           kubernetes/example-guestbook-php-redis   192.168.122.11/     app=frontend,name=frontend,uses=redis-slave,redis-master   Running
+
 
 The example sets up front end controller and service to provide web access to the Redis cluster.
 
@@ -275,19 +289,19 @@ Before creating the service for the web front end, we're going to add a 'load ba
       "id": "frontend",
       "kind": "Service",
       "apiVersion": "v1beta1",
-      "port": 80,
-      "publicIPs": ["192.168.122.13"],
-      "containerPort": 80,
+      "port": 8000,
+      "publicIPs": ["192.168.122.14"],
+      "containerPort": "http-server",
       "selector": {
         "name": "frontend"
       },
       "labels": {
         "name": "frontend"
       }
-    }
+     }
 
 Then you can create this service.
 
     [fedora@atomic-master ~]$ kubectl create -f frontend-service.json
 
-Once this service starts, pull up the guestbook in a web browser at the IP you assigned in the publicIPs list, as well as on all minions on port 8000.  You can make a change in any of these and see it replicated everywhere.  You've now created and scheduled your first Kubernetes pod.  You can explore the Kubernetes documentation for more information on how to build pods and services.
+Once this service starts, pull up the guestbook in a web browser at the IP you assigned in the publicIPs listening on port 8000.  You've now created and scheduled your first kubernetes pod.  You can explore the kubernetes documentation for more information on how to build pods and services.

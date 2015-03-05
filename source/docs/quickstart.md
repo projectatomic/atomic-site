@@ -45,11 +45,11 @@ Here's how to get started with Atomic on your machine using virt-manager on Linu
 
 ## Step by Step on VirtualBox
 
-Here's how to get started with Atomic on your machine using VirtualBox on Windows, OS X or Linux.
+Here's how to get started with Atomic on your machine using VirtualBox on Windows, OS X, or Linux.
 
-1. Download the VirtualBox image.
+1. Download the qcow2 image of your choice (Fedora or CentOS).
 
-2. Run `bzip2 -i [filename]` to uncompress the downloaded image.
+2. Convert the qcow2 image to vdi, using the instructions above.
 
 3. Start VirtualBox.
 

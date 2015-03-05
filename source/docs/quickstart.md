@@ -104,7 +104,7 @@ Once you've booted and logged in to your Atomic host, you can update the system 
 
 ## Readying More Space For Containers
 
-Docker is ready to go at this point, but there's another fairly important bit of config to do, if you're going to be testing out more than a couple containers--you need to add a bigger drive for `/var/lib/docker`.
+Docker is ready to go at this point, but there's another fairly important bit of config to do, if you're going to be testing out more than a couple containers--you need to add a bigger drive for the docker LVM thin pool.
 
 ### Add A New Drive in virt-manager
 
@@ -128,30 +128,25 @@ Docker is ready to go at this point, but there's another fairly important bit of
 
 ### Configuring the New Drive
 
-1. Run `fdisk -l` to find name of your new disk (e.g., /dev/vdb)
+1. Run `$ sudo fdisk -l` to find name of your new disk (e.g., /dev/vdb)
 
-2. Run `fdisk /dev/vdb`. 
+2. Open `/etc/sysconfig/docker-storage-setup` in an editor
 
-3. In fdisk, type `n`, `p`, [Enter] three times, and `w` to make new partition on a new
-disk.
+3. Add the new disk by creating a `DEVS` entry.  If you added more than one, you can add more to the list separated by a space.
+    
+        DEVS="/dev/vdb"
 
-4. Run `mkfs.xfs /dev/vdb1`. This doesn't have to be xfs, it can be any filesystem type.
+4. If you'd like to use some of the space on the new disk to grow the root volume, you can create a `ROOT_SIZE` with the new total size.
 
-5. If you already have data in `/var/lib/docker` you want to keep, copy this data off to some backup directory.
+        ROOT_SIZE=4G
 
-6. Run `systemctl stop docker`.
+5. Run `$ sudo docker-storage-setup` to run the helper script and configure the thin pool.  This tool calculates the amount of available space, what's needed for the metadata pool, and executes the LVM commands.
 
-7. Run `rm -rf /var/lib/docker/*`
+6. Run `$ sudo docker info` to make sure that the Docker daemon sees the added space.
 
-8. Run `blkid /dev/vdb1`. Take note of the blkid.
+7. If you added space to the root volume, run `$ sudo xfs_growfs /` to make sure the filesystem gets expanded to match the volume size.
 
-9. Open /etc/fstab and add this line:
-
-`UUID=<UUID-from-blkid> /var/lib/docker <file system type> defaults 1 1`
-
-10. Run `mount -a`.
-
-11. Run `systemctl start docker`. Docker is ready to go.
+8. If you added space to the root volume, run `df -Th` to make sure that the root volume has been grown to the new total size.
 
 ## Finding Help
 

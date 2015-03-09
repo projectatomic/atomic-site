@@ -6,18 +6,20 @@ We recommend reading the Getting Started Guide and Concepts Guide if you're enti
 
 * **A virtualization client.** [Virtual Machine Manager](http://virt-manager.org/) (virt-manager) is a very good KVM-based client for Linux systems. Windows and OS X users can give [VirtualBox](https://www.virtualbox.org/) a try. Be sure your virtualization client is properly configured to access the Internet.
 
-* **A virtual machine image.** Images for Atomic based on Fedora 20 can be found at the [rpm-ostree project](http://rpm-ostree.cloud.fedoraproject.org/project-atomic/images/) for [VirtualBox](http://rpm-ostree.cloud.fedoraproject.org/project-atomic/images/f20/vbox) and [KVM/QEMU](http://rpm-ostree.cloud.fedoraproject.org/project-atomic/images/f20/qemu) images for virt-manager.
+* **A virtual machine image.** Images for Atomic hosts are produced by both the Fedora Project and the CentOS Project.  Downloads for these images can be found via the [Downloads page] (http://www.projectatomic.io/download/) in QCOW2, Vagrant Box, and RAW formats.
 
-* **Note for VirtualBox users** At the moment, we are not producing native VirtualBox images, but you can generate your own VirtualBox image from the qcow2 images with `qemu-img`:
+* **Note for VirtualBox users** At the moment, we are not producing native VirtualBox images, but you can generate your own VirtualBox image from the qcow2 images with `qemu-img` or `VBoxManage`:
 
 ````
 qemu-img convert -f qcow2 [filename].qcow2 -O vdi [filename].vdi
+
+VBoxManage convertfromraw [filename] [outputfile]
 ````
 
 
 ## Step by Step on virt-manager
 
-Here's how to get started with Atomic on your machine using virt-manager on Linux. The instructions below are for running virt-manager on Fedora 20. The steps may vary slightly when running older distributions of virt-manager.
+Here's how to get started with Atomic on your machine using virt-manager on Linux. The instructions below are for running virt-manager on Fedora 21. The steps may vary slightly when running older distributions of virt-manager.
 
 1. Download the KVM/QEMU image.
 

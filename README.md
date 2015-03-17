@@ -1,7 +1,7 @@
 # Middleman-Springboard
 
-Springboard is a starter-pack for Middleman, for quickly whipping together
-static-based websites.
+Springboard is a starter-pack for [Middleman](https://middlemanapp.com/), 
+for quickly whipping together static-based websites.
 
 To get started, you need to have Ruby and Ruby Gems installed, as well
 as "bundler".
@@ -109,4 +109,4 @@ Simply add a new `gem 'some-gem-here'` line in the `Gemfile` and run
 ## More info
 
 For more information, please check the excellent
-[Middleman documentation](http://middlemanapp.com/getting-started/).
+[Middleman documentation](https://middlemanapp.com/basics/install/).

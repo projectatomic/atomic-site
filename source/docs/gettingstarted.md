@@ -200,12 +200,17 @@ As of kubernetes-0.7.0, the kubelet systemd unit file has a dependency on the do
 
 The address entry in the kubelet config file must match the KUBLET_ADDRESSES entry on the master.   If hostnames are used, this also must match output of `hostname -f` on the minion.  We're using the eth0 IP address like we did on the master.
 
+We are also setting up the cluster dns settings to allow service ip resolution using kube-dns. Make sure you put the space in before the first parameter in KUBELET_ARGS, otherwise the kubelet daemon sees the rest of the line as a single parameter to cluster_dns and will fail to start up.
+
     [fedora@atomic01 ~]$ sudo vi /etc/kubernetes/kubelet 
     # The address for the info server to serve on (set to 0.0.0.0 or "" for all interfaces)
     KUBELET_ADDRESS="--address=192.168.122.11"
 
     # You may leave this blank to use the actual hostname
     KUBELET_HOSTNAME="--hostname_override=192.168.122.11"
+
+    # Add your own!
+    KUBELET_ARGS=" --cluster_dns=10.254.0.10 --cluster_domain=kubernetes.local"
 
 Set the location of the etcd server, here we've got the single service on the master.
 
@@ -250,7 +255,92 @@ Once you've created all the minions for your cluster, you can check to make sure
     [fedora@atomic-master ~]$ kubectl get minions
 
 ## Exploring Kubernetes
-There are several ways to get started using Kubernetes pods to create workloads.  The Kubernetes upstream project publishes a Redis guestbook example that works to show off most of the components and use cases.  You can download just the JSON files from the [ Github repo ](https://github.com/GoogleCloudPlatform/kubernetes/tree/master/examples/guestbook) to the master Atomic host.  Once you've got the files, it's a simple matter to use kubectl to create the pod, service, and replication controller.  Follow along starting with [Step One] (https://github.com/GoogleCloudPlatform/kubernetes/tree/master/examples/guestbook#step-one-turn-up-the-redis-master) in the guide, or skip ahead and run the following commands:
+There are several ways to get started using Kubernetes pods to create workloads.  The Kubernetes upstream project publishes a Redis guestbook example that works to show off most of the components and use cases.  
+
+
+Before starting the example, you need to create a kube-dns replication controller and service, so that the guestbook examples can communicate. Get the configuration files skydns-rc.yaml.in and skydns-svc.yaml.in for this from [Kubernetes Github](https://github.com/GoogleCloudPlatform/kubernetes/tree/master/cluster/addons/dns). Copy these files to the master Atomic host, and remove the ".in" from the filename.
+
+These files are yaml templates, so you will need to manually fill in the templated parameters (easily found by as they are surrounded by "{{" and "}}").  In skydns-rc.yaml, set dns_replicas to 1 and both dns_domains to kubernetes.local
+
+    kind: ReplicationController
+    apiVersion: v1beta1
+    id: kube-dns
+    namespace: default
+    labels:
+      k8s-app: kube-dns
+      kubernetes.io/cluster-service: "true"
+    desiredState:
+      replicas: 1
+      replicaSelector:
+        k8s-app: kube-dns
+      podTemplate:
+        labels:
+          name: kube-dns
+          k8s-app: kube-dns
+          kubernetes.io/cluster-service: "true"
+        desiredState:
+          manifest:
+            version: v1beta2
+            id: kube-dns
+            dnsPolicy: "Default"  # Don't use cluster DNS.
+            containers:
+              - name: etcd
+                image: quay.io/coreos/etcd:v2.0.3
+                command: [
+                        # entrypoint = "/etcd",
+                        "-listen-client-urls=http://0.0.0.0:2379,http://0.0.0.0:4001",
+                        "-initial-cluster-token=skydns-etcd",
+                        "-advertise-client-urls=http://127.0.0.1:4001",
+                ]
+              - name: kube2sky
+                image: kubernetes/kube2sky:1.1
+                command: [
+                        # entrypoint = "/kube2sky",
+                        "-domain=kubernetes.local",
+                ]
+              - name: skydns
+                image: kubernetes/skydns:2015-03-11-001
+                command: [
+                        # entrypoint = "/skydns",
+                        "-machines=http://localhost:4001",
+                        "-addr=0.0.0.0:53",
+                        "-domain=kubernetes.local.",
+                ]
+                ports:
+                  - name: dns
+                    containerPort: 53
+                    protocol: UDP
+
+In skydns-svc.yaml, substitute the dns_server parameter with 10.254.0.10
+
+    kind: Service
+    apiVersion: v1beta1
+    id: kube-dns
+    namespace: default
+    protocol: UDP
+    port: 53
+    portalIP: 10.254.0.10
+    containerPort: 53
+    labels:
+      k8s-app: kube-dns
+      name: kube-dns
+      kubernetes.io/cluster-service: "true"
+    selector:
+      k8s-app: kube-dns
+
+You can use kubectl to create the kube-dns replication controller and service as follows:
+
+    [fedora@atomic-master ~]$ kubectl create -f skydns-rc.yaml
+    [fedora@atomic-master ~]$ kubectl get replicationController kube-dns
+    [fedora@atomic-master ~]$ kubectl get pods -l name=kube-dns
+
+    [fedora@atomic-master ~]$ kubectl create -f skydns-svc.yaml
+    [fedora@atomic-master ~]$ kubectl get service kube-dns
+
+
+Now you can download just the JSON files for the example from the [ Github repo ](https://github.com/GoogleCloudPlatform/kubernetes/tree/master/examples/guestbook) to the master Atomic host.  
+
+Once you've got the files, it's a simple matter to use kubectl to create the pod, service, and replication controller.  Follow along starting with [Step One] (https://github.com/GoogleCloudPlatform/kubernetes/tree/master/examples/guestbook#step-one-turn-up-the-redis-master) in the guide, or skip ahead and run the following commands:
 
     [fedora@atomic-master ~]$ kubectl create -f redis-master-controller.json
     [fedora@atomic-master ~]$ kubectl get replicationController redis-master-controller

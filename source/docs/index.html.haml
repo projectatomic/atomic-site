@@ -30,6 +30,48 @@ title: Project Atomic Documentation
 .row
 
   .col-md-4.col-sm-12
+    %h3 Updating the Atomic Host 
+
+    %p
+      Atomic hosts are 
+      %a( href="/docs/os-updates" ) updated
+      using a tool called rpm-ostree. An easy way to think about
+      rpm-ostree and its parent project 
+      %a( href="http://live.gnome.org/Projects/OSTree" ) OSTree
+      is "git for operating systems."
+
+    %p 
+      Using rpm-ostree we can easily update the system in one "atomic"
+      transaction, and roll back to the prior system if an update has any
+      issues. 
+
+  .col-md-4.col-sm-12
+    %h3 Managing Storage
+
+    %p
+      To set up additional storage for /var/lib/docker see
+      %a( href="/docs/docker-storage-recommendation" ) Setting Up Storage
+      and when considering alternative filesystems see
+      <a href="/docs/filesystems">Supported Filesystems</a>.
+
+  .col-md-4.col-sm-12
+    %h3 Atomic: /usr/bin/atomic
+
+    %p
+      The Atomic 
+      %a( href="/docs/usr-bin-atomic" ) (/usr/bin/atomic) Documentation
+      explains how to use the atomic command on Atomic hosts. This command
+      defines the entrypoint for Project Atomic hosts. 
+
+    %p
+      The goal of 
+      %a( href="https://github.com/projectatomic/atomic/" ) /usr/bin/atomic
+      is to provide a high-level, coherent entrypoint to the system, and fill
+      in gaps that are not filled by Linux container implementations.
+
+.row
+
+  .col-md-4.col-sm-12
     %h3 Building New Images
 
     %p
@@ -41,31 +83,6 @@ title: Project Atomic Documentation
       gives a set of explanations and tips which will help authoring new
       Docker images.
 
-
-  .col-md-4.col-sm-12
-    %h3 Updating the Atomic Host 
-
-    %p
-
-      Atomic use a new way to manage updates of the base
-      operating system, the
-      %a( href="/docs/os-updates" ) Operating System upgrades via rpm-ostree
-      provides some details about it, see also the online pages for the
-      %a( href="http://github.com/projectatomic/rpm-ostree/" ) rpm-ostree
-      project and the
-      %a( href="http://live.gnome.org/Projects/OSTree" ) OSTree
-      library.
-
-  .col-md-4.col-sm-12
-    %h3 Managing Storage
-
-    %p
-      To setup additional storage for /var/lib/docker see
-      %a( href="/docs/docker-storage-recommendation" ) Setting Up Storage
-      and when considering alternative filesystems see
-      <a href="/docs/filesystems">Supported Filesystems</a>.
-
-.row
 
   .col-md-4.col-sm-12
     %h3 Containment and Security

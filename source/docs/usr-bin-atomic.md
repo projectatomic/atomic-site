@@ -11,7 +11,7 @@ The goal of `atomic` is to provide a high-level, coherent entrypoint for the sys
 
 ### Note about Atomic
 
-The `atomic` command is still a bit new and undergoing rapid development. It is currently in Fedora and will soon be included in the CentOS Atomic host builds.
+The `atomic` command is still a bit new and undergoing rapid development. It is currently in Fedora 22 alpha and will soon be included in the CentOS Atomic host builds.
 
 ## Using /usr/bin/atomic
 

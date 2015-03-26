@@ -38,8 +38,12 @@ One host should be nominated to be the Atomic Kubernetes master server, with the
 
 Assumptions for IP addressing for following examples:
 
+    Physical interfaces for hosts:
     atomic-master 192.168.122.10 kubernetes master
     atomic0[1-4] 192.168.122.1[1-4] kubernetes minions
+
+    Overlay Docker networking range:
+    172.16.0.0/12
 
 ## Building the fleet boss
 Launch an Atomic host to act as the master node for the cluster.  We'll be installing the local docker cache, the etcd source, and the Kubernetes master services here.  As a good practice, update to the latest available Atomic tree. 
@@ -91,19 +95,43 @@ Since we want to make sure the local cache is always up, we'll create a systemd 
 ### Configuring Kubernetes master
 We're using a single etcd server, not a replicating cluster in this guide.  This makes etcd simple, as it will work as needed out of the box.  No need to modify the etcd config file, just enable and start the daemon with all the rest of the Kubernetes services.
 
-For Kubernetes, there's a few config files in /etc/kubernetes we need to set up for this host to act as a master.  First off is setting up the etcd store that Kubernetes will use.  We're using a single local etcd service, so we'll point that at the master on the standard port.
+For Kubernetes, there's a few config files in /etc/kubernetes we need to set up for this host to act as a master.  First off is the general config file used by all of the services.  Then we'll add service specific variables to those service config files.
+
+    Services
+        config
+        apiserver
+        controller-manager
+        scheduler
+
+
+#### Common service configurations
+We'll be setting up the etcd store that Kubernetes will use.  We're using a single local etcd service, so we'll point that at the master on the standard port.  We'll also set up how the services find the apiserver.
 
     [fedora@atomic-master ~]$ sudo vi /etc/kubernetes/config 
+    # Comma seperated list of nodes in the etcd cluster
     KUBE_ETCD_SERVERS="--etcd_servers=http://192.168.122.10:4001"
 
-The apiserver needs to be set to listen on all IP addresses, and where the apiserver will listen for the scheduler.
+    # How the replication controller and scheduler find the kube-apiserver
+    KUBE_MASTER="--master=192.168.122.10:8080"
+
+***Note:*** If you are using an Atomic tree with kubernetes 0.11.0 or later, you will need to add the transport to the KUBE_MASTER variable as follows:
+
+    # How the replication controller and scheduler find the kube-apiserver
+    KUBE_MASTER="--master=http://192.168.122.10:8080"
+
+#### Apiserver service configuration
+The apiserver needs to be set to listen on all IP addresses, instead of just localhost.
 
     [fedora@atomic-master ~]$ sudo vi /etc/kubernetes/apiserver 
     # The address on the local server to listen to.
     KUBE_API_ADDRESS="--address=0.0.0.0"
-    # How the replication controller and scheduler find the kube-apiserver
-    KUBE_MASTER="--master=192.168.122.10:8080"
 
+ If you need to modify the set of IPs that Kubernetes assigns to services, change the KUBE_SERVICE_ADDRESSES value. Since this guide is using the 192.168.122.0/24 and 172.16.0.0/12 networks, we can leave the default.  This address space needs to be unused elsewhere, but doesn't need to be reachable from either of the other networks. 
+
+    # Address range to use for services
+    KUBE_SERVICE_ADDRESSES="--portal_net=10.254.0.0/16"
+
+#### Controller Manager service configuration
 The controller manager service needs to how to locate it's minions.  We're using IPs as addresses, which must match the KUBLET_HOSTNAME for the minions kublet service. If hostnames are used, must resolve to match output of `hostname -f` on the minion.
 
     [fedora@atomic-master ~]$ sudo vi /etc/kubernetes/controller-manager 
@@ -212,8 +240,15 @@ Set the location of the etcd server, here we've got the single service on the ma
     [fedora@atomic01 ~]$ sudo vi /etc/kubernetes/config 
     # Comma seperated list of nodes in the etcd cluster
     KUBE_ETCD_SERVERS="--etcd_servers=http://192.168.122.10:4001"
+    # How the replication controller and scheduler find the kube-apiserver
+    KUBE_MASTER="--master=192.168.122.10:8080"
 
-Reload systemd to pick up our workaround and enable the minion services.  Reboot the minion to make sure everything start on boot correctly.
+***Note:*** If you are using an Atomic tree with kubernetes 0.11.0 or later, you will need to add the transport to the KUBE_MASTER variable as follows:
+
+    # How the replication controller and scheduler find the kube-apiserver
+    KUBE_MASTER="--master=http://192.168.122.10:8080"
+
+If you created the drop-in, reload systemd and then enable the minion services.  Reboot the minion to make sure everything starts on boot correctly.
 
     [fedora@atomic01 ~]$ sudo systemctl daemon-reload
 
@@ -290,7 +325,7 @@ Before creating the service for the web front end, we're going to add a 'load ba
       "kind": "Service",
       "apiVersion": "v1beta1",
       "port": 8000,
-      "publicIPs": ["192.168.122.14"],
+      "publicIPs": ["192.168.122.14","192.168.122.12"],
       "containerPort": "http-server",
       "selector": {
         "name": "frontend"

@@ -11,7 +11,7 @@ as "bundler".
 On an rpm based distribution:
 
 ```
-sudo yum install -y ruby-devel rubygems gcc-c++ curl-devel rubygem-bundler
+sudo yum install -y ruby-devel rubygems gcc-c++ curl-devel rubygem-bundler ImageMagick
 git clone http://github.com/projectatomic/atomic-site.git
 cd atomic-site
 bundle install

@@ -402,3 +402,18 @@
 .author-info
   margin-left: 0
   margin-right: 0
+
+body.admin_index
+  // Acommodate the sidebar too
+  margin-top: 5rem
+
+  #author-select
+    // Author selection was designed for full-width pages.
+    // As Atomic has a sidebar, this doesn't leave enough room
+    // so resizing is a workaround.
+    width: 84%
+
+  #content
+    // Space is added in body.admin_index
+    // so readjust the #content padding
+    padding-top: 1.5rem

@@ -6,6 +6,9 @@
 
 Time.zone = data.site.timezone || 'UTC'
 
+# Admin needs i18n turned on for time_ago_in_words
+activate :i18n, langs: [:en]
+
 # Automatic image dimensions on image_tag helper
 activate :automatic_image_sizes
 

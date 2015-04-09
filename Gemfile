@@ -59,12 +59,7 @@ gem 'rails-assets-jquery', '~> 1'
 # Bootstrap
 
 # Bootstrap, as SASS
-gem "bootstrap-sass"
-
-# There's a bug in with bootstrap-sass + sprockets-sass in 3.3.3
-# FIXME: When a fix is released (3.3.4?), remove this block
-# See: https://github.com/middleman/middleman/issues/1265
-gem 'middleman-sprockets', '3.3.2'
+gem "bootstrap-sass", "3.0.0.0"
 
 
 #####

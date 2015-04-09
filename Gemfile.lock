@@ -10,12 +10,8 @@ GEM
       tzinfo (~> 1.1)
     addressable (2.3.8)
     asciidoctor (1.5.2)
-    autoprefixer-rails (5.1.8)
-      execjs
-      json
-    bootstrap-sass (3.3.4.1)
-      autoprefixer-rails (>= 5.0.0.1)
-      sass (>= 3.2.19)
+    bootstrap-sass (3.0.0.0)
+      sass (~> 3.2)
     builder (3.2.2)
     celluloid (0.16.0)
       timers (~> 4.0.0)
@@ -196,7 +192,7 @@ PLATFORMS
 
 DEPENDENCIES
   asciidoctor
-  bootstrap-sass
+  bootstrap-sass (= 3.0.0.0)
   builder (~> 3.0)
   coderay
   compass (~> 1.0.0.alpha.21)
@@ -208,7 +204,6 @@ DEPENDENCIES
   middleman-deploy
   middleman-favicon-maker
   middleman-livereload
-  middleman-sprockets (= 3.3.2)
   middleman-syntax
   nokogiri
   oj

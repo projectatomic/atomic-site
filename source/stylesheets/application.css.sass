@@ -8,16 +8,25 @@
 // sass-convert -F scss -T sass {bootstrap-sass}/vendor/assets/stylesheets/bootstrap/bootstrap.scss
 @import bootstrap-includes
 
+// Custom mixins
+@import lib/mixin/grayscale.sass
+@import lib/mixin/responsive-image.sass
+
 //@import vendor/normalize.css
 @import fonts/fonts.css
 @import vendor/solarized-light.sass
 
 @import lib/scrollbar-on.sass
-@import lib/juvia-comments.sass
+//@import lib/juvia-comments.sass
 
 @import lib/site.sass
 @import lib/markdown.sass
 @import lib/blog.sass
+@import lib/search.sass
+
+@import lib/stickyfooter.sass
+@import lib/svg-fallback.sass
+
 @import lib/docbrowser.sass
 
 @import font-awesome

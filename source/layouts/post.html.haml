@@ -1,12 +1,15 @@
-- wrap_layout :layout do
+~ wrap_layout :layout do
 
-  - blog_post = current_page.data.date
+  %section.blog-post-page.row
 
-  - if blog_post
-    = partial :blog_post, locals: {article: current_page}
+    .col-md-10.col-md-offset-1
 
-    %section#blog-comments
+      - blog_post = defined? current_page.date
 
-  - else
-    = yield
+      - if blog_post
+        = partial :blog_post, locals: {article: current_page}
 
+        %section#blog-comments
+
+      - else
+        = yield

@@ -1,8 +1,13 @@
 # If you have OpenSSL installed, we recommend updating
 # the following line to use "https"
 source 'http://rubygems.org'
+source 'https://rails-assets.org'
 
-gem "middleman", "~>3.2"
+gem "middleman", "~> 3.3.3"
+
+# In order to get SASS 3.3, compass 1.0 is needed
+# FIXME: Remove this once 1.0 is final (very, very soon now -- next week?)
+gem 'compass', '~> 1.0.0.alpha.21'
 
 # Live-reloading plugin
 gem "middleman-livereload"
@@ -44,13 +49,22 @@ gem "builder", "~> 3.0"
 # Better JSON lib
 gem "oj"
 
+# Lock jQuery to 1.x, for better IE support (6 - 8)
+# Fixes and features are backported from 2.x to 1.x; only diff is IE support.
+# see http://blog.jquery.com/2013/01/15/jquery-1-9-final-jquery-2-0-beta-migrate-final-released/
+gem 'rails-assets-jquery', '~> 1'
+
 
 #####
 # Bootstrap
 
-# Bootstrap, as SASS 3 version (there's a bug in 3.0.1+, so we're
-# locking to 3.0.0 for now
-gem "bootstrap-sass", "3.0.0"
+# Bootstrap, as SASS
+gem "bootstrap-sass"
+
+# There's a bug in with bootstrap-sass + sprockets-sass in 3.3.3
+# FIXME: When a fix is released (3.3.4?), remove this block
+# See: https://github.com/middleman/middleman/issues/1265
+gem 'middleman-sprockets', '3.3.2'
 
 
 #####
@@ -70,7 +84,13 @@ gem "asciidoctor"
 # mediawiki
 gem "wikicloth"
 
-# Markdown, with GitHub flavoring
-gem "redcarpet"
+gem "coderay"
+gem "stringex"
+
+# Markdown
+gem 'redcarpet'
 
 gem 'open-uri-cached'
+
+# RSS/Atom parsing
+gem "feedjira"

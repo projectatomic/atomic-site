@@ -155,7 +155,7 @@ ready do
   blog.tags.each do |tag_name, _tag_data|
     next unless tag_name
 
-    proxy "/blog/tag/#{tag_name.downcase}.xml",
+    proxy "/blog/tag/#{tag_name.downcase.parameterize}.xml",
           'feed.xml',
           locals: { tag_name: tag_name },
           ignore: true

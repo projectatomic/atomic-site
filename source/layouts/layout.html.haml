@@ -1,70 +1,23 @@
-!!!5
-/[if lt IE 7]  <html class="no-js lt-ie10 lt-ie9 lt-ie8 lt-ie7" lang="en-us">
-/[if IE 7]     <html class="no-js lt-ie10 lt-ie9 lt-ie8" lang="en-us">
-/[if IE 8]     <html class="no-js lt-ie10 lt-ie9" lang="en-us">
-/[if IE 9]     <html class="no-js lt-ie10 lt-ie9" lang="en-us">
-/[if lt IE 10] <html class="no-js lt-ie10" lang="en-us">
-/[if !IE]>
-%html.no-js(lang="en")
-  / <![endif]
+~ wrap_layout :basic do
 
-  %head
+  %section#page-wrap.container
 
-    %title
-      - page_title = discover_title
-      = "#{page_title} &mdash;" if page_title
-      = data.site.name
+    .row
 
-    %meta(charset="utf-8")
-    %meta(name="description" content="#{data.site.description || ''}")
+      #sidebar.col-md-3.col-lg-2
+        - unless data.page.hide_header || request['params']['contentonly']
+          = partial "header"
 
-    - meta_author = author_name current_page.data.author || data.site.author || data.site.owner || ''
+      %section#content.col-md-9.col-lg-10{class: data.page.no_container.nil? ? 'container' : '' }
 
-    %meta(name="author" content="#{meta_author}")
-    %meta(content="initial-scale=1.0,user-scalable=no,maximum-scale=1,width=device-width" name="viewport")
+        -# Show a warning for those using < IE6 or lower
+        /[if lt IE 7]
+          <p class="chromeframe">You are using an outdated browser.
+          <a href="http://browsehappy.com/">Upgrade your browser today</a> or
+          <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
 
-    = yield_content :head
+        -# Render actual page content
+        = yield
 
-    -# google+ link for site vs g+ profile verification.
-    -# https://support.google.com/plus/answer/1713826?hl=en&ref_topic=3293784
-    %link(rel="publisher" href="https://plus.google.com/108727025270662383247")
-
-    -# RSS link for automatic feed discovery tools
-    %link(rel="alternate" type="application/atom+xml" title="Blog Articles" href="/blog/feed.xml")
-
-    -# App Icons
-    %link(rel="shortcut icon" href="/images/favicon.ico")
-    %link(rel="apple-touch-icon-precomposed" href="/images/apple-touch-icon-precomposed.png")
-    %link(rel="apple-touch-icon-precomposed" sizes="57x57" href="/images/apple-touch-icon-57-precomposed.png")
-    %link(rel="apple-touch-icon-precomposed" sizes="72x72" href="/images/apple-touch-icon-72-precomposed.png")
-    %link(rel="apple-touch-icon-precomposed" sizes="114x114" href="/images/apple-touch-icon-114-precomposed.png")
-    %link(rel="apple-touch-icon-precomposed" sizes="144x144" href="/images/apple-touch-icon-144-precomposed.png")
-
-    = stylesheet_link_tag "application"
-    = stylesheet_link_tag "print", media: "print"
-
-    - if data.page.stylesheet
-      = stylesheet_link_tag "global", data.page.stylesheet
-
-  %body{:class => (page_classes || 'page') + " source-#{current_page.source_file.split('.').last}" }
-    .container#page-wrap
-      .row
-        .col-md-3.col-lg-2#sidebar
-          - unless data.page.hide_header
-            = partial "header"
-        .col-md-9.col-lg-10#content
-
-          -# Show a warning for those using < IE6 or lower
-          /[if lt IE 7]
-            <p class="chromeframe">You are using an outdated browser.
-            <a href="http://browsehappy.com/">Upgrade your browser today</a> or
-            <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
-
-          -# Render actual page content
-          = yield
-
-      - unless data.page.hide_footer
-        = partial "footer"
-
-    = javascript_include_tag 'application'
-
+    - unless data.page.hide_footer || request['params']['contentonly']
+      = partial "footer"

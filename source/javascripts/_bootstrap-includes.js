@@ -1,3 +1,5 @@
+// Change /// to //= to enable an include
+
 //= require bootstrap/affix
 //= require bootstrap/alert
 //= require bootstrap/button

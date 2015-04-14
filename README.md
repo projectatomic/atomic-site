@@ -6,26 +6,26 @@ quick instructions:
 To get started, you need to have Ruby and Ruby Gems installed, as well
 as "bundler".
 
+
 ## Initial setup
 
 On an rpm based distribution:
 
 ```
-sudo yum install -y ruby-devel rubygems gcc-c++ curl-devel rubygem-bundler ImageMagick
 git clone http://github.com/projectatomic/atomic-site.git
 cd atomic-site
-bundle install
+./setup.sh # This script assumes your user account has sudo rights
 ```
 
 
 ## Running a local server
 
-1. Start a local Middleman server that uses local gems by typing
-   `bundle exec middleman server`
+1. Start a local Middleman server:
 
-   (Note: 'server' is optional, but it helps if you're going through
-   command-history in bash or zsh with control-r, versus other middleman
-   commands like `console`, `build`, or `deploy`)
+   `./run-server.sh`
+
+   This will update your locally installed gems and start a Middleman
+   development server.
 
 2. Next, browse to <http://0.0.0.0:4567>
 
@@ -51,7 +51,7 @@ The site can be easily customized by editing `data/site.yml`.
 To add a post to the community blog (or any blog managed by middleman) use:
 
 ```
-bundle middleman article TITLE
+bundle exec middleman article TITLE
 ```
 
 
@@ -60,8 +60,6 @@ bundle middleman article TITLE
 After getting it how you want, you can build the static site by running:
 
 `bundle exec middleman build`
-
-(If you have middleman in your path, you can just run `middleman build`.)
 
 
 ## Deploying
@@ -74,6 +72,7 @@ FIXME: Right now, please reference <data/site.yml>
 
 After copying your public key to the remote server and configuring your
 site in <data/site.yml>, deployment is one simple command:
+
 ```
 bundle exec middleman deploy
 ```
@@ -88,4 +87,4 @@ Simply add a new `gem 'some-gem-here'` line in the `Gemfile` and run
 ## More info
 
 For more information, please check the excellent
-[Middleman documentation](http://middlemanapp.com/basics/getting-started/)
+[Middleman documentation](https://middlemanapp.com/basics/install/).

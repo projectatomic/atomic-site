@@ -1,5 +1,10 @@
 ---
-pageable: true
+# frontpage has no special title
+title: ""
+pageable: false
+page_classes: front-page header-page
+per_page: 1
+blog_summary_length: 700
 ---
 .jumbotron
   %h1
@@ -17,83 +22,64 @@ pageable: true
   %p.buttons
     %a.btn.btn-default{:href => "/download" }
       %i.fa.fa-rocket
-      Get Started
+      Download and Get Started
       %i.fa.fa-long-arrow-right
 
   = partial "social"
 
-.row.featurette
-  .col-sm-7.col-md-7
-    %h2 Trusted Distributions, Atomic Updates
-    %p
+  .row
+    -# main point, full width on smaller screens
+    .col-xs-12.col-lg-4
+      %h2
+        %i.fa.fa-thumbs-up
+        =lorem.words(4).capitalize
+      %p
+        =lorem.sentences(3)
+      %p
+        #{link_to "Learn more about point 1", "#"}
 
-      An Atomic Host is a lean operating system designed to run Docker
-      containers, built from upstream CentOS, Fedora, or Red Hat Enterprise
-      Linux RPMs. It provides all the benefits of the upstream distribution, plus
-      the ability to perform atomic upgrades and rollbacks &mdash; giving the best
-      of both worlds: A modern update model from a Linux distribution you know
-      and trust.
+    -# 2 subpoints, taking two columns on smaller screens
+    .col-xs-12.col-sm-6.col-lg-4
+      %h2
+        %i.fa.fa-thumbs-up
+        =lorem.words(3).capitalize
+      %p
+        =lorem.sentences(3)
+      %p
+        #{link_to "Learn more about point 2", "#"}
 
-    %p
-
-      #{link_to "Learn how rpm-ostree brings atomicity to your favorite Linux distributions.", "/docs/os-updates"}
-
-  .col-sm-5.col-md-5
-    %img.img-responsive{:alt => "", "src" => "/images/speedboat.png"}/
-
-.row.featurette
-  .col-sm-5.col-md-5
-    %img.img-responsive{:alt => "", "src" => "/images/secure-containers.png"}/
-  .col-sm-7.col-md-7
-    %h2 Secure Production Containers
-    %p
-
-      Running containers in production systems demands strong safeguards &mdash; especially
-      in multi-tenant environments. Atomic Hosts use SELinux to protect and
-      confine Docker containers with strict mandatory access control inside Linux
-      Container namespaces.
-
-    %p
-
-      #{link_to "Find out how SELinux and Docker work together to keep your applications secure.", "/docs/docker-and-selinux"}
+    .col-xs-12.col-sm-6.col-lg-4
+      %h2
+        %i.fa.fa-thumbs-up
+        =lorem.words(4).capitalize
+      %p
+        =lorem.sentences(3)
+      %p
+        #{link_to "Learn more about point 3", "#"}
 
 .row.featurette
-  .col-sm-7.col-md-7
-    %h2 Portable and Scalable
-    %p
+  .col-sm-12.col-md-12
 
-      Docker containers can easily move across environments &mdash; from a developers laptop to
-      a production host, or even across operating systems. Atomic hosts include Kubernetes for 
-      orchestration and management of containerized application deployments, across a large cluster
-      of container hosts.
+    - blog_archives = blog.articles.length - current_page.data.per_page
+    - blogwidth = blog_archives > 0 ? 8 : 12
 
-    %p
+    %h2 ManageIQ Community News
 
-      #{link_to "Learn about how Kubernetes can manage your Dockerized applications.", "http://www.projectatomic.io/docs/gettingstarted/"}
+    %section{class: "col-md-#{blogwidth}"}
+      %section.blog-posts
+        = partial :blog_posts, locals: {summarize: current_page.data.blog_summary_length}
 
-  .col-sm-5.col-md-5
-    %img.img-responsive{:alt => "", "src" => "/images/portable.png"}/
+    - if blog_archives > 0
+      %section.col-md-4
+      %section.blog-archive
+        - blog_url = "#{blog.options[:prefix]}#{blog.options[:page_link]}/".sub(':num', '2')
 
-.row.featurette
-  .col-sm-5.col-md-5
-    %img.img-responsive{:alt => "", "src" => "/images/cockpit.png"}/
+        %h2 Recent archives
+        %ol
+          - blog.articles.drop(current_page.data.per_page).take(blog.options[:per_page] - current_page.data.per_page).each do |article|
+            %li= link_to article.title, article.url
 
-  .col-sm-7.col-md-7
-    %h2 Unified Management from Containers to the OS
-    %p
-
-      Containers are elastic and dynamic, and you need management that
-      is just as dynamic. Atomic includes a preview of Cockpit, a new
-      administration tool Linux serves via a Web browser.  Cockpit allows
-      admins to manage storage, services, and inspect journals
-      straight from the browser. Cockpit also allows you to directly 
-      inspect your containers and images. Atomic also makes it easy to 
-      integrate your existing monitoring infrastructure in privileged 
-      containers.
-
-    %p
-
-      #{link_to "Find out how Cockpit can ease container management.", "/docs/cockpit"}
+        = link_to "&raquo; View older posts", blog_url, class: "more-link"
 
 .row.featurette
   .col-sm-12.col-md-12

@@ -13,6 +13,8 @@ First, it's great to see more interest in solving the problem of running Linux c
 
 That said, I'd like to encourage VMware to consider whether they need to start from scratch with Project Photon. Creating an operating system from scratch is not trivial in the least, and there's a lot of work that could be shared between Photon and Atomic.
 
+READMORE
+
 ## A Common Base?
 
 Naturally, I took Photon for a spin when it was announced Monday. It’s an RPM-based system, which is something we have a lot of experience in delivering -- and we even make all of our tools for Fedora (e.g., Koji) public for folks who want to do it themselves. 

@@ -11,6 +11,8 @@ In case you missed it, Fedora 22 Beta was [released today](http://fedoramagazine
 
 Not listed on the product page, but worth checking out, is an ISO you can use to install Atomic on bare metal (or in another virtualization platform of your choice). You can find that image [here](https://dl.fedoraproject.org/pub/alt/stage/22_Beta_RC3/Cloud_Atomic/x86_64/iso/Fedora-Cloud_Atomic-x86_64-22_Beta.iso), along with its [CHECKSUM file](https://dl.fedoraproject.org/pub/alt/stage/22_Beta_RC3/Cloud_Atomic/x86_64/iso/Fedora-Cloud_Atomic-22_Beta-x86_64-CHECKSUM). 
 
+READMORE
+
 If you've installed Fedora before, that will look very familiar. You don't get to select packages, but the rest of the experience is fairly similar to doing a Server or Workstation installation. Give it a spin and let us know how it works for you! Note that you can use this image to install Atomic on a system and then [build your own](https://github.com/jasonbrooks/byo-atomic) Build Your Own Atomic to pull updates from. 
 
 ## CentOS Update Problem

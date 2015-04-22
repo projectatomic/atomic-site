@@ -1,14 +1,10 @@
 ---
-author: dwalsh
-layout: post 
 title: Addressing Problems with Ping in Containers on Atomic Hosts
-date: 2015-04-02 15:44 UTC
-tags:
-- Ping
-- RHEL Atomic
-- Docker
-categories:
-- Blog
+author: dwalsh
+date: 2015-04-02 15:44:00 UTC
+tags: Ping, RHEL Atomic, Docker
+comments: true
+published: true
 ---
 
 Having problems with `ping` in your containers? It might not be what you think! 
@@ -18,6 +14,8 @@ Having problems with `ping` in your containers? It might not be what you think!
 We received a bug report the other day with the following comment:
 
 On a RHEL 7 host (registered and subscribed), I can use Yum to install additional packages from `docker run ...` or in a Docker file.  If I install the `iputils` package (and any dependencies), the basic `ping` command does not work.  However, if I use the `busybox` image from the public Docker index, its ping command works perfectly fine (on same RHEL 7 host).
+
+READMORE
 
 # Steps to Reproduce:
 ```

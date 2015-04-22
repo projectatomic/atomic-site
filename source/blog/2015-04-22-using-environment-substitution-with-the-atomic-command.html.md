@@ -3,13 +3,15 @@ title: Using Environment Substitution with the Atomic Command
 author: dwalsh
 date: 2015-04-22 11:00:00 UTC
 tags: Atomic, CLI, Docker, Bash
-published: false
 comments: true
+published: true
 ---
 
 I recently published a [post on the Red Hat Developer Blog](http://developerblog.redhat.com/2015/04/21/introducing-the-atomic-command) about the Atomic command that we've been working on for the last few months. 
 
 The [Atomic](http://www.projectatomic.io/docs/usr-bin-atomic/) command (/usr/bin/atomic) is a high-level, coherent entrypoint for Atomic Host systems, and aims to fill in the gaps in Linux container implementations. 
+
+READMORE
 
 One of the first questions I received was about environment substitution. The user wanted to have standard Bash substitutions working with /usr/bin/atomic. Specifically, he wanted to allow substitutions like `$PWD/.foobar` and `--user=$(id -u)`.
 

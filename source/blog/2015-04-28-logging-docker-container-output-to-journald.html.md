@@ -1,10 +1,10 @@
 ---
 title: Logging Docker Container Output to journald
 author: dwalsh
-date: 2015-04-27 14:08:17 UTC
+date: 2015-04-28 17:26:27 UTC
 tags: Docker, logging, journald
 comments: true
-published: false
+published: true
 ---
 
 [Docker](https://www.docker.com/) has added a new feature to allow alternate logging drivers, and soon you'll be able to use `journald` as a supported driver.

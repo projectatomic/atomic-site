@@ -11,6 +11,8 @@ published: true
 
 The Container Camp lineup included a nice mix of project talks and real user stories that left me looking forward to attending the next time the crew comes to town, and thinking back on the key issues raised during the event.
 
+READMORE
+
 First, as anyone who’s ventured beyond running Docker containers on a personal laptop or in some other single host scenario has experienced, maintaining the sort of automagical delight that’s powered Docker’s popularity while expanding to a cluster of hosts can be quite a challenge. 
 
 As several of the Container Camp speakers pointed out, the networking, storage, and scheduling tasks that “just work” in a single host context require more planning and choices. Fortunately, the project and product communities clustered around Docker have come up with many different, compelling options for filling these gaps.

@@ -11,6 +11,8 @@ published: true
 
 With Docker 1.6 they support json-file, which is the old default, syslog, or no logging at all.
 
+READMORE
+
 If you ran your docker daemon with the `--log-driver=syslog` option, any output from a container would go directly to system syslog daemon, and usually end up in /var/log/messages.
 
 I added a patch to support journald as a logging driver, and it was [recently merged](https://github.com/docker/docker/pull/12557).  

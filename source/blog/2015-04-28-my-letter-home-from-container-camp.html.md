@@ -1,7 +1,7 @@
 ---
 title: My Letter Home from Container Camp
 author: jbrooks
-date: 2015-04-28 17:47:17 UTC
+date: 2015-04-28 21:04:04 UTC
 tags: docker, atomic, containercamp
 comments: true
 published: true

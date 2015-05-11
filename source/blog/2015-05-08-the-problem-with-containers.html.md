@@ -11,6 +11,8 @@ Our own [Daniel Riek](http://rhelblog.redhat.com/author/danielriek/) wrote a [gr
 
 This is where it gets interesting:
 
+READMORE
+
 > As it is today, appc only covers a very small part of what needs to be sorted out for a container-based, application-centric model. The impact of containerization in redefining the enterprise OS is still vastly underestimated by most; it is a departure from the traditional model of a single-instance, monolithic, UNIX user space in favor of a multi-instance, multi-version environment using containers and aggregate packaging. We are talking about nothing less than changing some of the core paradigms on which the software industry has been working for the last 20 – if not 40 – years.
 
 In other words: change is hard, and the entire computing world as we know it is turning upside down. This necessarily means re-learning how to do some things that we take for granted. Like, how to build applications that's not a manual construction process involving bailing wire and duct tape. Appc covers important territory around defining how containers are expected to work, but it leaves out a lot about how they're supposed to work in concert.

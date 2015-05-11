@@ -17,7 +17,7 @@ In other words: change is hard, and the entire computing world as we know it is 
 
 > Another important scope issue is primarily induced by the name “Application” - at this point, appc covers individual containers up to a pod. Unfortunately... there are very few applications that consist of only a single container / single pod. 
 
-Sure, one can stand up a containers, maybe a few at a time, customize some pods, install some software, throw Kubernetes in it, and voila! What do you have? You just hand-crafted a solution that Works For You (tm) but is impossible to manage, won't survive the next technology culling, doesn't integrate with your existing management tooling, and probably cannot be easily repeated. 
+Sure, one can stand up a container, maybe a few at a time, customize some pods, install some software, throw Kubernetes in it, and voila! What do you have? You just hand-crafted a solution that Works For You (tm) but is impossible to manage, won't survive the next technology culling, doesn't integrate with your existing management tooling, and probably cannot be easily repeated. 
 
 This is not to downplay the work that is taking place right now on appc. After all, we have to start somewhere, and walking must be perfected before running or flying. However, Daniel brings up one more point that should give us pause when considering the current container landscape:
 

@@ -1,4 +1,4 @@
-FROM fedora:latest
+FROM fedora:21
 MAINTAINER mscherer@redhat.com
 WORKDIR /tmp
 RUN yum upgrade -y 

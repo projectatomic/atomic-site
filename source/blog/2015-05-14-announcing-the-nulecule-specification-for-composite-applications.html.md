@@ -1,13 +1,17 @@
 ---
 title: Announcing the Nulecule Specification for Composite Applications
 author: johnmark
-date: 2015-05-14 16:44:18 UTC
+date: 2015-05-14 20:47:56 UTC
 tags: nulecule, atomic, composite apps, docker, rkt
 comments: true
 published: true
 ---
 
-Those of us in Project Atomic have been creating a platform-neutral specification, [called Nulecule](http://github.com/projectatomic/nulecule/) ([noo-le-kyul](http://simpsons.wikia.com/wiki/Made-up_words)), to help developers and admins build and launch composite, multi-container applications. You’ll find an excellent description of the problem and our solution at the [RHEL Blog](http://rhelblog.redhat.com/2015/05/14/atomicapp-nulecule/). We’ve also created [Atomic App](http://github.com/projectatomic/atomicapp/) as a way to run these applications using the Nulecule spec. If you just want to dive in and do stuff, just follow those links and go crazy. Read on for more.
+Those of us in Project Atomic have been creating a platform-neutral specification, [called Nulecule](http://github.com/projectatomic/nulecule/) ([noo-le-kyul](http://simpsons.wikia.com/wiki/Made-up_words)), to help developers and admins build and launch composite, multi-container applications. You’ll find an excellent description of the problem and our solution at the [RHEL Blog](http://rhelblog.redhat.com/2015/05/14/atomicapp-nulecule/). 
+
+We’ve also created [Atomic App](http://github.com/projectatomic/atomicapp/) as a way to run these applications using the Nulecule spec. If you just want to dive in and do stuff, just follow those links and go crazy. Read on for more.
+
+READMORE
 
 ![](/images/nulecule-diagram.png)
 

@@ -15,19 +15,18 @@ title: Welcome to the Atomic community
 
   The Atomic project relies on several open source
   projects as the building blocks used for the project. For the hosts
-  it relies heavily on
-  %a( href="http://kernel.org/") linux kernel
+  it relies heavily on <a href="http://kernel.org/">linux kernel</a>
   features, the
-  %a( href="http://www.freedesktop.org/wiki/Software/systemd/" ) systemd
+  <a href="http://www.freedesktop.org/wiki/Software/systemd/">systemd</a>
   system and service manager,
-  %a( href="https://wiki.gnome.org/Projects/OSTree" ) OSTree
+  <a href="https://wiki.gnome.org/Projects/OSTree">OSTree</a>
   and
-  %a( href="http://rpm-ostree.cloud.fedoraproject.org/" ) rpm-ostree
+  <a href="http://rpm-ostree.cloud.fedoraproject.org/">rpm-ostree</a>
   for updates,
-  %a( href="https://www.docker.io/" ) Docker
-  and
-  %a( href="https://index.docker.io/u/ccoleman/geard/" ) geard
-  for application deployment, and of course the various targeted Linux
+  <a href="https://www.docker.io/">Docker</a>
+  for application deployment, 
+  <a href="https://github.com/GoogleCloudPlatform/kubernetes">kubernetes</a>
+  for orchestration, and of course the various targeted Linux
   distributions.
   The Atomic community will work toward development of the Atomic project
   in an inclusive way by contributing to the related upstream projects,
@@ -43,21 +42,20 @@ title: Welcome to the Atomic community
 
     %p
       The project hosts a few mailing lists, one for
-      %a( href="http://lists.projectatomic.io/mailman/listinfo/atomic" ) general discussions
+      <a href="http://lists.projectatomic.io/mailman/listinfo/atomic">general discussions</a>
       on the project and user feedback, one for
-      %a( href="http://lists.projectatomic.io/mailman/listinfo/atomic-devel" )technical discussions
+      <a href="http://lists.projectatomic.io/mailman/listinfo/atomic-devel">technical discussions</a>
       as well as patch exchanges and reviews, and a low traffic list for
-      %a( href="http://lists.projectatomic.io/mailman/listinfo/atomic-announce" )announcements
-      \.
+      <a href="http://lists.projectatomic.io/mailman/listinfo/atomic-announce">announcements</a>.
 
     %p
       A dedicated
-      %a( href="http://ask.projectatomic.io" ) forum
+      <a href="http://ask.projectatomic.io">forum</a>
       is also available for asking questions and sharing answers.
 
     %p
       We also hang out on the Freenode IRC servers in the
-      %a( href="irc://irc.freenode.net/#atomic" ) #atomic
+      <a href="irc://irc.freenode.net/#atomic">#atomic</a>
       channel.
 
   .col-md-4.col-sm-12
@@ -67,16 +65,14 @@ title: Welcome to the Atomic community
 
       To report issues and get community help it is a good idea to first
       consult the
-      %a( href="http://ask.projectatomic.io/en/questions/" ) related forum
+      <a href="http://ask.projectatomic.io/en/questions/">related forum</a>.
 
     %p
 
       If you have a well identified issue, report
       it in the Bugzilla hosted by Red Hat. Remember: first
-      %a( href="https://bugzilla.redhat.com/buglist.cgi?product=Atomic" ) check existing issues
-      , then
-      %a( href="https://bugzilla.redhat.com/enter_bug.cgi?product=Atomic" ) enter a new bug
-      \. We appreciate your bugs!
+      <a href="https://bugzilla.redhat.com/buglist.cgi?product=Atomic">check existing issues</a>, then
+      <a href="https://bugzilla.redhat.com/enter_bug.cgi?product=Atomic">enter a new bug</a>. We appreciate your bugs!
 
   .col-md-4.col-sm-12
     %h2 Check the Code Out
@@ -85,11 +81,18 @@ title: Welcome to the Atomic community
 
       The code source and build recipe used to generate Atomic hosts
       are hosted on the
-      %a( href="https://github.com/projectatomic/" ) projectatomic
+      <a href="https://github.com/projectatomic/">projectatomic</a>
       repo on GitHub.
-      The source to build this web site is also available
-      %a( href="https://github.com/projectatomic/atomic-site" ) there
-      \!
+
+    %p
+
+      The source to build this web site is available
+      #{link_to "there", "https://github.com/projectatomic/atomic-site"},
+      as well as code for 
+      #{link_to "rpm-ostree", "https://github.com/projectatomic/rpm-ostree"},      
+      #{link_to "anaconda", "https://github.com/projectatomic/anaconda"},
+      and 
+      #{link_to "Docker image examples", "https://github.com/projectatomic/docker-image-examples"}.
 
 %h2
   %a( name="quickstart")
@@ -101,13 +104,11 @@ title: Welcome to the Atomic community
   technical options on the list, answer newcomers' questions in the forum,
   take part in the development of the upstream projects we use,
   help us integrate into the existing distrbutions
-  %a( href="http://rpm-ostree.cloud.fedoraproject.org/" ) Fedora
+  <a href="http://rpm-ostree.cloud.fedoraproject.org/">Fedora</a>
   and
-  %a( href="http://wiki.centos.org/Cloud" ) CentOS
-  \. You can also help us to port Atomic so that it can use different
+  <a href="http://wiki.centos.org/Cloud">CentOS</a>. You can also help us to port Atomic so that it can use different
   formats or be usable on other distributions. Can't code? Help us by
-  %a( href="/docs/#contribute" ) contributing documentation
-  \. Can't write docs? You can still help us by spreading
+  <a href="/docs/#contribute">contributing documentation</a>. Can't write docs? You can still help us by spreading
   the word to friends, posting on social media, or by telling User
   Groups about Atomic.
 

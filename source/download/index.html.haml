@@ -7,29 +7,28 @@ title: Get Started with Project Atomic
 %img.pull-right( src="/images/platforms.png")
 
 %p.lead 
-  Atomic can run on the same platforms and clouds as the distributions it is based on.
+  Atomic Host images are now available from Fedora and the CentOS Project. 
 
 %p.lead
-  Download an Atomic Fedora 20 VM now.
+  Fedora 21 Atomic Cloud is available as part of the <a href="https://getfedora.org/cloud/download/">Fedora 21 Cloud</a> release. The <a href="http://wiki.centos.org/SpecialInterestGroup/Atomic">CentOS Atomic SIG</a> has images being produced regularly, which are available <a href="http://buildlogs.centos.org/rolling/7/isos/x86_64/">as compressed or uncompressed qcow2 images</a>.
 
 %p 
-  The "QEMU" image works on Linux KVM virtualization, for example 
+  The "QEMU" image works on Linux KVM virtualization, for example is 
   <a href="http://openstack.redhat.com/">RDO</a> (OpenStack), 
   <a href="http://ovirt.org">oVirt</a>, 
   <a href="http://virt-manager.org/">virt-manager</a> and
-  the "Boxes" virtual machine application available on 
-  <a href="http://fedoraproject.org/">Fedora 20</a>.
+  the "Boxes" virtual machine application available in 
+  <a href="http://fedoraproject.org/">Fedora</a> and <a href="http://centos.org/">CentOS 7</a>.
 
 .clearfix
 
 %p.buttons.hidden-xs
-  %a.btn.btn-primary.btn-lg{:href => "http://rpm-ostree.cloud.fedoraproject.org/project-atomic/images/f20/vbox"} VirtualBox (Win, Mac)
-  %a.btn.btn-primary.btn-lg{:href => "http://rpm-ostree.cloud.fedoraproject.org/project-atomic/images/f20/qemu"} QEMU (Linux)
-%p.buttons.visible-xs
-  %a.btn.btn-primary.btn-block{:href => "http://rpm-ostree.cloud.fedoraproject.org/project-atomic/images/f20/vbox"} VirtualBox (Win, Mac)
-  %a.btn.btn-primary.btn-block{:href => "http://rpm-ostree.cloud.fedoraproject.org/project-atomic/images/f20/qemu"} QEMU (Linux)
+  %a.btn.btn-primary.btn-lg{:href => "https://getfedora.org/cloud/download/"} Fedora 21
 
-%p Stay tuned for more distributions and optimized images for cloud environments.
+%p.buttons.hidden-xs
+  %a.btn.btn-primary.btn-lg{:href => "http://buildlogs.centos.org/rolling/7/isos/x86_64/"} CentOS Atomic Host (testing)
+
+%p An older bare metal installer based on Fedora 21 is <a href="http://rpm-ostree.cloud.fedoraproject.org/project-atomic/install/rawhide/20140708.0/boot.iso">available</a>.
 
 .clearfix
 
@@ -45,32 +44,20 @@ title: Get Started with Project Atomic
 
     %h3 Extremely Quick Start Guide For the Impatient
 
-    %p Atomic boots to a text console, asking you to log in:
-    %pre
-    
-      Localhost login: root <span class="text-muted">[press enter]</span>
-
     %p
-      There is no password by default.
+      From here in, we'll refer to the Atomic VM as the "host," even though it's actually a VM. Atomic boots to a text console, asking you to log in.
+      You need to create a metadata ISO for use with <a href="http://cloudinit.readthedocs.org/en/latest/">cloud-init</a>.
 
-    %p
-      Even though remote login via ssh is disabled with a blank password,
-      it makes sense to set one now:
+      For example instructions on creating one, see: <a href="https://www.technovelty.org//linux/running-cloud-images-locally.html">this blog entry</a>.
 
-    %pre
-      \# passwd root
-      Changing password for user root.
-      New password: <span class="text-muted">[enter a new password ]</span>
-      Retype new password: <span class="text-muted">[ enter the password again ]</span>
-     
   .col-md-6.col-sm-12
     %h2 Atomic Upgrades
 
     %p
       From a running host, start an upgrade with:
     %pre
-      $ rpm-ostree upgrade
-      $ systemctl reboot
+      \# rpm-ostree upgrade
+      \# systemctl reboot
     %p
       On the boot screen you'll see your new version. Hold down the
       SHIFT key there to rollback to your previous tree.
@@ -85,7 +72,7 @@ title: Get Started with Project Atomic
       Host applications on Atomic with #{link_to "Docker", "https://www.docker.io"}
     %pre
       :preserve
-        $ docker run fedora /bin/echo "hello world"
+        # docker run fedora /bin/echo "hello world"
     %p
       Get familiar with the #{link_to "Docker tutorial", "https://www.docker.io/gettingstarted/#"}, then
       learn how you can build reusable images and run Docker in production on Atomic hosts.
@@ -102,9 +89,9 @@ title: Get Started with Project Atomic
 
     %pre
       :preserve
-        # setenforce 0 
         # systemctl enable cockpit.socket
-        # visit http://&lt;ipaddress&gt;:21064 in a browser
+        # systemctl start cockpit.socket
+        # visit http://&lt;ipaddress&gt;:9090 in a browser
     %p
       Cockpit is perfect for new sysadmins, allowing them to easily perform simple tasks such as storage 
       administration, inspecting journals and starting and stopping services.
@@ -112,26 +99,24 @@ title: Get Started with Project Atomic
     %p
       The snapshot of Cockpit included in Atomic is a preview - do
       not use in production environments.  Cockpit is under rapid
-      development, with work on security hardening and reliability
-      ongoing.
+      development.
 
     %p 
       %a( href="http://cockpit-project.org" ) &raquo; Visit cockpit-project.org...
 
   .col-md-6.col-sm-12
-    %h2 Cluster Your Containers
+    %h2 Learn about Kubernetes
 
     %p
-      Setup and link containers across hosts
-    %pre
-      :preserve
-        $ gear install pmorie/sti-html-app html -p 8080:0 --start
-    %p
-      Install containers to systemd and link them across a cluster with geard, the new core
-      of OpenShift.
+      If you're looking to work with orchestration, you'll want 
+      to get started with Kubernetes.
 
-    %p 
-      %a( href="https://openshift.github.io/geard" ) &raquo; Learn about geard...
+    %p
+      The "Atomic fleet concepts" portion of our Getting Started 
+      guide will walk you through configuring a Kubernetes cluster.
+ 
+    %p  
+      %a( href="/docs/gettingstarted" ) &raquo; Get started with Kubernetes...
 
 -#.row{:style => 'clear:both'}
   .col-md-4.col-sm-12

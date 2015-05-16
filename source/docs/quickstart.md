@@ -6,11 +6,20 @@ We recommend reading the Getting Started Guide and Concepts Guide if you're enti
 
 * **A virtualization client.** [Virtual Machine Manager](http://virt-manager.org/) (virt-manager) is a very good KVM-based client for Linux systems. Windows and OS X users can give [VirtualBox](https://www.virtualbox.org/) a try. Be sure your virtualization client is properly configured to access the Internet.
 
-* **A virtual machine image.** Images for Atomic based on Fedora 20 can be found at the [rpm-ostree project](http://rpm-ostree.cloud.fedoraproject.org/project-atomic/images/) for [VirtualBox](http://rpm-ostree.cloud.fedoraproject.org/project-atomic/images/f20/vbox) and [KVM/QEMU](http://rpm-ostree.cloud.fedoraproject.org/project-atomic/images/f20/qemu) images for virt-manager.
+* **A virtual machine image.** Images for Atomic hosts are produced by both the Fedora Project and the CentOS Project.  Downloads for these images can be found via the [Downloads page] (http://www.projectatomic.io/download/) in QCOW2, Vagrant Box, and RAW formats.
+
+* **Note for VirtualBox users** At the moment, we are not producing native VirtualBox images, but you can generate your own VirtualBox image from the qcow2 images with `qemu-img` or `VBoxManage`:
+
+````
+qemu-img convert -f qcow2 [filename].qcow2 -O vdi [filename].vdi
+
+VBoxManage convertfromraw [filename] [outputfile]
+````
+
 
 ## Step by Step on virt-manager
 
-Here's how to get started with Atomic on your machine using virt-manager on Linux. The instructions below are for running virt-manager on Fedora 20. The steps may vary slightly when running older distributions of virt-manager.
+Here's how to get started with Atomic on your machine using virt-manager on Linux. The instructions below are for running virt-manager on Fedora 21. The steps may vary slightly when running older distributions of virt-manager.
 
 1. Download the KVM/QEMU image.
 
@@ -34,15 +43,15 @@ Here's how to get started with Atomic on your machine using virt-manager on Linu
 
 11. Assign a new name to the VM and click Finish. The Atomic instance will boot.
 
-Note: When running virt-manager on Red Hat Enterprise Linux 6 or CentOS 6, the VM will not boot until the disk storage format is changed from raw to qcow2.
+**Note**: When running virt-manager on Red Hat Enterprise Linux 6 or CentOS 6, the VM **will not boot** until the disk storage format is changed from raw to qcow2.
 
 ## Step by Step on VirtualBox
 
-Here's how to get started with Atomic on your machine using VirtualBox on Windows, OS X or Linux.
+Here's how to get started with Atomic on your machine using VirtualBox on Windows, OS X, or Linux.
 
-1. Download the VirtualBox image.
+1. Download the qcow2 image of your choice (Fedora or CentOS).
 
-2. Run `bzip2 -i [filename]` to uncompress the downloaded image.
+2. Convert the qcow2 image to vdi, using the instructions above.
 
 3. Start VirtualBox.
 
@@ -54,23 +63,50 @@ Here's how to get started with Atomic on your machine using VirtualBox on Window
 
 7. Select the Use an existing virtual hard drive option, browse to the file location, and click Create. The virtual machine will be created and the virtual machine will be ready.
 
-## Configure Your Atomic Machine
+## Logging In To Your Atomic Machine
 
-After the Atomic virtual machine is created, it will be ready to use, though there will be some steps to take to prepare the VM for more efficient use.
+You will need to create a metadata ISO to supply data through [**cloud-init**](http://cloudinit.readthedocs.org/en/latest/) when your host boots. 
 
-1. Start the VM. On boot, the login prompt will appear.
+1. Create a `meta-data` file with your desired hostname and any instance-id.
 
-2. Login as root, with no password.
+        $ cat meta-data
+        instance-id: id-local01
+        local-hostname: samplehost.example.org
 
-3. Run `passwd` and set a password for your account.
+2. Create a `user-data` file. The #cloud-config directive at the beginning of the file is mandatory.
 
-4. Run `rpm-ostree upgrade` to upgrade rpm-ostree to the latest version.
+        $ cat user-data
+        #cloud-config
+        password: mypassword 
+        ssh_pwauth: True
+        chpasswd: { expire: False }
+            
+        ssh_authorized_keys: 
+          - ssh-rsa ... foo@bar.baz (insert ~/.ssh/id_rsa.pub here)
 
-5. Reboot your system to apply the upgrade.
+3. After creating the `user-data` and `meta-data` files, generate an ISO. Make sure the user running libvirt has the proper permissions to read the generated image.
+
+        $ genisoimage -output init.iso -volid cidata -joliet -rock user-data meta-data
+
+#### virt-manager
+
+1. In the virt-manager GUI, click to open your Atomic machine. Then on the top bar click *View > Details*
+2. Click on *Add Hardware* on the bottom left corner.
+3. Choose *Storage*, and *Select managed or other existing storage*. Browse and select the `init.iso` image you created. Change the *Device type* to CDROM device.  Click on *Finish* to create and attach this storage.
+
+#### VirtualBox
+
+1. In the VirtualBox GUI, click *Settings* for you Atomic virtual machine.
+2. On the *Storage* tab, for the IDE Controller, *Add CD/DVD Device*.
+3. Select *Choose Disk*, and select the `init.iso` you created.
+
+Boot the virtual machine with the disk attached and cloud-init will populate the default user information with the password or SSH keys you provided in the `user-data` file. **For a Fedora image, the default user is `fedora`, for CentOS the default user is `centos`.**
+
+Once you've booted and logged in to your Atomic host, you can update the system software with `$ sudo rpm-ostree upgrade` to pull in any updates.
 
 ## Readying More Space For Containers
 
-Docker is ready to go at this point, but there's another fairly important bit of config to do, if you're going to be testing out more than a couple containers--you need to add a bigger drive for `/var/lib/docker`.
+Docker is ready to go at this point, but there's another fairly important bit of config to do, if you're going to be testing out more than a couple containers--you need to add a bigger drive for the docker LVM thin pool.
 
 ### Add A New Drive in virt-manager
 
@@ -94,30 +130,25 @@ Docker is ready to go at this point, but there's another fairly important bit of
 
 ### Configuring the New Drive
 
-1. Run `fdisk -l` to find name of your new disk (e.g., /dev/vdb)
+1. Run `$ sudo fdisk -l` to find name of your new disk (e.g., /dev/vdb)
 
-2. Run `fdisk /dev/vdb`. 
+2. Open `/etc/sysconfig/docker-storage-setup` in an editor
 
-3. In fdisk, type `n`, `p`, [Enter] three times, and `w` to make new partition on a new
-disk.
+3. Add the new disk by creating a `DEVS` entry.  If you added more than one, you can add more to the list separated by a space.
+    
+        DEVS="/dev/vdb"
 
-4. Run `mkfs.xfs /dev/vdb1`. This doesn't have to be xfs, it can be any filesystem type.
+4. If you'd like to use some of the space on the new disk to grow the root volume, you can create a `ROOT_SIZE` with the new total size.
 
-5. If you already have data in `/var/lib/docker` you want to keep, copy this data off to some backup directory.
+        ROOT_SIZE=4G
 
-6. Run `systemctl stop docker`.
+5. Run `$ sudo docker-storage-setup` to run the helper script and configure the thin pool.  This tool calculates the amount of available space, what's needed for the metadata pool, and executes the LVM commands.
 
-7. Run `rm -rf /var/lib/docker/*`
+6. Run `$ sudo docker info` to make sure that the Docker daemon sees the added space.
 
-8. Run `blkid /dev/vdb1`. Take note of the blkid.
+7. If you added space to the root volume, run `$ sudo xfs_growfs /` to make sure the filesystem gets expanded to match the volume size.
 
-9. Open /etc/fstab and add this line:
-
-`UUID=<UUID-from-blkid> /var/lib/docker <file system type> defaults 1 1`
-
-10. Run `mount -a`.
-
-11. Run `systemctl start docker`. Docker is ready to go.
+8. If you added space to the root volume, run `df -Th` to make sure that the root volume has been grown to the new total size.
 
 ## Finding Help
 

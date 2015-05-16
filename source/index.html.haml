@@ -9,11 +9,10 @@ pageable: true
   %p.lead
     Project Atomic integrates the tools and patterns of container-based application 
     and service deployment with trusted operating system platforms to deliver an 
-    end-to-end hosting architecture that's modern, reliable and secure.
+    end-to-end hosting architecture that's modern, reliable, and secure.
 
   %p
-    Cloud images are available for download, supporting VirtualBox, QEMU/KVM and OpenStack. Support for
-    bare metal installation is coming.
+    Fedora, CentOS, and Red Hat Enterprise Linux-based Atomic Hosts are now available for download.
    
   %p.buttons
     %a.btn.btn-default{:href => "/download" }
@@ -60,18 +59,17 @@ pageable: true
 
 .row.featurette
   .col-sm-7.col-md-7
-    %h2 Integrated and Portable
+    %h2 Portable and Scalable
     %p
 
       Docker containers can easily move across environments &mdash; from a developers laptop to
-      a production host, or even across operating systems.  When combined with systemd,
-      administrators can be certain those containers run on startup, restart when they crash, and are
-      audited, logged, and securely managed. Atomic taps geard to install and link
-      Docker containers into systemd and coordinate these containers across hosts.
+      a production host, or even across operating systems. Atomic hosts include Kubernetes for 
+      orchestration and management of containerized application deployments, across a large cluster
+      of container hosts.
 
     %p
 
-      #{link_to "Learn about how geard brings systemd and Docker together.", "/docs/geard"}
+      #{link_to "Learn about how Kubernetes can manage your Dockerized applications.", "http://www.projectatomic.io/docs/gettingstarted/"}
 
   .col-sm-5.col-md-5
     %img.img-responsive{:alt => "", "src" => "/images/portable.png"}/
@@ -86,11 +84,12 @@ pageable: true
 
       Containers are elastic and dynamic, and you need management that
       is just as dynamic. Atomic includes a preview of Cockpit, a new
-      administration tool Linux serves via a Web browser.  It allows
+      administration tool Linux serves via a Web browser.  Cockpit allows
       admins to manage storage, services, and inspect journals
-      straight from the browser, and directly inspect your containers
-      and images. Atomic also makes it easy to integrate your existing
-      monitoring infrastructure in privileged containers.
+      straight from the browser. Cockpit also allows you to directly 
+      inspect your containers and images. Atomic also makes it easy to 
+      integrate your existing monitoring infrastructure in privileged 
+      containers.
 
     %p
 

@@ -4,12 +4,12 @@ Project Atomic facilitates application-centric IT architecture by providing an e
 
 The core of Project Atomic is the Project Atomic Host. This is a lightweight operating system that has been assembled out of upstream RPM content. It is designed to run applications in Docker containers. Hosts based on Red Hat Enterprise Linux and Fedora are available now. Hosts based on CentOS will be available soon.
 
-Project Atomic hosts inherit the full features and advantages of their base distributions. This includes systemd, which provides container-dependency managment and fault recovery. It also includes journald, which provides secure aggregation and attribution of container logs. Project Atomic builds on these features, using the following components, which have been tailored for containerized-application management:
+Project Atomic hosts inherit the full features and advantages of their base distributions. This includes systemd, which provides container-dependency management and fault recovery. It also includes journald, which provides secure aggregation and attribution of container logs. Project Atomic builds on these features, using the following components, which have been tailored for containerized-application management:
 
-* [Docker](https://www.docker.io/), an open-source project for creating lightweight, portable, self-sufficient application containers.
-* [rpm-OSTree](http://rpm-ostree.cloud.fedoraproject.org/#/), an open-source tool for managing bootable, immutable, versioned filesystem trees from upstream RPM content.
-* [systemd](http://www.freedesktop.org/wiki/Software/systemd/), an open-source system and service manager for Linux.
-* [geard](https://github.com/smarterclayton/geard), an open-source project for installing and linking Docker containers into systemd, and for coordinating those Docker containers across hosts.  geard is the core of the next-generation of OpenShift.
+* [Docker](https://www.docker.io/), an open source project for creating lightweight, portable, self-sufficient application containers.
+* [Kubernetes](http://kubernetes.io/), an open source project that allows you to manage a cluster of Linux containers as a single system.
+* [rpm-ostree](http://www.projectatomic.io/docs/os-updates/), an open source tool for managing bootable, immutable, versioned filesystem trees from upstream RPM content.
+* [systemd](http://www.freedesktop.org/wiki/Software/systemd/), an open source system and service manager for Linux.
 
 ## How Can Project Atomic Help Me?
 
@@ -18,4 +18,4 @@ Project Atomic hosts inherit the full features and advantages of their base dist
 * Developer/DevOps-led shops seek control over the runtime underneath their applications, without necessarily owning the entire stack.
 * VMs provide a means for separation among applications, but this model adds significant resource and management overhead.
 
-Slimming down the host with the Atomic distribution limits the surface area and patch frequency for administrators.  Docker containers offer developers and admins a clear path to delivering consistent and fully tested stacks from development to production.  Containers secured with Linux namespaces, cGroups, and SELinux give isolation close to that of a VM, with much greater flexibility and efficiency.  And simple, easy-to-use tools like geard and Cockpit provide cross-cluster capabilities to deploy and manage applications.
+Slimming down the host with the Atomic distribution limits the surface area and patch frequency for administrators.  Docker containers offer developers and admins a clear path to delivering consistent and fully tested stacks from development to production.  Containers secured with Linux namespaces, cGroups, and SELinux give isolation close to that of a VM, with much greater flexibility and efficiency.  And simple, easy-to-use tools like Cockpit provide cross-cluster capabilities to deploy and manage applications.

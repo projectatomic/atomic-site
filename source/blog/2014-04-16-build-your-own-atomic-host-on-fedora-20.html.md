@@ -144,7 +144,7 @@ systemctl reboot
 
 ## Tree-Building Time
 
-Upon reboot, the rpm-ostree-autobuilder service should start, and begin looking, in the `/srv/rpm-ostree` directory, for a `products.json` file to defines the trees and images to build.
+Upon reboot, the rpm-ostree-autobuilder service should start, and begin looking, in the `/srv/rpm-ostree` directory, for a `products.json` file to define the trees and images to build.
 
 A products.json that corresponds to the initial Project Atomic images is available [in this gist](https://gist.github.com/jasonbrooks/10749644). A products.json that produces multiple images (based on rawhide) is available in Colin Walters' [Fedora Atomic Initiative repository](https://github.com/cgwalters/fedora-atomic/blob/master/products.json).
 
@@ -156,7 +156,13 @@ Some notes on products.json:
 
 * The `"products"` section includes the `"packages"` specific to a particular image, and a `"units"` section listing systemd services to start by default.
 
-The rpm-ostree-autobuilder will periodically check for products.json changes, and build accordingly, but you can spur a new build by running the command `rm -rf cache/raw/images images/auto cache/packageset*.txt && echo treecompose | rpm-ostree-autobuilder console` from your /srv/rpm-ostree directory. (that first, `rm` command is due to a caching bug and ought to be unecessary before too long)
+The rpm-ostree-autobuilder will periodically check for products.json changes, and build accordingly, but you can spur a new build by running the command 
+
+````
+rm -rf cache/raw/images images/auto cache/packageset*.txt && echo treecompose | rpm-ostree-autobuilder console
+````
+
+from your /srv/rpm-ostree directory. (that first, `rm` command is due to a caching bug and ought to be unecessary before too long)
 
 The ostree assembly process takes a while to complete. You can monitor the treecompose with:
 

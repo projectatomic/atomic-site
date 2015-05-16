@@ -29,24 +29,26 @@ Consider the following example: an administrator would like to deploy a new simp
 
 The administrator decides that the image needs three components:
 
-* RHEL base image
+* Fedora base image
 * Apache Web server
-* The addition of their own web site content.
+* Web site content
 
 The administrator can build the image in one of the two following ways:
 
 * Create a Dockerfile that builds the image with the website included
-* Interactively, by running the RHEL base image using a BASH shell to yum install httpd and its dependencies, and then save the image
+* Interactively, by running the Fedora base image using a BASH shell to yum install httpd and its dependencies, and then save the image
 
-The first approach involves building a Dockerfile that uses the base RHEL image and installs the needed Apache packages, and then ADDs the necessary files. This ensures that the entire website is complete in one build. We will examine this approach later. The administrator decides that the RHEL + Apache web server layered image is reusable for other future web sites. This means that an Apache Web server image based on RHEL is what is first required. 
+The first approach involves building a Dockerfile that uses the base Fedora image and installs the needed Apache packages, and then ADDs the necessary files. This ensures that the entire website is complete in one build. We will examine this approach later. The administrator decides that the Fedora + Apache web server layered image is reusable for other future web sites. This means that an Apache Web server image based on Fedora is what is first required. 
 
-### Interactively from a Running RHEL Container
+### Interactively from a Running Fedora Container
 
-Assuming there is an image called `rhel` (the latest RHEL version) in a Docker registry, run the following Docker command on a Docker host machine:
+There is a semi-official image called `fedora` (the latest Fedora version) in the public Docker registry.  For more information on this image and the options available, check the repository page.
 
-    # docker run -i -t rhel bash
+To run a container with an interactive shell, run the following Docker command on the Project Atmoic host:
 
-This returns a shell prompt. Inside the container shell, run the following `yum` commands to get the latest updates for RHEL, and to install Apache httpd:
+    # docker run -i -t fedora bash
+
+This has created a running Fedora instance in a Docker container and attached a bash shell to the tty. Inside the container shell, run the following `yum` commands to get the latest updates for Fedora, and to install Apache httpd:
 
     # yum update -y
     # yum install -y httpd
@@ -55,22 +57,22 @@ This returns a shell prompt. Inside the container shell, run the following `yum`
 From the host machine, save the new image by finding the container ID and then committing it to a new image name:
 
     # docker ps -a
-    # docker commit c16378f943fe rhel-httpd
+    # docker commit c16378f943fe fedora-httpd
 
 Now push the image to the registry using the image ID. In this example the registry is on registry-host and listening on port 5000. Default Docker commands will push to the default `docker.io` registry. Instead, push to the local registry, which is on a host called *registry-host*. To do this, tag the image with the host name or IP address, and the port of the registry: 
 
-    # docker tag rhel-httpd registry-host:5000/myadmin/rhel-httpd
-    # docker push registry-host:5000/myadmin/rhel-httpd
+    # docker tag fedora-httpd registry-host:5000/myadmin/fedora-httpd
+    # docker push registry-host:5000/myadmin/fedora-httpd
 
 Check that this worked by running:
 
     # docker images
 
-You should see both `rhel-httpd` and `registry-host:5000/myadmin/rhel-httpd` listed.
+You should see both `fedora-httpd` and `registry-host:5000/myadmin/fedora-httpd` listed.
 
 The administrator now has a new image that contains a Apache Web server. The adminstrator can build a Dockerfile based on that image and add the appropriate files. Docker automatically untars or unzips the files in a source tar or zip file into the target directory. Here is the Dockerfile:
 
-    FROM registryhost:5000/whenry/rhel-httpd
+    FROM registryhost:5000/whenry/fedora-httpd
     MAINTAINER A D Ministator email: admin@corp.example.com
 
     # Add the tar file of the web site 
@@ -92,7 +94,7 @@ Build and run from the directory where the Dockerfile and content is located.  T
 
 This approach is a great way to learn about Docker and building images. It is also good for troubleshooting and prototyping.  It is how `docker.io` teaches you about Docker in their Getting Started web page.
 
-Recommendation: It would be good to expose port 80 and define the entry point in the `rhel-httpd` image and then merely add the files in the final Dockefile. That way the application only has to worry about the files needed for the new website.  
+Recommendation: It would be good to expose port 80 and define the entry point in the `fedora-httpd` image and then merely add the files in the final Dockefile. That way the application only has to worry about the files needed for the new website.  
 
 ### Using a Single Dockerfile 
 
@@ -104,9 +106,9 @@ A good practice is to make a sub-directory with a related name and create a Dock
     # cd httpd
     # cp mysite.tar .
 
-Create the Dockerfile. This Dockerfile assumes a base image called rhel:
+Create the Dockerfile. This Dockerfile assumes a base image called fedora:
 
-    FROM rhel
+    FROM fedora
     MAINTAINER A D Ministator email: admin@mycorp.com
 
     # Update the image with the latest packages (recommended)

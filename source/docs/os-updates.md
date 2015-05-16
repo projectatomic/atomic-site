@@ -15,7 +15,7 @@ Simply invoke `rpm-ostree upgrade`.  It checks the repository URL
 specified in `/ostree/repo/config` to check for an updated version.
 
 If a new version is found, it will first be downloaded, then deployed.
-At that point, a 3-way merge of configuration is performed, using the
+At that point, a three-way merge of configuration is performed, using the
 new `/etc` as a base, and applying your changes on top.
 
 After an update is prepared, you should `systemctl reboot` to cause

@@ -110,6 +110,8 @@ GEM
       em-websocket (~> 0.5.1)
       middleman-core (>= 3.3)
       rack-livereload (~> 0.3.15)
+    middleman-piwik (0.2.0)
+      middleman-core (~> 3.2)
     middleman-sprockets (3.3.2)
       middleman-core (>= 3.2)
       sprockets (~> 2.2)
@@ -204,6 +206,7 @@ DEPENDENCIES
   middleman-deploy
   middleman-favicon-maker
   middleman-livereload
+  middleman-piwik
   middleman-syntax
   nokogiri
   oj

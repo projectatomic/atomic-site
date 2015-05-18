@@ -186,6 +186,12 @@ activate :blog_helpers
 
 require 'lib/monkeypatch_blog_date.rb'
 
+activate :piwik do |f|
+    f.id = 4
+    f.domain = 'piwik-osasteam.rhcloud.com'
+    f.url = 'piwik'
+end
+
 ###
 # Development-only configuration
 ###

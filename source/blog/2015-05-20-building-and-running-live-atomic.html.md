@@ -22,7 +22,7 @@ To run the live image you will need to set up
 
 I won't describe how to set these up here.
 
-If you are not interested in building the images by yourself, you can use live images from here and jump right to the section *Build output - images and PXE config*.
+If you are not interested in building the images you can try [images I built during writing this blogpost](https://rvykydal.fedorapeople.org/atomic/pxetolive/) or Fedora images if there are already some at the time you are reading this post, and jump right to the section *Build output - images and PXE config*.
 
 Building live Atomic image
 --------------------------

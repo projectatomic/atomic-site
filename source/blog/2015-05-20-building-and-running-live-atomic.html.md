@@ -11,6 +11,8 @@ categories:
 ---
 In this post I'll show how to build live Atomic Host image that can be run on diskless machine using PXE boot, and how to run the live system and customize it with boot options and cloud-config for better use of resources, leading to goal of storing Docker images on iSCSI devices.
 
+READMORE
+
 Servers you'll need:
 --------------------
 

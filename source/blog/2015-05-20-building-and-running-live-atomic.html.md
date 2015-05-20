@@ -1,50 +1,46 @@
 ---
-author: Radek Vykydal
 title: Building and running live Atomic from PXE with iSCSI
-date: 2015-05-20
-tags:
-- Atomic
-- iSCSI
-- PXE
-categories:
-- Blog
+author: rvykydal
+date: 2015-05-20 21:42:14 UTC
+tags: Atomic, iSCSI, PXE
+comments: true
+published: true
 ---
+
 In this post I'll show how to build live Atomic Host image that can be run on diskless machine using PXE boot, and how to run the live system and customize it with boot options and cloud-config for better use of resources, leading to goal of storing Docker images on iSCSI devices.
 
 READMORE
 
-Servers you'll need:
---------------------
+##Servers you'll need:
 
-To run the live image you will need to set up
+To run the live image you will need to set up the following:
 
-- PXE server to serve kernel and initramfs modified for booting into live Atomic image
-- HTTP server to serve live Atomic image and `cloud-init` configuration
-- (optional) iSCSI target serving device used for storing docker images
+- A PXE server to serve kernel and initramfs modified for booting into live Atomic image.
+- A HTTP server to serve live Atomic image and `cloud-init` configuration.
+- (optional) An iSCSI target serving device used for storing docker images.
 
 I won't describe how to set these up here.
 
 If you are not interested in building the images you can try [images I built during writing this blogpost](https://rvykydal.fedorapeople.org/atomic/pxetolive/) or Fedora images if there are already some at the time you are reading this post, and jump right to the section *Build output - images and PXE config*.
 
-Building live Atomic image
---------------------------
+## Building the live Atomic image
 
-### Using livemedia-creator tool
+### Using the livemedia-creator tool
 
-* I will be using Fedora 22 Beta Server to build the live image. We need `lorax` package containing `livemedia-creator` - the tool for building the image, and kvm virtualization which livemedia-creator uses to create live image with Atomic installer iso.
+* I will be using Fedora 22 Beta Server to build the live image. We need `lorax` package containing `livemedia-creator` - the tool for building the image, and kvm virtualization which livemedia-creator uses to create live image with Atomic installer iso. (Note, Fedora 22 Server will be released soon.)
 
 ```
 sudo dnf install wget lorax libvirt virt-install qemu-kvm
 ```
 
-* Download Atomic **installer iso** which will be used to install live Atomic to raw disk image in a virtual machine. For now let's use Fedora 22 Test Candidate 3 (final iso images for current Fedora release should be available at https://getfedora.org/en/cloud/download/, or you can try [Fedora 22 Beta Atomic iso](http://download.fedoraproject.org/pub/fedora/linux/releases/test/22_Beta/Cloud_Atomic/x86_64/iso/Fedora-Cloud_Atomic-x86_64-22_Beta.iso))
+* Download the Atomic **installer iso** which will be used to install live Atomic to raw disk image in a virtual machine. For now let's use Fedora 22 Test Candidate 3 (final ISO images for the current Fedora release should be available at https://getfedora.org/en/cloud/download/, or you can try [Fedora 22 Beta Atomic iso](http://download.fedoraproject.org/pub/fedora/linux/releases/test/22_Beta/Cloud_Atomic/x86_64/iso/Fedora-Cloud_Atomic-x86_64-22_Beta.iso))
 
 ```
 sudo wget http://alt.fedoraproject.org/pub/alt/stage/22_TC3/Cloud_Atomic/x86_64/iso/Fedora-Cloud_Atomic-x86_64-22_TC3.iso -O /var/lib/libvirt/images/atomic-installer.iso
 ```
 
 
-The iso contains the repository Atomic Host will be installed from (it is also possible to use remote repository, see below).
+The ISO contains the repository Atomic Host will be installed from (it is also possible to use remote repository, see below).
 
 
 * Download installer **kickstart file** for live Atomic image.
@@ -58,7 +54,7 @@ The comments in the [fedora-atomic-pxe-live.ks](https://github.com/rvykydal/anac
 
 * Build the live image with `livemedia-creator`
 
-`livemedia-creator` is using kvm virtual machine:
+`livemedia-creator` uses a kvm virtual machine:
 
 ```
 sudo systemctl start libvirtd.service
@@ -108,7 +104,7 @@ total 425076
 -rwxr-xr-x. 1 root root   5895192 Jan  1  1970 vmlinuz-4.0.1-300.fc22.x86_64
 
 ```
-### Building image from non-local Atomic repo
+### Building the image from non-local Atomic repo
 
 With the [fedora-atomic-pxe-live.ks](https://github.com/rvykydal/anaconda-kickstarts/blob/master/atomic/fedora-atomic-pxe-live.ks) we were using Atomic repository embedded in the installer iso by including kickstart snippet from the installation image:
 ```
@@ -122,21 +118,16 @@ The snippet contains `ostreesetup` command pointing to the repository. To overri
 ostreesetup --nogpg --osname=fedora-atomic --remote=fedora-atomic --url=http://10.34.102.55:8000/ --ref=fedora-atomic/f22/x86_64/docker-host
 ```
 
-This way Atomic installer iso can be used to create live Atomic image with updated content. It is not possible to update live Atomic Host in the normal way with `atomic host upgrade` command, respin of the live image needs to be done. It is because (atomic) updates of system using ostree technology require rebooting into updated system (and allow for reboot or rollback to previous version of the system).
+This way the Atomic installer ISO can be used to create live Atomic image with updated content. It is not possible to update live Atomic Host in the normal way with `atomic host upgrade` command, respin of the live image needs to be done. It is because (atomic) updates of system using ostree technology require rebooting into updated system (and allow for reboot or rollback to previous version of the system).
 
 
 ### Building image with rpm-ostree-toolbox
 
 To build Atomic repository locally there is the [rpm-ostree-toolbox](https://github.com/projectatomic/rpm-ostree-toolbox) tool. The repository is built with `treecompose` command. With the tool also installer iso can be built using `installer` command, and there is even a `liveimage` command for building live Atomic image. It is running `livemadia-creator` in container so one big advangage is that the image can be built on other then target system without any issues. I may cover this in another blog post.
 
+## Build output - images and PXE config
 
-
-
-
-Build output - images and PXE config
-------------------------------------
-
-To run live Atomic three images and pxe configuration are required:
+To run live Atomic three images and PXE configuration are required:
 
 * `vmlinuz-4.0.1-300.fc22.x86_64` - kernel image to be supplied by PXE (tftp) server
 * `initramfs-4.0.1-300.fc22.x86_64.img` - initrd image to be supplied by PXE (tftp) server. Compared to initrd image from Atomic repository it has two dracut modules added: `livenet` for fetching live images and `dmsquash-live` for running system from live root images.
@@ -175,13 +166,12 @@ live-rootfs.squashfs.img
                                  /
 ```
 
-Yes, seems like quite a bit of layers. I'll talk about another option which should be available in Fedora rawhide in *Mounitng live image with rd.writable.fsimg?* section.
+Yes, seems like quite a bit of layers. I'll talk about another option which should be available in Fedora rawhide in *Mounting live image with rd.writable.fsimg?* section.
 
 
-Running live Atomic Host from PXE:
-----------------------------------
+## Running live Atomic Host from PXE:
 
-So, let's move our kernel and initrd images to our PXE server, live image to our HTTP server, update PXE_CONFIG accordingly and set it up on the PXE server, eg:
+So, let's move our kernel and initrd images to our PXE server, live image to our HTTP server, update PXE_CONFIG accordingly and set it up on the PXE server, e.g.:
 
 ```
 # PXE configuration template generated by livemedia-creator
@@ -285,7 +275,7 @@ It is roughly the same as the size defined in kicktart file.
 ```
 part / --fstype="ext4" --size=6000
 ```
-because we build the image with livemedia-creator using `--live-rootfs-keep-size` option (I think the size from kickstart is truncated to number of GiBs, hence the 6000 MiB vs 4.9 GB difference). It is also possible to set the desired size directly by `--live-rootfs-size` option. We don't have to be afraid of overcommiting here as the image is sparse. But what we see reported by `df` is not the real space available for writing our data. As said above, there is a read-write devicemapper layer using **overlay image** (devicemapper shapshot) to store live data:
+Because we build the image with livemedia-creator using `--live-rootfs-keep-size` option (I think the size from kickstart is truncated to number of GiBs, hence the 6000 MiB vs 4.9 GB difference). It is also possible to set the desired size directly by `--live-rootfs-size` option. We don't have to be afraid of overcommiting here as the image is sparse. But what we see reported by `df` is not the real space available for writing our data. As said above, there is a read-write devicemapper layer using **overlay image** (devicemapper shapshot) to store live data:
 
 ```
 [fedora@atomic-00 ~]$ lsblk
@@ -328,7 +318,7 @@ fd44297e2ddb: Error pulling image (latest) from centos, endpoint: https://regist
 FATA[0074] Error pulling image (latest) from centos, Driver devicemapper failed to create image rootfs fd44297e2ddb050ec4fa9752b7a4e3a8439061991886e2091e7c1f007c906d75: Error saving transaction metadata: Error syncing metadata file /var/lib/docker/devicemapper/metadata/.tmp816100005: fsync: input/output error 
 ```
 
-Ooops, we'we already run out of space trying to pull about 80 MB image (you'll see also handful of Buffer I/O errors on device dm-0 and Ext4-fs errors in console). Indeed, the live-rw snapshot became invalid:
+Oops, we'we already run out of space trying to pull about 80 MB image (you'll see also handful of Buffer I/O errors on device dm-0 and Ext4-fs errors in console). Indeed, the live-rw snapshot became invalid:
 
 ```
 [fedora@atomic-00 ~]$ sudo dmsetup status
@@ -349,7 +339,7 @@ kernel test/rv/atomic_live_blog/vmlinuz-4.0.1-300.fc22.x86_64
 append initrd=test/rv/atomic_live_blog/initramfs-4.0.1-300.fc22.x86_64.img root=live:http://10.34.39.2/trees/rv/atomic_live_blog/live-rootfs.squashfs.img ostree=/ostree/boot.0/Fedora-Cloud_Atomic/b71c9aba7a86fb046928c05d5175e65234589a82a471e7d3030f126b24211018/0 ds=nocloud-net;seedfrom=http://10.34.39.2/ks/rv/ci/ rd.live.overlay.size=1024
 ```
 
-Let's reboot into the live Atomic with the option and pull centos docker image.
+Let's reboot into the live Atomic with the option and pull CentOS Docker image.
 
 ```
 [fedora@atomic-00 ~]$ sudo docker pull centos
@@ -517,7 +507,6 @@ Status: Downloaded newer image for centos:latest
 
 Far better, some 200 KB were consumed during the pull. With this setup we seem to have fairly usable live Atomic system.
 
-
 ### Mounitng live image with rd.writable.fsimg?
 
 There is a new patch in rawhide dracut alowing to mount rootfs image packed in squashfs image in a slightly different way, copying the rootrs image into RAM and loop mounting it read-write.
@@ -555,12 +544,5 @@ live-rootfs.squashfs.img
 
 
 With this option there is no read-write overlay layer so you don't need to care about its size and `rd.live.overlay.size` option.
-You should be able to try this dracut boot option with Atomic Host images built from rawhide repository. See the *Builiding image from non-local Atomic repo* section for learning how to use another repository in place of the one embedded in installer iso. The effectiveness of this approach compared to read-write overlay is something to be explored and will probably vary in aspects depending on use case.
 
-
-
-
-
-
-
-
+You should be able to try this dracut boot option with Atomic Host images built from rawhide repository. See the *Builiding image from non-local Atomic repo* section for learning how to use another repository in place of the one embedded in installer ISO. The effectiveness of this approach compared to read-write overlay is something to be explored and will probably vary in aspects depending on use case.

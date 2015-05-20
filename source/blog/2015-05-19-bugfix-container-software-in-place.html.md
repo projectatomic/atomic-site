@@ -1,13 +1,13 @@
 ---
 title: Bugfix Container Software In Place
 author: aweiteka
-date: 2015-05-15 20:47:56 UTC
+date: 2015-05-19 17:54:07 UTC
 tags: atomic, docker, development, vagrant
 comments: true
 published: true
 ---
 
-Debugging container applications can be frustrating. Last week a few of us got together to hack on [Atomicapp](https://github.com/projectatomic/atomicapp) and the [Nulecule specification](https://github.com/projectatomic/nulecule). The codebase was moving fast so I hit a few bugs. The problem was the application I was running was in a container and the bug was difficult to reproduce on my local workstation. The python traceback output suggested it was a simple fix so I wanted to just edit the code in place in the container and keep moving. But then how would I get the code onto my local development box and into my git repository? And how could I test this code change?
+Debugging container applications can be frustrating. Last week a few of us got together to hack on [Atomicapp](https://github.com/projectatomic/atomicapp) and the [Nulecule specification](https://github.com/projectatomic/nulecule). The codebase was moving fast, so I hit a few bugs. The problem was the application I was running was in a container and the bug was difficult to reproduce on my local workstation. The python traceback output suggested it was a simple fix so I wanted to just edit the code in place in the container and keep moving. But then how would I get the code onto my local development box and into my git repository? And how could I test this code change?
 
 My approach was to bindmount the source from the local workstation into the container so the files being edited can remain in the local git repository.
 
@@ -54,6 +54,6 @@ I'm running a [vagrant box](https://atlas.hashicorp.com/atomicapp/boxes/dev) tha
 1. Back in the other window running the container bash shell you should now see the changes you just made. Try running the application again.
 1. Repeat steps 8-10 as your development workflow. When you have fixed the bug, commit the changes, push and submit a pull request.
 
-This example uses Python, an interpreted language, but a similar approach should work with compiled languages such as [golang](http://golang.org/). If you're not running in a Vagrant environment the steps are fewer but I included them here so you might benefit from seeing the rsync workflow.
+This example uses Python, an interpreted language, but a similar approach should work with compiled languages such as [Go](http://golang.org/). If you're not running in a Vagrant environment the steps are fewer but I included them here so you might benefit from seeing the rsync workflow.
 
 Working with containers means learning new ways of debugging. I hope this post helps broaden your vision of how this can be done while still retaining efficient workflows under version control.

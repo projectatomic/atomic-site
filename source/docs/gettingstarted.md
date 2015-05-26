@@ -9,7 +9,7 @@ Project Atomic provides a platform to deploy and manage containers on bare-metal
 * **A virtual machine image.** Images for Atomic based on Fedora and CentOS are available for the supported virtualization options.
 
 ## Downloading Atomic
-There are Atomic host images available from the Fedora Cloud SIG and the CentOS Atomic SIG.  The Fedora 21 [Atomic host images are available] (https://getfedora.org/en/cloud/download/) in Raw and QCOW2 formats, as well as an AMI.  The CentOS 7 [Atomic host image is available] (http://buildlogs.centos.org/rolling/7/isos/x86_64/ ) in QCOW2 format.
+There are Atomic host images available from the Fedora Cloud SIG and the CentOS Atomic SIG.  The Fedora 22 [Atomic host images are available] (https://getfedora.org/cloud/download/atomic.html) in Raw and QCOW2 formats, as well as an AMI.  The CentOS 7 [Atomic host image is available] (http://buildlogs.centos.org/rolling/7/isos/x86_64/ ) in QCOW2 format.
 
 ## Installing Atomic
 At the moment, only pre-generated disk images are available.  A future

@@ -1,13 +1,13 @@
 ---
 title: Building and running live Atomic from PXE with iSCSI
 author: rvykydal
-date: 2015-05-20 21:42:14 UTC
+date: 2015-05-26 04:00:00 UTC
 tags: Atomic, iSCSI, PXE
 comments: true
 published: true
 ---
 
-In this post I'll show how to build live Atomic Host image that can be run on diskless machine using PXE boot, and how to run the live system and customize it with boot options and cloud-config for better use of resources, leading to goal of storing Docker images on iSCSI devices.
+In this post I'll show how to build live Atomic Host image that can be run on diskless machine using PXE boot. Once we have the images, I'll show you how to run the live system and customize it with boot options and cloud-config for better use of resources, leading to the goal of storing Docker images on iSCSI devices.
 
 READMORE
 
@@ -123,7 +123,7 @@ This way the Atomic installer ISO can be used to create live Atomic image with u
 
 ### Building image with rpm-ostree-toolbox
 
-To build Atomic repository locally there is the [rpm-ostree-toolbox](https://github.com/projectatomic/rpm-ostree-toolbox) tool. The repository is built with `treecompose` command. With the tool also installer iso can be built using `installer` command, and there is even a `liveimage` command for building live Atomic image. It is running `livemadia-creator` in container so one big advangage is that the image can be built on other then target system without any issues. I may cover this in another blog post.
+To build Atomic repository locally there is the [rpm-ostree-toolbox](https://github.com/projectatomic/rpm-ostree-toolbox) tool. The repository is built with `treecompose` command. With the tool also installer iso can be built using `installer` command, and there is even a `liveimage` command for building live Atomic image. It is running `livemadia-creator` in container so one big advangage is that the image can be built on other than target system without any issues. I may cover this in another blog post.
 
 ## Build output - images and PXE config
 
@@ -270,7 +270,7 @@ tmpfs                399M     0  399M   0% /run/user/1000
 
 ```
 
-It is roughly the same as the size defined in kicktart file.
+It is roughly the same as the size defined in kickstart file.
 
 ```
 part / --fstype="ext4" --size=6000

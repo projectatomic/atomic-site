@@ -10,25 +10,28 @@ title: Get Started with Project Atomic
   Atomic Host images are now available from Fedora and the CentOS Project. 
 
 %p.lead
-  Fedora 21 Atomic Cloud is available as part of the <a href="https://getfedora.org/cloud/download/">Fedora 21 Cloud</a> release. The <a href="http://wiki.centos.org/SpecialInterestGroup/Atomic">CentOS Atomic SIG</a> has images being produced regularly, which are available <a href="http://buildlogs.centos.org/rolling/7/isos/x86_64/">as compressed or uncompressed qcow2 images</a>.
-
+  Fedora 22 Atomic Cloud is available as part of the <a href="https://getfedora.org/cloud/download/atomic.html">Fedora 22 Cloud</a> release.
 %p 
-  The "QEMU" image works on Linux KVM virtualization, for example is 
+  The "QCOW2" image works on Linux KVM virtualization, for example is 
   <a href="http://openstack.redhat.com/">RDO</a> (OpenStack), 
   <a href="http://ovirt.org">oVirt</a>, 
   <a href="http://virt-manager.org/">virt-manager</a> and
   the "Boxes" virtual machine application available in 
   <a href="http://fedoraproject.org/">Fedora</a> and <a href="http://centos.org/">CentOS 7</a>.
+%p  
+  Vagrant images are also available for VirtualBox and libvirt/KVM providers, as are AMIs for running in EC2.
+%p.lead
+  The <a href="http://wiki.centos.org/SpecialInterestGroup/Atomic">CentOS Atomic SIG</a> has images being produced regularly, which are available <a href="http://buildlogs.centos.org/rolling/7/isos/x86_64/">as compressed or uncompressed qcow2 images</a>.
 
 .clearfix
 
 %p.buttons.hidden-xs
-  %a.btn.btn-primary.btn-lg{:href => "https://getfedora.org/cloud/download/"} Fedora 21
+  %a.btn.btn-primary.btn-lg{:href => "https://getfedora.org/cloud/download/"} Fedora Atomic Host
 
 %p.buttons.hidden-xs
-  %a.btn.btn-primary.btn-lg{:href => "http://buildlogs.centos.org/rolling/7/isos/x86_64/"} CentOS Atomic Host (testing)
+  %a.btn.btn-primary.btn-lg{:href => "http://buildlogs.centos.org/rolling/7/isos/x86_64/"} CentOS Atomic Host
 
-%p A newer bare-metal installer based on Fedora 22 Beta is <a href="http://dl.fedoraproject.org/pub/alt/stage/22_TC1/Cloud_Atomic/x86_64/iso/Fedora-Cloud_Atomic-x86_64-22_TC1.iso">available</a>.
+%p A bare-metal installer based on Fedora 22 is also <a href="http://download.fedoraproject.org/pub/fedora/linux/releases/22/Cloud_Atomic/x86_64/iso/Fedora-Cloud_Atomic-x86_64-22.iso">available</a>.
 
 .clearfix
 
@@ -56,7 +59,7 @@ title: Get Started with Project Atomic
     %p
       From a running host, start an upgrade with:
     %pre
-      \# rpm-ostree upgrade
+      \# atomic host upgrade
       \# systemctl reboot
     %p
       On the boot screen you'll see your new version. Hold down the

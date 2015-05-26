@@ -11,10 +11,11 @@ aweiteka:
   name: Aaron Weitekamp
   twitter: aweiteka
 
-christoph:
+goern:
   name: Christoph Görn
   twitter: goern
   gravatar: 0038a1e9f4492e2f964f0f39d2d0dc7f
+  description: Works for Red Hat's System Design and Engineering Team... into Docker, Atomic, Kubernetes, Red Hat...
 
 dwalsh:
   name: Dan Walsh

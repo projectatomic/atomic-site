@@ -12,6 +12,7 @@ If you are contributing to the Project Atomic site, please look at the following
 * Create a git branch for the blog post for clean merges
 * Blogs reside in the source/data/blog directory
 * Naming convention is date-title *yyyy-mm-dd-this-is-a-blog*
+* Create a pull request to submit for editorial review
  
 ### Template
 The header for the post should contain the following information, tags are a free form list.  Your post will start immediately following the header.  Add a 'READMORE' tag on a separate line to define at a good place to continue reading the full post.
@@ -45,7 +46,7 @@ Add yourself to data/authors.yml
 * Fork this repo
 * Create a git branch per document for clean merges
 * Pull and merge often
-* For a blog post jump down
+* Create a pull request to submit for editorial review
 
 ### Objective:
 * Provide overview of the guides objectives

@@ -92,17 +92,17 @@ title: Get Started with Project Atomic
 
     %pre
       :preserve
-        # systemctl enable cockpit.socket
-        # systemctl start cockpit.socket
+        # atomic run cockpit/ws
         # visit http://&lt;ipaddress&gt;:9090 in a browser
     %p
       Cockpit is perfect for new sysadmins, allowing them to easily perform simple tasks such as storage
       administration, inspecting journals and starting and stopping services.
 
     %p
-      The snapshot of Cockpit included in Atomic is a preview - do
-      not use in production environments.  Cockpit is under rapid
-      development.
+      Cockpit runs inside a privileged container and is able to monitor and
+      administer several servers at the same time. Each server only needs
+      ```cockpit-bridge``` and ```cockpit-shell```, which are part of Fedora
+      Atomic 22, in order to get connected to Cockpit.
 
     %p
       %a( href="http://cockpit-project.org" ) &raquo; Visit cockpit-project.org...

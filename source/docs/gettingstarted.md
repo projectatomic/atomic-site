@@ -1,9 +1,9 @@
 # Project Atomic Getting Started Guide
 
 ## About the Project
-Project Atomic provides a platform to deploy and manage containers on bare-metal, virtual, or cloud-based servers.  Project Atomic hosts are designed to be minimal hosts focused on the delivery of container services.  The Atomic host is built using OStree, which delivers a set of file system objects rather than RPM packages.  OStree makes these file system objects immutable, rendering updates an atomic operation for easy update and rollback.  Container runtime is provided via docker, and container cluster management is provided by Kubernetes.  
+Project Atomic provides a platform to deploy and manage containers on bare-metal, virtual, or cloud-based servers.  Project Atomic hosts are designed to be minimal hosts focused on the delivery of container services.  The Atomic host is built using OStree, which delivers a set of file system objects rather than RPM packages.  OStree makes these file system objects immutable, rendering updates an atomic operation for easy update and rollback.  Container runtime is provided via docker, and container cluster management is provided by Kubernetes.
 
-## Prerequisites 
+## Prerequisites
 * **A virtualization client.** Virtual Machine Manager (virt-manager) is a very good KVM-based client for Linux systems. Windows and OS X users can give VirtualBox a try. Be sure your virtualization client is properly configured to access the Internet.  An Atomic host can be run under OpenStack or EC2 as well.
 
 * **A virtual machine image.** Images for Atomic based on Fedora and CentOS are available for the supported virtualization options.
@@ -30,7 +30,7 @@ It's important to note that on an Atomic system, the `/etc` and `/var` directori
 At present, the primary expected method to install software locally is via docker containers.  You can also use `/usr/local` or `/opt` (in the OSTree model, these are really `/var/usrlocal` and `/var/opt`, respectively).
 
 ## Atomic fleet concepts
-Clusters of Atomic hosts under control of a Kubernetes master server is the expected operating arrangement of an Atomic environment.  Kubernetes distributes and orchestrates the construction of pods on the Atomic hosts.  Pods are collections of docker containers that logically separate services in an application.  The principle of single responsibility is an important design pattern when looking at building scalable applications with Kubernetes.  
+Clusters of Atomic hosts under control of a Kubernetes master server is the expected operating arrangement of an Atomic environment.  Kubernetes distributes and orchestrates the construction of pods on the Atomic hosts.  Pods are collections of docker containers that logically separate services in an application.  The principle of single responsibility is an important design pattern when looking at building scalable applications with Kubernetes.
 
 Flannel provides a distributed, tunneled overlay network for Atomic hosts.  This overlay network is used for inter-container networking only, while a Kubernetes proxy service provides for service level access to the host IP space. Etcd is used to distribute configurations for both Kubernetes and Flannel.
 
@@ -46,7 +46,7 @@ Assumptions for IP addressing for following examples:
     172.16.0.0/12
 
 ## Building the fleet boss
-Launch an Atomic host to act as the master node for the cluster.  We'll be installing the local docker cache, the etcd source, and the Kubernetes master services here.  As a good practice, update to the latest available Atomic tree. 
+Launch an Atomic host to act as the master node for the cluster.  We'll be installing the local docker cache, the etcd source, and the Kubernetes master services here.  As a good practice, update to the latest available Atomic tree.
 
     [fedora@atomic-master ~]$ sudo atomic upgrade
     [fedora@atomic-master ~]$ sudo systemctl reboot
@@ -82,7 +82,7 @@ Since we want to make sure the local cache is always up, we'll create a systemd 
     [Service]
     Restart=on-failure
     RestartSec=10
-    ExecStart=/usr/bin/docker start -a %p 
+    ExecStart=/usr/bin/docker start -a %p
     ExecStop=-/usr/bin/docker stop -t 2 %p
 
     [Install]
@@ -107,7 +107,7 @@ For Kubernetes, there's a few config files in /etc/kubernetes we need to set up 
 #### Common service configurations
 We'll be setting up the etcd store that Kubernetes will use.  We're using a single local etcd service, so we'll point that at the master on the standard port.  We'll also set up how the services find the apiserver.
 
-    [fedora@atomic-master ~]$ sudo vi /etc/kubernetes/config 
+    [fedora@atomic-master ~]$ sudo vi /etc/kubernetes/config
     # Comma seperated list of nodes in the etcd cluster
     KUBE_ETCD_SERVERS="--etcd_servers=http://192.168.122.10:4001"
 
@@ -122,11 +122,11 @@ We'll be setting up the etcd store that Kubernetes will use.  We're using a sing
 #### Apiserver service configuration
 The apiserver needs to be set to listen on all IP addresses, instead of just localhost.
 
-    [fedora@atomic-master ~]$ sudo vi /etc/kubernetes/apiserver 
+    [fedora@atomic-master ~]$ sudo vi /etc/kubernetes/apiserver
     # The address on the local server to listen to.
     KUBE_API_ADDRESS="--address=0.0.0.0"
 
- If you need to modify the set of IPs that Kubernetes assigns to services, change the KUBE_SERVICE_ADDRESSES value. Since this guide is using the 192.168.122.0/24 and 172.16.0.0/12 networks, we can leave the default.  This address space needs to be unused elsewhere, but doesn't need to be reachable from either of the other networks. 
+ If you need to modify the set of IPs that Kubernetes assigns to services, change the KUBE_SERVICE_ADDRESSES value. Since this guide is using the 192.168.122.0/24 and 172.16.0.0/12 networks, we can leave the default.  This address space needs to be unused elsewhere, but doesn't need to be reachable from either of the other networks.
 
     # Address range to use for services
     KUBE_SERVICE_ADDRESSES="--portal_net=10.254.0.0/16"
@@ -134,7 +134,7 @@ The apiserver needs to be set to listen on all IP addresses, instead of just loc
 #### Controller Manager service configuration
 The controller manager service needs to how to locate it's minions.  We're using IPs as addresses, which must match the KUBLET_HOSTNAME for the minions kublet service. If hostnames are used, must resolve to match output of `hostname -f` on the minion.
 
-    [fedora@atomic-master ~]$ sudo vi /etc/kubernetes/controller-manager 
+    [fedora@atomic-master ~]$ sudo vi /etc/kubernetes/controller-manager
     # Comma seperated list of minions
     KUBELET_ADDRESSES="--machines=192.168.122.11,192.168.122.12,192.168.122.13,192.168.122.14"
 
@@ -144,7 +144,7 @@ Enable and start the Kubernetes services.
     [fedora@atomic-master ~]$ sudo systemctl start etcd kube-apiserver kube-controller-manager kube-scheduler
 
 ### Configuring the Flannel overlay network
-Flanneld provides a tunneled network configuration via etcd.  To push the desired config into etcd, we'll create a JSON file with the options we want and use curl to push the data.  We've selected a /12 network to create a /24 subnet per minion.  
+Flanneld provides a tunneled network configuration via etcd.  To push the desired config into etcd, we'll create a JSON file with the options we want and use curl to push the data.  We've selected a /12 network to create a /24 subnet per minion.
 
     [fedora@atomic-master ~]$ vi flanneld-conf.json
     {
@@ -161,7 +161,7 @@ We'll create a keyname specific to this cluster to store the network configurati
 
 Just to make sure we have the right config, we'll pull it via curl and parse the JSON return.
 
-    [fedora@atomic-master ~]$ curl -L http://localhost:4001/v2/keys/atomic01/network/config | python -m json.tool  
+    [fedora@atomic-master ~]$ curl -L http://localhost:4001/v2/keys/atomic01/network/config | python -m json.tool
     {
         "action": "get",
         "node": {
@@ -173,7 +173,7 @@ Just to make sure we have the right config, we'll pull it via curl and parse the
     }
 
 ## Atomic Minions
-Launch your first Atomic host to act as a minion node for the cluster.  We'll be installing the Kubernetes minion services and configuring docker to use Flannel and our cache.  These nodes will act as the workers and run Pods and containers.  You can repeat this on as many nodes as you like to provide resources to the cluster.  In our master example, we've set up 4 minions.  As a good practice, update to the latest available Atomic tree. 
+Launch your first Atomic host to act as a minion node for the cluster.  We'll be installing the Kubernetes minion services and configuring docker to use Flannel and our cache.  These nodes will act as the workers and run Pods and containers.  You can repeat this on as many nodes as you like to provide resources to the cluster.  In our master example, we've set up 4 minions.  As a good practice, update to the latest available Atomic tree.
 
     [fedora@atomic01 ~]$ sudo atomic upgrade
     [fedora@atomic01 ~]$ sudo systemctl reboot
@@ -188,7 +188,7 @@ Add the local cache registry running on the master to the docker options that ge
 ### Configuring Docker to use the Flannel overlay
 To set up flanneld, we just need to point the local flannel service to the etcd service on the master serving up the config from the right key for the cluster.
 
-    [fedora@atomic01 ~]$ sudo vi /etc/sysconfig/flanneld 
+    [fedora@atomic01 ~]$ sudo vi /etc/sysconfig/flanneld
     # etcd url location.  Point this to the server where etcd runs
     FLANNEL_ETCD="http://192.168.122.10:4001"
 
@@ -197,13 +197,13 @@ To set up flanneld, we just need to point the local flannel service to the etcd 
     FLANNEL_ETCD_KEY="/atomic01/network"
 
 
-To get docker using the flanneld overlay, we'll change the networking config to use the flanneld provided bridge IP and MTU settings.  We'll also change the unit definition to wait for flanneld to start.  That way the environment file created by flanneld is available and will provide a usable address for the docker0 bridge.  
+To get docker using the flanneld overlay, we'll change the networking config to use the flanneld provided bridge IP and MTU settings.  We'll also change the unit definition to wait for flanneld to start.  That way the environment file created by flanneld is available and will provide a usable address for the docker0 bridge.
 
 Using a systemd drop-in file allows us to override the distributed systemd unit file without making direct modifications.  The blank `ExecStart=` line erases all previously defined `ExecStart` directives and only subsequent `ExecStart` lines will be used by systemd.
 
     [fedora@atomic01 ~]$ sudo mkdir -p /etc/systemd/system/docker.service.d/
-    [fedora@atomic01 ~]$ sudo vi /etc/systemd/system/docker.service.d/10-flanneld-network.conf 
-    
+    [fedora@atomic01 ~]$ sudo vi /etc/systemd/system/docker.service.d/10-flanneld-network.conf
+
     [Unit]
     After=flanneld.service
     Requires=flanneld.service
@@ -228,7 +228,7 @@ As of kubernetes-0.7.0, the kubelet systemd unit file has a dependency on the do
 
 The address entry in the kubelet config file must match the KUBLET_ADDRESSES entry on the master.   If hostnames are used, this also must match output of `hostname -f` on the minion.  We're using the eth0 IP address like we did on the master.
 
-    [fedora@atomic01 ~]$ sudo vi /etc/kubernetes/kubelet 
+    [fedora@atomic01 ~]$ sudo vi /etc/kubernetes/kubelet
     # The address for the info server to serve on (set to 0.0.0.0 or "" for all interfaces)
     KUBELET_ADDRESS="--address=192.168.122.11"
 
@@ -237,7 +237,7 @@ The address entry in the kubelet config file must match the KUBLET_ADDRESSES ent
 
 Set the location of the etcd server, here we've got the single service on the master.
 
-    [fedora@atomic01 ~]$ sudo vi /etc/kubernetes/config 
+    [fedora@atomic01 ~]$ sudo vi /etc/kubernetes/config
     # Comma seperated list of nodes in the etcd cluster
     KUBE_ETCD_SERVERS="--etcd_servers=http://192.168.122.10:4001"
     # How the replication controller and scheduler find the kube-apiserver
@@ -264,24 +264,24 @@ Once all of your services are started, the networking should look something like
         link/ether 0a:45:46:8d:6a:de brd ff:ff:ff:ff:ff:ff
         inet 10.4.0.120/24 brd 10.4.0.255 scope global dynamic eth0
            valid_lft 3570sec preferred_lft 3570sec
-        inet6 fe80::845:46ff:fe8d:6ade/64 scope link 
+        inet6 fe80::845:46ff:fe8d:6ade/64 scope link
            valid_lft forever preferred_lft forever
-    3: flannel.1: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 8951 qdisc noqueue state UNKNOWN group default 
+    3: flannel.1: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 8951 qdisc noqueue state UNKNOWN group default
         link/ether 1a:50:6d:23:5d:a2 brd ff:ff:ff:ff:ff:ff
         inet 172.16.36.0/12 scope global flannel.1
            valid_lft forever preferred_lft forever
-        inet6 fe80::1850:6dff:fe23:5da2/64 scope link 
+        inet6 fe80::1850:6dff:fe23:5da2/64 scope link
            valid_lft forever preferred_lft forever
-    5: docker0: <NO-CARRIER,BROADCAST,MULTICAST,UP> mtu 1500 qdisc noqueue state DOWN group default 
+    5: docker0: <NO-CARRIER,BROADCAST,MULTICAST,UP> mtu 1500 qdisc noqueue state DOWN group default
         link/ether 56:84:7a:fe:97:99 brd ff:ff:ff:ff:ff:ff
         inet 172.16.36.1/24 scope global docker0
            valid_lft forever preferred_lft forever
-    
+
 
 [ Repeat on all minions ]
 
 Once you've created all the minions for your cluster, you can check to make sure the Kubernetes cluster is communicating properly.  On the Kubernetes master, check to the visibility of the minions.  This means you should be ready to start scheduling your first pod.
-    
+
     [fedora@atomic-master ~]$ kubectl get minions
 
 ## Exploring Kubernetes
@@ -291,19 +291,19 @@ There are several ways to get started using Kubernetes pods to create workloads.
     [fedora@atomic-master ~]$ kubectl get replicationController redis-master-controller
     [fedora@atomic-master ~]$ kubectl get pods -l name=redis-master
 
-    [fedora@atomic-master ~]$ kubectl create -f redis-master-service.json 
+    [fedora@atomic-master ~]$ kubectl create -f redis-master-service.json
     [fedora@atomic-master ~]$ kubectl get service redis-master
 
-    [fedora@atomic-master ~]$ kubectl create -f  redis-slave-controller.json 
+    [fedora@atomic-master ~]$ kubectl create -f  redis-slave-controller.json
     [fedora@atomic-master ~]$ kubectl get replicationController redis-slave-controller
     [fedora@atomic-master ~]$ kubectl get pods -l name=redis-master
 
-    [fedora@atomic-master ~]$ kubectl create -f redis-slave-service.json 
+    [fedora@atomic-master ~]$ kubectl create -f redis-slave-service.json
     [fedora@atomic-master ~]$ kubectl get service redisslave
 
 To check the status of the containers using `kubectl get`.  You can also check on services and replication controllers with the `get` command.  At this point, the Redis cluster and associated containers will be downloaded and running on your minions.
 
-    [fedora@atomic-master ~]$ kubectl get pods 
+    [fedora@atomic-master ~]$ kubectl get pods
     POD                                    IP                  CONTAINER(S)        IMAGE(S)                                 HOST                LABELS                                                     STATUS
     22341c61-bdeb-11e4-892b-525400fa2bea   172.17.0.2          redis-master        dockerfile/redis                         192.168.122.14/     app=redis,name=redis-master                                Running
     720081b3-bdeb-11e4-892b-525400fa2bea   172.17.0.2          redis-slave         brendanburns/redis-slave                 192.168.122.13/     app=redis,name=redis-slave,uses=redis-master               Running
@@ -319,7 +319,7 @@ The example sets up front end controller and service to provide web access to th
 
 Before creating the service for the web front end, we're going to add a 'load balancer' entry point.  This is a single IP address that will allow for access to any and all of the exposed ports on the minions that will run the front end containters.  This allows you to create an external IP address for a web service without needing to expose all of the minions. Add a `publicIPs` entry for an "external" service, containing one of the eth0 IP addresses of a minion in the cluster.  This doesn't need to be a minion that is actually running the front end containers.  This is also a list, so you could have more than one IP in the entry.
 
-    [fedora@atomic-master ~]$ vi frontend-service.json 
+    [fedora@atomic-master ~]$ vi frontend-service.json
     {
       "id": "frontend",
       "kind": "Service",

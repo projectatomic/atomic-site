@@ -199,7 +199,7 @@ ds=nocloud-net;seedfrom=http://10.34.39.2/ks/rv/ci/
 
 The option points to a directory containing `meta-data` and `user-data` files.
 
-Here is an example of [meta-data](https://github.com/rvykydal/anaconda-kickstarts/blob/master/atomic/ci/pxe-to-live-with-iscsi/meta-data) file.
+Here is an example of the [meta-data](https://github.com/rvykydal/anaconda-kickstarts/blob/master/atomic/ci/pxe-to-live-with-iscsi/meta-data) file.
 
 ```
 instance-id: Atomic0

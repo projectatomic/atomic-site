@@ -48,7 +48,7 @@ Assumptions for IP addressing for following examples:
 ## Building the fleet boss
 Launch an Atomic host to act as the master node for the cluster.  We'll be installing the local docker cache, the etcd source, and the Kubernetes master services here.  As a good practice, update to the latest available Atomic tree.
 
-    [fedora@atomic-master ~]$ sudo atomic upgrade
+    [fedora@atomic-master ~]$ sudo atomic host upgrade
     [fedora@atomic-master ~]$ sudo systemctl reboot
 
 ### Local Docker registry

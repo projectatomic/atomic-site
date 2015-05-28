@@ -6,19 +6,19 @@ title: Get Started with Project Atomic
 
 %img.pull-right( src="/images/platforms.png")
 
-%p.lead 
-  Atomic Host images are now available from Fedora and the CentOS Project. 
+%p.lead
+  Atomic Host images are now available from Fedora and the CentOS Project.
 
 %p.lead
   Fedora 22 Atomic Cloud is available as part of the <a href="https://getfedora.org/cloud/download/atomic.html">Fedora 22 Cloud</a> release.
-%p 
+%p
   The "QCOW2" image works on Linux KVM virtualization, for example it runs on
-  <a href="http://openstack.redhat.com/">RDO</a> (OpenStack), 
-  <a href="http://ovirt.org">oVirt</a>, 
+  <a href="http://openstack.redhat.com/">RDO</a> (OpenStack),
+  <a href="http://ovirt.org">oVirt</a>,
   <a href="http://virt-manager.org/">virt-manager</a> and
-  the "Boxes" virtual machine application available in 
+  the "Boxes" virtual machine application available in
   <a href="http://fedoraproject.org/">Fedora</a> and <a href="http://centos.org/">CentOS 7</a>.
-%p  
+%p
   Vagrant images are also available for VirtualBox and libvirt/KVM providers, as are AMIs for running in EC2.
 %p.lead
   The <a href="http://wiki.centos.org/SpecialInterestGroup/Atomic">CentOS Atomic SIG</a> has images being produced regularly, which are available <a href="http://buildlogs.centos.org/rolling/7/isos/x86_64/">as compressed or uncompressed qcow2 images</a>.
@@ -65,7 +65,7 @@ title: Get Started with Project Atomic
       On the boot screen you'll see your new version. Hold down the
       SHIFT key there to rollback to your previous tree.
 
-    %p 
+    %p
       %a( href="/docs/os-updates" ) &raquo; More on atomic upgrades with OSTree...
 
   .col-md-6.col-sm-12
@@ -80,7 +80,7 @@ title: Get Started with Project Atomic
       Get familiar with the #{link_to "Docker tutorial", "https://www.docker.io/gettingstarted/#"}, then
       learn how you can build reusable images and run Docker in production on Atomic hosts.
 
-    %p 
+    %p
       %a( href="/docs/#docker" ) &raquo; Read about Docker in production...
 
 .row
@@ -92,33 +92,33 @@ title: Get Started with Project Atomic
 
     %pre
       :preserve
-        # systemctl enable cockpit.socket
-        # systemctl start cockpit.socket
+        # atomic run cockpit/ws
         # visit http://&lt;ipaddress&gt;:9090 in a browser
     %p
-      Cockpit is perfect for new sysadmins, allowing them to easily perform simple tasks such as storage 
+      Cockpit is perfect for new sysadmins, allowing them to easily perform simple tasks such as storage
       administration, inspecting journals and starting and stopping services.
 
     %p
-      The snapshot of Cockpit included in Atomic is a preview - do
-      not use in production environments.  Cockpit is under rapid
-      development.
+      Cockpit runs inside a privileged container and is able to monitor and
+      administer several servers at the same time. Each server only needs
+      ```cockpit-bridge``` and ```cockpit-shell```, which are part of Fedora
+      Atomic 22, in order to get connected to Cockpit.
 
-    %p 
+    %p
       %a( href="http://cockpit-project.org" ) &raquo; Visit cockpit-project.org...
 
   .col-md-6.col-sm-12
     %h2 Learn about Kubernetes
 
     %p
-      If you're looking to work with orchestration, you'll want 
+      If you're looking to work with orchestration, you'll want
       to get started with Kubernetes.
 
     %p
-      The "Atomic fleet concepts" portion of our Getting Started 
+      The "Atomic fleet concepts" portion of our Getting Started
       guide will walk you through configuring a Kubernetes cluster.
- 
-    %p  
+
+    %p
       %a( href="/docs/gettingstarted" ) &raquo; Get started with Kubernetes...
 
 -#.row{:style => 'clear:both'}
@@ -131,7 +131,7 @@ title: Get Started with Project Atomic
 
     %p
       We have images and instructions for the most common platforms:
-      KVM/QEmu, OpenStack, VMWare and Vagrant. 
+      KVM/QEmu, OpenStack, VMWare and Vagrant.
 
     %p
 
@@ -139,7 +139,7 @@ title: Get Started with Project Atomic
       as a fallback you can install Atomic with the installer ISO
       image.
 
-    %p 
+    %p
       %a( href="download/virtualization" ) &raquo; Read more...
 
   .col-md-4.col-sm-12
@@ -151,18 +151,18 @@ title: Get Started with Project Atomic
       providers, ready to run.
 
     %p
- 
+
       We have preloaded images available for Amazon EC2 and Rackspace
       cloud. For other compatible cloud providers you can upload the
       provided image yourself, or use the installer ISO.
 
-    %p 
+    %p
       %a( href="download/cloud" ) &raquo; Read more...
 
   .col-md-4.col-sm-12
     %h2 Your Own Hardware
 
-    %p 
+    %p
 
       Atomic can be installed on most 64 bit X86 computers. Actual
       hardware requirements depend on your use case.
@@ -173,7 +173,7 @@ title: Get Started with Project Atomic
       megabytes of memory would be a minimum for testing and
       experimenting with Atomic.
 
-    %p 
+    %p
       %a(href="download/metal") Read more...
 
 %h2
@@ -183,14 +183,14 @@ title: Get Started with Project Atomic
 %p
   Still have questions? Read an #{link_to "Introduction to Atomic", "/docs/introduction"} and the #{link_to "documentation section", "/docs/"}.
 
--#%h2 
+-#%h2
   %a( name="quickstart")
   Quick Start Guide
 
 -#%p Now that you got Project Atomic installed, it's time to put it to work. And we have to write this quickstart guide so you can follow it. Basically the purpose of this section is to get your newly installed Atomic host to do something useful and to make you understand how it works, how to install containers and how to do common deployments.
 
 
--#%h2 
+-#%h2
   %a( name="quickstart")
   Quick Start Guide
 
@@ -198,7 +198,7 @@ title: Get Started with Project Atomic
 
 %h2 Done? Join the Community!
 
-%p 
-  Time to jump to our 
-  %a( href="/community" ) community 
+%p
+  Time to jump to our
+  %a( href="/community" ) community
   page to share your experience, raise issues or propose improvements!

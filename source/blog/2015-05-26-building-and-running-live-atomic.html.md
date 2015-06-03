@@ -312,6 +312,7 @@ docker-253:0-278707-pool: 0 209715200 thin-pool 1 179/524288 4664/1638400 - rw d
 Looking at values for `live-rw` we can see that there are 632648/1048576 of 512B sectors used, which is about a half of the total 512MB.
 
 Let's try to pull some docker image and look at the values.
+
 ```
 [fedora@atomic-00 ~]$ sudo docker pull centos
 latest: Pulling from centos

@@ -54,14 +54,16 @@ While the installation proceeds, you can specify the user settings:
 
 Kickstart installations offer a means to automate the installation process, either partially or fully. Kickstart files contain answers to all questions normally asked by the installation program, such as what time zone do you want the system to use, how should the drives be partitioned or which packages should be installed. 
 
-Currently, the */usr/share/anaconda/interactive-defaults.ks* kickstart is already included in Fedora Atomic boot.iso. This minimal configuration file contains two required commands:
+The installer ISO contains embedded content, and thus works offline.
 
-    bootloader --timeout=3 --extlinux
-    ostreesetup --nogpg --osname=fedora-atomic-host --remote=installmedia --url=file:///install/ostree --ref=fedora-atomic/rawhide/x86_64/server/docker-host-systemd
+However, to do a PXE installation, you must download the content
+dynamically.  We strongly recommend mirroring the OSTree repository,
+rather than having each machine contact the upstream provider.
 
-The first command above choses the *extlinux* bootloader that is required by the current Anaconda-OSTree implementation. The second command specifies the default OSTree repository.
-
-For unattended installation you need to specify your own kickstart configuration and load it from the boot prompt as described below. Use the required `bootloader` and `ostreesetup` commands in your custom configuration. If you omit this step, your kickstart will be ignored and the default one will be used.
+So, for unattended installation you need to specify your own kickstart
+configuration and load it from the boot prompt as described below. Use
+the `ostreesetup` command in your custom configuration, which is what
+configures anaconda to consume the rpm-ostree generated content.
 
 For example, create *atomic-ks.cfg* file with the following content:
 
@@ -71,10 +73,12 @@ For example, create *atomic-ks.cfg* file with the following content:
     zerombr
     clearpart --all --initlabel
     autopart
+    # SSH keys are better than passwords, but this is a simple example
     rootpw --plaintext atomic
 
-    bootloader --timeout=3 --extlinux
-    ostreesetup --nogpg --osname=fedora-atomic-host --remote=installmedia --url=file:///install/ostree --ref=fedora-atomic/rawhide/x86_64/server/docker-host-systemd
+    # NOTICE: This will download the content from upstream; this will be very slow.
+    # Create your own OSTree repo locally and mirror the content instead.
+    ostreesetup --nogpg --osname=fedora-atomic --remote=fedora-atomic --url=https://dl.fedoraproject.org/pub/fedora/linux/atomic/22/ --ref=fedora-atomic/f22/x86_64/docker-host
 
 There are several other options you can specify in the kickstart file, see *Kickstart Options* in the [Fedora Installation guide](http://docs.fedoraproject.org/en-US/Fedora/20/html/Installation_Guide/s1-kickstart2-options.html). 
 

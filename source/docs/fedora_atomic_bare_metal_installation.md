@@ -4,7 +4,7 @@ Performing a Bare Metal Installation of Fedora Atomic
 
 ## Getting the Installation Image and Creating Media
 
-Download the [**boot.iso**](https://dl.fedoraproject.org/pub/alt/stage/22_Beta_RC3/Cloud_Atomic/x86_64/iso/Fedora-Cloud_Atomic-x86_64-22_Beta.iso) file and use it to create installation media. For example, if you run the GNOME desktop, you can use the *Write to disk* capability of the Nautilus file browser to create an installation DVD. Alternatively, you can write the installation ISO image to a USB device with the `dd` command.
+Download the [**boot.iso**](http://download.fedoraproject.org/pub/fedora/linux/releases/22/Cloud_Atomic/x86_64/iso/Fedora-Cloud_Atomic-x86_64-22.iso) file and use it to create installation media. For example, if you run the GNOME desktop, you can use the *Write to disk* capability of the Nautilus file browser to create an installation DVD. Alternatively, you can write the installation ISO image to a USB device with the `dd` command.
 
 These procedures are described in the [Fedora Installation guide](http://docs.fedoraproject.org/en-US/Fedora/20/html/Installation_Guide/sn-making-media.html) in the second chapter called *Making media*. 
 
@@ -18,9 +18,9 @@ Once your system has completed booting, the boot screen is displayed:
 
 The boot media displays a graphical boot menu with three options:
 
-- *Install Fedora Docker Host* - Choose this option to install Fedora Atomic onto your computer system using the graphical installation program. 
+- *Install Fedora 22* - Choose this option to install Fedora Atomic onto your computer system using the graphical installation program. 
 
-- *Test this media & install Fedora Docker Host* -  With this option, the integrity of the installation media is tested before installing Fedora Atomic onto your computer system using the graphical installation program. This option is selected by default.
+- *Test this media & install Fedora 22* -  With this option, the integrity of the installation media is tested before installing Fedora Atomic onto your computer system using the graphical installation program. This option is selected by default.
 
 - *Troubleshooting* - This item opens a menu with additional boot options. From this screen you can launch a rescue mode for Fedora Atomic, or run a memory test. Also, you can start the installation in the basic graphics mode as well as boot the installation from local media.
 
@@ -36,7 +36,7 @@ Select your language of preference and press *Continue*. The *INSTALLATION SUMMA
 
 This menu allows you to configure your installation in the order you choose. Each menu item leads to an individual configuration screen. For description of these sub-screens, see the corresponding sections of the Fedora Installation guide:
 
-- [*Date & Time*](http://docs.fedoraproject.org/en-US/Fedora/20/html/Installation_Guide/s1-timezone-x86.html) - lets you configure date, time, time zone, and NTP (Network Time Protocol).
+- [*Time & Date*](http://docs.fedoraproject.org/en-US/Fedora/20/html/Installation_Guide/s1-timezone-x86.html) - lets you configure date, time, time zone, and NTP (Network Time Protocol).
 - [*Keyboard*](http://docs.fedoraproject.org/en-US/Fedora/20/html/Installation_Guide/sn-keyboard-x86.html) - here you can select keyboard layouts to use on your system.  
 - [*Language Support*](http://docs.fedoraproject.org/en-US/Fedora/20/html/Installation_Guide/language-support-x86.html) - this screen provides language options for your installation, it is identical to the welcome screen depicted above.
 - [*Installation Destination*](http://docs.fedoraproject.org/en-US/Fedora/20/html/Installation_Guide/s1-diskpartsetup-x86.html) - allows you to select storage devices and set partitioning. Note that it is recommended to use the default partitioning configured in the boot.iso image.
@@ -94,6 +94,8 @@ With the kickstart file described above, the installation proceeds automatically
 
 ## Updating and Reverting Fedora Atomic
 
+NOTE: If you've used a different `ostreesetup` URL or reference, you'll want to make sure you set the appropriate repository to get updates.  If the `ostreesetup` URL is where you'd like to receive updates, you can skip the `rebase` section.
+
 To receive updates for your Fedora Atomic installation, specify the location of the remote OSTree repository. Execute:
 
     # ostree remote add --set=gpg-verify=false fedora-atomic http://dl.fedoraproject.org/pub/alt/fedora-atomic/repo/
@@ -110,11 +112,11 @@ The `rebase` command, that is an extension of the `upgrade` command, switches to
 
 To determine what version of the operating system is running, execute:
 
-    # ostree admin status
+    # atomic host status
 
 To revert to a previous installation, execute the following commands:
 
-    # rpm-ostree rollback
+    # atomic host rollback
     # systemctl reboot
 
 <!---

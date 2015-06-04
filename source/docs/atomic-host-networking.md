@@ -22,4 +22,4 @@ Kubernetes gives every pod its own IP address allocated from an internal network
 
 In Kubernetes, every machine in the cluster is assigned a full subnet, a model intended to reduce the complexity of doing port mapping, but which can prove challenging to implement in many network environments. Atomic hosts include [flannel](https://github.com/coreos/flannel/blob/master/README.md), which provides an overlay network that gives a subnet to each machine in a kubernetes cluster.
 
-To learn how to configure flannel and kubernetes in an Atomic host cluster, check out the Project Atomic [getting started guide](gettingstarted).
+To learn how to configure flannel and kubernetes in an Atomic host cluster, check out the Project Atomic [Getting Started Guide](http://www.projectatomic.io/docs/gettingstarted/).

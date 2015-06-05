@@ -9,7 +9,7 @@ categories:
 ---
 
 
-With the release of Fedora 22 Atomic host, the Cockpit Project team changed the way cockpit was delivered.  We now have a super-privileged container (SPC) for the web service (cockpit-ws) with the bridge, shell, and docker components installed by default on the Atomic host.  You can read more about the change on the [Cockpit Project wiki page](https://github.com/cockpit-project/cockpit/wiki/Atomic).
+With the release of Fedora 22 Atomic host, the Cockpit Project team changed the way cockpit was delivered.  You can read more about the change on the [Cockpit Project wiki page](https://github.com/cockpit-project/cockpit/wiki/Atomic).  The team is currently uploading the cockpit container to the Fedora repo on the Docker Hub, but Fedora Release Engineering is working on publishing layered images.  We now have a super-privileged container (SPC) for the web service (cockpit-ws) with the bridge, shell, and docker components installed by default on the Atomic host.  
 
 ```
 cockpit-shell-0.55-1.fc22.noarch
@@ -111,4 +111,4 @@ Jun 05 14:56:17 atomic-cockpit.localdomain docker[1595]: + /usr/sbin/remotect...
 Hint: Some lines were ellipsized, use -l to show in full.
 ```
 
-Now that the service is up and running, point your web brower at port 9090 on the Atomic host and you should see the Cockpit login page.  Log in with the `fedora` credentials and you should be ready to go.  You can add other hosts to this Cockpit instance, with the knowledge that reboots and upgrades to the host or the container won't affect the configuration.
+Now that the service is up and running, point your web brower at port 9090 on the Atomic host and you should see the Cockpit login page.  You'll need to log in with a user in the `wheel` group in order to adminstrate the system, but you can log in as any user to view the local host.  For the published Fedora 22 Atomic cloud image, log in with the `fedora` credentials and you should be ready to go.  You can add other hosts to this Cockpit instance, with the knowledge that reboots and upgrades to the host or the container won't affect the configuration.

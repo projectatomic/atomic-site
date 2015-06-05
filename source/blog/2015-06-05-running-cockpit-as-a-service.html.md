@@ -1,16 +1,15 @@
 ---
 title: Running Cockpit as a service in Fedora 22 Atomic Host
 author: mmicene
-date: 2014-10-21
+date: 2015-06-05 04:00:00 UTC
 layout: post
 comments: true
 categories: 
   - Blog
-published: True
 ---
 
 
-With the release of Fedora 22 Atomic host, the Cockpit Project team changed the way cockpit was delivered.  We now have a super-privileged container for the web service (cockpit-ws) with the bridge, shell, and docker components installed by default on the Atomic host.  
+With the release of Fedora 22 Atomic host, the Cockpit Project team changed the way cockpit was delivered.  We now have a super-privileged container (SPC) for the web service (cockpit-ws) with the bridge, shell, and docker components installed by default on the Atomic host.  You can read more about the change on the [Cockpit Project wiki page](https://github.com/cockpit-project/cockpit/wiki/Atomic).
 
 ```
 cockpit-shell-0.55-1.fc22.noarch
@@ -20,9 +19,12 @@ cockpit-bridge-0.55-1.fc22.x86_64
 
 READMORE
 
-This means you can simply run `atomic run fedora/cockpitws` as root or with sudo and cockpit will be running on port 9090.  Very simple, but that means it doesn't run as a service like it did previously.  To make the cockpitws container start and stop with the system we can create a systemd unit file.
+This means you can simply run `atomic run fedora/cockpitws` as root or with sudo and cockpit will be running on port 9090.  
 
-Lets we'll go ahead look at the LABELs the Cockpit Project team used in the Dockerfile using `atomic info`.
+### Inspecting the new SPC
+Very simple, but that means you'll need to manually restart cockpit after a reboot.  To make the cockpitws container start and stop with the system, we need a systemd unit file.
+
+Using `atomic info`, look at the LABELs the Cockpit Project team used in the Dockerfile for the SPC.
 
 ```
 [fedora@atomic-cockpit ~]$ sudo atomic info fedora/cockpitws
@@ -33,7 +35,8 @@ UNINSTALL    : /usr/bin/docker run -ti --rm --privileged -v /:/host IMAGE /cockp
 
 These LABELs are used by `atomic` to determine what docker command line to build when `atomic run`, `atomic install`, or `atomic uninstall` are issued.  In order to make the systemd unit file behavior match the `atomic run` behavior, we'll the RUN label as our model.
 
-Install the cockpitws container using `atomic`, then build the unit file around it.
+### Install the container
+Install the cockpitws container using `atomic`.
 
 ```
 [fedora@atomic-cockpit ~]$ sudo atomic install fedora/cockpitws
@@ -51,12 +54,13 @@ Install the cockpitws container using `atomic`, then build the unit file around 
 
 There's a few things going on here in the install method.  
 
-Note that we're exposing the Atomic host root directory to the container at `/host`.  As a SPC, this allows the container to access the host filesystem and make changes. The install method creates a set of directories in `/etc` and `/var` to persist state.  This means that we don't need any particular cockpitws container to stick around, any cockpitws container will be able to read the appropriate state from the host.  We can upgrade the cockpit image and not worry about losing data.  Since `/etc` and `/var` are writable on an Atomic host, and `/etc` content will be appropriately merged on a tree change, cockpit data will also survive an `atomic host upgrade` as well.
+Note that we're exposing the Atomic host root directory to the container at `/host`.  As a SPC, this allows the container to access the host filesystem and make changes. The install method creates a set of directories in `/etc` and `/var` to persist configs.  This means that we don't need any particular cockpitws container to stick around, any cockpitws container will be able to read the appropriate state from the host.  We can upgrade the cockpit image and not worry about losing data.  Since `/etc` and `/var` are writable on an Atomic host, and `/etc` content will be appropriately merged on a tree change, cockpit data will also survive an `atomic host upgrade` as well.
 
+### Set up the systemd unit
 With the container available to docker, we'll build the systemd unit file next.  For local systemd unit files, we want them to reside in /etc/systemd/system.
 
 ```
-sudo vi /etc/systemd/system/cockpitws.service
+[fedora@atomic-cockpit ~]$ sudo vi /etc/systemd/system/cockpitws.service
 
 [Unit]
 Description=Cockpit Web Interface
@@ -73,15 +77,18 @@ ExecStop=-/usr/bin/docker stop -t 2 %p
 WantedBy=multi-user.target
 ```
 
-The `ExecStart` line in the unit file looks nearly identical to the RUN label, with one minor change.  When running out of systemd, we don't want to use `docker -d` instead we want either `docker -a` or `docker --rm`.  We're using `docker --rm` here because we don't need this particular container to survice a restart.  We are going to name using the `%p` tag just to make it easier to find in `docker ps`.
+The `ExecStart` line in the unit file looks nearly identical to the RUN label, with one change.  When running containers from systemd, we don't want to use `docker -d`, instead we want either `docker -a` or `docker --rm`.  We're using `docker --rm` here since we don't need this particular container instance to survice a restart.  We are going to name container using the `%p` tag to pick up the systemd service name, just to make it easier to find in `docker ps`.
 
-Reload systemd to read the new unit file, enable the service to start on reboot, and then start the new cockpitws service.
+Now we can reload systemd to read the new unit file, enable the service to start on reboot, and then start the new cockpitws service.
 
 ```
 [fedora@atomic-cockpit ~]$ sudo systemctl daemon-reload
+
 [fedora@atomic-cockpit ~]$ sudo systemctl enable cockpitws.service 
 Created symlink from /etc/systemd/system/multi-user.target.wants/cockpitws.service to /etc/systemd/system/cockpitws.service.
+
 [fedora@atomic-cockpit ~]$ sudo systemctl start cockpitws.service 
+
 [fedora@atomic-cockpit ~]$ sudo systemctl status cockpitws.service 
 ● cockpitws.service - Cockpit Web Interface
    Loaded: loaded (/etc/systemd/system/cockpitws.service; enabled; vendor preset: disabled)

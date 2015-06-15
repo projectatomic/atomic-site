@@ -9,8 +9,9 @@ published: true
 
 When using SELinux for controlling processes within a container, you need to make sure any content that gets volume mounted into the container is readable, and potentially writable, depending on the use case.
 
-By default, Docker container processes run with the `system_u:system_r:svirt_lxc_net_t:s0` label.  The `svirt_lxc_net_t` type is allowed to read/execute most content under /usr, but it is
-not allowed to use most other types on the system. 
+By default, Docker container processes run with the `system_u:system_r:svirt_lxc_net_t:s0` label.  The `svirt_lxc_net_t` type is allowed to read/execute most content under /usr, but it is not allowed to use most other types on the system. 
+
+READMORE
 
 If you want to volume mount content under `/var`, for example, into a container you need to set the labels on this content.  In the `docker run` man page we mention this.
 

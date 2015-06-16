@@ -11,7 +11,7 @@
   Building Images: /docs/docker-building-images
   Image Author Guidance: /docs/docker-image-author-guidance
   About SELinux: /docs/docker-and-selinux
-  Managing Contaners: /docs/kubernetes
+  Managing Containers: /docs/kubernetes
   Atomic Host Networking: /docs/atomic-host-networking
 - Contributing:
   How to Contribute: /docs/#contribute

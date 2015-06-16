@@ -28,34 +28,31 @@ blog_summary_length: 500
   = partial "social"
 
   .row
-    -# main point, full width on smaller screens
-    .col-xs-12.col-lg-4
+    .col-xs-12.col-lg-6
       %h2
-        %i.fa.fa-thumbs-up
-        =lorem.words(4).capitalize
+        Nulecule
+        %small /NOO-le-kyul/ 
+        %small (noun)
       %p
-        =lorem.sentences(3)
+        Nulecule is a made-up word meaning "the mother of all atomic 
+        particles". Sounds like "molecule". But different. 
       %p
-        #{link_to "Learn more about point 1", "#"}
+        Also a specification for deploying and complex 
+        multi-container applications and their dependencies.
+      %p
+        #{link_to "&raquo; More about Nulecule", "/docs/nulecule"}
 
-    -# 2 subpoints, taking two columns on smaller screens
-    .col-xs-12.col-sm-6.col-lg-4
+    .col-xs-12.col-lg-6
       %h2
-        %i.fa.fa-thumbs-up
-        =lorem.words(3).capitalize
+        AtomicApp
       %p
-        =lorem.sentences(3)
+        AtomicApp implementats the Nulecule Specification in a practice.
+        It can be used to bootstrap, install and run complete (and complex)
+        applications in a container context. 
       %p
-        #{link_to "Learn more about point 2", "#"}
-
-    .col-xs-12.col-sm-6.col-lg-4
-      %h2
-        %i.fa.fa-thumbs-up
-        =lorem.words(4).capitalize
+        AtomicApp itself is packaged as a container.
       %p
-        =lorem.sentences(3)
-      %p
-        #{link_to "Learn more about point 3", "#"}
+        #{link_to "&raquo; Learn about Atomic App", "/docs/atomicapp"}
 
 .row.featurette
   .col-sm-12.col-md-12

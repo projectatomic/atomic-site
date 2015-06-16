@@ -4,7 +4,7 @@ Performing a Bare Metal Installation of Fedora Atomic
 
 ## Getting the Installation Image and Creating Media
 
-Download the [**boot.iso**](https://dl.fedoraproject.org/pub/alt/stage/22_Beta_RC3/Cloud_Atomic/x86_64/iso/Fedora-Cloud_Atomic-x86_64-22_Beta.iso) file and use it to create installation media. For example, if you run the GNOME desktop, you can use the *Write to disk* capability of the Nautilus file browser to create an installation DVD. Alternatively, you can write the installation ISO image to a USB device with the `dd` command.
+Download the [**boot.iso**](http://download.fedoraproject.org/pub/fedora/linux/releases/22/Cloud_Atomic/x86_64/iso/Fedora-Cloud_Atomic-x86_64-22.iso) file and use it to create installation media. For example, if you run the GNOME desktop, you can use the *Write to disk* capability of the Nautilus file browser to create an installation DVD. Alternatively, you can write the installation ISO image to a USB device with the `dd` command.
 
 These procedures are described in the [Fedora Installation guide](http://docs.fedoraproject.org/en-US/Fedora/20/html/Installation_Guide/sn-making-media.html) in the second chapter called *Making media*. 
 
@@ -18,9 +18,9 @@ Once your system has completed booting, the boot screen is displayed:
 
 The boot media displays a graphical boot menu with three options:
 
-- *Install Fedora Docker Host* - Choose this option to install Fedora Atomic onto your computer system using the graphical installation program. 
+- *Install Fedora 22* - Choose this option to install Fedora Atomic onto your computer system using the graphical installation program. 
 
-- *Test this media & install Fedora Docker Host* -  With this option, the integrity of the installation media is tested before installing Fedora Atomic onto your computer system using the graphical installation program. This option is selected by default.
+- *Test this media & install Fedora 22* -  With this option, the integrity of the installation media is tested before installing Fedora Atomic onto your computer system using the graphical installation program. This option is selected by default.
 
 - *Troubleshooting* - This item opens a menu with additional boot options. From this screen you can launch a rescue mode for Fedora Atomic, or run a memory test. Also, you can start the installation in the basic graphics mode as well as boot the installation from local media.
 
@@ -36,7 +36,7 @@ Select your language of preference and press *Continue*. The *INSTALLATION SUMMA
 
 This menu allows you to configure your installation in the order you choose. Each menu item leads to an individual configuration screen. For description of these sub-screens, see the corresponding sections of the Fedora Installation guide:
 
-- [*Date & Time*](http://docs.fedoraproject.org/en-US/Fedora/20/html/Installation_Guide/s1-timezone-x86.html) - lets you configure date, time, time zone, and NTP (Network Time Protocol).
+- [*Time & Date*](http://docs.fedoraproject.org/en-US/Fedora/20/html/Installation_Guide/s1-timezone-x86.html) - lets you configure date, time, time zone, and NTP (Network Time Protocol).
 - [*Keyboard*](http://docs.fedoraproject.org/en-US/Fedora/20/html/Installation_Guide/sn-keyboard-x86.html) - here you can select keyboard layouts to use on your system.  
 - [*Language Support*](http://docs.fedoraproject.org/en-US/Fedora/20/html/Installation_Guide/language-support-x86.html) - this screen provides language options for your installation, it is identical to the welcome screen depicted above.
 - [*Installation Destination*](http://docs.fedoraproject.org/en-US/Fedora/20/html/Installation_Guide/s1-diskpartsetup-x86.html) - allows you to select storage devices and set partitioning. Note that it is recommended to use the default partitioning configured in the boot.iso image.
@@ -54,14 +54,16 @@ While the installation proceeds, you can specify the user settings:
 
 Kickstart installations offer a means to automate the installation process, either partially or fully. Kickstart files contain answers to all questions normally asked by the installation program, such as what time zone do you want the system to use, how should the drives be partitioned or which packages should be installed. 
 
-Currently, the */usr/share/anaconda/interactive-defaults.ks* kickstart is already included in Fedora Atomic boot.iso. This minimal configuration file contains two required commands:
+The installer ISO contains embedded content, and thus works offline.
 
-    bootloader --timeout=3 --extlinux
-    ostreesetup --nogpg --osname=fedora-atomic-host --remote=installmedia --url=file:///install/ostree --ref=fedora-atomic/rawhide/x86_64/server/docker-host-systemd
+However, to do a PXE installation, you must download the content
+dynamically.  We strongly recommend mirroring the OSTree repository,
+rather than having each machine contact the upstream provider.
 
-The first command above choses the *extlinux* bootloader that is required by the current Anaconda-OSTree implementation. The second command specifies the default OSTree repository.
-
-For unattended installation you need to specify your own kickstart configuration and load it from the boot prompt as described below. Use the required `bootloader` and `ostreesetup` commands in your custom configuration. If you omit this step, your kickstart will be ignored and the default one will be used.
+So, for unattended installation you need to specify your own kickstart
+configuration and load it from the boot prompt as described below. Use
+the `ostreesetup` command in your custom configuration, which is what
+configures anaconda to consume the rpm-ostree generated content.
 
 For example, create *atomic-ks.cfg* file with the following content:
 
@@ -71,10 +73,12 @@ For example, create *atomic-ks.cfg* file with the following content:
     zerombr
     clearpart --all --initlabel
     autopart
+    # SSH keys are better than passwords, but this is a simple example
     rootpw --plaintext atomic
 
-    bootloader --timeout=3 --extlinux
-    ostreesetup --nogpg --osname=fedora-atomic-host --remote=installmedia --url=file:///install/ostree --ref=fedora-atomic/rawhide/x86_64/server/docker-host-systemd
+    # NOTICE: This will download the content from upstream; this will be very slow.
+    # Create your own OSTree repo locally and mirror the content instead.
+    ostreesetup --nogpg --osname=fedora-atomic --remote=fedora-atomic --url=https://dl.fedoraproject.org/pub/fedora/linux/atomic/22/ --ref=fedora-atomic/f22/x86_64/docker-host
 
 There are several other options you can specify in the kickstart file, see *Kickstart Options* in the [Fedora Installation guide](http://docs.fedoraproject.org/en-US/Fedora/20/html/Installation_Guide/s1-kickstart2-options.html). 
 
@@ -89,6 +93,8 @@ The *linux* keyword is used here to specify the installation program image file 
 With the kickstart file described above, the installation proceeds automatically until Anaconda prompts you to reboot the system to complete the installation. 
 
 ## Updating and Reverting Fedora Atomic
+
+NOTE: If you've used a different `ostreesetup` URL or reference, you'll want to make sure you set the appropriate repository to get updates.  If the `ostreesetup` URL is where you'd like to receive updates, you can skip the `rebase` section.
 
 To receive updates for your Fedora Atomic installation, specify the location of the remote OSTree repository. Execute:
 
@@ -106,11 +112,11 @@ The `rebase` command, that is an extension of the `upgrade` command, switches to
 
 To determine what version of the operating system is running, execute:
 
-    # ostree admin status
+    # atomic host status
 
 To revert to a previous installation, execute the following commands:
 
-    # rpm-ostree rollback
+    # atomic host rollback
     # systemctl reboot
 
 <!---

@@ -23,11 +23,8 @@ the updates to take effect.
 
 ## Rollback to the Previous Tree
 
-If something goes wrong, by default, you always have a previous
-tree (operating system snapshot) installed.  It will be available
-as a bootloader entry; hold down SHIFT during OS bootup to cause
-the bootloader to prompt.
+By default, you always have a previous tree (an operating system snapshot) installed. So if something goes wrong, you can always fall back to the previous tree. The previous tree is available as a bootloader entry; to access the previous tree, hold down SHIFT during OS bootup and select the fallback tree in the bootloader menu.
 
-If you boot into the new tree and determine something is wrong,
+If you boot into the new tree and determine that something is wrong,
 you can invoke `rpm-ostree rollback`.
 

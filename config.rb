@@ -77,7 +77,7 @@ activate :blog do |blog|
   # blog.summary_length = 99999
 
   blog.paginate = true
-  blog.per_page = 10
+  blog.per_page = 5
   blog.page_link = 'page=:num'
 end
 

@@ -8,27 +8,36 @@ blog_summary_length: 500
 ---
 .jumbotron
   %h1
-    Deploy and Manage Your 
-    %a{:href => "http://docker.io"} Docker
-    Containers.
+    Deploy and Run Complex Containers
   %p.lead
-    Project Atomic integrates the tools and patterns of container-based application 
-    and service deployment with trusted operating system platforms to deliver an 
-    end-to-end hosting architecture that's modern, reliable, and secure.
-
+    Create your application using a set of
+    %a{:href => "http://docker.io"} Docker
+    containers. Deploy as bundle on a proven, trusted platform.
+    
   %p
-    Fedora, CentOS, and Red Hat Enterprise Linux-based Atomic Hosts are now available for download.
-   
+    Project Atomic introduces Atomic App, that implements the Nulecule
+    specification which lets you manage multiple containers as a bundle.
+    Stand on the shoulders of giants and utilize proven, existing containers 
+    as building blocks for your service or application.
+       
   %p.buttons
-    %a.btn.btn-default{:href => "/download" }
-      %i.fa.fa-rocket
-      Download and Get Started
+    %a.btn.btn-default{:href => "/docs/atomicapp" }
+      %i.fa.fa-graduation-cap.text-primary
+      Learn more about Atomic App
       %i.fa.fa-long-arrow-right
 
   = partial "social"
 
   .row
-    .col-xs-12.col-lg-6
+    .col-xs-12.col-lg-4
+      %h2 Atomic Host
+      
+      %p 
+        Based on proven technology from Red Hat Enterprise Linux and the CentOS
+        project, Atomic Host is a very lightweight platform, designed with the
+        sole purpose to run docker containers.
+        
+    .col-xs-12.col-lg-4
       %h2
         Nulecule
         %small /NOO-le-kyul/ 
@@ -42,13 +51,12 @@ blog_summary_length: 500
       %p
         #{link_to "&raquo; More about Nulecule", "/docs/nulecule"}
 
-    .col-xs-12.col-lg-6
+    .col-xs-12.col-lg-4
       %h2
-        AtomicApp
+        Complex Containers
       %p
-        AtomicApp implementats the Nulecule Specification in a practice.
-        It can be used to bootstrap, install and run complete (and complex)
-        applications in a container context. 
+        Examples of applications that benefit from being deployed in 
+        multi-container fashion.
       %p
         AtomicApp itself is packaged as a container.
       %p

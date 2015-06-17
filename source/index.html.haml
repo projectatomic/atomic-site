@@ -3,7 +3,7 @@
 title: ""
 pageable: false
 page_classes: front-page header-page
-per_page: 3
+per_page: 5
 blog_summary_length: 500
 ---
 .jumbotron
@@ -57,26 +57,14 @@ blog_summary_length: 500
 .row.featurette
   .col-sm-12.col-md-12
 
-    - blog_archives = blog.articles.length - current_page.data.per_page
-    - blogwidth = blog_archives > 0 ? 8 : 12
-
     %h2 Community News
 
-    %section{class: "col-md-#{blogwidth}"}
-      %section.blog-posts
-        = partial :blog_posts, locals: {summarize: current_page.data.blog_summary_length}
+    %section.blog-posts
+      = partial :blog_posts, locals: {summarize: current_page.data.blog_summary_length}
 
-    - if blog_archives > 0
-      %section.col-md-4
-      %section.blog-archive
-        - blog_url = "#{blog.options[:prefix]}#{blog.options[:page_link]}/".sub(':num', '2')
+      - blog_url = "#{blog.options[:prefix]}#{blog.options[:page_link]}/".sub(":num", "2")
 
-        %h2 Recent archives
-        %ol
-          - blog.articles.drop(current_page.data.per_page).take(blog.options[:per_page] - current_page.data.per_page).each do |article|
-            %li= link_to article.title, article.url
-
-        = link_to "&raquo; View older posts", blog_url, class: "more-link"
+      %h3=link_to "&raquo; View older news", blog_url, class: "more-link"
 
 .row.featurette
   .col-sm-12.col-md-12

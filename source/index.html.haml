@@ -10,32 +10,47 @@ blog_summary_length: 500
   %h1
     Deploy and Run Complex Containers
   %p.lead
-    Create your application using a set of
+    Create your application as a bundle of
     %a{:href => "http://docker.io"} Docker
-    containers. Deploy as bundle on a proven, trusted platform.
+    containers. Deploy and manage it on a proven, trusted platform.
     
   %p
-    Project Atomic introduces Atomic App, that implements the Nulecule
-    specification which lets you manage multiple containers as a bundle.
-    Stand on the shoulders of giants and utilize proven, existing containers 
+    %strong Project Atomic introduces Atomic App
+    &mdash; an implementation of the 
+    #{link_to "Nulecule", "/docs/nulecule"}
+    specification, which lets you manage multiple containers as one bundle.
+    Instead of starting your application or service from scratch, 
+    stand on the shoulders of giants and utilize proven, existing containers 
     as building blocks for your service or application.
        
   %p.buttons
     %a.btn.btn-default{:href => "/docs/atomicapp" }
       %i.fa.fa-graduation-cap.text-primary
-      Learn more about Atomic App
+      Learn more about running Complex Applications with Atomic
       %i.fa.fa-long-arrow-right
 
   = partial "social"
 
-  .row
+  .row        
     .col-xs-12.col-lg-4
-      %h2 Atomic Host
-      
-      %p 
-        Based on proven technology from Red Hat Enterprise Linux and the CentOS
-        project, Atomic Host is a very lightweight platform, designed with the
-        sole purpose to run docker containers.
+      %h2
+        Containers, Bundled
+      %p
+        With Atomic App, you can use existing, proven 
+        containers as building blocks for your product or project.
+        
+      %p
+        Databases, various services and other common components are
+        vital parts of application and services, and utilizing existing
+        containers lets you focus more on your own code and spend less time
+        packaging and setting up the common plumbing required.
+        
+      %p.lead
+        %a( href="https://github.com/projectatomic/atomicapp" )
+          %i.fa.fa-fw.fa-github
+          Atomic App on Github
+        
+        
         
     .col-xs-12.col-lg-4
       %h2
@@ -46,21 +61,34 @@ blog_summary_length: 500
         Nulecule is a made-up word meaning "the mother of all atomic 
         particles". Sounds like "molecule". But different. 
       %p
-        Also a specification for deploying and complex 
-        multi-container applications and their dependencies.
-      %p
-        #{link_to "&raquo; More about Nulecule", "/docs/nulecule"}
+        Also a specification for applications composed from 
+        multiple containers. Check it out on Github below, or read through
+        #{link_to "the Getting Started -guide", "https://github.com/projectatomic/nulecule/blob/master/docs/getting-started.md" }
+        if you want to know more.
+        
+      %p.lead
+        %a( href="https://github.com/projectatomic/nulecule/" )
+          %i.fa.fa-fw.fa-github
+          Nulecule on Github
 
     .col-xs-12.col-lg-4
-      %h2
-        Complex Containers
+      %h2 Atomic Host
+      
+      %p 
+        Based on proven technology either from Red Hat Enterprise Linux or the 
+        CentOS and Fedora projects, Atomic Host is the lightweight platform, 
+        designed with the sole purpose to run containerized applications.
+        
       %p
-        Examples of applications that benefit from being deployed in 
-        multi-container fashion.
-      %p
-        AtomicApp itself is packaged as a container.
-      %p
-        #{link_to "&raquo; Learn about Atomic App", "/docs/atomicapp"}
+        To balance the need between long-term stability and new 
+        features, we are providing different releases of Atomic Host
+        for you to choose from.
+
+      %p.lead
+        %a( href="/releases" )
+          %i.fa.fa-fw.fa-download
+          Get Started
+
 
 .row.featurette
   .col-sm-12.col-md-12

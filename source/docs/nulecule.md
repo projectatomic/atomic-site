@@ -2,9 +2,9 @@
 title: "Nulecule Specification"
 ---
 
-# Composite Container-based Application Specification
+# Nulecule: A Composite Container-based Application Specification
 
-`/NOO-le-kyul/` (n.) a made-up word meaning ["the mother of all atomic particles"](http://simpsons.wikia.com/wiki/Made-up_words). Sounds like "molecule". But different.
+***/NOO-le-kyul/*** *(n.)* &ndash; a made-up word meaning &quot;*[the mother of all atomic particles](http://simpsons.wikia.com/wiki/Made-up_words)*.&quot; Sounds like "molecule". But different.
 
 **Package once. Run anywhere.** With pluggable orchestration providers you can package your application to run on OpenShift, Kubernetes, Docker Compose, Helios, Panamax, Docker Machine, etc. and allow the user to choose the target when deployed.
 

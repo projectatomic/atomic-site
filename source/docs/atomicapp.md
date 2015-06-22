@@ -1,7 +1,7 @@
 ---
-title: "AtomicApp"
+title: "Atomic App"
 ---
-# What is atomicapp?
+# What is Atomic App?
 
 Atomicapp is a reference implementation of the [Nulecule Specification](https://github.com/projectatomic/nulecule). It can be used to bootstrap container applications and to install and run them. Atomicapp is designed to be run in a container context. Examples using this tool may be found in the [Nulecule examples directory](https://github.com/projectatomic/nulecule/tree/master/examples).
 
@@ -72,20 +72,7 @@ As of Version 0.0.1 Atomicapp uses [Python 2.7.5](https://docs.python.org/2/) an
 
 ##Communication channels
 
+Interested in **Atomic App**? We'd love to hear from you about your use of Atomic App and work together on improving it. 
+
 * IRC: #nulecule (On Freenode)
 * Mailing List: [container-tools@redhat.com](https://www.redhat.com/mailman/listinfo/container-tools)
-
-# The Badges
-
-[![Code Health](https://landscape.io/github/projectatomic/atomicapp/master/landscape.svg?style=flat)](https://landscape.io/github/projectatomic/atomicapp/master)
-[![Build Status](https://travis-ci.org/projectatomic/atomicapp.svg?branch=master)](https://travis-ci.org/projectatomic/atomicapp)
-
-# Copyright
-
-Copyright (C) 2015 Red Hat Inc.
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU Affero General Public License, version
-3, as published by the Free Software Foundation. For details see
-GNU-AGPL-3.0.txt 
-

@@ -7,7 +7,7 @@ Atomic App is a reference implementation of the [Nulecule Specification](https:/
 
 ## Getting Started
 
-Atomic App is packaged as a container. End-users typically do not install the software from source. Instead use the atomicapp container as the `FROM` line in a Dockerfile and package your application on top. For example:
+Atomic App itself is packaged as a container. End-users typically do not install the software from source. Instead use the atomicapp container as the `FROM` line in a Dockerfile and package your application on top. For example:
 
 ```
 FROM projectatomic/atomicapp
@@ -22,7 +22,7 @@ For more information see the [Nulecule getting started guide](https://github.com
 
 ## Developers
 
-First of all, clone the github repository: `git clone https://github.com/projectatomic/atomicapp`.
+Step 1 - clone the github repository: `git clone https://github.com/projectatomic/atomicapp`.
 
 ### Install this project
 Simply run
@@ -31,7 +31,7 @@ Simply run
 pip install .
 ```
 
-If you want to do some changes to the code, I suggest to do:
+If you want to make some changes to the code, setting these environment variables will help:
 
 ```
 cd atomicapp
@@ -44,7 +44,7 @@ alias atomicapp="`pwd`/atomicapp/cli/main.py"
 atomicapp [--dry-run] build [TAG]
 ```
 
-Calls Docker build to package up the application and tags the resulting image.
+Calls 'docker build' to package up the application and tags the resulting image.
 
 ### Install and Run
 ```

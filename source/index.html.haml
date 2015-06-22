@@ -30,64 +30,61 @@ blog_summary_length: 500
 
   = partial "social"
 
-  .row        
-    .col-xs-12.col-lg-4
-      %h2
-        Atomic App
-      %p
-        With Atomic App, you can use existing, proven 
-        containers as building blocks for your product or project.
-        
-      %p
-        Databases, various services and other common components are
-        vital parts of application and services, and utilizing existing
-        containers lets you focus more on your own code and spend less time
-        packaging and setting up the common plumbing required.
-        
-      %p.lead
-        %a( href="/docs/atomicapp" )
-          %i.fa.fa-fw.fa-graduation-cap
-          Learn more about Atomic App
-        
-        
-        
-    .col-xs-12.col-lg-4
-      %h2
-        Nulecule
-        %small /NOO-le-kyul/ 
-        %small (noun)
-      %p
-        Nulecule is a made-up word meaning "the mother of all atomic 
-        particles". Sounds like "molecule". But different. 
-      %p
-        Also a specification for applications composed from 
-        multiple containers. Check it out on Github below, or read through
-        #{link_to "the Getting Started -guide", "https://github.com/projectatomic/nulecule/blob/master/docs/getting-started.md" }
-        if you want to know more.
-        
-      %p.lead
-        %a( href="https://github.com/projectatomic/nulecule/" )
-          %i.fa.fa-fw.fa-github
-          Nulecule on Github
-
-    .col-xs-12.col-lg-4
-      %h2 Atomic Host
+.row.featurette
+  .col-md-12#secondary
+    .row
+      .col-xs-12.col-lg-4
+        %h2
+          Atomic App
+        %p
+          With Atomic App, you can use existing, proven 
+          containers as building blocks for your product or project.
       
-      %p 
-        Based on proven technology either from Red Hat Enterprise Linux or the 
-        CentOS and Fedora projects, Atomic Host is the lightweight platform, 
-        designed with the sole purpose to run containerized applications.
+        %p
+          Databases, various services and other common components are
+          vital parts of application and services, and utilizing existing
+          containers lets you focus more on your own code and spend less time
+          packaging and setting up the common plumbing required.
+      
+        %p
+          %a( href="/docs/atomicapp" )
+            %i.fa.fa-fw.fa-graduation-cap
+            Learn more about Atomic App
+      
+      .col-xs-12.col-lg-4
+        %h2
+          Nulecule
+          %small /NOO-le-kyul/ 
+          %small (noun)
+        %p
+          Nulecule is a made-up word meaning "the mother of all atomic 
+          particles". Sounds like "molecule". But different. 
+        %p
+          Also a specification for applications composed from 
+          multiple containers. Check it out on Github below, or read through
+          #{link_to "the Getting Started -guide", "https://github.com/projectatomic/nulecule/blob/master/docs/getting-started.md" }
+          if you want to know more.
         
-      %p
-        To balance the need between long-term stability and new 
-        features, we are providing different releases of Atomic Host
-        for you to choose from.
-
-      %p.lead
-        %a( href="/releases" )
-          %i.fa.fa-fw.fa-download
-          Get Started
-
+        %p
+          %a( href="https://github.com/projectatomic/nulecule/" )
+            %i.fa.fa-fw.fa-github
+            Nulecule on Github
+      .col-xs-12.col-lg-4
+        %h2 Atomic Host
+      
+        %p 
+          Based on proven technology either from Red Hat Enterprise Linux or the 
+          CentOS and Fedora projects, Atomic Host is the lightweight platform, 
+          designed with the sole purpose to run containerized applications.
+      
+        %p
+          To balance the need between long-term stability and new 
+          features, we are providing different releases of Atomic Host
+          for you to choose from.
+        %p
+          %a( href="/releases" )
+            %i.fa.fa-fw.fa-download
+            Get Started
 
 .row.featurette
   .col-sm-12.col-md-12

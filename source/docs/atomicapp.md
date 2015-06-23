@@ -66,10 +66,6 @@ Action `run` performs `install` prior it's own tasks are executed if `APP` is gi
 
 Providers represent various deployment targets. They can be added by placing a file called `provider_name.py` in `providers/`. This file needs to implement the interface explained in (providers/README.md). For a detailed description of all providers available see the [Provider description](Providers.asciidoc).
 
-## Dependencies
-
-As of Version 0.0.1 Atomic App uses [Python 2.7.5](https://docs.python.org/2/) and [Anymarkup](https://github.com/bkabrda/anymarkup).
-
 ##Communication channels
 
 Interested in **Atomic App**? We'd love to hear from you about your use of Atomic App and work together on improving it. 

@@ -7,6 +7,8 @@ per_page: 5
 blog_summary_length: 500
 ---
 .jumbotron
+  %img.pull-right.img-responsive( src="/images/multicontainer.svg" )
+  .clearfix.visible-xs
   %h1
     Create and Run Applications in Linux Containers
   %p.lead
@@ -58,13 +60,16 @@ blog_summary_length: 500
           %small /NOO-le-kyul/ 
           %small (noun)
         %p
-          [Nulecule is a made-up word](http://simpsons.wikia.com/wiki/Made-up_words#N)
-          meaning "the mother of all atomic articles". Sounds like "molecule". But different. 
+          :markdown
+            [Nulecule is a made-up word](http://simpsons.wikia.com/wiki/Made-up_words#N)
+            meaning "the mother of all atomic articles". Sounds like "molecule". 
+            But different. 
         %p
-          Also a specification for applications composed from 
-          multiple containers. Check it out on Github below, or read through
-          #{link_to "the Getting Started -guide", "https://github.com/projectatomic/nulecule/blob/master/docs/getting-started.md" }
-          if you want to know more.
+          :markdown
+            Also a specification for applications composed from 
+            multiple containers. Check it out on Github below, or read through
+            [the Getting Started -guide](https://github.com/projectatomic/nulecule/blob/master/docs/getting-started.md)
+            if you want to know more.
         
         %p
           %a( href="https://github.com/projectatomic/nulecule/" )

@@ -11,6 +11,8 @@ We would like to announce the general availability of CentOS Atomic Host (May 20
 
 CentOS Atomic Host is produced by the [CentOS Atomic SIG](http://wiki.centos.org/SpecialInterestGroup/Atomic), based on upstream work from  [Project Atomic](http://www.projectatomic.io/). 
 
+READMORE
+
 CentOS Atomic Host is available as a qcow2 image, as VirtualBox or libvirt-formatted Vagrant box and as an installable ISO image. These images are available for download at [cloud.centos.org](http://cloud.centos.org/centos/7/atomic/images/). The backing ostree repo is published to [mirror.centos.org](http://mirror.centos.org/centos/7/atomic/x86_64/repo).
 
 If you currently run an atomic host (from any distro or release in the past), you can rebase to this released CentOS Atomic Host by running the following two commands :

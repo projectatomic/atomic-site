@@ -1,5 +1,5 @@
 ---
-title: Friends Don't Let Friends Run Docker on Loopback in Production
+title: "Friends Don't Let Friends Run Docker on Loopback in Production"
 author: jbrooks
 date: 2015-06-27 16:09:53 UTC
 tags: fedora, centos, docker, project atomic, device mapper, overlayfs, selinux
@@ -21,7 +21,7 @@ _NOTE: Starting with `docker-1.6.2-14.el7.centos.x86_64.rpm` (released just a fe
 
 As my collegue [Jeremy Eder](https://twitter.com/jeremyeder) discussed in [this blog post](http://developerblog.redhat.com/2014/09/30/overview-storage-scalability-docker/) from October 2014, the AUFS backend that started out as Docker's default [storage option](http://jpetazzo.github.io/assets/2015-03-03-not-so-deep-dive-into-docker-storage-drivers.html), but never made its way into the mainlain Linux kernel, posed a problem for Red Hat and our upstream first, no out-of-tree bits ways.
 
-The settled-upon solution was [device mapper thin provisioning](https://github.com/docker/docker/blob/master/daemon/graphdriver/devmapper/README.md), which takes two block devices (the data and the metadata devices) and creates a "pool" of space that can be used to create other block devices for Docker containers and images. The device mapper backend can be configured to use direct LVM volumes or you can let Docker create a pair of loopback mounted sparse files to serve as the block devices. 
+The settled-upon solution was [device mapper thin provisioning](https://github.com/docker/docker/blob/master/daemon/graphdriver/devmapper/README.md), which takes a block storage device to create a pool of space that can be used to create other block devices for Docker containers and images. The device mapper backend can be configured to use direct LVM volumes or you can let Docker create a pair of loopback mounted sparse files to serve as the block devices. 
 
 The former option has required pre-planning – if you're working from a typical single-drive laptop machine, you need to set aside some space for Docker at install-time, or you need to mess with partition-resizing. The latter option delivers, um, crap performance, and may or may not be to blame for various problems that Docker-using Fedorans or CentOSians have been encountering. The bug report referenced in the tweet above, for instance, involves this loopback file storage configuration, and that often seems to be the case with similar reports.
 
@@ -71,7 +71,7 @@ If you can't easily add another disk to your Docker host -- for instance, if you
 
 Jeremy Eder discussed OverlayFS in his [blog post](http://developerblog.redhat.com/2014/09/30/overview-storage-scalability-docker/) from October, but at that time, this backend required a special "Frankenkernel" and an experimental build of Docker. Now, however, OverlayFS support ships with the regular Fedora and CentOS kernels and Docker packages, and it's super easy to set up.
 
-While we're past the Frankenkernels stage with OverlayFS, it's considered a ["technology preview" in RHEL 7.1](https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/7.1_Release_Notes/chap-Red_Hat_Enterprise_Linux-7.1_Release_Notes-File_Systems.html). One significant downside of OverlayFS, for now at least, is that it doesn't play nice with SELinux, so we have to disable SELinux support within our containers -- we can leave it enabled for the host itself.
+While we're past the Frankenkernels stage with OverlayFS, it's considered a ["technology preview" in RHEL 7.1](https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/7.1_Release_Notes/chap-Red_Hat_Enterprise_Linux-7.1_Release_Notes-File_Systems.html). One significant downside of OverlayFS, for now at least, is that it doesn't play nice with SELinux, so we have to disable SELinux support within our containers -- we can leave it enabled for the host itself. Additionally, there's a [reported issue](https://bugzilla.redhat.com/show_bug.cgi?id=1213602) (with workaround) involving OverlayFS and use of yum within containers.  
 
 First, we'll stop the Docker service, and delete `/var/lib/docker` (again, this will blow away your containers and images).
 

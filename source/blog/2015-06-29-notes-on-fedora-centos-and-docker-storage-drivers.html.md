@@ -1,10 +1,10 @@
 ---
-title: "Friends Don't Let Friends Run Docker on Loopback in Production"
+title: Friends Don't Let Friends Run Docker on Loopback in Production
 author: jbrooks
-date: 2015-06-27 16:09:53 UTC
+date: 2015-06-29 16:53:15 UTC
 tags: fedora, centos, docker, project atomic, device mapper, overlayfs, selinux
-published: false
 comments: true
+published: true
 ---
 
 I've heard negative things about the Fedora\|CentOS Docker storage configuration in the past, and while manning the Red Hat booth in San Francisco at [DockerCon](http://www.dockercon.com/) last week, I spoke to a number of people who've experienced these storage issues themselves.

@@ -106,7 +106,7 @@ The last item, _bootcmd_, instructs cloud-init to run a script on the earliest o
 # Run on boot once
 
 set -eux
-if [ -f /etc/systemd/system/etcd.service.d/flannel.conf ]; then
+if [ -f /etc/systemd/system/etcd.service.d/restart.conf ]; then
     exit 0
 fi
 

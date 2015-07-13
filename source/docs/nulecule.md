@@ -34,7 +34,7 @@ Nulecule specification enables complex applications to be defined, packaged and 
 
 ## “The Big Picture”
 
-![Alt Nulecule specification high-level story.](/images/NuleculeHigh-LevelStory.png "Nulecule specification high-level story")
+<img src="/images/nulecule-diagram.png" width="100%" alt="Nulecule specification high-level story" />
 
 ## Deployment User Experience
 

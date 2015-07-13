@@ -23,8 +23,6 @@ Nulecule defines a pattern and model for packaging complex multi-container appli
 
 Nulecule specification enables complex applications to be defined, packaged and distributed using standard container technologies. The resulting container includes dependencies while supporting multiple orchestration providers and ability to specify resource requirements. The Nulecule specification also supports aggregation of multiple composite applications. The Nulecule specification is container and orchestration agnostic, enabling the use of any container and orchestration engine.
 
-**[Glossary of terms](docs/glossary.md)**
-
 ## Nulecule Specification Highlights
 
 * Application description and context maintained within a single container through extensible metadata

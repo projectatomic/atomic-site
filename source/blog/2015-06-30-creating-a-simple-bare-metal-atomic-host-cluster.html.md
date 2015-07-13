@@ -44,7 +44,7 @@ reboot
 %post
 ostree remote add --set=gpg-verify=false \
 	   Fedora-Cloud_Atomic \
-       'http://dl.fedoraproject.org/pub/fedora/linux/atomic/22/'
+       'https://dl.fedoraproject.org/pub/fedora/linux/atomic/22/'
 mkdir /var/cloud-init
 curl http://boothost/f22-atomic/meta-data.a1 > /var/cloud-init/meta-data
 curl http://boothost/f22-atomic/user-data > /var/cloud-init/user-data

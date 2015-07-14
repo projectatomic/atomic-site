@@ -1,17 +1,19 @@
 ---
 title: Docker, CentOS 6, and You
 author: jbrooks
-date: 2015-07-09 15:26:26 UTC
+date: 2015-07-14 16:18:24 UTC
 tags: docker, centos
-published: false
 comments: true
+published: true
 ---
 
-Recently, I blogged about [docker-on-loopback-storage woes and workarounds](http://www.projectatomic.io/blog/2015/06/notes-on-fedora-centos-and-docker-storage-drivers/)--a topic that came up during several conversations I had at last month's Dockercon. Another frequently-discussed item from the conference involved Docker on CentOS 6, and whether and for how long users can count on running this combination.
+Recently, I blogged about [docker-on-loopback-storage woes and workarounds](http://www.projectatomic.io/blog/2015/06/notes-on-fedora-centos-and-docker-storage-drivers/) -- a topic that came up during several conversations I had at last month's Dockercon. Another frequently-discussed item from the conference involved Docker on CentOS 6, and whether and for how long users can count on running this combination.
 
 Docker and CentOS 6 have never been a terrific fit, which shouldn't be surprising considering that the version of the Linux kernel that CentOS ships was first released over three years before Docker's first public release (0.1.0). The OS and kernel version you use matter a great deal, because with Docker, that's where all your contained processes run.
 
 With a hypervisor such as KVM, it's not uncommon or problematic for an elder OS to host, through the magic of virtualization, all manner of bleeding-edge software components. In fact, if you're attached to CentOS 6, virtualization is a solid option for running containers in a more modern, if virtual, host.
+
+READMORE
 
 If you're set on CentOS 6, and set on hosting your containers on bare metal, you've had a few options, however. Docker has been available in EPEL, under the name [`docker-io`](https://dl.fedoraproject.org/pub/epel/6/x86_64/repoview/docker-io.html), for some time, although that package version has been sitting at 1.5.0 since February.
 
@@ -51,4 +53,4 @@ Docker worked fine -- I gave it a solid run-through using this slick [kubernetes
 
 I couldn't, however, figure out how to switch the default storage driver from loopback to direct-lvm. It's possible that I'd need a newer device-mapper package to make this work. 
 
-If you're interested in helping figure out what additional dependencies are required to get and keep Docker running well on CentOS 6, check out this [mailing list thread](http://lists.centos.org/pipermail/centos-devel/2015-July/013585.html) about getting involved with the effort, or come introduce yourself in #centos-devel on Freenode. 
+If you're interested in helping figure out what additional dependencies are required to get and keep Docker running well on CentOS 6, check out this [mailing list thread](http://lists.centos.org/pipermail/centos-devel/2015-July/013585.html) about getting involved with the effort, or come introduce yourself in #centos-devel on Freenode.

@@ -3,12 +3,11 @@ title: Project Atomic at ContainerCon
 author: jzb
 date: 2015-07-01 10:43:29 UTC
 tags: Event, ContainerCon
-published: false
 comments: true
+published: true
 ---
 
-![](/images/lf-logo.jpg
-)Attending [ContainerCon](http://events.linuxfoundation.org/events/containercon) in Seattle this year? Co-located with CloudOpen and LinuxCon, ContainerCon is focused on bringing contributors working with containers, the Linux kernel, and other components together to continue improving the Linux container ecosystem.
+![](/images/lf-logo.jpg) Attending [ContainerCon](http://events.linuxfoundation.org/events/containercon) in Seattle this year? Co-located with CloudOpen and LinuxCon, ContainerCon is focused on bringing contributors working with containers, the Linux kernel, and other components together to continue improving the Linux container ecosystem.
 
 As you might expect, there's quite a few talks on the schedule related to Project Atomic or components important to Atomic (like Kubernetes). Here's a sample of talks you might want to plan on seeing:
 

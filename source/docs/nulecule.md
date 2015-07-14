@@ -45,7 +45,7 @@ Run the image. You will be prompted to provide required values that are missing 
 [sudo] atomic run projectatomic/helloapache
 ```
 
-## Option 2: unattended
+### Option 2: unattended
 
 1. Create file `answers.conf` with these contents:
 

@@ -23,8 +23,6 @@ Nulecule defines a pattern and model for packaging complex multi-container appli
 
 Nulecule specification enables complex applications to be defined, packaged and distributed using standard container technologies. The resulting container includes dependencies while supporting multiple orchestration providers and ability to specify resource requirements. The Nulecule specification also supports aggregation of multiple composite applications. The Nulecule specification is container and orchestration agnostic, enabling the use of any container and orchestration engine.
 
-**[Glossary of terms](docs/glossary.md)**
-
 ## Nulecule Specification Highlights
 
 * Application description and context maintained within a single container through extensible metadata
@@ -34,7 +32,7 @@ Nulecule specification enables complex applications to be defined, packaged and 
 
 ## “The Big Picture”
 
-![Alt Nulecule specification high-level story.](/images/NuleculeHigh-LevelStory.png "Nulecule specification high-level story")
+<img src="/images/nulecule-diagram.png" width="100%" alt="Nulecule specification high-level story" />
 
 ## Deployment User Experience
 
@@ -47,7 +45,7 @@ Run the image. You will be prompted to provide required values that are missing 
 [sudo] atomic run projectatomic/helloapache
 ```
 
-## Option 2: unattended
+### Option 2: unattended
 
 1. Create file `answers.conf` with these contents:
 

@@ -69,4 +69,4 @@ The SIG meets weekly on Thursdays at 16:00 UTC in the #centos-devel channel, and
 
 If you run into any problems with the images or components, feel free to ask on the [centos-devel](http://lists.centos.org/mailman/listinfo/centos-devel) mailing list. 
 
-Have questions about using Atomic? See the [atomic](https://lists.projectatomic.io/mailman/listinfo/atomic) mailing list or find us in the #atomic channel on Freenode. 
+Have questions about using Atomic? See the [atomic](https://lists.projectatomic.io/mailman/listinfo/atomic) mailing list or find us in the #atomic channel on Freenode.

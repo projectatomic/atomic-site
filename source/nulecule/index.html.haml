@@ -1,25 +1,25 @@
 ---
-title: The Nulecule Specification 
+title: The Nulecule Specification
 ---
 
-%h1 The Nulecule Specification 
+%h1 The Nulecule Specification
 
 %img.img-responsive.pull-right.hidden-xs( src="/images/nulecule.png")
 %p.lead
 
-  Nulecule defines a pattern and model for packaging complex multi-container 
-  applications, referencing all their dependencies, including orchestration 
-  metadata in a container image for building, deploying, monitoring, 
+  Nulecule defines a pattern and model for packaging complex multi-container
+  applications, referencing all their dependencies, including orchestration
+  metadata in a container image for building, deploying, monitoring,
   and active management.
 
 %p
 
-  Nulecule specification enables complex applications to be defined, packaged 
-  and distributed using standard container technologies. The resulting container 
-  includes dependencies while supporting multiple orchestration providers and 
-  ability to specify resource requirements. The Nulecule specification also 
-  supports aggregation of multiple composite applications. The Nulecule 
-  specification is container and orchestration agnostic, enabling the use of 
+  Nulecule specification enables complex applications to be defined, packaged
+  and distributed using standard container technologies. The resulting container
+  includes dependencies while supporting multiple orchestration providers and
+  ability to specify resource requirements. The Nulecule specification also
+  supports aggregation of multiple composite applications. The Nulecule
+  specification is container and orchestration agnostic, enabling the use of
   any container and orchestration engine.
 
 %p
@@ -28,17 +28,15 @@ title: The Nulecule Specification
 .row
 
   .col-md-4.col-sm-12
-    %h2 Specification 
+    %h2 Specification
 
     %p
       The Nulecule Specification is developed as a community effort on github.
       Versions:
 
-      <ul>
-        <li>Latest <a href="/nulecule/spec/latest/index.html">human readable version</a>, <a href="https://github.com/projectatomic/nulecule/tree/master/spec/schema.json">machine readable version</a>
-        <li>v0.0.2 <a href="/nulecule/spec/0.0.2/index.html">human readable version</a>, <a href="https://github.com/projectatomic/nulecule/tree/master/spec/schema.json">machine readable version</a>
-        <li>v0.0.1-alpha <a href="https://github.com/projectatomic/nulecule/releases/tag/v0.0.1-alpha">Archive</a>
-      </ul>
+      %ul
+        %li v0.0.2 aka latest <a href="/nulecule/spec/0.0.2/">human readable version</a>, <a href="https://github.com/projectatomic/nulecule/blob/release-0.0.2/spec/0.0.2/schema.json">machine readable version</a>
+        %li v0.0.1-alpha <a href="https://github.com/projectatomic/nulecule/releases/tag/v0.0.1-alpha">Archive</a>
 
     %p
       The Team uses a <a href="https://www.redhat.com/mailman/listinfo/container-tools">mailing lists</a> hosted by Red Hat.
@@ -53,31 +51,31 @@ title: The Nulecule Specification
       channel.
 
   .col-md-4.col-sm-12
-    %h2 Reference Implementation 
+    %h2 Reference Implementation
 
     %p
-      <a href="https://github.com/projectatomic/atomicapp">Atomicapp</a> is a reference implementation of the Nulecule Specification.
-      It can be used to bootstrap container applications and to install and run them. Atomicapp is designed to be run in a container 
+      <a href="https://github.com/projectatomic/atomicapp">Atomic App</a> is a reference implementation of the Nulecule Specification.
+      It can be used to bootstrap container applications and to install and run them. Atomic App is designed to be run in a container
       context. Examples using this tool may be found in the <a href="https://github.com/projectatomic/nulecule/tree/master/examples">Nulecule examples directory</a>.
 
   .col-md-4.col-sm-12
-    %h2 Get involved 
+    %h2 Get involved
 
     %p
-      The code source and Dockerfile to generate an Atomicapp base image
+      The code source and Dockerfile to generate an Atomic App base image
       are hosted on the
-      <a href="https://github.com/projectatomic/atomicapp">Atomicapp</a>
+      <a href="https://github.com/projectatomic/atomicapp">Atomic App</a>
       repo on GitHub.
 
     %p
       If you have a well identified issue, report
-      it in Atomicapp's issues section hosted on github. Remember: first
+      it in Atomic App's issues section hosted on github. Remember: first
       <a href="https://github.com/projectatomic/atomicapp/issues">check existing issues</a>, then
       <a href="https://github.com/projectatomic/atomicapp/issues/new">enter a new issue</a>. We appreciate your bugs!
 
 %h2
   %a( name="quickstart")
-  We need you! 
+  We need you!
 
 %p
   The Nulecule is in a flux. Join now and help us to shape its future of Applications!

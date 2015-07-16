@@ -14,6 +14,8 @@ The last few days, I have spent some time playing around with Docker's `<none>:<
 3.	Why do I see a lot of `<none>:<none>` images when I do `docker images -a` ?
 4.	What is the difference between `docker images` and `docker images -a` ?
 
+READMORE
+
 Before I start answering these questions, let’s take a moment to remember that there are two kinds of `<none>:<none>` images, the good and the bad.
 
 ## The Good <none>:<none>

@@ -75,7 +75,7 @@ If you remember `<none>:<none>` images listed in `docker images -a` are intermed
 The next command can be used to clean up these dangling images.
 
 ```
-docker rmi $(docker images -f “dangling=true” -q)
+docker rmi $(docker images -f "dangling=true" -q)
 ```
 
 Docker doesn’t have an automatic garbage collection system as of now. That would definitely be a nice feature to have. For now this command can be used to do a manual garbage collection.

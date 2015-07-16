@@ -14,11 +14,11 @@ The last few days, I have spent some time playing around with Docker's `<none>:<
 3.	Why do I see a lot of `<none>:<none>` images when I do `docker images -a` ?
 4.	What is the difference between `docker images` and `docker images -a` ?
 
-READMORE
-
 Before I start answering these questions, let’s take a moment to remember that there are two kinds of `<none>:<none>` images, the good and the bad.
 
-## The Good <none>:<none>
+READMORE
+
+## The Good &lt;none&gt;:&lt;none&gt;
 
 To understand this, we need to understand how Docker's image file system works, and how the image layers are organized. For the purpose of this article we will be using a Fedora image as an example. The Docker daemon is running on my laptop, and I am going to pull a fedora image from docker hub.
 
@@ -44,7 +44,7 @@ All right! So we got that right. Now we understand what these `<none>:<none>` im
 
 We have already covered points (1), (3) and (4). Lets throw some light onto point (2).
 
-## The Bad <none>:<none>
+## The Bad &lt;none&gt;:&lt;none&gt;
 
 Another style of `<none>:<none>` images are the dangling images which can cause disk space problems.
 

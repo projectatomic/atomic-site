@@ -1,10 +1,10 @@
 ---
 title: Testing Nulecule on Debian
 author: bexelbie
-date: 2015-07-16 16:52:32 UTC
+date: 2015-07-17 04:00:00 UTC
 tags: Docker, Nulecule
+published: false
 comments: true
-published: true
 ---
 
 # Testing Nulecule on Debian

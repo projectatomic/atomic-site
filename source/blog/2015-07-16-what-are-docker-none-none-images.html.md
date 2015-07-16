@@ -1,10 +1,10 @@
 ---
 title: What are Docker &lt;none&gt;:&lt;none&gt; images?
 author: shishir
-date: 2015-07-16 04:00:00 UTC
-tags: Docker, space, filesystem, best practices
-published: false
+date: 2015-07-16 12:17:44 UTC
+tags: Docker, space, filesystem, best practices, images
 comments: true
+published: true
 ---
 
 The last few days, I have spent some time playing around with Docker's `<none>:<none>` images. I'm writing this post to explain how they work, and how they affect docker users. This article will try to address questions like:

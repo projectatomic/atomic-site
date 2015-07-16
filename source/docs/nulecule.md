@@ -96,11 +96,11 @@ You may want to download the application, review, edit the answerfile then run.
 
 ## Developer User Experience
 
-See the [Getting Started with Nulecule guide](docs/getting-started.md).
+See the [Getting Started with Nulecule guide](https://github.com/projectatomic/nulecule/blob/master/docs/getting-started.md).
 
 ## Implementations
 
-This is only a specification. Implementations may be written in any language. See [implementation guide](/docs/implementation_guide.md) for more details.
+This is only a specification. Implementations may be written in any language. See [implementation guide](https://github.com/projectatomic/nulecule/blob/master/docs/implementation_guide.md) for more details.
 
 **Reference implementation** https://github.com/projectatomic/atomicapp
 
@@ -110,7 +110,7 @@ Developer tooling is TBD. There is some work planned for [DevAssistant](http://d
 
 ### Contributing
 
-Please review the [contributing guidelines](CONTRIBUTING.md) before submitting pull requests.
+Please review the [contributing guidelines](https://github.com/projectatomic/nulecule/blob/master/CONTRIBUTING.md) before submitting pull requests.
 
 ###Communication channels
 

@@ -15,7 +15,7 @@ title: "Nulecule Specification"
 **Change runtime parameters for different environments.** No need to edit files before deployment. Users can choose interactive or unattended deployment. Guide web interface users with parameter metadata to validate user input and provide descriptive help.
 
 ## Problem Statement
-Currently there is no standard mechanism to define a composite multi-container application or composite service composed of aggregate pre-defined building blocks spanning multiple hosts and clustered deployments. In addition, the associated metadata and artifact management requires separate processes outside the context of the application itself. 
+Currently there is no standard mechanism to define a composite multi-container application or composite service composed of aggregate pre-defined building blocks spanning multiple hosts and clustered deployments. In addition, the associated metadata and artifact management requires separate processes outside the context of the application itself.
 
 ## What is Nulecule?
 
@@ -23,12 +23,26 @@ Nulecule defines a pattern and model for packaging complex multi-container appli
 
 Nulecule specification enables complex applications to be defined, packaged and distributed using standard container technologies. The resulting container includes dependencies while supporting multiple orchestration providers and ability to specify resource requirements. The Nulecule specification also supports aggregation of multiple composite applications. The Nulecule specification is container and orchestration agnostic, enabling the use of any container and orchestration engine.
 
-## Nulecule Specification Highlights
+## Nulecule Specification
+
+The Nulecule Specification is developed as a community effort on github.
+
+The Team uses a <a href="https://www.redhat.com/mailman/listinfo/container-tools">mailing lists</a> hosted by Red Hat.
+
+If you want to contribute to the Nulecule Specification itself, we welcome you at <a href="https://github.com/projectatomic/nulecule/">the spec's repo</a>.
+
+
+### Highlights
 
 * Application description and context maintained within a single container through extensible metadata
 * Composable definition of complex applications through inheritance and composition of containers into a single, standards-based, portable description.
 * Simplified dependency management for the most complex applications through a directed graph to reflect relationships.
 * Container and orchestration engine agnostic, enabling the use of any container technology and/or orchestration technology
+
+### Releases
+
+* latest, 0.0.2 <a href="/nulecule/spec/0.0.2/index.html">human readable version</a>, <a href="https://github.com/projectatomic/nulecule/tree/master/spec/schema.json">machine readable version</a>
+* 0.0.1-alpha <a href="https://github.com/projectatomic/nulecule/releases/tag/v0.0.1-alpha">Archive</a>
 
 ## “The Big Picture”
 
@@ -102,4 +116,3 @@ Please review the [contributing guidelines](CONTRIBUTING.md) before submitting p
 
 * IRC: #nulecule (On Freenode)
 * Mailing List: [container-tools@redhat.com](https://www.redhat.com/mailman/listinfo/container-tools)
-

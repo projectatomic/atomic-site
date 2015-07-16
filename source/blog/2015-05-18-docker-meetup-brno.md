@@ -1,6 +1,6 @@
 ---
 title: First Docker Meetup in Brno, Czech Republic
-author: bex
+author: bexelbie
 date: 2015-05-18 16:52:32 UTC
 tags: Docker, Event
 comments: true

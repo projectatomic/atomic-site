@@ -1,7 +1,7 @@
 ---
 title: Testing Nulecule on Debian
 author: bexelbie
-date: 2015-07-17 04:00:00 UTC
+date: 2015-08-05 04:00:00 UTC
 tags: Docker, Nulecule
 comments: true
 published: true
@@ -9,15 +9,13 @@ published: true
 
 # Testing Nulecule on Debian
 
-Unless you've recently returned from a sabbatical year in a remote monastery with no internet, you know that Containers have arrived, and it's a whole new world.
-
-<img src="https://images.duckduckgo.com/iu/?u=http%3A%2F%2Fglobal3.memecdn.com%2Fa-whole-new-world_o_941765.jpg&f=1">
-
-READMORE
+<img src="https://images.duckduckgo.com/iu/?u=http%3A%2F%2Fglobal3.memecdn.com%2Fa-whole-new-world_o_941765.jpg&f=1"> Unless you've recently returned from a sabbatical year in a remote monastery with no internet, you know that Containers have arrived, and it's a whole new world.
 
 I'll save you five minutes of reading, and 90 minutes of watching Disney's Alladin and assume you know about containers.  If not, take a look at [Docker](https://github.com/docker), [rkt](https://github.com/coreos/rkt) and the [Open Container Project](http://www.opencontainers.org/).  For bonus points, watch [How Docker Didn't Invent Containers](http://www.motivp.com/shop/video/How_Docker_did_not_invent_the_containers) from the [First Docker Meetup](http://www.projectatomic.io/blog/2015/05/docker-meetup-brno/) in my adopted hometown of Brno, Czech Republic.  When you're done singing the fantastic Disney songs, come back.  I'll wait.
 
-While there is a lot of "shaking out" still going on around containers, one thing is for sure.  Applications are definitely starting to be delivered this way.  Currently, honestly, most folks are not using containers in production, and most deliverables are for internal use only.  Even in these few cases though, the applications being delivered are typically simple.  Maybe 2-3 containers. i.e. a web server container, a database container, and a caching server container. But something like [OpenStack on Docker](https://www.youtube.com/watch?v=NGOnG8czBk0)  is 12 containers.  12 containers that need to be linked, networked, and  orchestrated with various configuration changes for your environment. 
+READMORE
+
+While there is a lot of "shaking out" still going on around containers, one thing is for sure.  Applications are definitely starting to be delivered this way.  Currently, honestly, most folks ae not using containers in production, and most deliverables are for internal use only.  Even in these few cases though, the applications being delivered are typically simple.  Maybe 2-3 containers. i.e. a web server container, a database container, and a caching server container. But something like [OpenStack on Docker](https://www.youtube.com/watch?v=NGOnG8czBk0)  is 12 containers.  12 containers that need to be linked, networked, and  orchestrated with various configuration changes for your environment.
 
 Complex applications are ... complex, in the sense that they require multiple processes to interact. No significant ISVs or OpenSource projects have delivered complex applications using containers.  The [Nulecule Specification](http://www.projectatomic.io/blog/2015/05/announcing-the-nulecule-specification-for-composite-applications/) was created to solve the problem of complex application delivery.
 

@@ -10,6 +10,7 @@ published: true
 I often get bug reports from users asking *"why can't I use `docker` as a non root user, by default?"*
 
 Docker has the ability to change the group ownership of the /run/docker.socket to have group permission of 660, with the `group` ownership the docker group.  This would allow users added to the docker group to be able to run docker containers without having to execute `sudo` or `su` to become root. Sounds great...  
+READMORE
 
 ```
 ls -l /var/run/docker.sock 

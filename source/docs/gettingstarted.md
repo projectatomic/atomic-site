@@ -123,6 +123,12 @@ The apiserver needs to be set to listen on all IP addresses, instead of just loc
     # The address on the local server to listen to.
     KUBE_API_ADDRESS="--address=0.0.0.0"
 
+If you follow this guide on a test cluster, you will also need to remove `ServiceAccount` from the `KUBE_ADMISSION_CONTROL` parameter. The complete line will look like:
+
+    KUBE_ADMISSION_CONTROL="--admission_control=NamespaceLifecycle,NamespaceExists,LimitRanger,SecurityContextDeny,ResourceQuota"
+
+
+
  If you need to modify the set of IPs that Kubernetes assigns to services, change the KUBE_SERVICE_ADDRESSES value. Since this guide is using the 192.168.122.0/24 and 172.16.0.0/12 networks, we can leave the default.  This address space needs to be unused elsewhere, but doesn't need to be reachable from either of the other networks.
 
     # Address range to use for services
@@ -287,7 +293,7 @@ We can now create a simple Kubernetes pod to schedule a workload.
 We'll create a simple nginx pod definition on the master.  You can use JSON or YAML to create pods, we'll use YAML.
 
     [fedora@atomic-master ~]$ vi kube-nginx.yml
-    apiVersion: v1beta3
+    apiVersion: v1
     kind: Pod
     metadata:
       name: www

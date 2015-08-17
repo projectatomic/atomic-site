@@ -1,9 +1,9 @@
 ---
 title: Deploy Kubernetes with a Single Command Using Atomicapp
 author: jbrooks
-date: 2015-08-10 19:11:07 UTC
+date: 2015-08-17 19:11:07 UTC
 tags: docker, centos, fedora, atomic, atomicapp, nulecule, kubernetes
-published: false
+published: true
 comments: true
 ---
 
@@ -131,6 +131,8 @@ You can now run your image, push it to a docker registry to pull and run somewhe
 ```
 # atomic run jasonbrooks/kubernetes-atomicapp
 ```
+
+*NOTE: Running kubernetes in this way involves providing a container with access to the docker daemon on the host machine, which SELinux prevents, so you'll need to put SELinux into permissive mode (`sudo setenforce 0`) for this experiment.*
 
 From here, you can pick up with the original kubernetes-on-docker walkthrough, at the [**Test it out**](https://github.com/GoogleCloudPlatform/kubernetes/blob/release-1.0/docs/getting-started-guides/docker.md#test-it-out) step.
 

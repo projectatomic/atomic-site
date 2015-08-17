@@ -109,7 +109,7 @@ Finally we need a Dockerfile, which we can copy, mostly unchanged, from the nule
 $ cp nulecule/spec/examples/template/Dockerfile nulecule/examples/kubernetes-atomicapp/
 $ vi nulecule/examples/kubernetes-atomicapp/Dockerfile
 
-FROM projectatomic/atomicapp:0.1.1
+FROM projectatomic/atomicapp:0.1.3
 
 MAINTAINER Your Name <email@example.com>
 

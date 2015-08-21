@@ -4,13 +4,14 @@ title: Get Started with Project Atomic
 
 %h1 Get Started with Atomic
 
+%h2 Download an Atomic Host image
+
 %img.pull-right( src="/images/platforms.png")
 
 %p.lead
-  Atomic Host images are now available from Fedora and the CentOS Project.
+  Atomic Host images are available from Fedora and the CentOS Project.  The <a href="http://wiki.centos.org/SpecialInterestGroup/Atomic">CentOS Atomic SIG</a> offers a rebuild of Red Hat Enterprise Linux Atomic Host on
+  <a href="http://cloud.centos.org/centos/7/atomic/images/">cloud.centos.org</a>.
 
-%p.lead
-  Fedora 22 Atomic Cloud is available as part of the <a href="https://getfedora.org/cloud/download/atomic.html">Fedora 22 Cloud</a> release.
 %p
   The "QCOW2" image works on Linux KVM virtualization, for example it runs on
   <a href="http://openstack.redhat.com/">RDO</a> (OpenStack),
@@ -21,8 +22,7 @@ title: Get Started with Project Atomic
 %p
   Vagrant images are also available for VirtualBox and libvirt/KVM providers, as are AMIs for running in EC2.
 %p.lead
-  The <a href="http://wiki.centos.org/SpecialInterestGroup/Atomic">CentOS Atomic SIG</a> offers a rebuild of Red Hat Enterprise Linux Atomic Host on 
-  <a href="http://cloud.centos.org/centos/7/atomic/images/">cloud.centos.org</a>.
+
 
 .clearfix
 
@@ -38,7 +38,7 @@ title: Get Started with Project Atomic
 
 .row
   .col-md-12.sm-12
-    %h2 Setting Up the Virtual Machine
+    %h2 Set Up the Virtual Machine
 
     %p
       Please follow the
@@ -46,16 +46,26 @@ title: Get Started with Project Atomic
       to create a new virtual machine with Atomic and set
       up more disk space for your containers.
 
+    %h2 Configure an Atomic cluster
+
+    %p
+      Atomic hosts are either used in a standalone configuration to run Docker containers or in an orchestrated cluster to run Kubernetes pods.
+      You can use the
+      %a( href="/docs/gettingstarted" ) Getting Started Guide
+      to set up a cluster.  You can run a standalone configuration after completing the Quick Start guide.
+
+-#.row{:style => 'clear:both'}
     %h3 Extremely Quick Start Guide For the Impatient
 
     %p
       From here in, we'll refer to the Atomic VM as the "host," even though it's actually a VM. Atomic boots to a text console, asking you to log in.
       You need to create a metadata ISO for use with <a href="http://cloudinit.readthedocs.org/en/latest/">cloud-init</a>.
 
-      For example instructions on creating one, see: <a href="https://www.technovelty.org//linux/running-cloud-images-locally.html">this blog entry</a>.
+      For example instructions on creating one, see:
+      %a( href="/blog/2014/10/getting-started-with-cloud-init/" ) this blog entry.
 
   .col-md-6.col-sm-12
-    %h2 Atomic Upgrades
+    %h4 Atomic Upgrades
 
     %p
       From a running host, start an upgrade with:
@@ -70,7 +80,7 @@ title: Get Started with Project Atomic
       %a( href="/docs/os-updates" ) &raquo; More on atomic upgrades with OSTree...
 
   .col-md-6.col-sm-12
-    %h2 Docker Containers
+    %h4 Docker Containers
 
     %p
       Host applications on Atomic with #{link_to "Docker", "https://www.docker.io"}
@@ -84,9 +94,10 @@ title: Get Started with Project Atomic
     %p
       %a( href="/docs/#docker" ) &raquo; Read about Docker in production...
 
-.row
+
+-#.row{:style => 'clear:both'}
   .col-md-6.col-sm-12
-    %h2 Try the New UI for Your Server
+    %h4 Try the New UI for Your Server
 
     %p
       Administer the services on your system with Cockpit (Preview - not for production use)
@@ -109,7 +120,7 @@ title: Get Started with Project Atomic
       %a( href="http://cockpit-project.org" ) &raquo; Visit cockpit-project.org...
 
   .col-md-6.col-sm-12
-    %h2 Learn about Kubernetes
+    %h4 Learn about Kubernetes
 
     %p
       If you're looking to work with orchestration, you'll want

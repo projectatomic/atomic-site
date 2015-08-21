@@ -1,6 +1,6 @@
 # Project Atomic Quick Start Guide
 
-We recommend reading the Getting Started Guide and Concepts Guide if you're entirely new to the concept of Atomic and Docker. But, we also wanted to provide a **Quick Start Guide** (or "guide for the impatient") for folks who just want to plow through and see what all the fuss is about.
+We recommend reading the [Getting Started Guide](http://www.projectatomic.io/docs/gettingstarted) and Concepts Guide if you're entirely new to the concept of Atomic and Docker. But, we also wanted to provide a **Quick Start Guide** (or "guide for the impatient") for folks who just want to set up a single Atomic host and see what all the fuss around Docker and Atomic is about.
 
 ## What You Need
 
@@ -8,7 +8,7 @@ We recommend reading the Getting Started Guide and Concepts Guide if you're enti
 
 * **A virtual machine image.** Images for Atomic hosts are produced by both the Fedora Project and the CentOS Project.  Downloads for these images can be found via the [Downloads page] (http://www.projectatomic.io/download/) in QCOW2, RAW, and Vagrant BOX formats.
 
-* **Note for VirtualBox users** At the moment, we are not producing native VirtualBox images, but you can generate your own VirtualBox image from the qcow2 images with `qemu-img`:
+* **Note for VirtualBox users** We are not producing native VirtualBox images, but you can generate your own VirtualBox image from the qcow2 images with `qemu-img`:
 
 ````
 qemu-img convert -f qcow2 [filename].qcow2 -O vdi [filename].vdi
@@ -26,18 +26,19 @@ There are three basic steps we'll do for each virtualization provider before boo
 
 ## Prep the cloud-init source ISO
 
-In order to pass run time customizations to an Atomic host, we use cloud-init.  
-You will need to create a metadata ISO to supply critical data via [**cloud-init**](http://cloudinit.readthedocs.org/en/latest/) when your host boots.  You can pass system data via `meta-data` and configuration data via `user-data` files.  We will be setting up the password and adding an ssh key for the default user.  The metatdata ISO is created on the machine running your virtualization provider.
+In order to pass run time customizations to an Atomic host, we use [**cloud-init**](http://cloudinit.readthedocs.org/en/latest/) .  
 
-1. Create a `meta-data` file with your desired hostname and any instance-id.
+You will need to create a metadata ISO to supply critical data when your Atomic host boots.  System data is presented via the `meta-data` file and configuration data via the `user-data` file.  We will be setting up the password and ssh key for the default user.  The metatdata ISO is created on the machine running your virtualization provider.
 
-        $ cat meta-data
+1. Create a `meta-data` file with your desired hostname and instance-id.  If you need to change any of this information on a running host, you will need to increment the `instance-id`.  This is how `cloud-init` identifies a particular instance.
+
+        $ vi meta-data
         instance-id: atomic-host001
         local-hostname: atomic01.example.org
 
-2. Create a `user-data` file. The #cloud-config directive at the beginning of the file is mandatory, not a comment.  If you have multiple admins and ssh keys you'd like to access the default user, you can add a new `ssh-rsa` line.  The
+2. Create a `user-data` file. The #cloud-config directive at the beginning of the file is mandatory, not a comment.  If you have multiple admins and ssh keys you'd like to access the default user, you can add a new `ssh-rsa` line.
 
-        $ cat user-data
+        $ vi user-data
         #cloud-config
         password: atomic
         ssh_pwauth: True
@@ -136,8 +137,6 @@ Docker is ready to go at this point, but there's another fairly important bit of
 3. Select the Controller for the VM and click the Add Hard Disk icon. A Question dialog will open.
 
 4. Choose Create New Disk. The Create Virtual Hard Drive dialog box will open.
-
-5. Follow the steps 7-10 above used in creating a new VirtualBox VM to make a new hard drive for the VirtualBox VM.
 
 ### Configuring the New Drive
 

@@ -3,7 +3,7 @@ title: Running a Containerized Cockpit UI from Cloud-init
 author: jbrooks
 date: 2015-08-26 20:13:21 UTC
 tags: cockpit, fedora, atomic, systemd, cloud-init, docker
-published: false
+published: true
 comments: true
 ---
 
@@ -12,6 +12,8 @@ Fedora 22's Atomic Host dropped most of packages for the web-based server UI, [c
 ### cloud-init and cockpit
 
 Referencing the sample `cockpitws.service` file from [Matt's post](http://www.projectatomic.io/blog/2015/06/running-cockpit-as-a-service/), and using cloud-init's [cloud-config-write-files](http://bazaar.launchpad.net/~cloud-init-dev/cloud-init/trunk/view/head:/doc/examples/cloud-config-write-files.txt) functionality, I started out with this service file:
+
+READMORE
 
 ```
 [Unit]

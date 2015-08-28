@@ -10,7 +10,7 @@ I was recently introduced to [Sysdig](www.sysdig.org/) for inspecting running pr
 
 READMORE
 
-The existing sysdig container works without an issue on my Fedora 22 Worktstation install as is.  You can follow the general container install instructions on the website and start poking around on your system.  I was able to see I/O and network data, running process information, file access, and all sorts of other interesting data.
+The existing sysdig container works without an issue on my Fedora 22 Workstation install as is.  You can follow the general container install instructions on the website and start poking around on your system.  I was able to see I/O and network data, running process information, file access, and all sorts of other interesting data.
 
 Looking to move this to an Atomic host, I found a few things that need some work.
 

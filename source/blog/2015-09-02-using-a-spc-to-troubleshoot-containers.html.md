@@ -20,9 +20,9 @@ First, the `docker run` command line:
 docker run -i -t --name sysdig --privileged -v /var/run/docker.sock:/host/var/run/docker.sock -v /dev:/host/dev -v /proc:/host/proc:ro -v /boot:/host/boot:ro -v /lib/modules:/host/lib/modules:ro -v /usr:/host/usr:ro sysdig/sysdig
 ```
 
-Lots of volumes to mount read-only that present an opportunity for typos for this super privileged container.  This is exactly where [`atomic` LABEL support](http://www.projectatomic.io/blog/2015/04/using-environment-substitution-with-the-atomic-command/) is useful.  So I've got a reason to build my own Docker file for this application.
+Lots of volumes to mount read-only that present an opportunity for typos for this super privileged container.  This is exactly where [`atomic` LABEL support](http://www.projectatomic.io/blog/2015/04/using-environment-substitution-with-the-atomic-command/) is useful.
 
-Secondly, sysdig needs kernel headers in order to build the probe module it uses.  Fedora 22 Atomic host doesn't ship with `kernel-headers` installed in the base tree, so the container will have to provide that package.
+Secondly, sysdig needs kernel headers in order to build the probe module it uses.  Fedora 22 Atomic host doesn't ship with `kernel-headers` installed in the base tree, so my container will have to provide that package.
 
 So I set out to build a new Dockerfile aimed at providing a Fedora Atomic host friendly environment.  I started with [the upstream sysdig Dockerfile](https://github.com/draios/sysdig/tree/dev/docker/stable).  I changed the source to match the Fedora version we build Atomic hosts from, in this case 22.  I added the kernel-headers package, trimmed down the other packages being installed, and set up the `docker run` command in the `RUN` label.
 
@@ -55,7 +55,9 @@ Since updates to the kernel would come as a new Atomic tree, I decided to use a 
 
 I'm not specifying a kernel version in this Dockerfile, but I did test that as well if you'd like tighter coupling between the Atomic versions and the Docker Hub tag.
 
-Once the container is pushed to the Docker Hub, `atomic run` will be able to launch the sysdig-spc container and give you the ability to inspect your running containers.
+Once the container is pushed to the Docker Hub, `atomic run` will be able to launch the sysdig-spc container and give you the ability to inspect your running containers.  The container will open a shell as root, you can run `csysdig` to get the TUI version, or `sysdig -l` to see what modules you can run from the command line.  You can also check out the sysdig website for examples.
+
+If you'd like to try out the container I built try:
 
 `atomic run --spc nzwulfin/sysdig-spc`
 

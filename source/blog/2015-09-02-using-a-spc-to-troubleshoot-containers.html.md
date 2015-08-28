@@ -6,11 +6,11 @@ tags: fedora, atomic, docker
 ---
 One of the issues with containers built "The Right Way" (TM) (e.g., minimal containers that only provide the application code) is figuring out what's going on inside the container.  If you ship just application code, you run the risk of turning your container into a proverbial black box.   Atomic hosts can provide a one way view of all of the operations inside a container, if you can find the right tool.  Rather than adding more tools to your application container, folks like [Dan Walsh](https://twitter.com/rhatdan) have been working on [super privileged containers](https://developerblog.redhat.com/2014/11/06/introducing-a-super-privileged-container-concept/) to manage the host, such as [the Cockpit container](http://www.projectatomic.io/blog/2015/06/running-cockpit-as-a-service/).
 
-I was recently introduced [Sysdig](www.sysdig.org/) for inspecting running process and activity on a Linux system.  It's a fairly nifty tool that understands Docker containers, and the authors have made sure that sysdig can be run in a container.  This made it very simple to install on my laptop and start investigating.
+I was recently introduced to [Sysdig](www.sysdig.org/) for inspecting running process and activity on a Linux system.  It's a fairly nifty tool that understands Docker containers, and the authors have made sure that sysdig can be run in a container.  This made it very simple to install on my laptop and start investigating.
 
 READMORE
 
-The existing sysdig container works without an issue on my Fedora 22 Worktstaion install as is.  You can follow the general container install instructions on the website and start poking around on your system.  I was able to see I/O and network data, running process information, file access, and all sorts of other interesting data.
+The existing sysdig container works without an issue on my Fedora 22 Worktstation install as is.  You can follow the general container install instructions on the website and start poking around on your system.  I was able to see I/O and network data, running process information, file access, and all sorts of other interesting data.
 
 Looking to move this to an Atomic host, I found a few things that need some work.
 
@@ -64,5 +64,7 @@ If you'd like to try out the container I built try:
 Or if you want to run a specific tagged container:
 
 `atomic run --spc nzwulfin/sysdig-spc:22.99`
+
+Once you have sysdig running on your host, check out the project's [examples page](http://www.sysdig.org/wiki/sysdig-examples/) to see what you can do with the utility. 
 
 Building your own tools SPC can make inspecting and troubleshooting Docker and Kubernetes environments simpler.

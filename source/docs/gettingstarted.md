@@ -134,13 +134,6 @@ If you follow this guide on a test cluster, you will also need to remove `Servic
     # Address range to use for services
     KUBE_SERVICE_ADDRESSES="--portal_net=10.254.0.0/16"
 
-#### Controller Manager service configuration
-The controller manager service needs to how to locate it's nodes.  We're using IPs as addresses, which must match the KUBLET_HOSTNAME for the nodes kublet service. If hostnames are used, must resolve to match output of `hostname -f` on the node.
-
-    [fedora@atomic-master ~]$ sudo vi /etc/kubernetes/controller-manager
-    # Comma seperated list of nodes
-    KUBELET_ADDRESSES="--machines=192.168.122.11,192.168.122.12,192.168.122.13,192.168.122.14"
-
 Enable and start the Kubernetes services.
 
     [fedora@atomic-master ~]$ sudo systemctl enable etcd kube-apiserver kube-controller-manager kube-scheduler

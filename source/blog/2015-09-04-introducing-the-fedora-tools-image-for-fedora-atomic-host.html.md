@@ -7,7 +7,7 @@ published: true
 comments: true
 ---
 
-Borrowing from the [developerblog](http://developerblog.redhat.com/2015/03/11/introducing-the-rhel-container-for-rhel-atomic-host/) entry, here's an introduction the “rhel-tools” image for RHEL Atomic Host.
+Borrowing from the [developerblog](http://developerblog.redhat.com/2015/03/11/introducing-the-rhel-container-for-rhel-atomic-host/) entry, here's an introduction the “fedora-tools” image for Fedora Atomic Host.
 
 When Red Hat’s performance team first started experimenting with Atomic, it became clear that our needs for low-level debug capabilities were at odds with the stated goal of Atomic to maintain a very small footprint.  If you consider your current production environment, most standard-builds do not include full debug capabilities, so this is nothing new.  What is new, is that on RHEL you could easily install any debug/tracing/analysis utility, but on Atomic:
 

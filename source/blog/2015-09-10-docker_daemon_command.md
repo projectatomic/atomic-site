@@ -1,7 +1,10 @@
- 
-# <span style="color:cornflowerblue">Docker daemon command</span>
-## <span style="color:cornflowerblue">Author: Shishir Mahajan</span>
----
+title: New Docker Daemon
+author: shishir
+date: 2015-09-10 05:00:09 UTC
+tags: Docker, daemon, 1.8
+comments: true
+published: false
+--
 Docker 1.8 fixes a long term problem with handling of command line options. It introduces the `docker daemon` command which segregates
 the global options from the daemon options.
 

@@ -13,6 +13,8 @@ Docker daemon is a background server side process that manages images and contai
 
 A system administrator can execute `systemctl start docker` to start the `docker daemon.`
 
+READMORE
+
 ![systemctl start docker](images/docker_daemon_start.png)
 
 As you can see in the above screenshot, writing `systemctl start docker` will instruct systemd to go to `/usr/lib/systemd/system/docker.service` unit file and start docker based on `ExecStart` flag. Under the hood, this unit file executes the docker binary `/usr/bin/docker -d` to start the daemon. What this means is, a user can also start docker daemon by executing `docker -d` or `docker --daemon.`

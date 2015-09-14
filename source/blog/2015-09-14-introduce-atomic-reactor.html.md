@@ -1,7 +1,7 @@
 ---
 title: Introducing Atomic Reactor
 author: ttomecek
-date: 2015-09-08 12:00:00 UTC
+date: 2015-09-14 17:27:26 UTC
 tags: fedora, atomic, docker, build
 comments: true
 published: true
@@ -10,7 +10,6 @@ published: true
 It's been a while when we [announced](https://lists.projectatomic.io/projectatomic-archives/atomic-devel/2015-July/msg00010.html) move of [atomic-reactor](https://github.com/projectatomic/atomic-reactor) under Project Atomic.
 
 Since the name is so cryptic, one could wonder about the purpose of the tool. Let's go through a simple example...
-
 
 ## What problem is atomic-reactor trying to solve?
 
@@ -186,6 +185,5 @@ In [2]: params=json.load(open("build.json"))
 
 In [3]: api.build_image_here(**params)
 ```
-
 
 This is the basic introduction of atomic-reactor. We'll be happy for any feedback. You can reach us at [atomic-devel](https://lists.projectatomic.io/mailman/listinfo/atomic-devel) or via [GitHub](https://github.com/projectatomic/atomic-reactor).

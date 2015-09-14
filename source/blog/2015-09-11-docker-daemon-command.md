@@ -60,12 +60,13 @@ The Docker `daemon` command will bring the following changes to docker users:
  * A user can still start docker daemon using `docker -d` and `docker --daemon`. Docker provides full backward compatibility without breaking any existing use cases.
  * With the new `docker daemon` command, global flags and daemon flags must be passed in the below format.
 
-	![docker daemon format](images/docker_daemon_format.png)
+![docker daemon format](images/docker_daemon_format.png)
 
   What this means is, the below command `docker --selinux-enabled daemon` will throw an error. Since `--selinux-enabled` is a daemon flag, it should be passed after docker daemon command. This would however completely work with `docker -d` maintaining the backward compatibility.
 	
-	![docker daemon error](images/docker-selinux.png)
-	![docker daemon error](images/docker_daemon_error.png)
+![docker daemon error](images/docker-selinux.png)
+
+![docker daemon error](images/docker_daemon_error.png)
 
  * Daemon flags now cannot be passed to other docker commands (as global flags) like inspect, pull, push etc. Now, If we run the above  `docker inspect` example again, it would blow up.
 

@@ -1,7 +1,7 @@
 ---
 title: Clustering Atomic Hosts with Kubernetes, Ansible, and Vagrant
 author: jbrooks
-date: 2015-09-18 00:51:32 UTC
+date: 2015-09-21 18:31:32 UTC
 tags: kubernetes, atomic, docker, vagrant, ansible, libvirt, openstack, atomicapp
 comments: true
 published: true

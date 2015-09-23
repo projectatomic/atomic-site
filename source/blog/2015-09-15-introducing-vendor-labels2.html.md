@@ -3,7 +3,7 @@ title: Introducing Image Metadata Labels for Software Vendors
 author: aweiteka
 date: 2015-09-15 19:11:07 UTC
 tags: docker, atomic, labels
-published: true
+published: false
 comments: true
 ---
 

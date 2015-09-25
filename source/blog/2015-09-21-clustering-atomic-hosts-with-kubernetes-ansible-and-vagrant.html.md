@@ -19,11 +19,13 @@ READMORE
 
 To follow along, you'll need a machine with vagrant and a provider for libvirt, virtualbox, or openstack. I typically use libvirt on Fedora, but I've had success with virtualbox on Fedora as well -- if someone wants to test this with virtualbox and Windows or OS X, please let me know if it works.
 
-I'm using Fedora 22, and this command pulled in the specific dependencies I needed:
+I'm using Fedora 23, and this command pulled in the specific dependencies I needed:
 
 ```
-dnf install -y vagrant-libvirt libvirt-devel gcc gcc-c++ ruby-devel
+dnf install -y vagrant-libvirt libvirt-devel gcc gcc-c++ ruby-devel python-netaddr git wget unzip
 ```
+
+For Fedora 22, which ships with an older version of vagrant (`1.7.2`), and for CentOS 7, which doesn't have vagrant in its software repositories, you'll need to install vagrant from the [upstream package](https://dl.bintray.com/mitchellh/vagrant/vagrant_1.7.4_x86_64.rpm). And run `vagrant plugin install vagrant-libvirt` to get the libvirt provider.
 
 The way that this `Vagrantfile` is currently written, you're required to have the `vagrant-openstack-provider` installed, whether you're using it or not, so either install it:
 

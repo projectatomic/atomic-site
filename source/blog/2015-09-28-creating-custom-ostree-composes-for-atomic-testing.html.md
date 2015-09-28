@@ -3,7 +3,7 @@ title: Creating Custom ostree Composes for Atomic Testing
 author: miabbott
 date: 2015-09-28 09:00:28 UTC
 tags: ostree, rpm-ostree, testing, Fedora
-published: false
+published: true
 comments: true
 ---
 

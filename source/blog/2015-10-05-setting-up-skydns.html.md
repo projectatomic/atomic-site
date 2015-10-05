@@ -11,6 +11,8 @@ Kubernetes is (currently) missing an integrated dns solution for service discove
 
 I have seen some tutorials on how to get `skydns` working, but almost all of them are rather involved. However, if you just want a simple setup on a single node for testing then it is actually rather easy to get `skydns` set up.
 
+READMORE
+
 Setting it up
 =============
 

@@ -7,7 +7,7 @@ comments: true
 published: true
 ---
 
-Kubernetes is (currently) missing an integrated dns solution for service discovery. In the future it will be integrated into `kubernetes` (see [PR11599](https://github.com/kubernetes/kubernetes/pull/11599)) but for now we have to setup [SkyDNS](https://github.com/skynetservices/skydns) manually.
+Kubernetes exposes DNS for service discovery, but the DNS server itself must be configured after you install Kubernetes. In the future it will be integrated into `kubernetes` as part of the platform (see [PR11599](https://github.com/kubernetes/kubernetes/pull/11599)) but for now you have to setup and run the [SkyDNS](https://github.com/skynetservices/skydns) container yourself.
 
 I have seen some tutorials on how to get `skydns` working, but almost all of them are rather involved. However, if you just want a simple setup on a single node for testing then it is actually rather easy to get `skydns` set up.
 

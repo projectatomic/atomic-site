@@ -3,8 +3,8 @@ title: Report on the Container Roundtable @ LinuxCon EU 2015
 author: bexelbie
 date: 2015-10-12 00:52:32 UTC
 tags: Docker, Event
+published: false
 comments: true
-published: true
 ---
 
 At [LinuxCon Europe 2015](http://events.linuxfoundation.org/events/linuxcon-europe) from 5-7 October, 2015 in Dublin, Ireland. Joe Brockmeier (Red Hat) moderated a panel discussion between Tom Barlow (Docker), Sebastian Goasguen (Citrix) and Brandon Philips (CoreOS) about containers.  As you may know, the technology underlying containers is not new and that a big part of the innovation provided by Docker and others is essentially an easier way to package and access this technology.  However, there are key questions ahead as the technology continues to mature and transcend the "it's just packaging" idea.  I didn't transcribe the entire session, but I wanted to call out a few of the exchanges and how they affect various roles.

@@ -36,7 +36,11 @@ You will need to create a metadata ISO to supply critical data when your Atomic 
         instance-id: atomic-host001
         local-hostname: atomic01.example.org
 
-2. Create a `user-data` file. The #cloud-config directive at the beginning of the file is mandatory, not a comment.  If you have multiple admins and ssh keys you'd like to access the default user, you can add a new `ssh-rsa` line.
+2. Create a `user-data` file.
+
+    **Note:** The #cloud-config directive at the beginning of the file is mandatory, not a comment.
+
+    If you have multiple admins and ssh keys you'd like to access the default user, you can add a new `ssh-rsa` line.
 
         $ vi user-data
         #cloud-config

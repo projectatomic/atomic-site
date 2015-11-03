@@ -1,13 +1,16 @@
 ---
-title: What Happened at the 2nd Big Docker Meetup in Brno, Czech Republic on 15 October 2015 @ 6 pm
+title: What Happened at the 2nd Big Docker Meetup in Brno, Czech Republic on 15 October
+  2015 @ 6 pm
 author: bexelbie
-date: 2015-10-23 12:52:32 UTC
+date: 2015-11-03 21:10:20 UTC
 tags: Docker, Event
 comments: true
-published: false
+published: true
 ---
 
 <a href="https://plus.google.com/photos/111655466984621162361/albums/6205968149218406801/6205968150060842418?pid=6205968150060842418&oid=111655466984621162361"><img src="https://lh6.googleusercontent.com/-M4Fe5iq6_Uc/ViAHJt_DvbI/AAAAAAAAO4A/gYCxoHSqWTA/w779-h438-no/NI2S1352.jpg" width="200" height="115"></a>The [Docker Brno Meetup](http://www.meetup.com/Docker-Brno/events/225508213/) group had its second big meeting on 15 October 2015 at 6 pm at the [Impact Hub](http://maps.google.com/maps?f=q&hl=en&q=Cyrilsk%C3%A1+7%2C+Brno%2C+cz) in Brno, Czech Republic.  This meeting followed up a monthly set of more informal gatherings in pubs around the city and the [first meeting on 18 May 2015](http://www.projectatomic.io/blog/2015/05/docker-meetup-brno/).
+
+READMORE
 
 The meeting was attended by about a 100 people.  [Jan Bleha](https://twitter.com/JanBleha), the main organizer and our host for the evening surveyed the crowd with some demographic questions:
 

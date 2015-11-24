@@ -1,7 +1,7 @@
 geard 
 =====
 
-**Project Atomic has switched to using [Kubernetes](http://kubernetes.io/) for conainer management**
+**Project Atomic has switched to using [Kubernetes](http://kubernetes.io/) for container management**
 **The following should be considered deprecated and is left here for historical reference**
 
 geard is a command line client for installing [Docker](https://www.docker.io) images as containers onto a systemd-enabled Linux operating system (systemd 207 or newer).  It may be run as a command:

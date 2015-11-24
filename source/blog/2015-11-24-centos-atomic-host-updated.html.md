@@ -1,7 +1,7 @@
 ---
 title: CentOS Atomic Host Updated
 author: jbrooks
-date: 2015-11-24 21:57:40 UTC
+date: 2015-11-24 12:00:00 UTC
 tags: cockpit, fedora, atomic, systemd, cloud-init, docker
 comments: true
 published: true

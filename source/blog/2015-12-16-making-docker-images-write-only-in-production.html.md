@@ -1,5 +1,5 @@
 ---
-title: Making Docker images write-only in production
+title: Making Docker images read-only in production
 author: dwalsh
 date: 2015-12-16 22:06:42 UTC
 tags: docker, production, operations, images, tmpfs

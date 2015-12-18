@@ -8,12 +8,9 @@ We recommend reading the [Getting Started Guide](http://www.projectatomic.io/doc
 
 * **A virtual machine image.** Images for Atomic hosts are produced by both the Fedora Project and the CentOS Project.  Downloads for these images can be found via the [Downloads page] (http://www.projectatomic.io/download/) in QCOW2, RAW, and Vagrant BOX formats.
 
-* **Note for VirtualBox users** We are not producing native VirtualBox images, but you can generate your own VirtualBox image from the qcow2 images with `qemu-img`:
+    **Note for VirtualBox users** We are not producing native VirtualBox images, but you can generate your own VirtualBox image from the qcow2 images with `qemu-img`:
 
-````
-$ qemu-img convert -f qcow2 [filename].qcow2 -O vdi [filename].vdi
-
-````
+    `$ qemu-img convert -f qcow2 [filename].qcow2 -O vdi [filename].vdi`
 
 ## Step by Step
 There are three basic steps we'll do for each virtualization provider before booting the virtual machine:

@@ -11,7 +11,7 @@ We recommend reading the [Getting Started Guide](http://www.projectatomic.io/doc
 * **Note for VirtualBox users** We are not producing native VirtualBox images, but you can generate your own VirtualBox image from the qcow2 images with `qemu-img`:
 
 ````
-qemu-img convert -f qcow2 [filename].qcow2 -O vdi [filename].vdi
+$ qemu-img convert -f qcow2 [filename].qcow2 -O vdi [filename].vdi
 
 ````
 
@@ -63,7 +63,7 @@ We'll start with the QCOW2 format image for both virt-manager and VirtualBox.  F
 
 
 ````
-qemu-img convert -f qcow2 [filename].qcow2 -O vdi [filename].vdi
+$ qemu-img convert -f qcow2 [filename].qcow2 -O vdi [filename].vdi
 
 ````
 

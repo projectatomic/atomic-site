@@ -1,13 +1,15 @@
 ---
 title: atomic top, docker top and ps
 author: runcom
-date: 2015-12-21 17:11:47 UTC
+date: 2016-01-06 15:11:47 UTC
 tags: Docker
+published: false
 comments: true
-published: true
 ---
 
-`atomic top` is a new atomic subcommand which will allow you to interactively display the top process information from _all_ of your containers running on a host. It works like standard top command where it will continuously update the top processes. Under the hood `atomic top` is using the Docker's top API to gather information about a particular container. When queried, the Docker daemon uses `ps` to give back results. The same happens with the Docker CLI.
+Looking to view running container information quickly? Check out the new `atomic top` command! 
+
+`atomic top` is a new atomic sub-command which will allow you to interactively display the top process information from _all_ of your containers running on a host. It works like standard top command where it will continuously update the top processes. Under the hood `atomic top` is using the Docker's top API to gather information about a particular container. When queried, the Docker daemon uses `ps` to give back results. The same happens with the Docker CLI.
 
 The Docker's `top` command allows users to display the `ps` output for the main process of a given container ID or name. It's handy because it gives you back information about containers running on remote daemons as well.
 

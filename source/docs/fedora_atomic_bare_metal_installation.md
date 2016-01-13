@@ -98,7 +98,7 @@ NOTE: If you've used a different `ostreesetup` URL or reference, you'll want to 
 
 To receive updates for your Fedora Atomic installation, specify the location of the remote OSTree repository. Execute:
 
-    # ostree remote add --set=gpg-verify=false fedora-atomic http://dl.fedoraproject.org/pub/alt/fedora-atomic/repo/
+    # ostree remote add --set=gpg-verify=false fedora-atomic https://dl.fedoraproject.org/pub/alt/fedora-atomic/repo/
 
 Here, *fedora-atomic* is used as a name for the remote repository. The URL is stored in the */etc/ostree/remotes.d/fedora-atomic.conf* configuration file. Today, it is required to disable GPG verification for the remote repository to update Fedora Atomic successfully. Therefore the *--set=gpg-verify=false* option above. Alternatively, you can disable GPG by appending `gpg-verify=false` to */etc/ostree/remotes.d/fedora-atomic.conf*.
 

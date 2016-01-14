@@ -2,7 +2,7 @@
 title: How to Run a More Secure Non-Root User Container
 author: dwalsh
 date: 2016-01-07 17:40 UTC
-tags: docker, privledges
+tags: docker, privileges
 comments: true
 published: true
 ---

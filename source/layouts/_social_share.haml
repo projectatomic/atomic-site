@@ -1,0 +1,17 @@
+- share_url = URI.encode("http://#{data.site.domain}#{article.url}")
+
+%p
+  %small Share this post:
+  %span#social_share.btn-group
+    %a.btn.btn-default.btn-xs{:href => "http://twitter.com/share?text=yourtext&url=#{share_url}", 
+        :title => "Twitter", :role => "button" }
+      %i.fa.fa-twitter
+      Twitter
+    %a.btn.btn-default.btn-xs{:href => "http://www.facebook.com/sharer.php?u=#{share_url}", 
+        :title => "Facebook", :role => "button" }
+      %i.fa.fa-facebook
+      Facebook
+    %a.btn.btn-default.btn-xs{:href => "https://plus.google.com/share?url=#{share_url}", 
+        :title => "Google", :role => "button" }
+      %i.fa.fa-google-plus
+      Google+

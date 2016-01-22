@@ -126,6 +126,10 @@
           - tags.sort {|a,b| a.downcase <=> b.downcase}.each do |tag|
             %li= link_to tag, tag_path(tag)
 
+    - if article_view
+      =# show sharing buttons on article view, but not on blog lists
+      = partial :social_share, locals: {article: article}
+
     - if article_view && author_card(author)
 
       #author-info.author-info

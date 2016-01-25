@@ -8,7 +8,7 @@ Docker containers can also communicate with external containers and applications
 
 However, container linking does not span multiple docker hosts, and it is difficult for applications running inside containers to advertise their external IP and port, as that information is not available to them.
 
-While you many run containers on one or more Atomic hosts using only the networking facilities provided by docker itself, multi-host docker deployments will benefit from using the additional stack components that ship with Atomic.
+While you may run containers on one or more Atomic hosts using only the networking facilities provided by docker itself, multi-host docker deployments will benefit from using the additional stack components that ship with Atomic.
 
 Consult the upstream docker documentation for more information about docker [networking concepts](https://docs.docker.com/articles/networking), and to learn more about [docker links](https://docs.docker.com/userguide/dockerlinks).
 

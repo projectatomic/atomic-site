@@ -24,8 +24,13 @@ Cockpit also makes it easy to monitor and administer Docker containers running o
 * Run and Delete container images
 
 ## Starting and Using Cockpit
-**Cockpit is in beta/preview at this time**, but you can still try it out and help test! For more information, see the [Cockpit](http://fedoraproject.org/wiki/Changes/CockpitManagementConsole) project page.
 
 1. After starting your atomic host, you need to run the `cockpit` container:
-    * `$ sudo atomic run cockpit/ws
+    * `$ sudo atomic run cockpit/ws`
 2. You can now use the `cockpit` management interface at `http://yourhost:9090`
+
+For information on adding a systemd service file to ensure that the cockpit/ws container runs on system startup, see [this blog post](/blog/2015/06/running-cockpit-as-a-service/), and see [this post](/blog/2015/08/running-a-containerized-cockpit-ui-from-cloud-init/) to learn how to run cockpit via cloud-init. 
+
+## Learn More About Cockpit
+
+For more information, check out the [Cockpit documentation](http://cockpit-project.org/guide/latest/) at the [project site](http://cockpit-project.org/).

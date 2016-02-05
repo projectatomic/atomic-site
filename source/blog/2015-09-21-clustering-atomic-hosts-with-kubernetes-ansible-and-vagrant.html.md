@@ -22,7 +22,7 @@ To follow along, you'll need a machine with vagrant and a provider for libvirt, 
 I'm using Fedora 23, and this command pulled in the specific dependencies I needed:
 
 ```
-dnf install -y vagrant-libvirt libvirt-devel gcc gcc-c++ ruby-devel python-netaddr git wget unzip
+dnf install -y vagrant-libvirt libvirt-devel gcc gcc-c++ ruby-devel python-netaddr git wget unzip libselinux-python ansible
 ```
 
 For Fedora 22, which ships with an older version of vagrant (`1.7.2`), and for CentOS 7, which doesn't have vagrant in its software repositories, you'll need to install vagrant from the [upstream package](https://dl.bintray.com/mitchellh/vagrant/vagrant_1.7.4_x86_64.rpm). And run `vagrant plugin install vagrant-libvirt` to get the libvirt provider.
@@ -98,7 +98,7 @@ I typically test out my kubernetes clusters by running the upstream project's [g
 $ vagrant ssh kube-master
 
 $ mkdir guest && cd guest
-$ sudo atomic run projectatomic/guestbookgo-app
+$ sudo atomic run projectatomic/guestbookgo-atomicapp
 ```
 
 Once the app is up and running, which you can discern by watching `kubectl get pods`, you can figure out the IP and port on which to access the app in your browser:

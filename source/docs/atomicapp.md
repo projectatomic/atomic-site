@@ -3,7 +3,7 @@ title: "Atomic App"
 ---
 # What is Atomic App?
 
-Atomic App is a reference implementation of the [Nulecule Specification](https://github.com/projectatomic/nulecule). It can be used to bootstrap container applications and to install and run them. Atomic App is designed to be run in a container context. Examples using this tool may be found in the [Nulecule examples directory](https://github.com/projectatomic/nulecule/tree/master/examples).
+Atomic App is a reference implementation of the [Nulecule Specification](https://github.com/projectatomic/nulecule). It can be used to bootstrap container applications and to install and run them. Atomic App is designed to be run in a container context. Examples using this tool may be found in the [Nulecule examples directory](https://github.com/projectatomic/nulecule/tree/master/spec/examples/template).
 
 ## Getting Started
 

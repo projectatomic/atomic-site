@@ -1,0 +1,227 @@
+---
+title: Atomic Registry
+---
+%img.img-responsive.pull-right( src="/images/multicontainer.svg")
+%h1 Atomic Registry
+
+
+%p.lead
+
+  An enterprise container registry solution run on-premise or in the cloud
+
+%h2 What is Atomic Registry?
+
+%p
+
+  Atomic Registry is an open source enterprise registry based on the 
+  %a( href="https://www.openshift.org/" target="_blank") Origin
+  and
+  %a( href="http://cockpit-project.org/" target="_blank") Cockpit
+  projects.
+
+%p
+
+  Follow the 
+  %a( href="/registry#quickstart" ) Quickstart instructions
+  to try it out.
+
+%h2 Features
+
+.row
+
+  .col-md-4.col-sm-12
+    %h3 Beautiful User Interface
+
+    %p
+      Based on the 
+      %a( href="http://cockpit-project.org/" target="_blank") Cockpit Project
+      , Atomic Registry features a well-designed web interface with views for 
+      administrators and basic users.
+
+
+  .col-md-4.col-sm-12
+    %h3 Integration Ready SSO
+
+    %p
+      Built-in OAuth server to integrate with enterprise and cloud identity providers for a single sign-on (SSO) user experience.
+
+  .col-md-4.col-sm-12
+    %h3 Security and Control
+
+    %p
+      Robust role-based access control (RBAC) to distribute images securely.
+
+.row
+
+  .col-md-4.col-sm-12
+    %a(href="/images/registry-console.png")
+      %img.img-responsive( src="/images/registry-console.png")
+
+  .col-md-4.col-sm-12
+    %a(href="/images/registry-images.png")
+      %img.img-responsive( src="/images/registry-images.png")
+
+  .col-md-4.col-sm-12
+    %a(href="/images/registry-rbac.png")
+      %img.img-responsive( src="/images/registry-rbac.png")
+
+
+%h2
+  %a( name="quickstart")
+  Try It
+
+%h3 Prerequisites
+
+%ul
+  %li Red Hat-based system (RHEL, Centos, Fedora, including Atomic)
+  %li Docker
+  %li
+    %code atomic
+    CLI. This should be part of any Red Hat-based system.
+  %li
+    Storage for images. By default registry images will use local storage at 
+    %code /var/lib/origin/volumes
+    It is recommended that external storage be provided at this mountpoint or configure the registry for cloud storage.
+
+%h3 Deploy the Registry
+
+%ol
+
+  %li
+    <strong>Install</strong>. This will create configuration files and certificates in 
+    %code /etc/origin 
+    , create systemd files and pull down the docker images.
+    %pre
+      %code atomic install atomic-registry-quickstart
+  %li 
+    <strong>Configure</strong>. Optionally edit configuration file 
+    %code /etc/origin/master/master-config.yaml 
+    Refer to documentation to configure the 
+    %a( href="https://docs.openshift.org/latest/install_config/configuring_authentication.html" ) authentication identity provider.
+    or 
+    %a( href="https://docs.openshift.org/latest/install_config/certificate_customization.html") customizing certificates.
+    <strong>NOTE</strong>: Once the registry is running you may load any configuration changes using the systemd service manager, 
+    %code sudo systemctl restart atomic-openshift-master.service
+
+  %li <strong>Run</strong>. Start the origin service and launch the registry and web UI services. 
+  %pre
+    %code atomic run atomic-registry-quickstart
+
+  %li
+    <strong>Launch</strong> the registry web UI using a browser: 
+    %a( href="#" ) <strong>https://SERVER:9000</strong>
+    By default, <em>any</em> username and password will authenticate and have basic user priviledges.
+
+%h3 Push an image
+
+%ol
+  %li
+    <strong>docker login</strong>. Copy+paste the docker login command from the registry web interface.
+    %pre
+      %code sudo docker login -p <token> -e unused -u unused SERVER:5000
+
+  %li
+    <strong>Tag</strong>. Tag a docker image to match the registry hostname.
+    %pre
+      %code sudo docker tag MYIMAGE SERVER:5000/PROJECT/NAME
+
+  %li
+    <strong>Push</strong>. Push the tagged docker image to the registry. <strong>NOTE</strong>: If the docker daemon complains of an insecure registry, follow the instructions to configure
+    %code --INSECURE-REGISTRY SERVER:5000
+    and restart docker
+    %code sudo systemctl restart docker
+    %pre
+      %code sudo docker push SERVER:5000/PROJECT/NAME
+
+%h3
+  %a( name="configure" )
+  Configure
+
+%p
+  There are several setup steps that should be performed. These steps assume access to the CLI.
+
+%h4
+  %a( name="cli")
+  Working with the Command Line Interface (CLI)
+
+%p
+  The CLI client is not installed on the host system but it is available by entering the origin-master container on the Atomic Registry host system. The client may be installed on a remote system. See
+  %a(href="https://docs.openshift.org/latest/cli_reference/get_started_cli.html#installing-the-cli" target="_blank") documentation
+  for installing and using the remote CLI client.
+
+  %pre
+    %code $ sudo docker exec -it origin-master bash
+    \# oc whoami
+    system:admin
+
+%p
+  The
+  %code system:admin
+  user is a special user that should only be used for local cluster-administration tasks.
+
+%ol
+
+  %li
+    <strong>Configure an identity provider</strong>. Edit
+    %code /etc/origin/master/master-config.yaml
+    and restart the atomic-openshift-master service. Refer to
+    %a(href="https://docs.openshift.org/latest/install_config/configuring_authentication.html" target="_blank") authentication documentation
+    for supported identity providers, configuration details and examples. <em>Hint</em>: Integrating with 
+    %a(href="https://docs.openshift.org/latest/install_config/configuring_authentication.html#GitHub" target="_blank") GitHub authentication
+    is a fairly straightforward option.
+    %pre
+      %code sudo systemctl restart atomic-openshift-master.service
+
+  %li
+    <strong>Create an admin user</strong>. All authenticated users are assigned a basic user role by default. Choose at least one user to be an administrator. Replace
+    %code USERNAME
+    with a real user.
+    %pre
+      %code oadm policy add-cluster-role-to-user cluster-admin USERNAME
+
+  %li
+    <strong>Configure registry storage</strong>. TODO
+
+%h3 What's Next?
+
+%ul
+  %li Explore the web user interface and image sharing
+  %li
+    Decide if you want developers to 
+    %a(href="https://docs.openshift.org/latest/admin_guide/selfprovisioned_projects.html" target="_blank") create their own projects.
+  %li Learn about storage options and backing up the system.
+  %li
+    Learn how to configure the registry to use
+    %a(href="https://docs.openshift.org/latest/install_config/install/docker_registry.html#securing-the-registry" target="_blank") custom certificates.
+
+%h3
+  %a(name="issues")
+  Known Issues
+
+%ul
+  %li The web user interface is incomplete. There are some "not implemented" elements.
+
+%h2
+  %a(name="contact")
+  Contact
+
+%ul
+  %li
+    <strong>Email</strong>:
+    %a(href="mailto:atomic-dev@projectatomic.io") atomic-dev@projectatomic.io
+  %li <strong>IRC</strong>: #atomic on Freenode
+  %li Reporting issues
+  %ol
+    %li
+      Check the list of
+      %a(href="/registry#issues") known issues
+    %li
+      You may find discussion on Github issues page for
+      %a(href="https://github.com/openshift/origin/issues?q=is%3Aopen+is%3Aissue+label%3Acomponent%2Fimageregistry") Origin
+      or
+      %a(href="https://github.com/cockpit-project/cockpit/issues") Cockpit
+    %li
+      Send an 
+      %a(href="mailto:atomic-dev@projectatomic.io") email
+      or ask a question on the #atomic IRC channel on Freenode.
+      

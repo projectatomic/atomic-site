@@ -15,6 +15,9 @@ has_comments: true
 # If no owner is specified, then copyright will default to site name.)
 owner: Project Atomic. Sponsored by Red Hat, Inc.
 
+# Location where this repo exists on github
+github: projectatomic/atomic-site
+
 # The year your site was established (for the copyright)
 founding_year: 2014 # Defaults to current year if commented
 

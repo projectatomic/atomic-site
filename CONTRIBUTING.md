@@ -1,12 +1,12 @@
 # Contributing
 
-We want your contributions to making our site a great resource for 
+We want your contributions! Our goal is for projectatomic.io to have everything you need in order to run, administer, build applications, or contribute to Atomic projects.
 
 What follows is a guide to contributing content to the Project Atomic website.  
 
 ## Content We Want
 
-We're looking for anything which relates to the various open source sub-projects of Atomic, or running Linux containers on Red Hat platforms.  In general, all content should relate to open source technologies.  This includes:
+We're looking for anything which relates to the various open source sub-projects of Atomic, or running Linux containers on Fedora, CentOS or RHEL.  In general, all content should relate to open source technologies.  This includes:
 
 * Fedora, Centos, and RHEL Atomic Host
 * Atomic Developer Bundle

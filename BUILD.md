@@ -1,13 +1,35 @@
 # Building the Website
 
 This website is built on Middleman, a static site generator. See below for
-quick instructions:
+instructions for building it.
+
+## Docker build
+
+The recommended way to build the site is the simplest.  From the code root directory,
+run the docker build:
+
+```
+./docker.sh
+```
+
+If your local machine has Docker secured, then you'll need to sudo the above command.
+
+Once the container is up and running, the site will be available on 127.0.0.1:4567
+
+Note that because of cache issues, docker.sh does a build of the site image every
+time it runs. This may take a significant amount of time on slower machines.
+
+
+## Manual Build
+
+If you don't want to use the Docker container for some reason, 
+instructions for a manual build follow.
 
 To get started, you need to have Ruby and Ruby Gems installed, as well
 as "bundler".
 
 
-## Initial setup
+### Initial setup
 
 On an rpm based distribution:
 
@@ -18,7 +40,7 @@ cd atomic-site
 ```
 
 
-## Running a local server
+### Running a local server
 
 1. Start a local Middleman server:
 
@@ -36,17 +58,17 @@ cd atomic-site
    the page, unless you get a Ruby error.)
 
 
-## Updating
+### Updating
 
 When there are new gems in `Gemfile`, just run `bundle` again.
 
 
-## Customizing your site
+### Customizing your site
 
-The site can be easily customized by editing `data/site.yml`.
+The site can be customized by editing `data/site.yml`.
 
 
-## Adding a Post
+### Adding a Post
 
 To add a post to the community blog (or any blog managed by middleman) use:
 
@@ -55,7 +77,7 @@ bundle exec middleman article TITLE
 ```
 
 
-## Build your static site
+### Build your static site
 
 After getting it how you want, you can build the static site by running:
 
@@ -71,7 +93,7 @@ FIXME: Right now, please reference <data/site.yml>
 ### Actual deployment
 
 After copying your public key to the remote server and configuring your
-site in <data/site.yml>, deployment is one simple command:
+site in <data/site.yml>, deployment is one command:
 
 ```
 bundle exec middleman deploy

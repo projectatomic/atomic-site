@@ -14,4 +14,4 @@ Intructions on how to build the site for testing purposes are in BUILD.md.
 
 ## Contact
 
-General discussion of the site often takes place on atomic-devel@projectatomic.io mailing list.  To contact an individual in charge of the site, please see MAINTAINERS.md.
+General discussion of the site often takes place on [atomic-devel@projectatomic.io mailing list](https://lists.projectatomic.io/mailman/listinfo/atomic-devel) or on the #atomic channel on IRC.freenode.net.  To contact an individual in charge of the site, please see MAINTAINERS.md.

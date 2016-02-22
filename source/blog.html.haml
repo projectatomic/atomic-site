@@ -3,6 +3,9 @@ title: Project Atomic News
 pageable: true
 ---
 
+- content_for :head do
+  %link(href="/blog/feed.xml" rel="alternate" title="Atom feed" type="application/atom+xml")
+
 %section.blog-archive
 
   %h1 Project News

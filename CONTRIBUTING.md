@@ -30,7 +30,7 @@ If you are contributing to the Project Atomic site, please look at the following
 ### Blog posts
 * Fork this repo
 * Create a git branch for the blog post for clean merges
-* Blogs reside in the source/data/blog directory
+* Blogs reside in the source/blog directory
 * Naming convention is date-title *yyyy-mm-dd-this-is-a-blog*
 * Create a pull request to submit for editorial review
  

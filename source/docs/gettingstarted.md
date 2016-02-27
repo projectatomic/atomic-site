@@ -55,15 +55,13 @@ As a good practice, update to the latest available Atomic tree.
 ### Local Docker registry
 The Atomic cluster will use a local Docker registry mirror for caching with a local volume for persistance.  You may need to look at the amount of storage available to the Docker storage pool on the master host.  We don't want the container recreated every time the service gets restarted, so we'll create the container locally then set up a systemd unit file that will only start and stop the container.
 
-Create a named container from the Docker Hub registry image, exposing the standard Docker Hub port from the container via the host.  We're using a local host directory as a persistence layer for the images that get cached for use.  The other environment variables passed in to the registry set the source registry.  We're still using the Hub as the source, but you could set this to use a private registry instead of the public registry.
+Create a named container from the Docker Hub registry image, exposing the standard Docker Hub port from the container via the host.  We're using a local host directory as a persistence layer for the images that get cached for use.  The other environment variables passed in to the registry set the source registry.  ~~We're still using the Hub as the source, but you could set this to use a private registry instead of the public registry.~~
 
     [fedora@atomic-master~]$ sudo docker create -p 5000:5000 \
-    -v /var/lib/local-registry:/srv/registry \
-    -e STANDALONE=false \
-    -e MIRROR_SOURCE=https://registry-1.docker.io \
-    -e MIRROR_SOURCE_INDEX=https://index.docker.io \
-    -e STORAGE_PATH=/srv/registry \
-    --name=local-registry registry
+    -v /var/lib/local-registry:/var/lib/registry \
+    -e REGISTRY_STORAGE_FILESYSTEM_ROOTDIRECTORY=/var/lib/registry \
+    -e REGISTRY_PROXY_REMOTEURL=https://registry-1.docker.io \
+    --name=local-registry registry:2
 
 We need to change the SELinux context on the directory that docker created for our persistence volume.
 

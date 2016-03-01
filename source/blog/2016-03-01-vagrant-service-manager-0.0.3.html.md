@@ -1,9 +1,9 @@
 ---
 title: vagrant-service-manager Plugin Version 0.0.3 Released
 author: bexelbie
-date: 2016-02-29 11:50:00 UTC
+date: 2016-03-01 17:35:00 UTC
 tags: Docker, ADB, Vagrant
-published: false
+published: true
 comments: true
 ---
 Version 0.0.3 of the [vagrant-service-manager
@@ -19,7 +19,7 @@ This plugin replaces the previously released vagrant-adbinfo plugin.
 
 The plugin displays the configuration details for the Docker and other
 container-related services running inside of the ADB. This information can
-be used by a cli client, such as `docker` or `oc`, or by an IDE, such as
+be used by a CLI client, such as `docker` or `oc`, or by an IDE, such as
 [Eclipse](http://www.eclipse.org/community/eclipse_newsletter/2015/june/article3.php),
 to interact with the ADB.
 
@@ -48,7 +48,7 @@ $ curl https://raw.githubusercontent.com/projectatomic/vagrant-service-manager/m
 $ vagrant up
 
 # Obtain docker configuration information:
-    
+
 $ vagrant service-manager env docker
 # Copying TLS certificates to /home/bexelbie/Repositories/vagrant-service-manager/.vagrant/machines/default/virtualbox/docker
 # Set the following environment variables to enable access to the
@@ -65,7 +65,7 @@ $ vagrant service-manager box version
 Atomic Developer Bundle (ADB) 1.7.0
 ```
 
-Additionally the information for contributors has been expanded to make
+Additionally, the information for contributors has been expanded to make
 it even easier to become a contributor.
 
 Users of the previous plugin, vagrant-adbinfo, should know of the

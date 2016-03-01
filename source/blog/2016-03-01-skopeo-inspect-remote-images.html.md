@@ -7,9 +7,9 @@ published: true
 comments: true
 ---
 
-`atomic verify` checks whether there is a newer image available remotely and scans through all layers to see if any of the layers, which are base images themselves, have a new version available.  If the tool finds an out-of-date image, it will report as such. The command attempts to reach out the registry where the image has been downloaded from to understand if the local image is outdated.
+The `atomic verify` command checks whether there is a newer image available remotely and scans through all layers to see if any of the layers, which are base images themselves, have a new version available.  If the tool finds an out-of-date image, it will report as such. The command attempts to reach out the registry where the image has been downloaded from to understand if the local image is outdated.
 
-`atomic verify` currently relies on a Docker patch that Red Hat is carrying called *remote repository inspection*. It adds a new REST route that basically returns `docker inspect`-like information about a given image as found in the remote registry the image is hosted. We need this feature because `atomic verify` uses `LABEL`(s)&mdash;and in particular the `Version` `LABEL`&mdash;to check whether the local image needs to be updated. For more information about labels, see  the [projectatomic/ContainerApplicationGenericLabels](https://github.com/projectatomic/ContainerApplicationGenericLabels).
+Currently, `atomic verify` relies on a Docker patch that Red Hat is carrying called *remote repository inspection*. It adds a new REST route that basically returns `docker inspect`-like information about a given image as found in the remote registry the image is hosted. We need this feature because `atomic verify` uses `LABEL`(s)&mdash;and in particular the `Version` `LABEL`&mdash;to check whether the local image needs to be updated. For more information about labels, see  the [projectatomic/ContainerApplicationGenericLabels](https://github.com/projectatomic/ContainerApplicationGenericLabels).
 
 READMORE
 
@@ -17,7 +17,7 @@ We've been trying to push this patch upstream but the pull request got closed:  
 
 To avoid carrying a huge patch just to retrieve information about an image on registry with `docker`, we decided to put this feature into a small go binary called [skopeo](https://github.com/runcom/skopeo).
 
-`skopeo` is really simple, you just need to provide a fully qualified image (plus a reference&mdash;tag or digest&mdash;if you want to. By fully qualified, we mean you need to provide the registry url as part of the full image name (as opposed to what `docker` does when you run `FROM ubuntu`, which resolves to the `docker.io` public registry).
+The `skopeo` binary is really simple, you just need to provide a fully qualified image (plus a reference&mdash;tag or digest&mdash;if you want to. By fully qualified, we mean you need to provide the registry url as part of the full image name (as opposed to what `docker` does when you run `FROM ubuntu`, which resolves to the `docker.io` public registry).
 
 ```
 $ skopeo docker.io/ubuntu:12.04
@@ -28,7 +28,7 @@ $ skopeo docker.io/ubuntu:12.04
 The tool will output a json representation of the image available in the registry, instead of downloading it and later performing the inspection. As part of the output, `skopeo` lists also all available tags the image has on the given registry.
 The full json output is really similar to the `docker inspect` output, but it lacks some information such as the size of the image (which is not relevant in a remote inspection).
 
-`skopeo`  also supports registries that require authentication (such as private images on `docker.io`):
+The `skopeo` app also supports registries that require authentication (such as private images on `docker.io`):
 
 ```
 $ skopeo docker.io/runcom/busyboxt
@@ -44,4 +44,4 @@ $ skopeo registry.access.redhat.com/rhel7 | jq '.Config.Labels.Version'
 "7.2"
 ```
 
-`skopeo` is relatively new and in the future we aim to support [appc](https://github.com/appc/spec) images as well. However, right now, *appc* images need to be downloaded before being inspected, so it might be worth working on exposing image metadata as part of the their discovery procedure.
+The `skopeo` binary is relatively new and in the future we aim to support [appc](https://github.com/appc/spec) images as well. However, right now, *appc* images need to be downloaded before being inspected, so it might be worth working on exposing image metadata as part of the their discovery procedure.

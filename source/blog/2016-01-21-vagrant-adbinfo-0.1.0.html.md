@@ -3,7 +3,7 @@ title: vagrant-adbinfo Plugin Version 0.1.0 Released
 author: bexelbie
 date: 2016-01-21 11:50:00 UTC
 tags: Docker, ADB, Vagrant
-published: true
+published: false
 comments: true
 ---
 Version 0.1.0 of the [vagrant-adbinfo plugin](https://github.com/projectatomic/vagrant-adbinfo) has been released by Project Atomic.

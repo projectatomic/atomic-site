@@ -4,7 +4,7 @@ title: Project Atomic GSOC 2016
 
 # Project Atomic in Google Summer of Code 2016
 
-This year Project Atomic is proposing to participate in [Google Summer of Code 2016](https://developers.google.com/open-source/gsoc/) as part of the [Fedora Project](https://fedoraproject.org/wiki/GSOC_2016). At this point, we have not been accepted. If you are a student, or know a student, please consider submitting proposals once GSoC opens.
+This year Project Atomic is participating in [Google Summer of Code 2016](https://developers.google.com/open-source/gsoc/) as part of the [Fedora Project](https://fedoraproject.org/wiki/GSOC_2016). If you are a student, or know a student, please consider submitting proposals once GSoC opens.
 
 Specific projects we are accepting proposals in include:
 
@@ -16,9 +16,10 @@ Specific projects we are accepting proposals in include:
 * [Nulecule](https://github.com/projectatomic/nulecule)
 * [Other Project Atomic projects](https://github.com/projectatomic)
 
-## Participants
+## Contacts and Mentors
 
-The administrator for Project Atomic GSOC projects is <a href="mailto:jberkus@redhat.com">Josh Berkus</a>.  Contact Josh if you have questions about making a GSOC proposal.
+The administrator for Project Atomic GSOC projects is <a href="mailto:jberkus@redhat.com">Josh Berkus</a>.  Contact Josh if you have questions about making a GSOC proposal, or better ask
+questions on the [Atomic-Devel mailing list](https://lists.projectatomic.io/mailman/listinfo/atomic-devel) or on the #atomic or #fedora-cloud IRC channels on IRC.freenode.net.
 
 Mentors are:
 
@@ -29,9 +30,14 @@ Mentors are:
 ## Project Ideas
 
 What follows are a ideas for student projects around Atomic.  Please do not restrict yourself to these ideas;
-if there is something you want to build with containers and Atomic, then propose it!
+if there is something you want to build with containers and Atomic, then propose it!  Additional details of these
+ideas is available on the [Fedora GSOC 2016 wiki page](https://fedoraproject.org/wiki/Summer_coding_ideas_for_2016).
 
 ### RPM-OSTree and Fedora Atomic Host
+
+* [Next-generation Super-Privileged Container](https://github.com/projectatomic/atomic/issues/298) Improve building, managing, and updating these container images
+
+* [Atomic Host Package Layering](https://github.com/projectatomic/rpm-ostree/pull/107) mprove the package layering design, support more RPMs, ensure %post scripts are safe, etc
 
 * [Bootstrap with gpgcheck in kickstart](https://github.com/projectatomic/rpm-ostree/issues/190): Add a way for importing a GPG key from the kickstart `ostreesetup` command before the download starts. ["ostreesetup" is described here](https://docs.fedoraproject.org/en-US/Fedora/23/html/Installation_Guide/appe-kickstart-syntax-reference.html)
 
@@ -48,6 +54,8 @@ if there is something you want to build with containers and Atomic, then propose
 * [Drop privileges for HTTP fetches](https://bugzilla.gnome.org/show_bug.cgi?id=730037): The HTTP fetcher code is running in the same process of OSTree.  Move the HTTP fetcher code to another process with less privileges than the main process.
 
 * [Support kpatch](https://github.com/projectatomic/rpm-ostree/issues/118): Support live update for the kernel without rebooting or restarting any processes.
+
+* [Atomic Host Automated Updates](https://github.com/projectatomic/rpm-ostree/issues/177http://etherpad.osuosl.org/fedora-atomic-gsoc-2016) implement a service that automatically upgrades the system when a new image is available. If the system is not restarting correctly, the rollback to the previous working version.
 
 
 ## Applying to Project Atomic GSOC

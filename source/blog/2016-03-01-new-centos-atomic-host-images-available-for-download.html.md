@@ -1,15 +1,16 @@
 ---
 title: New CentOS Atomic Host Images Available for Download
 author: jbrooks
-date: 2016-02-29 21:49:31 UTC
+date: 2016-03-01 13:20:31 UTC
 tags: centos, docker, kubernetes
 comments: true
 published: true
 ---
-
 The CentOS Atomic SIG has released new images and an updated filesystem tree for CentOS Atomic Host. This includes a [patched glibc](https://access.redhat.com/articles/2161461) and a refreshed set of Kubernetes packages, among other updates.  All users running CentOS Atomic Host in production should update as soon as possible.
 
 An updated version of CentOS Atomic Host (version 7.20160224) is now available for download. CentOS Atomic Host is a lean operating system designed to run Docker containers, built from standard CentOS 7 RPMs, and tracking the component versions included in Red Hat Enterprise Linux Atomic Host.
+
+READMORE
 
 CentOS Atomic Host is available as a VirtualBox or libvirt-formatted Vagrant box, or as an installable ISO, qcow2 or Amazon Machine image. These images are available for download at [cloud.centos.org](http://cloud.centos.org/centos/7/atomic/images/). The backing ostree repo is published to [mirror.centos.org](http://mirror.centos.org/centos/7/atomic/x86_64/repo).
 

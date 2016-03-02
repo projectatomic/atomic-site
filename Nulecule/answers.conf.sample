@@ -1,0 +1,8 @@
+[atomic-site]
+image = jberkus/atomic-site
+hostport = 4567
+sourcedir = /home/josh/git/redhat/atomic-site-master/source
+datadir = /home/josh/git/redhat/atomic-site-master/data
+[general]
+namespace = default
+provider = docker

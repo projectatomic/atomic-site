@@ -3,10 +3,48 @@
 This website is built on Middleman, a static site generator. See below for
 instructions for building it.
 
+## Atomic.app
+
+The recommended way to test the site is with [atomic.app](https://github.com/projectatomic/atomicapp).  Currently,
+verion 0.4.2 or later is required.
+
+### First time setup
+
+There are a few setup steps you need to do the first time you clone
+the repository and run this as an atomic app.  You should have to do these again
+unless you re-clone the repo for some reason.
+
+1. authorize directory sharing in SELinux (may not be required in a VM):
+
+```
+    ./selinux_share.sh
+```
+
+2. configure answers.conf by copying Nulecule/answers.conf.sample to answers.conf
+   and editing the contents.
+
+For answers.conf, the two things you are required to set is the full file paths
+to the two directories, /source and /data.  The other fields should not require
+modification for most people.
+
+### running the atomic.app
+
+Once you've done the setup, you should be able to do this to run the container
+each time and test the atomic site by running from the repository root:
+
+```
+    sudo atomicpp run Nulecule/
+```
+
+The first time you do this, it will pull the atomic-site image, which may take
+a while depending on your internet connection.  After that it should be very fast.
+
+Once it's running, you can view the site on [127.0.0.1:4567](http://127.0.0.1:4567)
+
 ## Docker build
 
-The recommended way to build the site is the simplest.  From the code root directory,
-run the docker build:
+The second way to build the site is using Docker without atomic.app  From the code
+root directory, run the docker build:
 
 ```
 ./docker.sh
@@ -22,7 +60,7 @@ time it runs. This may take a significant amount of time on slower machines.
 
 ## Manual Build
 
-If you don't want to use the Docker container for some reason, 
+If you don't want to use the Atomic App or Docker containers for some reason,
 instructions for a manual build follow.
 
 To get started, you need to have Ruby and Ruby Gems installed, as well

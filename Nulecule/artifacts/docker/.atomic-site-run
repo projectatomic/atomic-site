@@ -1,1 +1,0 @@
-docker run --rm -p 4567:4567 --volume /home/josh/git/redhat/atomic-site-master/source:/tmp/source --volume /home/josh/git/redhat/atomic-site-master/data:/tmp/data jberkus/atomic-site

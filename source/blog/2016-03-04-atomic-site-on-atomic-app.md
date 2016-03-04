@@ -1,7 +1,7 @@
 ---
 title: Projectatomic.io Running in Atomic App
 author: jberkus
-date: 2016-03-04 12:00:00 UTC
+date: 2016-03-07 12:00:00 UTC
 tags: Atomic App, Nulecule, testing, development
 published: true
 comments: true
@@ -10,7 +10,7 @@ comments: true
 Since Atomic App has released version 0.4.2, I decided it was past time
 to make the atomic-site into an Atomic App instead of using a shell script that
 wraps Docker to test it.  The new setup is a big improvement, and a useful
-guide to "Nuleculeizing" your own apps.
+guide to "Nuleculizing" your own apps.
 
 As you know the purpose of Atomic App and Nulecule is to give you a provider-agnostic
 way to specify multi-container applications and orchestration metatdata which stays
@@ -99,6 +99,9 @@ graph:
       - name: image
         description: The webserver image
         default: jberkus/atomic-site
+      - name: provider
+        description: only support Docker, so need to set it here
+        default: docker
       - name: hostport
         description: The host TCP port as the external endpoint
         default: 4567
@@ -112,7 +115,9 @@ Here you'll notice that we supplied some defaults for the image name and the
 port to be used on the host, because we expect those to be the same for most
 users.  We don't expect that most users will have the same path to their local
 copy of the atomic-site repo, though, so those parameters have no defaults, meaning
-that the user has to supply them.
+that the user has to supply them.  While expressly setting the `provider` here is
+optional, since we're only supporting docker for this app, we want to set it
+as the default.
 
 Finally, the "artifacts" section defines where the provider files live:
 
@@ -172,7 +177,7 @@ Now, with it all together, I can now run my atomic app:
 
 ...and access the site on http://127.0.0.1:4567 so that I can test changes.
 
-Now, it's your turn to Nuleculeize an app.
+Now, it's your turn to Nuleculize an app.
 
 Check out the config here on the [atomic-site repo](https://github.com/projectatomic/atomic-site), and additional sample Atomic App
 configurations in the

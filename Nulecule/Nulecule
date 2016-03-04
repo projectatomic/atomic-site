@@ -12,6 +12,9 @@ graph:
       - name: image
         description: The webserver image
         default: jberkus/atomic-site
+      - name: provider
+        description: only support Docker, so need to set it here
+        default: docker
       - name: hostport
         description: The host TCP port as the external endpoint
         default: 4567

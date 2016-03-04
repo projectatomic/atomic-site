@@ -1,5 +1,5 @@
 ---
-title: Projectatomic.io running in Atomic App
+title: Projectatomic.io Running in Atomic App
 author: jberkus
 date: 2016-03-04 12:00:00 UTC
 tags: Atomic App, Nulecule, testing, development
@@ -7,7 +7,7 @@ published: true
 comments: true
 ---
 
-Since Atomic App is released version 0.4.2, I decided it was past time
+Since Atomic App has released version 0.4.2, I decided it was past time
 to make the atomic-site into an Atomic App instead of using a shell script that
 wraps Docker to test it.  The new setup is a big improvement, and a useful
 guide to "Nuleculeizing" your own apps.
@@ -25,7 +25,7 @@ In order to turn atomic-site into an Atomic App, I had to do five things:
    directories to be mounted as volumes, and set permissions on those;
 2. Create a template Dockerfile for the Atomic App;
 3. Create a Nulecule configuration file;
-4. Create a provider file for Docker.
+4. Create a provider file for Docker;
 5. Generate a an answers.conf file and edit it.
 
 Since the atomic-site is just a single-container app, and here we're just running
@@ -170,7 +170,7 @@ Now, with it all together, I can now run my atomic app:
 == The Middleman is loading
 ```
 
-... and access the site on http://127.0.0.1:4567 so that I can test changes.
+...and access the site on http://127.0.0.1:4567 so that I can test changes.
 
 Now, it's your turn to Nuleculeize an app.
 

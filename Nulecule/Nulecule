@@ -4,7 +4,7 @@ id: atomic-site
 
 metadata:
   name: Atomic Site app
-  appversion: 0.0.2
+  appversion: 0.1.0
   description: Atomic app for testing the Atomic Website
 graph:
   - name: atomic-site

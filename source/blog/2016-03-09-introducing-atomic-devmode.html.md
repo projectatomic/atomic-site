@@ -1,7 +1,7 @@
 ---
 title: Introducing Atomic Developer Mode
 author: jlebon
-date: 2016-03-09 20:30:00 UTC
+date: 2016-03-09 08:30:00 UTC
 comments: true
 published: true
 categories: blog
@@ -53,10 +53,12 @@ what the menu will now look like on the first boot:
 **A word of caution:** the GRUB menu timeout has a timeout of 1 second. Though
 increasing it would make it easier for people to select a different boot entry,
 it would also increase the boot up time for every other regular use case. If you
-miss it the first time, simply restart and try again!
+miss it the first time, simply restart and try again!  If you're using
+virt-manager, selecting "Enable boot menu" in the machine's boot options will
+give you a couple of extra seconds.
 
 When booted in Developer Mode, cloud-init will be provided with a local
-datasource which will automatically
+datasource that will automatically:
 
 1. generate a random root password,
 2. autologin as root into a [tmux](https://tmux.github.io/) session,

@@ -1,5 +1,5 @@
 FROM fedora:22
-MAINTAINER mscherer@redhat.com
+MAINTAINER jberkus@redhat.com
 WORKDIR /tmp
 RUN yum upgrade -y
 RUN yum install -y tar libcurl-devel zlib-devel patch rubygem-bundler ruby-devel git make gcc gcc-c++

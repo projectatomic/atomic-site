@@ -21,14 +21,14 @@ different when you boot the new image. There is now a "Developer Mode" entry in
 the GRUB boot menu. This blog post will describe why this new feature was added
 and what it does.
 
-READMORE
-
 One of the confusing things that newcomers encounter when they want to try out
 Atomic Host is setting up
 [cloud-init](http://cloudinit.readthedocs.org/en/latest/). Currently, it is
 impossible to use an Atomic Host image without providing cloud-init with a
 datasource. In the absence of a source, cloud-init will try connecting to
 various known metadata URLs for about 4 minutes and then give up.
+
+READMORE
 
 For most first-timers, the easiest way to get started has been to follow
 [the Quick Start Guide](http://www.projectatomic.io/docs/quickstart/), which
@@ -54,7 +54,7 @@ what the menu will now look like on the first boot:
 increasing it would make it easier for people to select a different boot entry,
 it would also increase the boot up time for every other regular use case. If you
 miss it the first time, simply restart and try again!  If you're using
-virt-mamanger, selecting "enable boot menu" will give you a couple seconds extra
+virt-mamanger, selecting "Enable boot menu" in the machine's boot options will give you a couple seconds extra
 time.
 
 When booted in Developer Mode, cloud-init will be provided with a local
@@ -76,16 +76,6 @@ tmux environment once it is fully booted up:
 One of the great strengths of Atomic Developer Mode is that its functionality is
 baked into the image. Thus, it does not assume any special setup of the host
 environment/OS, as long as it is capable of booting the image.
-
-Once you've booted into developer mode, you can disable cloud-init in order to
-have a permanent development VM with `systemctl disable cloud-init`.
-
-If you already have an Atomic Host installation, you can still get the boot menu
-added by upgrading to the new tree and running:
-
-```bash
-/usr/libexec/atomic-devmode/bootentry add
-```
 
 You can find more information on Atomic Developer Mode on the
 [atomic-devel mailing list](https://lists.projectatomic.io/projectatomic-archives/atomic-devel/2015-December/msg00034.html),

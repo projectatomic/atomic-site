@@ -1,7 +1,7 @@
 FROM fedora:22
 MAINTAINER jberkus@redhat.com
 WORKDIR /tmp
-RUN yum install -y tar libcurl-devel zlib-devel patch rubygem-bundler ruby-devel git make gcc gcc-c++
+RUN yum install -y tar libcurl-devel zlib-devel patch rubygem-bundler ruby-devel git make gcc gcc-c++ && yum clean all
 
 ADD config.rb /tmp/config.rb
 #ADD data /tmp/data

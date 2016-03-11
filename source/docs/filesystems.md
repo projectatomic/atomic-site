@@ -35,7 +35,7 @@ Containers are a bit more complicated. Each containers has two layers,
 one (called the "init" layer), which is based on an image layer and a
 child of that which contains the actual container content. The init
 layer contains a few files that must always exist in Docker containers
-(e.g. `/.dockerinit)`. Commiting a container (and thus creating an
+(e.g. `/.dockerinit)`. Committing a container (and thus creating an
 image) involves finding all the changes from the init layer to the
 container layer and applying those to a new layer based on the same
 image the container used.

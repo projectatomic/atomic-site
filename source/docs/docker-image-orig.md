@@ -70,7 +70,7 @@ Check that this worked by running:
 
 You should see both `fedora-httpd` and `registry-host:5000/myadmin/fedora-httpd` listed.
 
-The administrator now has a new image that contains a Apache Web server. The adminstrator can build a Dockerfile based on that image and add the appropriate files. Docker automatically untars or unzips the files in a source tar or zip file into the target directory. Here is the Dockerfile:
+The administrator now has a new image that contains a Apache Web server. The administrator can build a Dockerfile based on that image and add the appropriate files. Docker automatically untars or unzips the files in a source tar or zip file into the target directory. Here is the Dockerfile:
 
     FROM registryhost:5000/whenry/fedora-httpd
     MAINTAINER A D Ministator email: admin@corp.example.com

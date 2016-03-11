@@ -31,7 +31,7 @@ Petazzoni continued with examples of potential fixes for scenarios where Docker 
 
 You can, of course, get crazy and [run Docker-within-Docker](https://github.com/jpetazzo/docker2docker) by using KVM within a container. But then again, maybe *everything* doesn't need to be containerized. 
 
-One area that Petazzoni didn't mention during the intial talk is image signing. Right now, a lot of people are sharing Docker images without signing to ensure that the code you're running in a container actually is what was originally supplied or is actually from the source it purports to be from. This is a major concern, and Petazzoni says signing will be addressed eventually.
+One area that Petazzoni didn't mention during the initial talk is image signing. Right now, a lot of people are sharing Docker images without signing to ensure that the code you're running in a container actually is what was originally supplied or is actually from the source it purports to be from. This is a major concern, and Petazzoni says signing will be addressed eventually.
 
 With some caveats, though, the security picture for Docker is pretty good &ndash; but not yet perfect. So it goes. At the rate Docker is improving, we'll see many of the issues that Petazzoni discussed addressed by this time next year. And, in many cases, there are already workarounds.
 

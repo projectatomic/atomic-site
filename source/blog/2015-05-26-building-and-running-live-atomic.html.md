@@ -517,7 +517,7 @@ Far better, some 200 KB were consumed during the pull. With this setup we seem t
 
 ### Mounitng live image with rd.writable.fsimg?
 
-There is a new patch in rawhide dracut alowing to mount rootfs image packed in squashfs image in a slightly different way, copying the rootrs image into RAM and loop mounting it read-write.
+There is a new patch in rawhide dracut allowing to mount rootfs image packed in squashfs image in a slightly different way, copying the rootrs image into RAM and loop mounting it read-write.
 
 ```
 live-rootfs.squashfs.img

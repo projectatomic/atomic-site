@@ -289,7 +289,7 @@ $ sudo docker run -it --rm libvirt-client virsh list
 ----------------------------------------------------
 ````
 
-Just like our previous test from a workstation, the libvirt daemon responded.  Notice though, we did not have to pass the --connect arguement like the previous test because the libvirt-client container has that defined already.
+Just like our previous test from a workstation, the libvirt daemon responded.  Notice though, we did not have to pass the --connect argument like the previous test because the libvirt-client container has that defined already.
 
 
 ### Booting the Fedora cloud image using the libvirt-client container
@@ -426,7 +426,7 @@ It would be worthwhile to look at a few of the arguments in the install command 
 <li>-l points to a valid Fedora repository</li>
 <li>--network is using a valid bridge as defined on the host</li>
 <li>--graphics defines the type of vnc and a specific port, the 0.0.0.0 instructs vnc to listen “everywhere” -- a password can also be defined here.</li>
-<li>--noautoconsole instructs virt-install to not automatically set up a console as this will fail due to the container seperation.</li>
+<li>--noautoconsole instructs virt-install to not automatically set up a console as this will fail due to the container separation.</li>
 </ul>
 
 In the example command we used to start virt-install, we did specifically define port of 5910.  That port will default to :10 for connecting your vnc client, but we can also verify using the virsh command and the libvirt-client container like so:

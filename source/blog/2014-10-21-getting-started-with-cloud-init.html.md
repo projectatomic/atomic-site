@@ -50,7 +50,7 @@ ssh_authorized_keys:
    - ... ssh-rsa new public key here user@host ...
 ```
 
-If you want to add more ssh keys, just add a new line starting with a - under the `ssh_authorized_keys:` stanza.  This is YAML, so you want to use white spaces not tabs to indent.  The `#cloud-init` line is not a comment in the user-data file.  This is acutally a keyword that needs to be there.  Anything else preceeded with a `#` is a comment.  
+If you want to add more ssh keys, just add a new line starting with a - under the `ssh_authorized_keys:` stanza.  This is YAML, so you want to use white spaces not tabs to indent.  The `#cloud-init` line is not a comment in the user-data file.  This is acutally a keyword that needs to be there.  Anything else preceded with a `#` is a comment.  
 
 I've got the two files ready, so now I need to make a ISO to provide during the boot process.  If you've got a favorite method, you can use that, I'll use `genisoimage`.
 

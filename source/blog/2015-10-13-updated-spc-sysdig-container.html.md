@@ -9,7 +9,7 @@ published: true
 
 In a interesting coincidence, the same day we posted [the super privileged containers post](http://www.projectatomic.io/blog/2015/09/using-a-spc-to-troubleshoot-containers/) using [Sysdig](www.sysdig.org/), the Sysdig team announced [support for Atomic hosts](https://sysdig.com/dig-into-atomic-host/).  You can take a look at that announcement for how sysdig does it's magic on an Atomic host and which Atomic hosts are supported.
 
-So no more need to build your own sysdig container for your Atomic clusters, you can use the offical builds.  Here's what that looks like now.
+So no more need to build your own sysdig container for your Atomic clusters, you can use the official builds.  Here's what that looks like now.
 
 READMORE
 

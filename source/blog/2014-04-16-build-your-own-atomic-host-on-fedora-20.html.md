@@ -14,7 +14,7 @@ The application as shipping container metaphor behind the [Docker project's](htt
 
 While the app is where the action happens, I can't help but wonder what sort of ships await our containers when they arrive at the dock. No matter how well you've crafted or carefully you've packed your cargo, your application will only make it as far as its ship can take it.
 
-Maybe the best thing about Project Atomic is the way it addressess both the shipping container and the ship itself, the former with Docker, and the latter with an intriguing (if less catchily-named) project called rpm-ostree. 
+Maybe the best thing about Project Atomic is the way it addresses both the shipping container and the ship itself, the former with Docker, and the latter with an intriguing (if less catchily-named) project called rpm-ostree. 
 
 We can use rpm-ostree to take a set of packages from one of our friendly neighborhood RPM-based Linux distributions, assemble it into a "just-enough" OS image, and then deploy and manage hosts based on that image in a manner that more closely matches the container model than do traditional OSes.
 
@@ -162,7 +162,7 @@ The rpm-ostree-autobuilder will periodically check for products.json changes, an
 rm -rf cache/raw/images images/auto cache/packageset*.txt && echo treecompose | rpm-ostree-autobuilder console
 ````
 
-from your /srv/rpm-ostree directory. (that first, `rm` command is due to a caching bug and ought to be unecessary before too long)
+from your /srv/rpm-ostree directory. (that first, `rm` command is due to a caching bug and ought to be unnecessary before too long)
 
 The ostree assembly process takes a while to complete. You can monitor the treecompose with:
 

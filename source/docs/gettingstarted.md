@@ -53,7 +53,7 @@ As a good practice, update to the latest available Atomic tree.
     [fedora@atomic-master ~]$ sudo systemctl reboot
 
 ### Local Docker registry
-The Atomic cluster will use a local Docker registry mirror for caching with a local volume for persistance.  You may need to look at the amount of storage available to the Docker storage pool on the master host.  We don't want the container recreated every time the service gets restarted, so we'll create the container locally then set up a systemd unit file that will only start and stop the container.
+The Atomic cluster will use a local Docker registry mirror for caching with a local volume for persistence.  You may need to look at the amount of storage available to the Docker storage pool on the master host.  We don't want the container recreated every time the service gets restarted, so we'll create the container locally then set up a systemd unit file that will only start and stop the container.
 
 Create a named container from the Docker Hub registry image, exposing the standard Docker Hub port from the container via the host.  We're using a local host directory as a persistence layer for the images that get cached for use.  The other environment variables passed in to the registry set the source registry.  ~~We're still using the Hub as the source, but you could set this to use a private registry instead of the public registry.~~
 
@@ -108,7 +108,7 @@ For Kubernetes, there's a few config files in /etc/kubernetes we need to set up 
 We'll be setting up the etcd store that Kubernetes will use.  We're using a single local etcd service, so we'll point that at the master on the standard port.  We'll also set up how the services find the apiserver.
 
     [fedora@atomic-master ~]$ sudo vi /etc/kubernetes/config
-    # Comma seperated list of nodes in the etcd cluster
+    # Comma separated list of nodes in the etcd cluster
     KUBE_ETCD_SERVERS="--etcd_servers=http://192.168.122.10:2379"
 
     # How the replication controller and scheduler find the kube-apiserver

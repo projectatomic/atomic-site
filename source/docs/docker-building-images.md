@@ -73,7 +73,7 @@ Check that this worked by running:
 
 You should see both `fedora-httpd` and `fedora` listed.
 
-The administrator now has a new image that contains a Apache Web server. The adminstrator can build a Dockerfile based on that image and add the appropriate files. Given the relative path to a tarball of the site content, Docker automatically untars or unzips the files in a source tar or zip file into the target directory. Create a simple index.html and add it to a tarball called `mysite.tar` in the current directory.  
+The administrator now has a new image that contains a Apache Web server. The administrator can build a Dockerfile based on that image and add the appropriate files. Given the relative path to a tarball of the site content, Docker automatically untars or unzips the files in a source tar or zip file into the target directory. Create a simple index.html and add it to a tarball called `mysite.tar` in the current directory.  
 
 Here is the Dockerfile to add the web site content to the new base image and launch Apache on port 80:
 

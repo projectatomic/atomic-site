@@ -1,22 +1,22 @@
 ---
 title: Docker credentials store
 author: runcom
-date: 2016-03-11 15:55:08 UTC
+date: 2016-03-15 10:00:00 UTC
 tags: docker
-published: false
+published: true
 comments: true
 ---
 
-One security feature coming with the upcoming Docker 1.11 is the ability to store the credentials
-used to authenticate to registries into an external credentials store. Docker 1.11 will be able to automatically detect and use a default credentials
-store for the platform it will run on. We'll be talking more about this in the next paragraphs, but first, let's see how Docker is currently storing credentials.
+One security feature in the upcoming Docker 1.11 is the ability to use an external credentials store for registry authentication. The new version will automatically detect a configured external store, if it is available, and use it instead of the JSON file. We'll be talking more about this in a few paragraphs, but first, let's see how Docker is currently storing credentials.
+
 Login and logout
 =
-Nowadays Docker stores the credentials used to authenticate to registries inside a json file (usually in `$HOME/.docker/config.json`).
-The format is pretty simple:
+
+Today, Docker stores the credentials used for registry authentication inside a JSON file (usually in `$HOME/.docker/config.json`).
+Its format is pretty simple:
 
 ```bash
-$ cat $HOME/.docker/config.json 
+$ cat $HOME/.docker/config.json
 {
 	"auths": {
 		"https://index.docker.io/v1/": {
@@ -30,16 +30,17 @@ $ cat $HOME/.docker/config.json
 	}
 }
 ```
-After a successful `docker login`, Docker stores a base64 encoded string from the concatenation of the username, a colon, 
+After a successful `docker login`, Docker stores a base64 encoded string from the concatenation of the username, a colon,
 and the password and associates this string to the registry the user is logging into:
 
 ```bash
 $ echo YW11cmRhY2E6c3VwZXJzZWNyZXRwYXNzd29yZA== | base64 -d -
 amurdaca:supersecretpassword
 ```
-Let's forget about the `email` field because it will be removed in Docker 1.11 and it has never been used for authentication purposes.
 
-A `docker logout` simply removes the entry from the json file for the given registry the user is trying to logout from:
+Let's forget about the `email` field, since it will be removed in Docker 1.11, and has never been used for authentication purposes.
+
+A `docker logout` simply removes the entry from the JSON file for the given registry:
 
 ```bash
 $ docker logout localhost:5001
@@ -55,21 +56,24 @@ $ cat $HOME/.docker/config.json
 	}
 }
 ```
+
 Interacting with registries
 =
-Let's put this simple; if the registry the user is interacting with requires authentication, Docker retrieves the username and  the password
-from the aforementioned json file and use them to authenticate. No big deal.
-External credentials store
+
+Let's put this simply; if the registry the user is interacting with requires authentication, Docker retrieves the username and  the password from the aforementioned JSON file and use them to authenticate. No big deal.
+
+External Credentials Store
 =
-As said above, Docker 1.11 implements communication with an external credentials store, ala `git-credential-helper`. 
-The implementation shells out to a helper program when a credentials store is configured. Those programs can be implemented with any language as long as they follow the convention to pass arguments and information. The pull request which added this new feature can be found at [docker/docker#20107](https://github.com/docker/docker/pull/20107).
+
+As said above, Docker 1.11 implements communication with an external credentials store, in the same way as the `git-credential-helper` does for git.
+The implementation calls out to a helper program process when a credentials store is configured. The helper program can be implemented in any programming language as long as it follows the conventions for passed arguments and information. The pull request which added this new feature can be found at [docker/docker#20107](https://github.com/docker/docker/pull/20107).
 Docker is also providing a library to help building those credentials helpers at [docker/docker-credential-helpers](https://github.com/docker/docker-credential-helpers).
 
-To configure an *external* credentials store a user need an external helper program to interact with a specific keychain or external store. Docker requires the helper  program to be in the client's host `$PATH`. Docker itself is providing sane defaults for osx and windows and I've recently added support for a credentials store for linux ([docker/docker-credential-helpers#7](https://github.com/docker/docker-credential-helpers/pull/7)) which is using `libsecret` to work with the gnome keyring (and the KDE one). 
+To configure an *external* credentials store a user need an external helper program to interact with a specific keychain or external store. Docker requires the helper  program to be in the client's host `$PATH`. The Docker project itself is providing sane defaults for OSX and Windows. I've recently added support for a credentials store for desktop Linux ([docker/docker-credential-helpers#7](https://github.com/docker/docker-credential-helpers/pull/7)) which is using `libsecret` to work with the gnome keyring (and the KDE one).
 
-Once the helper program is installed on the client's host the user just needs to tell the Docker client to actually use it. Beaware the user needs to perform a `docker logout` to remove the credentials already stored in the json file.
+Once the helper program is installed on the client's host the user just needs to tell the Docker client to actually use it. Be aware that the user needs to perform a `docker logout` to remove the credentials already stored in the JSON file.
 
-This is how a configuration file looks like  after a successful `docker login`:
+This is what a configuration file looks like after a successful `docker login`:
 
 ```bash
 $ cat $HOME/.docker/config.json
@@ -80,7 +84,8 @@ $ cat $HOME/.docker/config.json
 	"credsStore": "secretservice"
 }
 ```
-The file is telling us that we have stored credentials for the registry at `localhost:5001` and we can see no credentials are stored in the file. Instead we can see that `credsStore` is populated with the string `secretservice` (which is the default on linux if installed). Docker reads the `credsStore` string and execute the helper `docker-credential-secretservice` to interact with the credentials store.
+
+This file is telling us that we have stored credentials for the registry at `localhost:5001` and we can see no credentials are stored in the file. Instead we can see that `credsStore` is populated with the string `secretservice` (which is the default on Linux if installed). Docker reads the `credsStore` string and execute the helper `docker-credential-secretservice` to interact with the credentials store.
 
 With the help of the binary `secret-tool` we can retrieve the credentials stored (just for debugging purposes):
 
@@ -99,10 +104,10 @@ attribute.docker_cli = 1
 
 When interacting with registries Docker queries the credentials store configured and uses the credentials returned (if any).
 
-Generally, it's desiderable to have the system credentials store managing secrets (specifically passwords) in order to apply any additional security measures (apart from file permissions).  
-The default linux credentials store uses the system keyring to store username and password for Docker (other tools do this such as Google Chrome) in the default Login session. This means the keyring is automatically unlocked when the user logins into the system. Password stored there also persist indefinitely, a reboot won't erase them for instance.  
+Generally, it's desirable to have the system credentials store managing secrets (specifically passwords) in order to apply any additional security measures (apart from file permissions).  
+The default desktop Linux credentials store uses the system keyring to store username and password for Docker in the default Login session, in the same way that other software like Google Chrome does. This means the keyring is automatically unlocked when the user logins into the system. Passwords stored there also persist indefinitely, so that a reboot won't erase them.  
 
-This pluggability helps us create and use more advanced *secrets backends* . We're currently exploring the [`custodia`](https://github.com/latchset/custodia) project to be used as an external credentials store for Docker, so stay tuned for more information!  
+The feature's pluggability helps us create and use more advanced *secrets backends*, especially for server use. We're currently exploring the [`custodia`](https://github.com/latchset/custodia) project to be used as an external credentials store for Docker, so stay tuned for more information!  
 Other implementations may store encrypted (hashed) credentials and validate the credentials provided without explicitly storing plain passwords.
 
 If you want to understand more about how all this is working or if you want to implement your own credentials store, you can find more information at [docker/docker-credential-helpers](https://github.com/docker/docker-credential-helpers).

@@ -1,13 +1,13 @@
 ---
-title: Docker credentials store
-author: runcom
-date: 2016-03-15 10:00:00 UTC
-tags: docker
+title: Added no-new-privileges Security Flag to Docker
+author: mrunalp
+date: 2016-03-17 10:00:00 UTC
+tags: docker, security, patches, SELinux
 published: true
 comments: true
 ---
 
-Red Hat staff working on Project Atomic have contributed support for a `no-new-privileges` option to [docker](https://github.com/docker/docker/pull/20727).
+I have contributed support for a `no-new-privileges` option to [docker](https://github.com/docker/docker/pull/20727).
 This flag has already been included in [runc](https://github.com/opencontainers/runc/pull/557) and the Open Container Initiative
 [spec](https://github.com/opencontainers/specs/pull/290).
 
@@ -88,6 +88,8 @@ Effective uid: 1000
 
 As you can see above the container process is still running as UID=1000, meaning that even if the
 image has dangerous code in it, we can still prevent the user from escalating privileges.
+
+Turning on `no_new_privs` actually stopped the SELinux transition from the docker daemon type `docker_t` to the container type, `svirt_lxc_net_t`. `no_new_privs` only allows SELinux transitions from one type to another if the target type as a complete subset of the source type. Dan Walsh worked on the SELinux policy for docker to fix this. With the latest policy in Fedora 24, `no_new_privs` and SELinux work well together. We will be back porting these fixes to RHEL when we ship docker support for `no_new_privs`.
 
 If you want to allow users to run images as a non-privileged UID, in most cases you would want to
 prevent them from becoming root.  `no_new_privileges` is a great tool for guaranteeing this.

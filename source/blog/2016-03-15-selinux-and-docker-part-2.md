@@ -1,20 +1,20 @@
 ---
 title: Extending SELinux Policy for Containers
 author: dwalsh
-date: 2016-03-14 10:00:00 UTC
+date: 2016-03-15 12:12:00 UTC
 tags: selinux, security, containers, docker
 comments: true
 published: true
 ---
 
-## The Problem: A Logger SPC
 
-A developer contacted me about building a container which will run as a log aggregator for
+A developer contacted me about building a container that will run as a log aggregator for
 `fluentd`.  This container needed to be a [SPC container](http://developers.redhat.com/blog/2014/11/06/introducing-a-super-privileged-container-concept/) that would manage parts of the host system, namely the log files under /var/logs.
 
 Being a good conscientious developer, he wanted to run his application as securely as possible.
-The option he wanted to avoid was running the container in `--privileged` mode, removing all security
-from the container.  When he ran his container `SELinux` complained about the container processes trying to read log files.
+The option he wanted to avoid was running the container in `--privileged` mode, removing all security from the container.  When he ran his container `SELinux` complained about the container processes trying to read log files.
+
+## The Problem: A Logger SPC
 
 He asked me if there was a way to run a container where SELinux would allow the access but the container process could still be confined.  I suggested that he could disable SELinux protections for just this container, leaving SELinux enforcing on for the other containers and for the host:
 
@@ -31,7 +31,7 @@ docker run -d -v /var/log:/var/log:Z fluentd
 ```
 
 The problem with this is that all of the files under /var/log would not be labeled with a container
-specific label (`svirt_sandbox_file_t`) Other parts of the host system like Logrotate, and log scanners would now be blocked from access the log files.
+specific label (`svirt_sandbox_file_t`). Other parts of the host system like Logrotate, and log scanners would now be blocked from access the log files.
 
 The best option we came up with was to generate a new `type` to run the container with.  
 
@@ -53,7 +53,8 @@ typeattribute container_logger_t sandbox_net_domain;
 logging_manage_all_logs(container_logger_t)
 ```
 
-Compile and install the policy
+Compile and install the policy.
+
 ```
 make -f /usr/selinux/devel/Makefile container_login.pp
 semodule -i container_login.pp
@@ -106,14 +107,13 @@ typeattribute container_logger_t sandbox_net_domain;
 ```
 
 This section will eventually be an interface `virt_sandbox_net_domain`.  (I sent a patch to the upstream
-selinux-policy package to add this interface) This new interface just assigns an attribute to `container_logger_t`.  Attributes bring in lots of policy rules, basically this attribute gives full network access to the `container_logger_t` processes.  If your container did not need access to the network, or you wanted to tighten the network ports that `container_logger_t` would be able to listen on or connect to, you would not use this interface.  
+selinux-policy package to add this interface.) This new interface just assigns an attribute to `container_logger_t`.  Attributes bring in lots of policy rules, basically this attribute gives full network access to the `container_logger_t` processes.  If your container did not need access to the network, or you wanted to tighten the network ports that `container_logger_t` would be able to listen on or connect to, you would not use this interface.  
 
 ```
 logging_manage_all_logs(container_logger_t)
 ```
 
-This last interface `logging_manage_all_logs` gives `container_logger_t` the ability to manage all of the log
-file types.  SELinux interfaces are defined and shipped under /usr/share/selinux/devel.
+This last interface `logging_manage_all_logs` gives `container_logger_t` the ability to manage all of the log file types.  SELinux interfaces are defined and shipped under /usr/share/selinux/devel.
 
 ## Conclusion
 

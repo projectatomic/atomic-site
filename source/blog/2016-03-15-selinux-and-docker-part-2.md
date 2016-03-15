@@ -14,6 +14,8 @@ A developer contacted me about building a container that will run as a log aggre
 Being a good conscientious developer, he wanted to run his application as securely as possible.
 The option he wanted to avoid was running the container in `--privileged` mode, removing all security from the container.  When he ran his container `SELinux` complained about the container processes trying to read log files.
 
+READMORE
+
 ## The Problem: A Logger SPC
 
 He asked me if there was a way to run a container where SELinux would allow the access but the container process could still be confined.  I suggested that he could disable SELinux protections for just this container, leaving SELinux enforcing on for the other containers and for the host:

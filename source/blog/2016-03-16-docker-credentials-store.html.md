@@ -14,8 +14,7 @@ READMORE
 
 Today, Docker stores the credentials used for registry authentication inside a JSON file (usually in `$HOME/.docker/config.json`). Its format is pretty simple:
 
-```
-bash
+```bash
 $ cat $HOME/.docker/config.json
 {
 	"auths": {
@@ -33,8 +32,7 @@ $ cat $HOME/.docker/config.json
 
 After a successful `docker login`, Docker stores a base64 encoded string from the concatenation of the username, a colon, and the password and associates this string to the registry the user is logging into:
 
-```
-bash
+```bash
 $ echo YW11cmRhY2E6c3VwZXJzZWNyZXRwYXNzd29yZA== | base64 -d -
 amurdaca:supersecretpassword
 ```
@@ -43,8 +41,7 @@ Let's forget about the `email` field, since it will be removed in Docker 1.11, a
 
 A `docker logout` simply removes the entry from the JSON file for the given registry:
 
-```
-bash
+```bash
 $ docker logout localhost:5001
 Remove login credentials for localhost:5001
 
@@ -76,8 +73,7 @@ Once the helper program is installed on the client's host the user just needs to
 
 This is what a configuration file looks like after a successful `docker login`:
 
-```
-bash
+```bash
 $ cat $HOME/.docker/config.json
 {
 	"auths": {
@@ -91,8 +87,7 @@ This file is telling us that we have stored credentials for the registry at `loc
 
 With the help of the binary `secret-tool` we can retrieve the credentials stored (just for debugging purposes):
 
-```
-bash
+```bash
 $ secret-tool search server localhost:5001
 [/org/freedesktop/secrets/collection/login/3774]
 label = localhost:5001

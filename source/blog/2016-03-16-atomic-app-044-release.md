@@ -1,14 +1,15 @@
 ---
 title: Atomic App 0.4.4 Released
 author: cdrage
-date: 2016-03-16 10:00:00 UTC
+date: 2016-03-16 17:30:00 UTC
 tags: atomicapp, Nulecule, releases
 published: true
 comments: true
 ---
 
-Atomic App version 0.4.4 has been released. This release includes a major update to our documentation as well as
-the user experience when deploying an Atomic App.
+Atomic App version 0.4.4 has been released. This release includes a major update to our documentation as well as the user experience when deploying an Atomic App.
+
+READMORE
 
 The main features are:
 
@@ -18,13 +19,13 @@ The main features are:
 
 UI:
 
-  - Fix --version output on CLI
+  - Fix `--version` output on CLI
   - Handle docker exception errors
   - Inform on wrong provider name provided within answers.conf
 
 Other:
 
-  - Fix requirements on 'make test'
+  - Fix requirements on `make test`
 
 You can download Atomic App from [the Github repository](https://github.com/projectatomic/atomicapp), or as part of [Atomic Host](http://www.projectatomic.io/download/).
 

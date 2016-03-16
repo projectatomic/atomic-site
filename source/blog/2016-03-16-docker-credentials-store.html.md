@@ -112,6 +112,4 @@ The default desktop Linux credential store uses the system keyring to store user
 
 The feature's pluggability helps us create and use more advanced *secrets backends*, especially for server use. We're currently exploring the [`custodia`](https://github.com/latchset/custodia) project to be used as an external credential store for Docker, so stay tuned for more information!
 
-Other implementations may store encrypted (hashed) credentials and validate the credentials provided without explicitly storing plain passwords.
-
 If you want to understand more about how all this is working or if you want to implement your own credential store, you can find more information at [docker/docker-credential-helpers](https://github.com/docker/docker-credential-helpers).

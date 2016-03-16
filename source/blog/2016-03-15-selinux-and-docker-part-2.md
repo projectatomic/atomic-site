@@ -7,7 +7,6 @@ comments: true
 published: true
 ---
 
-
 A developer contacted me about building a container that will run as a log aggregator for
 `fluentd`.  This container needed to be a [SPC container](http://developers.redhat.com/blog/2014/11/06/introducing-a-super-privileged-container-concept/) that would manage parts of the host system, namely the log files under /var/logs.
 

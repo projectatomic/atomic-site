@@ -87,6 +87,6 @@ Effective uid: 1000
 
 As you can see above the container process is still running as UID=1000, meaning that even if the image has dangerous code in it, we can still prevent the user from escalating privileges.
 
-Turning on `no_new_privs` actually stopped the SELinux transition from the docker daemon type `docker_t` to the container type, `svirt_lxc_net_t`. `no_new_privs` only allows SELinux transitions from one type to another if the target type as a complete subset of the source type. Dan Walsh worked on the SELinux policy for docker to fix this. With the latest policy in Fedora 24, `no_new_privs` and SELinux work well together. We will be back-porting these fixes to RHEL when we ship docker support for `no_new_privs`.
+Turning on `no_new_privs` actually stopped the SELinux transition from the docker daemon type `docker_t` to the container type, `svirt_lxc_net_t`. The `no_new_privs` option only allows SELinux transitions from one type to another if the target type as a complete subset of the source type. Dan Walsh worked on the SELinux policy for docker to fix this. With the latest policy in Fedora 24, `no_new_privs` and SELinux work well together. We will be back-porting these fixes to RHEL when we ship docker support for `no_new_privs`.
 
 If you want to allow users to run images as a non-privileged UID, in most cases you would want to prevent them from becoming root. `no_new_privileges` is a great tool for guaranteeing this.

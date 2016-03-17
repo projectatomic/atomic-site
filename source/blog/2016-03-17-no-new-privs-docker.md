@@ -1,30 +1,30 @@
 ---
 title: Added no-new-privileges Security Flag to Docker
 author: mrunalp
-date: 2016-03-17 10:00:00 UTC
+date: 2016-03-17 12:40:00 UTC
 tags: docker, security, patches, SELinux
 published: true
 comments: true
 ---
 
 I have contributed support for a `no-new-privileges` option to [docker](https://github.com/docker/docker/pull/20727).
-This flag has already been included in [runc](https://github.com/opencontainers/runc/pull/557) and the Open Container Initiative
-[spec](https://github.com/opencontainers/specs/pull/290).
+This flag has already been included in [runc](https://github.com/opencontainers/runc/pull/557) and the Open Container Initiative [spec](https://github.com/opencontainers/specs/pull/290).
 
-The new flag supports, in Docker, a security feature that was added to the Linux kernel back in 2012 under the name `no_new_privs`. The kernel feature works as follows:
+The new flag supports, in Docker, a security feature that was added to the Linux kernel back in 2012 under the name `no_new_privs`.
 
-* A process can set the `no_new_privs` bit
-in the kernel that persists across fork, clone and exec.
-* The `no_new_privs` bit ensures that the process or its
-children processes do not gain any additional privileges.
-* A process isn't allowed to unset the `no_new_privs` bit
-once it is set.
+READMORE
+
+The kernel feature works as follows:
+
+* A process can set the `no_new_privs` bit in the kernel that persists across fork, clone, and exec.
+* The `no_new_privs` bit ensures that the process or its children processes do not gain any additional privileges.
+* A process isn't allowed to unset the `no_new_privs` bit once it is set.
 * Processes with `no_new_privs` are not allowed to change uid/gid or gain any other capabilities, even if the process executes setuid binaries or executables with file capability bits set.
-* `no_new_privs` also prevents LSMs like SELinux from transitioning to process labels that have access not allowed to the current process.  This means an SELinux process is only allowed to transition to a process type with less privileges.
+* `no_new_privs` also prevents LSMs like SELinux from transitioning to process labels that have access not allowed to the current process. This means an SELinux process is only allowed to transition to a process type with less privileges.
 
-For more details see [kernel documentation](https://www.kernel.org/doc/Documentation/prctl/no_new_privs.txt)
+For more details see the [kernel documentation](https://www.kernel.org/doc/Documentation/prctl/no_new_privs.txt).
 
-Here is an example showcasing how it helps in Docker:
+Here is an example showcasing how it helps in Docker.
 
 Create a setuid binary that displays the effective uid:
 
@@ -76,8 +76,7 @@ Now we will create and run a container without `no-new-privileges`:
 [$ dockerfiles]# docker run -it --rm --user=1000  testnnp
 Effective uid: 0
 ```
-This shows that even though you requested a non privileged user (UID=1000) to run your container,
-that user would be able to become root by executing the setuid app on the container image.
+This shows that even though you requested a non-privileged user (UID=1000) to run your container, that user would be able to become root by executing the setuid app on the container image.
 
 Running with `no-new-privileges` prevents the uid transition while running a setuid binary:
 
@@ -86,10 +85,8 @@ Running with `no-new-privileges` prevents the uid transition while running a set
 Effective uid: 1000
 ```
 
-As you can see above the container process is still running as UID=1000, meaning that even if the
-image has dangerous code in it, we can still prevent the user from escalating privileges.
+As you can see above the container process is still running as UID=1000, meaning that even if the image has dangerous code in it, we can still prevent the user from escalating privileges.
 
-Turning on `no_new_privs` actually stopped the SELinux transition from the docker daemon type `docker_t` to the container type, `svirt_lxc_net_t`. `no_new_privs` only allows SELinux transitions from one type to another if the target type as a complete subset of the source type. Dan Walsh worked on the SELinux policy for docker to fix this. With the latest policy in Fedora 24, `no_new_privs` and SELinux work well together. We will be back porting these fixes to RHEL when we ship docker support for `no_new_privs`.
+Turning on `no_new_privs` actually stopped the SELinux transition from the docker daemon type `docker_t` to the container type, `svirt_lxc_net_t`. `no_new_privs` only allows SELinux transitions from one type to another if the target type as a complete subset of the source type. Dan Walsh worked on the SELinux policy for docker to fix this. With the latest policy in Fedora 24, `no_new_privs` and SELinux work well together. We will be back-porting these fixes to RHEL when we ship docker support for `no_new_privs`.
 
-If you want to allow users to run images as a non-privileged UID, in most cases you would want to
-prevent them from becoming root.  `no_new_privileges` is a great tool for guaranteeing this.
+If you want to allow users to run images as a non-privileged UID, in most cases you would want to prevent them from becoming root. `no_new_privileges` is a great tool for guaranteeing this.

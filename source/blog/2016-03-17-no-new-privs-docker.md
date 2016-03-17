@@ -20,7 +20,7 @@ The kernel feature works as follows:
 * The `no_new_privs` bit ensures that the process or its children processes do not gain any additional privileges.
 * A process isn't allowed to unset the `no_new_privs` bit once it is set.
 * Processes with `no_new_privs` are not allowed to change uid/gid or gain any other capabilities, even if the process executes setuid binaries or executables with file capability bits set.
-* `no_new_privs` also prevents LSMs like SELinux from transitioning to process labels that have access not allowed to the current process. This means an SELinux process is only allowed to transition to a process type with less privileges.
+* `no_new_privs` also prevents Linux Security Modules (LSMs) like SELinux from transitioning to process labels that have access not allowed to the current process. This means an SELinux process is only allowed to transition to a process type with less privileges.
 
 For more details see the [kernel documentation](https://www.kernel.org/doc/Documentation/prctl/no_new_privs.txt).
 

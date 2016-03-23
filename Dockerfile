@@ -1,8 +1,7 @@
-FROM fedora:22
-MAINTAINER mscherer@redhat.com
+FROM fedora:23
+MAINTAINER jberkus@redhat.com
 WORKDIR /tmp
-RUN yum upgrade -y
-RUN yum install -y tar libcurl-devel zlib-devel patch rubygem-bundler ruby-devel git make gcc gcc-c++
+RUN dnf install -y tar libcurl-devel zlib-devel patch rubygem-bundler ruby-devel git make gcc gcc-c++ redhat-rpm-config && dnf clean all
 
 ADD config.rb /tmp/config.rb
 #ADD data /tmp/data

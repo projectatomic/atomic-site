@@ -1,1 +1,1 @@
-docker run --rm -p $hostport:4567 --volume $sourcedir:/tmp/source --volume $datadir:/tmp/data $image
+docker run --rm -p $hostport:4567 --volume $sourcedir:/tmp/source:z --volume $datadir:/tmp/data:z $image

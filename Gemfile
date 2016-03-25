@@ -92,3 +92,7 @@ gem 'open-uri-cached'
 
 # RSS/Atom parsing
 gem "feedjira"
+
+gem "launchy"
+gem "slop"
+gem "chronic"

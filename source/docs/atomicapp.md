@@ -3,7 +3,7 @@ title: "Atomic App"
 ---
 # What is Atomic App?
 
-Atomic App is a reference implementation of the [Nulecule Specification](https://github.com/projectatomic/nulecule). It can be used to bootstrap container applications and to install and run them. Atomic App is designed to be run in a container context. Examples using this tool may be found in the [Nulecule examples directory](https://github.com/projectatomic/nulecule/tree/master/spec/examples/template).
+Atomic App is a reference implementation of the [Nulecule Specification](https://github.com/projectatomic/nulecule). It can be used to bootstrap container applications and to install and run them. Atomic App is designed to be run in a container context. Examples using this tool may be found in the [Nulecule examples library](https://github.com/projectatomic/nulecule-library).
 
 ## Getting Started
 
@@ -64,11 +64,11 @@ Action `run` performs `install` prior it's own tasks are executed if `APP` is gi
 
 ## Providers
 
-Providers represent various deployment targets. They can be added by placing a file called `provider_name.py` in `providers/`. This file needs to implement the interface explained in (providers/README.md). For a detailed description of all providers available see the [Provider description](Providers.asciidoc).
+Providers represent various deployment targets. They can be added by placing a file called `provider_name.py` in `providers/`. This file needs to implement the interface explained in (providers/README.md). For a detailed description of all providers available see the [Provider description](https://github.com/projectatomic/atomicapp/blob/master/docs/providers.md).
 
 ##Communication channels
 
-Interested in **Atomic App**? We'd love to hear from you about your use of Atomic App and work together on improving it. 
+Interested in **Atomic App**? We'd love to hear from you about your use of Atomic App and work together on improving it.
 
 * IRC: #nulecule (On Freenode)
 * Mailing List: [container-tools@redhat.com](https://www.redhat.com/mailman/listinfo/container-tools)

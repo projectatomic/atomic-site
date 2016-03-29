@@ -6,22 +6,23 @@ instructions for building it.
 ## Atomic.app
 
 The recommended way to test the site is with [atomic.app](https://github.com/projectatomic/atomicapp).  Currently,
-verion 0.4.2 or later is required.
+version 0.4.2 or later is required.
 
 ### First time setup
 
-There are a few setup steps you need to do the first time you clone
-the repository and run this as an atomic app.  You should have to do these again
-unless you re-clone the repo for some reason.
+The first time you run it in Atomic App, you'll need to generate an answers.conf
+file with information it needs to launch the container.  You shouldn't have to
+do this on successive runs unless you delete the answers.conf file for some
+reason.
 
-1. authorize directory sharing in SELinux (may not be required in a VM):
+1. run genanswers:
 
-```
-    ./selinux_share.sh
-```
+   ```
+   cd /path/to/atomic-site/Nulecule/
+   atomicapp genanswers .
+   ```
 
-2. configure answers.conf by copying Nulecule/answers.conf.sample to answers.conf
-   and editing the contents.
+2. edit answers.conf to match your setup.
 
 For answers.conf, the two things you are required to set is the full file paths
 to the two directories, /source and /data.  The other fields should not require
@@ -33,6 +34,7 @@ Once you've done the setup, you should be able to do this to run the container
 each time and test the atomic site by running from the repository root:
 
 ```
+    cd /path/to/atomic-site/
     sudo atomicpp run Nulecule/
 ```
 

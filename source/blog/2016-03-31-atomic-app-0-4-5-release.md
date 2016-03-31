@@ -1,13 +1,14 @@
 ---
-title: Atomic App 0.4.5 Released!
+title: Atomic App 0.4.5 Released
 author: cdrage
-date: 2016-03-31 15:15:00 UTC
+date: 2016-03-31 18:10:00 UTC
 tags: atomicapp, Nulecule, releases
-published: false
+published: true
 comments: true
 ---
-
 Atomic App verison 0.4.5 has been released! In this minor release of Atomic App we make some changes to the UI output as well as fix a few provider-specific bugs.
+
+READMORE
 
 The main features of this release are:
 
@@ -15,7 +16,7 @@ The main features of this release are:
   - More prominent output when Atomic App asks for a missing answers variable
   - Multi-line artifact support for the Docker provider
 
-Other:
+Other features include:
 
   - Update documentation on cli comparison
   - Move kubeconfig parsing to a separate class

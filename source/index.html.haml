@@ -18,14 +18,13 @@ blog_summary_length: 500
     trusted platform.
 
   %p
-    %strong Project Atomic introduces Atomic App
-    &mdash; an implementation of the
-    #{link_to "Nulecule", "/docs/nulecule"}
-    specification, which lets you manage multi-container applications and
-    orchestration metadata as easily as you manage RPMs.
+    %strong Project Atomic introduces Atomic Registry
+    &mdash; a free and open source enterprise
+    container registry.  Manage your containers without
+    third party hubs.
 
   %p.buttons
-    %a.btn.btn-default{:href => "/docs/atomicapp" }
+    %a.btn.btn-default{:href => "/registry" }
       %i.fa.fa-graduation-cap.text-primary
       Learn more!
       %i.fa.fa-long-arrow-right
@@ -37,22 +36,22 @@ blog_summary_length: 500
   .col-md-12#secondary
     .row
       .col-xs-12.col-lg-4
-        %h2
-          Atomic Registry
-        %p
-          An enterprise Docker container registry solution run on-premise or in
-          the cloud.
+
+        %h2 Atomic Host
 
         %p
-          Atomic Registry uses 100% open source technology to provide
-          enterprise features such as role-based access control (RBAC), diverse
-          authentication options, a rich web console, flexible storage
-          integration and more.
+          Based on proven technology either from Red Hat Enterprise Linux or the
+          CentOS and Fedora projects, Atomic Host is a lightweight, immutable platform,
+          designed with the sole purpose of running containerized applications.
 
         %p
-          %a( href="http://docs.projectatomic.io/registry" )
-            %i.fa.fa-play-circle
-            Get started with Atomic Registry
+          To balance the need between long-term stability and new
+          features, we are providing different releases of Atomic Host
+          for you to choose from.
+        %p
+          %a( href="/download" )
+            %i.fa.fa-fw.fa-download
+            Get Started
 
       .col-xs-12.col-lg-4
         %h2
@@ -79,22 +78,25 @@ blog_summary_length: 500
           %a( href="/docs/nulecule" )
             %i.fa.fa-fw.fa-graduation-cap
             Learn more about Nulecule
+
       .col-xs-12.col-lg-4
-        %h2 Atomic Host
+
+        %h2
+          Atomic Registry
+        %p
+          An enterprise Docker container registry solution run on-premise or in
+          the cloud.
 
         %p
-          Based on proven technology either from Red Hat Enterprise Linux or the
-          CentOS and Fedora projects, Atomic Host is a lightweight, immutable platform,
-          designed with the sole purpose of running containerized applications.
+          Atomic Registry uses 100% open source technology to provide
+          enterprise features such as role-based access control (RBAC), diverse
+          authentication options, a rich web console, flexible storage
+          integration and more.
 
         %p
-          To balance the need between long-term stability and new
-          features, we are providing different releases of Atomic Host
-          for you to choose from.
-        %p
-          %a( href="/download" )
-            %i.fa.fa-fw.fa-download
-            Get Started
+          %a( href="/registry" )
+            %i.fa.fa-play-circle
+            Get started with Atomic Registry
 
 .row.featurette
   .col-sm-12.col-md-12

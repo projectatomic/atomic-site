@@ -1,27 +1,29 @@
 ---
 title: Developing with Mesos-Marathon provider on Atomic Developer Bundle (ADB)
 author: dharmit
-date: 2016-03-24
+date: 2016-04-07
 layout: post
 comments: true
+published: true
 categories:
 - Blog
-tags: 
+tags:
 - mesos
 - marathon
 - vagrant
 - developer tools
+- atomic developer bundle
 ---
 
-Since 1.6.0 release, the [Atomic Developer Bundle
-(ADB)](https://github.com/projectatomic/adb-atomic-developer-bundle) 
+Since the 1.6.0 release, the [Atomic Developer Bundle
+(ADB)](https://github.com/projectatomic/adb-atomic-developer-bundle)
 includes support for Mesos-Marathon as an orchestrator. This is in conjunction
 with the support for Mesos-Marathon that was added to
 [Atomic App](https://github.com/projectatomic/atomicapp) 0.3.0. This feature
 supports developers choosing to work with atomicapps on Mesos-Marathon.
 
 Mesos Marathon is a distributed control system which can be used for container
-orchestration in large server clusters.  Many Docker-based infrastructure teams
+orchestration in large server clusters.  Some Docker-based infrastructure teams
 use Mesos instead of Kubernetes. Learn more here:
 
 - [Mesos](http://mesos.apache.org/)
@@ -63,9 +65,10 @@ Mesos-Marathon box with the help of
 
 #### Install Atomic App
 
-To install Atomic App, please refer the [installation
+Since the current ADB release doesn't have the latest version of Atomic App, we
+want to install it. The Atomic App [installation
 section](https://github.com/projectatomic/atomicapp#installing-atomic-app) on
-its GitHub repo.
+its GitHub repo explains how to install the current release.
 
 #### Setup Mesos-DNS
 
@@ -109,7 +112,7 @@ $ cat /etc/mesos-dns/config.json
 Replace 10.0.2.2 in above output to the IP of your vagrant box. This IP is of
 the system on which ZooKeeper is running.
 
-Next, start Mesos-DNS from the commnad line or using Marathon. Mesos-DNS
+Next, start Mesos-DNS from the command line or using Marathon. Mesos-DNS
 documentation suggests to use Marathon as it'll ensure that the Mesos-DNS
 service is restarted in event of any failure. I prefer checking from the
 command line before deploying it using Marathon.
@@ -141,8 +144,8 @@ All of the above lookups will be answered by Mesos-DNS if the setup is correct.
 
 #### Deploy a Flask + Redis based page visit counter app
 
-This is an atomicapp based on Nulecule specification. This is a 2-tier
-application based on Flask and redis. Every time you access the web page, a
+This is an atomic app based on the Nulecule specification that creates a 2-tier
+application based on Flask and Redis. Every time you access the web page, a
 message is displayed which indicates the number of times the web page was
 accessed. And this counter is incremented upon each access.
 
@@ -151,7 +154,7 @@ address of the server hosting Mesos-DNS needs to be the first nameserver entry
 in `/etc/resolv.conf` file. This makes it the primary DNS server. Related
 documentation [link](http://mesosphere.github.io/mesos-dns/docs/#slave-setup).
 
-For the redis container in this repo, go ahead and create a directory
+For the Redis container in this repo, go ahead and create a directory
 `/opt/redis` on the Vagrant box. This is for the sake of persistence. Also,
 you need to apply below SELinux context to `/opt/redis` on the host:
 
@@ -190,4 +193,3 @@ Please share feedback about your experience with the process of setting up
 Mesos-Marathon provider on ADB. You can do this by engaging with developrs on
 `#nulecule` IRC channel on Freenode or open an issue under [ADB repo on
 github](https://github.com/projectatomic/adb-atomic-developer-bundle).
-

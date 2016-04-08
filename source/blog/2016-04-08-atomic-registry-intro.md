@@ -39,7 +39,7 @@ installation and management of the registry.
 This is a 100% open source project. Please give us your feedback, ideas and contributions and help us make it better.
 
 * **IRC**: #atomic or #cockpit channels on Freenode
-* **Email**: [atomic-dev@projectatomic.io](mailto:atomic-dev@projectatomic.io)
+* **Email**: [atomic-devel@projectatomic.io](mailto:atomic-devel@projectatomic.io)
 * [OpenShift Origin source](https://github.com/openshift/origin/)
 * [Cockpit Project source](https://github.com/cockpit-project/cockpit)
 * [Documentation source](https://github.com/openshift/openshift-docs)

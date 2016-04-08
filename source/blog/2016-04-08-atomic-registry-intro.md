@@ -30,7 +30,7 @@ Check out this video introducing the user interface console.
 
 ### Try it out
 
-Atomic Reigstry is available now. We put together a [quickstart install](http://docs.projectatomic.io/registry/latest/registry_quickstart/administrators/index.html)
+Atomic Registry is available now. We put together a [quickstart install](http://docs.projectatomic.io/registry/latest/registry_quickstart/administrators/index.html)
 to get it up and running quickly on a system. [Documentation](http://docs.projectatomic.io/registry/) covers the architecture,
 installation and management of the registry.
 

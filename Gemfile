@@ -34,9 +34,6 @@ gem 'middleman-deploy'
 # Thumbnailer
 #gem "middleman-thumbnailer", github: "nhemsley/middleman-thumbnailer"
 
-# favicon support (favicon PNG should be 144×144)
-gem "middleman-favicon-maker"
-
 # HTML & XML parsing smarts
 gem "nokogiri"
 

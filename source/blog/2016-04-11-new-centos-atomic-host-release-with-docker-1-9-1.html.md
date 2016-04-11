@@ -1,13 +1,13 @@
 ---
 title: New CentOS Atomic Host Release, with Docker 1.9.1
 author: jbrooks
-date: 2016-04-08 20:04:12 UTC
+date: 2016-04-11 18:00:00 UTC
 tags: docker, kubernetes, centos
-published: false
+published: true
 comments: true
 ---
 
-An updated version of CentOS Atomic Host (version 7.20160404) is now available for [download](https://wiki.centos.org/SpecialInterestGroup/Atomic/Download), featuring significant updates to Docker (1.9.1) and to the [atomic run tool](https://github.com/projectatomic/atomic). 
+An updated version of CentOS Atomic Host (version 7.20160404) is now available for [download](https://wiki.centos.org/SpecialInterestGroup/Atomic/Download), featuring significant updates to Docker (1.9.1) and to the [atomic run tool](https://github.com/projectatomic/atomic).
 
 CentOS Atomic Host is a lean operating system designed to run Docker containers, built from standard CentOS 7 RPMs, and tracking the component versions included in Red Hat Enterprise Linux Atomic Host.
 
@@ -24,4 +24,4 @@ CentOS Atomic Host includes these core component versions:
 * etcd-2.2.5-1.el7.x86_64
 * cloud-init-0.7.5-10.el7.centos.1.x86_64
 
-For more information on the new release, check out [this post](http://seven.centos.org/2016/04/download-updated-centos-atomic-host-today/) on the [CentOS blog](http://seven.centos.org/). 
+For more information on the new release, check out [this post](http://seven.centos.org/2016/04/download-updated-centos-atomic-host-today/) on the [CentOS blog](http://seven.centos.org/).

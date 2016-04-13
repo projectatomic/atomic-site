@@ -1,7 +1,7 @@
 ---
 title: Getting Started with OCI
-author: mrumalp
-date: 2016-04-12 14:00:00 UTC
+author: mrunalp
+date: 2016-04-13 13:20:00 UTC
 tags: runc, OCI, Fedora
 published: true
 comments: true
@@ -9,14 +9,17 @@ comments: true
 
 This post will walk you through the steps to running a runc container using the [OCI](https://github.com/opencontainers/runtime-spec/) configuration.
 
-We will walk through two examples. One for running a Fedora container, and another for running a Redis container.
+We will walk through two examples. One for running a Fedora container and another for running a Redis container.
+
+READMORE
+
 There are three steps to running a runc container:
 
 1. Construct a rootfs
 2. Create a OCI configuration
 3. Start the runtime
 
-### Getting ocitools
+## Getting ocitools
 
 [OCItools](https://github.com/opencontainers/ocitools) are a bunch of utilities to work with the OCI specification. We are going to make use of the generate utility. It helps generate a OCI configuration for runc with a command line that is similar to docker run.
 
@@ -27,9 +30,9 @@ $ cd $GOPATH/src/github.com/opencontainers/ocitools
 $ make && make install
 ```
 
-Note: OCItools will soon be available as a package on Fedora, RHEL and CentOS.
+  **Note:** OCItools will soon be available as a package on Fedora, RHEL, and CentOS.
 
-### Fedora container
+## Fedora Container
 
 There are various ways to construct a rootfs. Ultimately, it is just a directory with a bunch of files that will be visible and used inside your container. In this example, we will use dnf to construct a rootfs.
 
@@ -109,7 +112,7 @@ sh-4.3# exit
 exit
 ```
 
-### Redis container
+## Redis Container
 
 We'll create a rootfs using dnf just like we did for Fedora:
 

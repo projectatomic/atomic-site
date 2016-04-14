@@ -15,7 +15,7 @@ The main features of this release are:
   - Renaming of provider configuration related parameters
   - --provider-auth added as a CLI command
 
-README
+READMORE
 
 Other:
 

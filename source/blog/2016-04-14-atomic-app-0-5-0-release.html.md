@@ -1,7 +1,7 @@
 ---
 title: Atomic App 0.5.0 Released!
 author: cdrage
-date: 2016-04-13 18:10:00 UTC
+date: 2016-04-14 12:15:00 UTC
 tags: atomicapp, Nulecule, releases
 published: true
 comments: true
@@ -10,10 +10,12 @@ comments: true
 This is a major release of Atomic App where we introduce a new CLI command as well as the renaming of multiple provider configuration parameters.
 
 The main features of this release are:
-  
+
   - Introduction of the `atomicapp init` CLI command
   - Renaming of provider configuration related parameters
   - --provider-auth added as a CLI command
+
+README
 
 Other:
 
@@ -21,12 +23,12 @@ Other:
   - Bug fix on persistent storage initialization
   - Utility method to gather sudo user path and information
   - Improved detection if we're inside a Docker container
-  - Improved readility on provider failed exceptions
+  - Improved readability on provider failed exceptions
   - docker inspect bugfix
 
 ## Atomic App Initialization
 
-We've included support for initializing a basic Atomic App via the `atomicapp init` command. This creates a basic example that can be used on __Docker__ and __Kubernetes__ providers based on the [centos/httpd](https://hub.docker.com/r/centos/httpd/) docker image.
+We've included support for initializing a basic Atomic App via the `atomicapp init` command. This creates a basic example that can be used on Docker and Kubernetes providers based on the [centos/httpd](https://hub.docker.com/r/centos/httpd/) docker image.
 
 ```bash
 ▶ atomicapp init helloworld
@@ -49,14 +51,13 @@ Atomic App: helloworld initialized at ./helloworld
 
 Your application resides in ./helloworld
 Please use this directory for managing your application
-
 ```
 
-## New provider configuration parameter names
+## New Provider Configuration Parameter Names
 
 We've renamed the provider-specific parameters for better clarity by adding dashes in-between 'provider' and the specified function.
 
-Major changes include the renaming of __accesstoken__ to __provider-auth__.
+Major changes include the renaming of accesstoken to provider-auth.
 
 ```
 providerapi --> provider-api

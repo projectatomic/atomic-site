@@ -54,23 +54,26 @@ Here's an example using [Atomic App](https://github.com/projectatomic/atomicapp)
 
 ### Option 1: Interactive
 
-Run the image. You will be prompted to provide required values that are missing from the default configuration.
+Run the image. You will be prompted to provide required values that are missing from the default configuration:
+
 ```
 $ [sudo] atomic run projectatomic/helloapache
 ```
 
 ### Option 2: Unattended
 
-1. Fetch an Atomic App with a generated answers.conf file.
+1. Fetch an Atomic App with a generated answers.conf file:
+
 ```
-$ [sudo] atomic run projectatomic/helloapache --mode fetch --destination helloapache 
+$ [sudo] atomic run projectatomic/helloapache --mode fetch --destination helloapache
 ...
 
 Your application resides in helloapache
 Please use this directory for managing your application
 ```
 
-2. Mode and modify the answers.conf.sample to your liking.
+2. Mode and modify the answers.conf.sample to your liking:
+
 ```
 $ mv answers.conf.sample answers.conf
 $ vim answers.conf

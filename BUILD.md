@@ -25,7 +25,7 @@ reason.
 2. edit answers.conf to match your setup.
 
 For answers.conf, the two things you are required to set is the full file paths
-to the two directories, /source and /data.  The other fields should not require
+to the two directories, /source and /data.  These should point to the absolute path to `atomic-site/source` and `atomic-site/data` on your computer.  For example: `/home/josh/git/atomic-site/source`. The other fields should not require
 modification for most people.
 
 ### running the atomic.app

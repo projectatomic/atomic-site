@@ -3,7 +3,7 @@ title: "Atomic App"
 ---
 # What is Atomic App?
 
-[Atomic App](https://github.com/projectatomic/atomicapp) is a reference implementation of the [Nulecule Specification](https://github.com/projectatomic/nulecule). It can be used to bootstrap container applications and to install and run them. Atomic App is designed to be run in a container context. 
+[Atomic App](https://github.com/projectatomic/atomicapp) is a reference implementation of the [Nulecule Specification](https://github.com/projectatomic/nulecule). It can be used to bootstrap container applications and to install and run them. Atomic App is designed to be run in a container context.
 
 Examples using this tool may be found in the [Nulecule examples library](https://github.com/projectatomic/nulecule-library).
 
@@ -33,7 +33,7 @@ git clone https://github.com/projectatomic/atomicapp
 cd atomicapp
 ```
 
-Install it
+Install it:
 
 ```
 sudo make install
@@ -41,12 +41,14 @@ sudo make install
 
 ### Running Atomic App
 
-This will run a helloworld example using the `centos/apache` container image on Kubernetes.
+This will run a helloworld example using the `centos/apache` container image on Kubernetes:
+
 ```
-sudo atomicapp run projectatomic/helloapache 
+sudo atomicapp run projectatomic/helloapache
 ```
 
-Same with Docker.
+Same with Docker:
+
 ```
 sudo atomicapp run projectatomic/helloapache --provider=docker
 ```
@@ -54,14 +56,17 @@ sudo atomicapp run projectatomic/helloapache --provider=docker
 ### Fetching, modifying and running an Atomic App
 
 Fetch a Nuleculized container, modify the answers file and launch it.
+
 ```
 atomicapp fetch projectatomic/helloapache --destination helloapache
 cd helloapache
-cp answers.conf.sample answers.conf # Modify then copy answers.conf.sample
+cp answers.conf.sample answers.conf # Modify then copy
+answers.conf.sample
 atomicapp run .
 ```
 
 ### Commands
+
 ```
 atomicapp {run,fetch,stop,genanswers,init} APP|PATH [--dry-run] [-a answers.conf] [-v] [--namespace foo] [--destination foo]
 ```

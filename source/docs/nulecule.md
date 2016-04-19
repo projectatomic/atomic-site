@@ -50,49 +50,46 @@ If you want to contribute to the Nulecule Specification itself, we welcome you a
 
 ## Deployment User Experience
 
-Here's an example using the [atomicapp reference implementation](https://github.com/projectatomic/atomicapp) with a kubernetes provider.
+Here's an example using [Atomic App](https://github.com/projectatomic/atomicapp), a reference implementation of Nulecule with a Kubernetes provider.
 
-### Option 1: interactive
+### Option 1: Interactive
 
 Run the image. You will be prompted to provide required values that are missing from the default configuration.
 ```
-[sudo] atomic run projectatomic/helloapache
+$ [sudo] atomic run projectatomic/helloapache
 ```
 
-### Option 2: unattended
+### Option 2: Unattended
 
-1. Create file `answers.conf` with these contents:
+1. Fetch an Atomic App with a generated answers.conf file.
+```
+$ [sudo] atomic run projectatomic/helloapache --mode fetch --destination helloapache 
+...
 
-        [general]
-        provider = kubernetes
+Your application resides in helloapache
+Please use this directory for managing your application
+```
 
-        [helloapache-app]
-        image = centos/httpd # optional: choose a different image
-        hostport = 80        # optional: choose a different port to expose
+2. Mode and modify the answers.conf.sample to your liking.
+```
+$ mv answers.conf.sample answers.conf
+$ vim answers.conf
 
-1. Run the application from the current working directory
+  [general]
+  provider = kubernetes
 
-        $ [sudo] atomic run projectatomic/helloapache
-        ...
-        helloapache
+  [helloapache-app]
+  image = centos/httpd # optional: choose a different image
+  hostport = 80        # optional: choose a different port to expose
+```
 
-### Option 3: install and run
+3. Run the application from the current working directory
 
-You may want to download the application, review, edit the answerfile then run.
-
-1. Download the application files using `atomic install`
-
-        [sudo] atomic install projectatomic/helloapache
-
-1. Rename `answers.conf.sample`
-
-        mv answers.conf.sample answers.conf
-
-1. Edit `answers.conf`, review files if desired and run
-
-        $ [sudo] atomic run projectatomic/helloapache
-        ...
-        helloapache
+```
+$ [sudo] atomic run projectatomic/helloapache .
+...
+helloapache
+```
 
 ## Developer User Experience
 
@@ -102,7 +99,7 @@ See the [Getting Started with Nulecule guide](https://github.com/projectatomic/n
 
 This is only a specification. Implementations may be written in any language. See [implementation guide](https://github.com/projectatomic/nulecule/blob/master/docs/implementation_guide.md) for more details.
 
-**Reference implementation** https://github.com/projectatomic/atomicapp
+**Reference implementation:** https://github.com/projectatomic/atomicapp
 
 ### Developer tooling
 

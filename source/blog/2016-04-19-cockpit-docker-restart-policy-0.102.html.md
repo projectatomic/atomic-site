@@ -1,7 +1,7 @@
 ---
 title: Cockpit with Docker Restart Policy
 author: stef
-date: 2016-04-14 13:33
+date: 2016-04-19 15:00:00 UTC
 tags: cockpit, linux, technical, kubernetes
 published: true
 comments: true
@@ -40,4 +40,3 @@ Cockpit 0.102 is available now:
  * [Source Tarball](https://github.com/cockpit-project/cockpit/releases/tag/0.102)
  * [Fedora 24](https://bodhi.fedoraproject.org/updates/cockpit-0.102-1.fc24)
  * [COPR for Fedora 23, CentOS and RHEL](https://copr.fedoraproject.org/coprs/g/cockpit/cockpit-preview/)
-

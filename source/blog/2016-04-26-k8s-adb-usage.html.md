@@ -12,12 +12,14 @@ The easiest way to get started with [Kubernetes](http://kubernetes.io/docs/whati
 
 Make sure you have basic setup ready, for that follow [install instructions](https://github.com/projectatomic/adb-atomic-developer-bundle/blob/master/docs/installing.rst).
 
-Now all you need to do is clone the repository that has Vagrantfile and start the Vagrantbox
+Now all you need to do is clone the repository that has Vagrantfile and start the Vagrantbox:
+
 ```bash
 $ git clone https://github.com/projectatomic/adb-atomic-developer-bundle.git
 $ cd adb-atomic-developer-bundle/components/centos/centos-k8s-singlenode-setup/
 $ vagrant up --provider libvirt
 ```
+
 You can also choose `provider` as `virtualbox` with command as `vagrant up --provider virtualbox`
 
 

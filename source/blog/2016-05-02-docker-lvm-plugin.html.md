@@ -1,6 +1,6 @@
 ---
 title: Working with Docker LVM Plugin
-date: 2016-05-01 13:55:00 UTC
+date: 2016-05-02 13:55:00 UTC
 author: shishir
 tags: docker, lvm
 published: true

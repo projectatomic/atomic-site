@@ -1,19 +1,20 @@
 ---
 title: App Development on OpenShift using ADB
 author: praveenkumar
-date: 2016-04-27 22:50:00 UTC
+date: 2016-05-03 14:14:00 UTC
 tags: openshift, origin, ADB
 published: true
 comments: true
 ---
+[The Atomic Developer Bundle (ADB)](https://github.com/projectatomic/adb-atomic-developer-bundle) is a prepackaged development environment filled production-grade pre-configured tools that also include [OpenShift origin](https://github.com/openshift/origin). Using ADB app-developers can easily start building and developing their application on OpenShift platform.
 
-[The Atomic Developer Bundle (ADB)](https://github.com/projectatomic/adb-atomic-developer-bundle) is a prepackaged development environment filled production-grade pre-configured tools which also include [OpenShift origin](https://github.com/openshift/origin). Using ADB app-developers can easily start building and developing their application on OpenShift platform.
+In this blog post, we are going to learn step by step to create an application on OpenShift platform and deploy. Before we proceed any further, I highly recommend you to go through [prerequisites guide](https://github.com/projectatomic/adb-atomic-developer-bundle/blob/master/docs/installing.rst). ADB provide a custom Vagrantfile to setup and provision OpenShift platform.
 
 READMORE
 
-In this blogpost we are going to learn step by step to create an application on OpenShift platform and deploy. Before we proceed any further I highly recommend you to go through [prerequisites guide](https://github.com/projectatomic/adb-atomic-developer-bundle/blob/master/docs/installing.rst). ADB provide a custom Vagranfile to setup and provision OpenShift platform.
+## Guideline for App Creation
 
-Step 1. Get ADB custom Vagrantfile for OpenShift.
+**Step 1. Get ADB custom Vagrantfile for OpenShift**
 
 ```
 $ git clone https://github.com/projectatomic/adb-atomic-developer-bundle
@@ -21,22 +22,21 @@ $ cd adb-atomic-developer-bundle/components/centos/centos-openshift-setup
 $ vagrant up
 ```
 
-Step 2. Download OpenShift origin client for your host. 
+**Step 2. Download OpenShift origin client for your host**
 
 - [Windows](https://github.com/openshift/origin/releases/download/v1.1.1/openshift-origin-client-tools-v1.1.1-e1d9873-windows.zip)
 - [Mac](https://github.com/openshift/origin/releases/download/v1.1.1/openshift-origin-client-tools-v1.1.1-e1d9873-mac.zip)
 - [Linux](https://github.com/openshift/origin/releases/download/v1.1.1/openshift-origin-client-tools-v1.1.1-e1d9873-linux-64bit.tar.gz)
 
-Step 3. Get OpenShift CLI details using `vagrant-service-manager` plugin
+**Step 3. Get OpenShift CLI details using `vagrant-service-manager` plugin**
 
 ```
 $ vagrant service-manager env openshift
 You can access the OpenShift console on: https://10.1.2.2:8443/console
 To use OpenShift CLI, run: oc login https://10.1.2.2:8443
-
 ```
 
-Step 4. Login to OpenShift using client tool. (**Make sure you use relative/absolute path for client binary**)
+**Step 4. Login to OpenShift using client tool (*Make sure you use relative/absolute path for client binary*)**
 
 ```
 $ ./oc login https://10.1.2.2:8443
@@ -50,10 +50,9 @@ Password: devel
 Login successful.
 
 Using project "sample-project".
-
 ```
 
-Step 5. We also provide some sample template to give an idea how you can create your application.
+**Step 5. Sample templates provided to give an idea how you can create your application**
 
 ```
 $ ./oc get templates -n openshift
@@ -68,7 +67,7 @@ nodejs-mongodb-example               An example Node.js application with a Mongo
 
 ```
 
-Step 6. Let we go ahead and deploy our first app [nodejs-example](https://github.com/openshift/nodejs-ex).
+**Step 6. Let we go ahead and deploy our first app [nodejs-example](https://github.com/openshift/nodejs-ex)**
 
 ```
 $ ./oc new-app nodejs-example
@@ -97,7 +96,7 @@ $ ./oc new-app nodejs-example
     Run 'oc status' to view your app.
 ```
 
-Step 7. Check status of your deployed application.
+**Step 7. Check status of your deployed application**
 
 ```
 $ ./oc status
@@ -105,14 +104,14 @@ In project OpenShift sample project (sample-project) on server https://10.1.2.2:
 
 svc/nodejs-example - 172.30.252.169:8080
   dc/nodejs-example deploys istag/nodejs-example:latest <-
-    bc/nodejs-example builds https://github.com/openshift/nodejs-ex.git with openshift/nodejs:0.10 
+    bc/nodejs-example builds https://github.com/openshift/nodejs-ex.git with openshift/nodejs:0.10
     #1 deployed 3 minutes ago - 1 pod
   exposed by route/nodejs-example
 
 View details with 'oc describe <resource>/<name>' or list everything with 'oc get all'.
 ```
 
-Step 8. Get your application route to access from browser. (**nodejs-example-sample-project.centos7-adb.10.1.2.7.xip.io**)
+**Step 8. Get your application route to access from browser (*nodejs-example-sample-project.centos7-adb.10.1.2.7.xip.io*)**
 
 ```
 $ ./oc get routes

@@ -1,9 +1,10 @@
 ---
-title: Using the atomic CLI to scan VMs
+title: Using the atomic CLI to scan Virtual Machines
 author: baude
-date: 2016-05-11 18:06:32 UTC
-published: false
+date: 2016-05-13 12:00:00 UTC
+published: true
 comments: true
+tags: security, atomic CLI, atomic scan
 ---
 
 Recently on the Red Hat Developers blog, I wrote about the re-architecture of the [atomic vulnerability scan feature](http://developers.redhat.com/blog/2016/05/02/introducing-atomic-scan-container-vulnerability-detection/).   The primary function of _[atomic](https://github.com/projectatomic/atomic) scan_ is to detect vulnerabilities in your images and containers using a plug-in enabled architecture.
@@ -12,7 +13,7 @@ Building upon that concept, we added an additional feature to _atomic scan_ wher
 
 In this blog, I will show you how to scan a live VM with _atomic scan_.
 
-#### Check for a running VM 
+#### Check for a running VM
 The first step is to see what VMs are on your system.  In my case, I have two VMs running; one of which was created for this purpose based on a RHEL 7.2 stock install with no updates.
 
 ```
@@ -23,7 +24,7 @@ The first step is to see what VMs are on your system.  In my case, I have two VM
  5     centos                         running
 
 ```
-The VM I want to work with is called _rhel7-scan_. 
+The VM I want to work with is called _rhel7-scan_.
 
 
 #### Check the filesystems in the VM
@@ -51,7 +52,7 @@ Now, armed with the VM's name (or domain) and the root filesystem's device, we c
 The VM's root filesystem is now mounted and we can use _ls_ to take a peek at the chroot.
 
 ```
-[bbaude@localhost ~]$ sudo ls -l /tmp/rhel 
+[bbaude@localhost ~]$ sudo ls -l /tmp/rhel
 total 28
 lrwxrwxrwx.  1 root root    7 May 11  2016 bin -> usr/bin
 drwxr-xr-x.  2 root root    6 May 11  2016 boot
@@ -79,12 +80,12 @@ Before we jump into scanning the filesystem, you should verify what scanners (pl
 
 ```
 [bbaude@localhost ~]$ sudo atomic scan --list
-Scanner: openscap * 
+Scanner: openscap *
   Image Name: openscap
-     Scan type: cve * 
+     Scan type: cve *
      Description: Performs a CVE scan based on known CVE data
 
-     Scan type: standards_compliance 
+     Scan type: standards_compliance
      Description: Performs a standard scan
 
 
@@ -93,6 +94,7 @@ Scanner: openscap *
 Based on this output, there is only one scanner available.  It is called _openscap_ and has two different scans avilable: _cve_ and _standards_compliance_.  The _cve_ scan is the noted as the default.  
 
 If you are not familiar with the _atomic scan_ function, you can simply learn more with the _--help_ switch or read the man page.  The key item we need to know about is the _--rootfs_ command line switch.  This switch requires a filesystem path as a value.
+
 ```
 [bbaude@localhost ~]$ sudo atomic scan --help
 usage: atomic scan [-h] [--scanner {openscap}] [--scan_type SCAN_TYPE]
@@ -196,7 +198,7 @@ As you can see, there are least three vulnerabilities caught here.  The rest wer
 Don't forget to unmount the VM's filesystem when your scan is complete.  In my case, I want to remediate the VM to shore up the vulnerabilties.
 
 ```
-[bbaude@localhost ~]$ sudo guestunmount /tmp/rhel 
+[bbaude@localhost ~]$ sudo guestunmount /tmp/rhel
 ```
 
 #### Remediate the vulnerabilties and rescan
@@ -214,7 +216,7 @@ docker run -it --rm -v /etc/localtime:/etc/localtime -v /run/atomic/2016-05-12-1
 
 Files associated with this scan are in /var/lib/atomic/openscap/2016-05-12-10-55-44-763361.
 
-[bbaude@localhost ~]$ sudo guestunmount /tmp/rhel 
+[bbaude@localhost ~]$ sudo guestunmount /tmp/rhel
 [bbaude@localhost ~]$  
 ```
 

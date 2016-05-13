@@ -1,5 +1,5 @@
 ---
-title: Using the atomic CLI to scan Virtual Machines
+title: Using the Atomic CLI to Scan Virtual Machines
 author: baude
 date: 2016-05-13 12:00:00 UTC
 published: true
@@ -13,7 +13,10 @@ Building upon that concept, we added an additional feature to _atomic scan_ wher
 
 In this blog, I will show you how to scan a live VM with _atomic scan_.
 
-#### Check for a running VM
+READMORE
+
+## Check for a Running VM
+
 The first step is to see what VMs are on your system.  In my case, I have two VMs running; one of which was created for this purpose based on a RHEL 7.2 stock install with no updates.
 
 ```
@@ -26,8 +29,8 @@ The first step is to see what VMs are on your system.  In my case, I have two VM
 ```
 The VM I want to work with is called _rhel7-scan_.
 
+## Check the Filesystems in the VM
 
-#### Check the filesystems in the VM
 To mount a live VM to our filesystem, I plan to use a couple of applications from the libguestfs package.  While we do know which VM (sometimes referred to as a virtual domain) we want to work with, mounting VMs requires some basic knowledge of the VM's fileystems; specifically, we want to know more about the VM's root filesystem.  We can use _virt-filesystems_ to probe the VM's filesystems.
 
 ```
@@ -36,15 +39,19 @@ To mount a live VM to our filesystem, I plan to use a couple of applications fro
 /dev/rhel/root
 [bbaude@localhost ~]$
 ```
+
 We now know the device associated with the root filesystem is _/dev/rhel/root_.  This is a required piece of information for mounting VMs.
 
-#### Mount the VM's root filesystem
+## Mount the VM's Root Filesystem
+
 The first step is to create a directory where the VM's root filesystem will reside after mounting.  In this case, I am going to simply create a directory called _/tmp/rhel_.
 
 ```
 [bbaude@localhost ~]$ mkdir /tmp/rhel
 ```
+
 Now, armed with the VM's name (or domain) and the root filesystem's device, we can use _guestmount_ to actually perform the mount.  Note here because the VM is live, I have choosen to mount the filesystem as read-only.  I also happen to know that the scanner does not need to write any files to the VM filesystem so read-only is appropriate.
+
 ```
 [bbaude@localhost ~]$ sudo guestmount  -d rhel7-scan -m /dev/rhel/root --ro /tmp/rhel
 ```
@@ -75,7 +82,8 @@ drwxr-xr-x. 13 root root 4096 May 11  2016 usr
 drwxr-xr-x. 19 root root 4096 May 11  2016 var
 ```
 
-#### Prepare to scan the mounted filesystem
+## Prepare to Scan the Mounted Filesystem
+
 Before we jump into scanning the filesystem, you should verify what scanners (plug-ins) are installed for atomic.  As my previous blog has shown, you can simply use _atomic scan --list_ to see what scanners are currently configured for you.
 
 ```
@@ -91,6 +99,7 @@ Scanner: openscap *
 
 * denotes defaults
 ```
+
 Based on this output, there is only one scanner available.  It is called _openscap_ and has two different scans avilable: _cve_ and _standards_compliance_.  The _cve_ scan is the noted as the default.  
 
 If you are not familiar with the _atomic scan_ function, you can simply learn more with the _--help_ switch or read the man page.  The key item we need to know about is the _--rootfs_ command line switch.  This switch requires a filesystem path as a value.
@@ -120,7 +129,9 @@ optional arguments:
 
 atomic scan <input> scans a container or image for CVEs
 ```
-#### Scan the filesystem using atomic scan
+
+## Scan the Filesystem Using Atomic Scan
+
 At this point, we have all the information we need to perform the scan.  It is now only a matter of executing the command properly.  The command syntax is simply _atomic scan --rootfs <path_to_rootfs>_.  You can also enable the _--verbose_ command line switch to see more output, which is good for debug purposes.
 
 **Note**:  Because I already have the openscap image pulled locally, you will not see it being pulled.  Of course, if you do not have the image local, your output will vary slightly.
@@ -191,9 +202,10 @@ Content removed due to length
 
 Files associated with this scan are in /var/lib/atomic/openscap/2016-05-11-13-54-05-804238.
 ```
+
 As you can see, there are least three vulnerabilities caught here.  The rest were clipped in the interest of space.
 
-#### Unmount the VM's filesystem
+## Unmount the VM's Filesystem
 
 Don't forget to unmount the VM's filesystem when your scan is complete.  In my case, I want to remediate the VM to shore up the vulnerabilties.
 
@@ -201,7 +213,7 @@ Don't forget to unmount the VM's filesystem when your scan is complete.  In my c
 [bbaude@localhost ~]$ sudo guestunmount /tmp/rhel
 ```
 
-#### Remediate the vulnerabilties and rescan
+## Remediate the Vulnerabilties and Rescan
 
 As I said earlier, this VM we scanned was based on a stock RHEL7.2 install without any updates.  This was obviously done on purpose to demonstrate the scan first.  I then logged into the VM and updated the system entirely and will now remount the VM filesystem and rescan.
 

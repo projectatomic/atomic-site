@@ -1,5 +1,5 @@
 ---
-title: Atomic App 0.5.2 released: Cleaner logging and binary generation!
+title: Atomic App 0.5.2 released - Cleaner logging and binary generation!
 author: cdrage
 date: 2016-05-24 12:15:00 UTC
 tags: atomicapp, Nulecule, releases
@@ -10,9 +10,10 @@ comments: true
 In this weeks release of Atomic App we not only have cleaner logging output when using the tool, but we've also added binary generation!
 
 The main features of this release are:
-  - Cleaning logging
-  - Binary generation
-  - README.MD generation removed from `atomicapp init`
+
+* Cleaning logging
+* Binary generation
+* README.MD generation removed from `atomicapp init`
 
 READMORE
 

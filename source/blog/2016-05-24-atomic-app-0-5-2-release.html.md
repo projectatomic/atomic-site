@@ -44,7 +44,7 @@ Please use this directory for managing your application
 
 ## Binary generation
 
-You'll now be able to generate a stand-alone binary for Atomic App without the need of having Python installed onto your system. This increases portability and is compatible with all Linux-based operating systems.
+You'll now be able to generate a stand-alone binary for Atomic App without the need of having Python installed.  This removes some issues around Python versions and module installation.
 
 Simply use `make binary` in the root folder of the Atomic App source code and your binary will be generated!
 

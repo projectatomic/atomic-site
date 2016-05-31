@@ -1,13 +1,13 @@
 ---
 title: Atomic App 0.5.2 released - Cleaner logging and binary generation!
 author: cdrage
-date: 2016-05-24 12:15:00 UTC
+date: 2016-05-31 16:55:00 UTC
 tags: atomicapp, Nulecule, releases
 published: true
 comments: true
 ---
 
-In this weeks release of Atomic App we not only have cleaner logging output when using the tool, but we've also added binary generation!
+In this week's release of Atomic App we not only have cleaner logging output when using the tool, but we've also added binary generation!
 
 The main features of this release are:
 
@@ -22,9 +22,9 @@ Other:
   - Code cleanup / minor code modifications (dictionary searches, loops)
   - Provider module / class loading refactoring
 
-## Cleaner logging
+## Cleaner Logging
 
-We've completed a clean-up on how we log Atomic App. With this release we've added ASCII art as well as cleaned up a lot of the redundant information outputted when deploying an Atomic App.
+We've completed a clean-up on how we log Atomic App. With this release, we've added ASCII art as well as cleaned up a lot of the redundant information outputted when deploying an Atomic App.
 
 ```
 ▶ atomicapp run projectatomic/helloapache --destination helloapache --provider=docker
@@ -42,7 +42,7 @@ Your application resides in helloapache
 Please use this directory for managing your application
 ```
 
-## Binary generation
+## Binary Generation
 
 You'll now be able to generate a stand-alone binary for Atomic App without the need of having Python installed.  This removes some issues around Python versions and module installation.
 
@@ -53,7 +53,6 @@ Simply use `make binary` in the root folder of the Atomic App source code and yo
 ...
 Binary created at bin/atomicapp
 ```
-
 
 Want to get started using Atomic App? Have a look at our extensive [start guide](https://github.com/projectatomic/atomicapp/blob/master/docs/start_guide.md), or use Atomic App as part of the Atomic CLI on an [Atomic Host](http://www.projectatomic.io/download/).
 

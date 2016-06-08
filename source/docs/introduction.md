@@ -1,15 +1,35 @@
 # Introduction to Project Atomic
 
-Project Atomic facilitates application-centric IT architecture by providing an end-to-end solution for deploying containerized applications quickly and reliably, with "atomic" update and rollback for application and host alike.
+Project Atomic is an umbrella for many projects related to containers that tie together around [Kubernetes](http://kubernetes.io/).
 
-The core of Project Atomic is the Project Atomic Host. This is a lightweight operating system that has been assembled out of upstream RPM content. It is designed to run applications in Docker containers. Hosts based on Red Hat Enterprise Linux (RHEL), Fedora, and CentOS (testing) are available for use.
+The first building block of Project Atomic is the "Atomic Host", which
+is a lightweight operating system that has been assembled out of
+upstream RPM content.  It is designed to run applications in Docker
+containers. Atomic Host versions based on CentOS and Fedora are
+available, and there is also a downstream enterprise version in Red
+Hat Enterprise Linux.
 
-Project Atomic hosts inherit the full features and advantages of their base distributions. Project Atomic builds on these features, using the following components, which have been tailored for containerized-application management:
+Currently, the host comes out of the box with
+[Kubernetes](http://kubernetes.io/) at the core.  A goal however is to
+move to a containerized Kubernetes installation, to more easily
+support different versions on the same host, such as
+[OpenShift v3](https://www.openshift.org/).  The Atomic Host also
+comes with several Kubernetes utilites such as
+[etcd](https://github.com/coreos/etcd) and
+[flannel](https://github.com/coreos/flannel).
 
-* [Docker](https://www.docker.io/), an open source project for creating lightweight, portable, self-sufficient application containers.
-* [Kubernetes](http://kubernetes.io/), an open source project that allows you to manage a cluster of Linux containers as a single system.
-* [rpm-ostree](http://www.projectatomic.io/docs/os-updates/), an open source tool for managing bootable, immutable, versioned filesystem trees from upstream RPM content.
-* [systemd](http://www.freedesktop.org/wiki/Software/systemd/), an open source system and service manager for Linux. This provides container-dependency management and fault recovery. It also includes journald, which provides secure aggregation and attribution of container logs. 
+The host system is managed via
+[rpm-ostree](http://www.projectatomic.io/docs/os-updates/), an open
+source tool for managing bootable, immutable, versioned filesystem
+trees from upstream RPM content.
+
+Kubernetes uses [Docker](https://www.docker.io/), an open source
+project for creating lightweight, portable, self-sufficient
+application containers.
+
+Finally, this and several other components are wrapped in the
+[atomic](https://github.com/projectatomic/atomic) command which provides
+a unified entrypoint.
 
 ## How Can Project Atomic Help Me?
 

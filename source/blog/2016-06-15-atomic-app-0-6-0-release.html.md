@@ -3,11 +3,11 @@ title: Atomic App 0.6.0 released - Native Kubernetes API Integration
 author: cdrage
 date: 2016-06-15 16:55:00 UTC
 tags: atomicapp, Nulecule, releases
-published: false
-comments: false
+published: true
+comments: true
 ---
 
-This release of Atomic App introduces a large code-base change related to our Kubernetes provider. 
+This release of Atomic App introduces a large code-base change related to our Kubernetes provider.
 
 We incorporate major changes to the Kubernetes provider. With this release we replace the usage of `kubectl` with the *requests* Python library and the Kubernetes HTTP API end-point. This change results in faster deployment, smaller image sizes and increased detail in logging messages.
 

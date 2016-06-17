@@ -29,6 +29,6 @@ Check out the new [systemd deployment](https://github.com/openshift/origin/tree/
 
 As a Red Hat-sponsored project we see the benefits in practicing **open source** as well as **open process**. We committed to this and worked hard to share our public [Trello organization](https://trello.com/atomicopenshift). The [Atomic Registry roadmap card](https://trello.com/c/0hsX6B4G) aggregates all of the planned and in-progress development work. I've been excited about progress on these specific items:
 
-* Unauthenticated docker pull ([Trello card](https://trello.com/c/Ev8y3pC4))
-* Image Signing prototype ([Trello aggregate card](https://trello.com/c/SApLBoLC))
-* Support for federated image remotes so ISVs can retain control of their layers without distributing base image layers ([Trello card](https://trello.com/c/DLaMPAoh))
+* **Unauthenticated docker pull**. This is essential for the on-premise use case where users want to tightly control who can push images but allow *anyone* to freely pull images without docker login. [Trello card](https://trello.com/c/Ev8y3pC4)
+* **Federated image remotes**. With the pending image layer federation support ISVs will be able to retain control of their layers without distributing base image layers from another vendor. [Trello card](https://trello.com/c/DLaMPAoh)
+* **Image Signing**. We're well along in our development of a simple but robust cryptographic image validation prototype. [Trello aggregate card](https://trello.com/c/SApLBoLC)

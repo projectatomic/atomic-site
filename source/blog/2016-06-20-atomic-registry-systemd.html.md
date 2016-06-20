@@ -1,25 +1,26 @@
 ---
 title: Atomic Registry Deployment Update
 author: aweiteka
-date: 2016-06-17
+date: 2016-06-20 13:09:00 UTC
 tags: atomic registry, systemd
 published: true
 comments: true
 ---
-
-Since Atomic Registry was [announced](blog/2016/04/atomic-registry-intro/) as *the* enterprise, 100% open source private docker registry, we have been responding to feedback from the community to make it great. The [Cockpit](http://cockpit-project.org/) team has been working hard to improve the console interface and general user experience. The [OpenShift](https://www.openshift.org/) team has been tirelessly updating the backend to make the registry more stable, usable and easier to deploy and maintain.
+Since Atomic Registry was [announced](blog/2016/04/atomic-registry-intro/) as *the* enterprise, 100% open source private docker registry, we have been responding to feedback from the community to make it great. The [Cockpit](http://cockpit-project.org/) team has been working hard to improve the console interface and general user experience. The [OpenShift](https://www.openshift.org/) team has been tirelessly updating the backend to make the registry more stable, usable, and easier to deploy and maintain.
 
 Some of the feedback we received suggested the deployment method was difficult to understand. As part of OpenShift it pulled in a lot of dependencies that were not essential for running the registry. The OpenShift features are terrific for running clustered container workloads but it can be a barrier to some administrators for just running a standalone registry.
 
-We've tried to strike a balance between ease of deployment, configuration and maintenance while retaining architectural flexibility to support scale, distributed configuration and container best practices. We're doing this through using systemd.
+READMORE
+
+We've tried to strike a balance between ease of deployment, configuration and maintenance while retaining architectural flexibility to support scale, distributed configuration and container best practices. We're doing this using systemd.
 
 ## Why Systemd?
 
 There are several benefits to managing containers with Systemd.
 
-- Mature process management that supports dependencies, logical restart, etc.
-- Ease of configuration that matches a traditional sysadmin experience.
-- Native system logging to journald.
+* Mature process management that supports dependencies, logical restart, etc.
+* Ease of configuration that matches a traditional sysadmin experience.
+* Native system logging to journald.
 
 With this approach we leverage docker packaging to deliver applications that *just work*.
 

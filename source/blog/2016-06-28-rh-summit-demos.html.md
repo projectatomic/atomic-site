@@ -10,8 +10,10 @@ comments: true
 If you're at Red Hat Summit, you might want to come by the Atomic Pod in Community Central and see the [Sub-Atomic Cluster](/blog/2016/06/micro-cluster-part-2/). More usefully, we'll be having a series of live demos by various contributors to the Atomic suite of projects, including:
 
 * Tuesday, 12:45pm: Using Cockpit to manage Kubernetes and Registry with Stef Walter and Peter Volpe
+* Tuesday, 4:45pm: Fully automated configure of Kubernetes with Ansible, Jamie Duncan
 * Tuesday, 6:00pm: Atomic Scan with Dan Walsh
 * Wednesday, 12:15pm: Container Security Tools with Mrunal Patel
+* Wednesday, 4:45pm: Fully automated configure of Kubernetes with Ansible, Jamie Duncan
 * Wednesday, 6:00pm: Atomic Scan with Dan Walsh
 * Thursday, 11:00am: Building Multi-container Apps with Dusty Mabe
 

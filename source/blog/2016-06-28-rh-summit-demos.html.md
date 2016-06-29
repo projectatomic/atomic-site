@@ -13,7 +13,6 @@ If you're at Red Hat Summit, you might want to come by the Atomic Pod in Communi
 * Tuesday, 4:45pm: Fully automated configure of Kubernetes with Ansible, Jamie Duncan
 * Tuesday, 6:00pm: Atomic Scan with Dan Walsh
 * Wednesday, 12:15pm: Container Security Tools with Mrunal Patel
-* Wednesday, 4:45pm: Fully automated configure of Kubernetes with Ansible, Jamie Duncan
 * Wednesday, 6:00pm: Atomic Scan with Dan Walsh
 * Thursday, 11:00am: Building Multi-container Apps with Dusty Mabe
 

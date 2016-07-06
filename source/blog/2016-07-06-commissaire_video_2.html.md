@@ -1,16 +1,17 @@
 ---
 title: "Atomic Video: Commissaire Basic Usage"
 author: smilner
-date: 2016-07-06 12:00:00 UTC
+date: 2016-07-06 11:00:00 UTC
 tags: commissaire, video, tutorial
 published: true
 comments: true
 ---
+Last month we introduced [Commissaire](http://www.projectatomic.io/blog/2016/05/introducing_commissaire/)
+giving a quick overview of features and architecture.
 
-Last month we introduced
-[Commissaire](http://www.projectatomic.io/blog/2016/05/introducing_commissaire/)
-giving a quick overview of features and architecture. This month we
-wanted to show how one can:
+READMORE
+
+This month we wanted to show how one can:
 
 * Run a Commissaire server
 * Configure commctl for use with Commissaire

@@ -1,7 +1,7 @@
 ---
 title: Origin on Fedora, Part 1
 author: jberkus
-date: 2016-06-09 12:41:00 UTC
+date: 2016-06-10 12:41:00 UTC
 tags: atomic host, openshift, fedora
 published: true
 comments: true

@@ -6,16 +6,17 @@ tags: security, selinux, docker
 published: true
 comments: true
 ---
+I recently answered an email asking about --selinux-enabled in the docker daemon, I thought others might wonder about this, so I wrote this blog.
 
-I recently answered an email asking about --selinux-enabled in the docker daemon, I thought others might wonder about this so I wrote this blog.
-
-> I'm currently researching the topic of `--selinux-enabed` in docker and what it is doing when set to TRUE.
+> I'm currently researching the topic of `--selinux-enabled` in docker and what it is doing when set to TRUE.
 >
 > From what I'm seeing, it simply will set context and labels to the services (docker daemon) when SELinux is enabled on the system and not using OverlayFS.
 >
 > But I'm wondering if that is even correct, and if so, what else is happening when setting `--selinux-enabled` to TRUE.
 
---selinux-enabled on the docker daemon causes it to set SELinux labels on the containers.  Docker reads the contexts file `/etc/selinux/targeted/contexts/lxc_contexts` for the default context to run containers.
+``--selinux-enabled` on the docker daemon causes it to set SELinux labels on the containers.  Docker reads the contexts file `/etc/selinux/targeted/contexts/lxc_contexts` for the default context to run containers.
+
+READMORE
 
 ```
 cat /etc/selinux/targeted/contexts/lxc_contexts
@@ -29,7 +30,7 @@ sandbox_lxc_process = "system_u:system_r:svirt_lxc_net_t:s0"
 
 Docker by default uses a confined SELinux type `svirt_lxc_net_t` to isolate the container processes from the host, and it generates a unique MCS label to allow SELinux to prevent one container process from attacking other container processes and content.
 
-If you don't specify `--selinux-enabled`, docker does not execute SELinux code to set labels. When docker launches a container process, the system falls back to default transition policy.  This means the container processes will either run as docker_t or spc_t (Depending on the version of policy you have installed.) Both of these types are unconfined.  SELinux will provide no security separation for these container processes.
+If you don't specify `--selinux-enabled`, docker does not execute SELinux code to set labels. When docker launches a container process, the system falls back to default transition policy.  This means the container processes will either run as docker_t or spc_t (depending on the version of policy you have installed). Both of these types are unconfined.  SELinux will provide no security separation for these container processes.
 
 > In addition, I'm also wondering what the impact will be, when `--selinux-enabed` is set to TRUE together with `--icc` to TRUE? Does it have any impact or is it unrelated.
 >

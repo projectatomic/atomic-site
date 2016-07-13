@@ -23,9 +23,13 @@ CentOS Atomic Host includes these core component versions:
 CentOS Atomic Host is available as a VirtualBox or libvirt-formatted Vagrant box, or as an installable ISO, qcow2 or Amazon Machine image. Check out the [CentOS wiki](https://wiki.centos.org/SpecialInterestGroup/Atomic/Download) for download links and installation instructions, or read on to learn more about what's new in this release.
 
 ## OCI Advances: runC and OCI Hooks
-CentOS Atomic Host now ships with [runC](http://runc.io/), a lightweight client wrapper around libcontainer for spawning and running containers according to the [Open Container Initiative](https://www.opencontainers.org/) specification. To learn about what you can do with runC and OCI, check out [this post](http://www.projectatomic.io/blog/2016/04/running_OCI/) from [Mrunal Patel](https://twitter.com/mrunalp), and this [Dockercon 2016 talk](https://www.youtube.com/watch?v=ZAhzoz2zJj8) from [Phil Estes](https://twitter.com/estesp).
+CentOS Atomic Host now ships with [runC](http://runc.io/), a lightweight client wrapper around libcontainer for spawning and running containers according to the [Open Container Initiative](https://www.opencontainers.org/) specification. In this release, the host's atomic run tool makes use of runC to manage system containers, also known as [super privileged containers](http://developerblog.redhat.com/2014/11/06/introducing-a-super-privileged-container-concept/). While it's possible to run system containers with docker, there are certain system components that present chicken-and-egg scenarios, such as flannel, on which docker itself depends.
 
-Users who wish to run systemd inside of their containers can do so more simply with this new atomic host release, thanks to a pair of [OCI hooks](https://github.com/projectatomic/oci-systemd-hook) that enable users to run systemd in docker and OCI compatible runtimes such as runc without requiring the `--privileged` flag, and to display journal information from these containers using the host's journalctl command.
+runC-based containers can be pushed and pulled from standard docker registries, but are composed slightly differently than standard docker containers, as described in [this post](http://www.projectatomic.io/blog/2016/04/running_OCI/) from [Mrunal Patel](https://twitter.com/mrunalp), and this [Dockercon 2016 talk](https://www.youtube.com/watch?v=ZAhzoz2zJj8) from [Phil Estes](https://twitter.com/estesp).
+
+For more information on the system container feature in atomic, check out the man page for the [atomic install](https://github.com/projectatomic/atomic/blob/v1.10.5/docs/atomic-install.1.md) command and [this blog post](http://www.scrivano.org/2016/03/24/system-containers-for-atomic/) from [Giuseppe Scrivano](https://twitter.com/gscrivano).
+
+Elsewhere on the OCI front, users who wish to run systemd inside of their containers can do so more simply with this new atomic host release, thanks to a pair of [OCI hooks](https://github.com/projectatomic/oci-systemd-hook) that enable users to run systemd in docker and OCI compatible runtimes such as runc without requiring the `--privileged` flag, and to display journal information from these containers using the host's journalctl command.
 
 ## Modifying the Host & CentOS Atomic Continuous
 Also new in CentOS Atomic Host is an updated version of OSTree, the project that provides for atomic system upgrades for Atomic Hosts. The new OSTree version adds support for the `ostree admin unlock` command, which mounts a writable overlayfs, allowing users to install rpms on their otherwise immutable atomic hosts. These overlaid packages can be made either to persist between reboots or not, but the overlay will be discarded following an ostree upgrade. For more information on this feature, check out [Jonathan Lebon's](https://github.com/jlebon) blog post on [hacking and extending atomic hosts](http://www.projectatomic.io/blog/2016/07/hacking-and-extending-atomic-host).
@@ -41,5 +45,3 @@ Switching to the Continuous release involves adding a new remote entry to an exi
 # rpm-ostree rebase centos-atomic-continuous:centos-atomic-host/7/x86_64/devel/continuous
 # systemctl reboot
 ```
-
-

@@ -1,15 +1,57 @@
 # Introduction to Project Atomic
 
-Project Atomic facilitates application-centric IT architecture by providing an end-to-end solution for deploying containerized applications quickly and reliably, with "atomic" update and rollback for application and host alike.
+Project Atomic is an umbrella for many projects related to re-designing the
+operating system around principles of "immutable infrastructure",
+using the LDK (Linux, Docker, Kubernetes) stack.  
 
-The core of Project Atomic is the Project Atomic Host. This is a lightweight operating system that has been assembled out of upstream RPM content. It is designed to run applications in Docker containers. Hosts based on Red Hat Enterprise Linux (RHEL), Fedora, and CentOS (testing) are available for use.
+Many of the components of Project Atomic are upstream components of
+[OpenShift Origin v3]().
 
-Project Atomic hosts inherit the full features and advantages of their base distributions. Project Atomic builds on these features, using the following components, which have been tailored for containerized-application management:
+The primary building block of Project Atomic is the "Atomic Host", a lightweight
+container OS which implements these ideas.  Atomic Hosts are immutable, since
+each is imaged from an upstream repository, supporting mass deployment.
+Applications run in containers. Atomic Host versions based on
+CentOS and Fedora are available, and there is also a downstream enterprise
+version in Red Hat Enterprise Linux.
 
-* [Docker](https://www.docker.io/), an open source project for creating lightweight, portable, self-sufficient application containers.
-* [Kubernetes](http://kubernetes.io/), an open source project that allows you to manage a cluster of Linux containers as a single system.
-* [rpm-ostree](http://www.projectatomic.io/docs/os-updates/), an open source tool for managing bootable, immutable, versioned filesystem trees from upstream RPM content.
-* [systemd](http://www.freedesktop.org/wiki/Software/systemd/), an open source system and service manager for Linux. This provides container-dependency management and fault recovery. It also includes journald, which provides secure aggregation and attribution of container logs. 
+Currently, the host comes out of the box with
+[Kubernetes](http://kubernetes.io/) installed.  A goal however is to
+move to a containerized Kubernetes installation, to more easily
+support different versions on the same host, such as
+[OpenShift v3](https://www.openshift.org/).  The Atomic Host also
+comes with several Kubernetes utilites such as
+[etcd](https://github.com/coreos/etcd) and
+[flannel](https://github.com/coreos/flannel).  Kubernetes curently uses
+[Docker](https://www.docker.io/), an open source
+project for creating lightweight, portable, self-sufficient
+application containers.
+
+The host system is managed via
+[rpm-ostree](http://www.projectatomic.io/docs/os-updates/), an open
+source tool for managing bootable, immutable, versioned filesystem
+trees from upstream RPM content. This and several other components are wrapped
+in the [atomic](https://github.com/projectatomic/atomic) command which provides
+a unified entrypoint.  
+
+The Project Atomic umbrella also encompasses many other tools which are essential
+to immutable, container-based infrastructures, including:
+
+* [Cockpit](http://cockpit-project.org/) gives visibility into your hosts
+  and your container cluster.
+* Many patches and extensions to Docker for better SELinux and Systemd integration.
+* [AtomicApp](https://github.com/projectatomic/atomicapp)
+  and [Nulecule](https://github.com/projectatomic/nulecule)
+  for composing mulit-container applications.
+* [Atomic Registry](http://docs.projectatomic.io/registry/) for registering
+  your containers.
+* [Commissaire](https://github.com/projectatomic/commissaire) to provide a
+  better API for Kubernetes hosts.
+* The [Atomic Developer Bundle](https://github.com/projectatomic/adb-atomic-developer-bundle)
+  to make development of containerized applications easy.
+
+There are many more tools and projects available within
+[Project Atomic](https://github.com/projectatomic). We're building the
+next-generation operating system, one component at a time.
 
 ## How Can Project Atomic Help Me?
 

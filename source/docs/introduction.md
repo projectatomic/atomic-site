@@ -1,35 +1,57 @@
 # Introduction to Project Atomic
 
-Project Atomic is an umbrella for many projects related to containers that tie together around [Kubernetes](http://kubernetes.io/).
+Project Atomic is an umbrella for many projects related to re-designing the
+operating system around principles of "immutable infrastructure",
+using the LDK (Linux, Docker, Kubernetes) stack.  
 
-The first building block of Project Atomic is the "Atomic Host", which
-is a lightweight operating system that has been assembled out of
-upstream RPM content.  It is designed to run applications in Docker
-containers. Atomic Host versions based on CentOS and Fedora are
-available, and there is also a downstream enterprise version in Red
-Hat Enterprise Linux.
+Many of the components of Project Atomic are upstream components of
+[OpenShift Origin v3]().
+
+The primary building block of Project Atomic is the "Atomic Host", a lightweight
+container OS which implements these ideas.  Atomic Hosts are immutable, since
+each is imaged from an upstream repository, supporting mass deployment.
+Applications run in containers. Atomic Host versions based on
+CentOS and Fedora are available, and there is also a downstream enterprise
+version in Red Hat Enterprise Linux.
 
 Currently, the host comes out of the box with
-[Kubernetes](http://kubernetes.io/) at the core.  A goal however is to
+[Kubernetes](http://kubernetes.io/) installed.  A goal however is to
 move to a containerized Kubernetes installation, to more easily
 support different versions on the same host, such as
 [OpenShift v3](https://www.openshift.org/).  The Atomic Host also
 comes with several Kubernetes utilites such as
 [etcd](https://github.com/coreos/etcd) and
-[flannel](https://github.com/coreos/flannel).
+[flannel](https://github.com/coreos/flannel).  Kubernetes curently uses
+[Docker](https://www.docker.io/), an open source
+project for creating lightweight, portable, self-sufficient
+application containers.
 
 The host system is managed via
 [rpm-ostree](http://www.projectatomic.io/docs/os-updates/), an open
 source tool for managing bootable, immutable, versioned filesystem
-trees from upstream RPM content.
+trees from upstream RPM content. This and several other components are wrapped
+in the [atomic](https://github.com/projectatomic/atomic) command which provides
+a unified entrypoint.  
 
-Kubernetes uses [Docker](https://www.docker.io/), an open source
-project for creating lightweight, portable, self-sufficient
-application containers.
+The Project Atomic umbrella also encompasses many other tools which are essential
+to immutable, container-based infrastructures, including:
 
-Finally, this and several other components are wrapped in the
-[atomic](https://github.com/projectatomic/atomic) command which provides
-a unified entrypoint.
+* [Cockpit](http://cockpit-project.org/) gives visibility into your hosts
+  and your container cluster.
+* Many patches and extensions to Docker for better SELinux and Systemd integration.
+* [AtomicApp](https://github.com/projectatomic/atomicapp)
+  and [Nulecule](https://github.com/projectatomic/nulecule)
+  for composing mulit-container applications.
+* [Atomic Registry](http://docs.projectatomic.io/registry/) for registering
+  your containers.
+* [Commissaire](https://github.com/projectatomic/commissaire) to provide a
+  better API for Kubernetes hosts.
+* The [Atomic Developer Bundle](https://github.com/projectatomic/adb-atomic-developer-bundle)
+  to make development of containerized applications easy.
+
+There are many more tools and projects available within
+[Project Atomic](https://github.com/projectatomic). We're building the
+next-generation operating system, one component at a time.
 
 ## How Can Project Atomic Help Me?
 

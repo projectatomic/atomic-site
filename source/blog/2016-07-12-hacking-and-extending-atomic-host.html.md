@@ -1,7 +1,7 @@
 ---
 title: Hacking and extending Atomic Host
 author: jlebon
-date: 2016-07-12 17:00:00 UTC
+date: 2016-07-13 13:00:00 UTC
 comments: true
 published: true
 tags: atomic, atomic host, hacking, ostree, rpm-ostree

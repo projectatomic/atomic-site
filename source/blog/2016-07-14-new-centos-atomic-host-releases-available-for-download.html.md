@@ -3,11 +3,11 @@ title: New CentOS Atomic Host Releases Available for Download
 author: jbrooks
 date: 2016-07-14 07:00:00 UTC
 tags: docker, kubernetes, centos
-published: false
+published: true
 comments: true
 ---
 
-Last week, the [CentOS Atomic SIG](http://wiki.centos.org/SpecialInterestGroup/Atomic) [released](https://seven.centos.org/2016/07/new-centos-atomic-host-ready-for-download/) an updated version of CentOS Atomic Host (tree version 7.20160707), featuring updated versions of docker and the atomic run tool. 
+Last week, the [CentOS Atomic SIG](http://wiki.centos.org/SpecialInterestGroup/Atomic) [released](https://seven.centos.org/2016/07/new-centos-atomic-host-ready-for-download/) an updated version of CentOS Atomic Host (tree version 7.20160707), featuring updated versions of docker and the atomic run tool.
 
 CentOS Atomic Host includes these core component versions:
 
@@ -34,7 +34,7 @@ Elsewhere on the OCI front, users who wish to run systemd inside of their contai
 ## Modifying the Host & CentOS Atomic Continuous
 Also new in CentOS Atomic Host is an updated version of OSTree, the project that provides for atomic system upgrades for Atomic Hosts. The new OSTree version adds support for the `ostree admin unlock` command, which mounts a writable overlayfs, allowing users to install rpms on their otherwise immutable atomic hosts. These overlaid packages can be made either to persist between reboots or not, but the overlay will be discarded following an ostree upgrade. For more information on this feature, check out [Jonathan Lebon's](https://github.com/jlebon) blog post on [hacking and extending atomic hosts](http://www.projectatomic.io/blog/2016/07/hacking-and-extending-atomic-host).
 
-For a more permanent package overlay option, there's a brand-new package layering capability available, which Jonathan also covers in [his post](http://www.projectatomic.io/blog/2016/07/hacking-and-extending-atomic-host). However, this capability is not yet included in the main CentOS Atomic Host release. 
+For a more permanent package overlay option, there's a brand-new package layering capability available, which Jonathan also covers in [his post](http://www.projectatomic.io/blog/2016/07/hacking-and-extending-atomic-host). However, this capability is not yet included in the main CentOS Atomic Host release.
 
 To facilitate the testing of this and other new atomic host features, the SIG is now producing a [Continuous](https://wiki.centos.org/SpecialInterestGroup/Atomic/Devel) atomic host tree, which combines a base of CentOS packages with an overlay of [certain continuously-built packages](https://github.com/CentOS/sig-atomic-buildscripts/blob/master/overlay.yml) pulled from upstream git sources. The packages are built using a project called [rpmdistro-gitoverlay](https://github.com/cgwalters/rpmdistro-gitoverlay) that runs as a [Jenkins job](https://ci.centos.org/job/atomic-rdgo-centos7/) within the CentOS CI infrastructure.
 

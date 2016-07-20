@@ -207,7 +207,6 @@ Using a systemd drop-in file allows us to override the distributed systemd unit 
     [Service]
     EnvironmentFile=/run/flannel/subnet.env
     ExecStartPre=-/usr/sbin/ip link del docker0
-    ExecStart=
     ExecStart=/usr/bin/docker daemon \
           --bip=${FLANNEL_SUBNET} \
           --mtu=${FLANNEL_MTU} \

@@ -1,51 +1,50 @@
 # Building the Website
 
-This website is built on Middleman, a static site generator. See below for
-instructions for building it.
+This website is built on [Middleman, a static site generator](https://middlemanapp.com). See instructions below for building it.
 
 ## Atomic.app
 
-The recommended way to test the site is with [atomic.app](https://github.com/projectatomic/atomicapp).  Currently,
-version 0.4.2 or later is required.
+The recommended way to test the site is with [atomic.app](https://github.com/projectatomic/atomicapp). Currently, version 0.4.2 or later is required.
 
 ### First time setup
 
-The first time you run it in Atomic App, you'll need to generate an answers.conf
-file with information it needs to launch the container.  You shouldn't have to
+The first time you run it with Atomic App, you'll need to generate an answers.conf
+file with information it needs to launch the container. You shouldn't have to
 do this on successive runs unless you delete the answers.conf file for some
 reason.
 
-1. run genanswers:
+1. Generate answer.conf file:
 
    ```
    cd /path/to/atomic-site/Nulecule/
    atomicapp genanswers .
    ```
 
-2. edit answers.conf to match your setup.
+2. Edit answers.conf to match your setup.
 
-For answers.conf, the two things you are required to set is the full file paths
-to the two directories, /source and /data.  These should point to the absolute path to `atomic-site/source` and `atomic-site/data` on your computer.  For example: `/home/josh/git/atomic-site/source`. The other fields should not require
-modification for most people.
+For answers.conf, the two things you are required to set is the full path
+to the two directories, /source and /data.  These should point to the absolute path to `atomic-site/source`
+and `atomic-site/data` directories on your computer.  For example: `/home/josh/git/atomic-site/source`.
+The other fields should not require modification for most people.
 
-### running the atomic.app
+### Running the atomic.app
 
-Once you've done the setup, you should be able to do this to run the container
-each time and test the atomic site by running from the repository root:
+Once you are done with the setup, you should be able to do this to run the container
+each time and test the atomic site by running from the repository's root:
 
 ```
-    cd /path/to/atomic-site/
-    sudo atomicpp run Nulecule/
+cd /path/to/atomic-site/
+sudo atomicapp run Nulecule/
 ```
 
 The first time you do this, it will pull the atomic-site image, which may take
 a while depending on your internet connection.  After that it should be very fast.
 
-Once it's running, you can view the site on [127.0.0.1:4567](http://127.0.0.1:4567)
+Once it's running, you can view the site on [127.0.0.1:4567](http://127.0.0.1:4567).
 
 ## Docker build
 
-The second way to build the site is using Docker without atomic.app  From the code
+The second way to build the site is using Docker without atomic.app. From the repo's
 root directory, run the docker build:
 
 ```
@@ -54,16 +53,14 @@ root directory, run the docker build:
 
 If your local machine has Docker secured, then you'll need to sudo the above command.
 
-Once the container is up and running, the site will be available on 127.0.0.1:4567
+Once the container is up and running, the site will be available on [127.0.0.1:4567](http://127.0.0.1:4567).
 
-Note that because of cache issues, docker.sh does a build of the site image every
-time it runs. This may take a significant amount of time on slower machines.
-
+Note that `docker.sh` builds the site's image every time it runs due to cache issues. This may take a significant amount of time on slower machines.
 
 ## Manual Build
 
 If you don't want to use the Atomic App or Docker containers for some reason,
-instructions for a manual build follow.
+you can follow below instructions to build the site manually.
 
 To get started, you need to have Ruby and Ruby Gems installed, as well
 as "bundler".
@@ -71,14 +68,13 @@ as "bundler".
 
 ### Initial setup
 
-On an rpm based distribution:
+On a rpm based distribution:
 
 ```
 git clone http://github.com/projectatomic/atomic-site.git
 cd atomic-site
 ./setup.sh # This script assumes your user account has sudo rights
 ```
-
 
 ### Running a local server
 
@@ -93,7 +89,7 @@ cd atomic-site
 
 3. Edit!
 
-   When you edit files (pages, layouts, CSS, etc.), the site will
+   Note, when you edit files (pages, layouts, CSS, etc.), the site will
    dynamically update in development mode. (There's no need to refresh
    the page, unless you get a Ruby error.)
 
@@ -102,24 +98,21 @@ cd atomic-site
 
 When there are new gems in `Gemfile`, just run `bundle` again.
 
-
 ### Customizing your site
 
 The site can be customized by editing `data/site.yml`.
 
-
 ### Adding a Post
 
-To add a post to the community blog (or any blog managed by middleman) use:
+To add a post to the community blog (or any blog managed by Middleman) use:
 
 ```
 bundle exec middleman article TITLE
 ```
 
-
 ### Build your static site
 
-After getting it how you want, you can build the static site by running:
+You can build the static site by running:
 
 `bundle exec middleman build`
 
@@ -128,12 +121,12 @@ After getting it how you want, you can build the static site by running:
 
 ### Setting up deployment
 
-FIXME: Right now, please reference <data/site.yml>
+FIXME: Right now, please reference [data/site.yml](data/site.yml)
 
 ### Actual deployment
 
 After copying your public key to the remote server and configuring your
-site in <data/site.yml>, deployment is one command:
+site in [data/site.yml](data/site.yml), deployment is one command:
 
 ```
 bundle exec middleman deploy

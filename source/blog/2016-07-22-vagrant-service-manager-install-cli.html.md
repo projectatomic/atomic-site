@@ -1,7 +1,7 @@
 ---
 title: Client Binary Installation Now Included in the ADB
 author: budhram
-date: 2016-07-20 09:56 UTC
+date: 2016-07-22 09:56 UTC
 tags: atomic-developer-bundle, vagrant-service-manager
 published: true
 comments: true
@@ -12,6 +12,8 @@ As part of the effort to continually improve the developer experience and make g
 The [vagrant-service-manager](https://github.com/projectatomic/vagrant-service-manager) plugin enables easier access to the features and services provided by the [Atomic Developer Bundle (ADB)](https://github.com/projectatomic/adb-atomic-developer-bundle). More information can be found in the README of 'vagrant-service-manager' repo.
 
 The `install-cli` command was released as part of 'vagrant-service-manager' version 1.2.0. This command installs the client binary for services provided by the ADB. Today it can download client binaries for docker and OpenShift. This feature allows developers to know they have the best client for use with the ADB services they are using.
+
+READMORE
 
 To use the 'install-cli' command, you must have version 1.2.0 or later of 'vagrant-service-manager' installed. You can verify the version you have installed with the following command:
 
@@ -44,8 +46,7 @@ $ vagrant up
 
 `vagrant up` will take a few minutes (and longer in the case of a slow network connection) to finish as it has to download the OpenShift Origin images from the Docker Hub. Once everything is ready you will see the information about how to access OpenShift Origin.
 
-Now, the OpenShift origin server is ready and you may need a client to access it and perform your
-desired operations. You can manually download the client binary from [OpenShift repository](https://github.com/openshift/origin/releases) but we recommend you to use 'install-cli' command provided.
+Now, the OpenShift origin server is ready and you may need a client to access it and perform your desired operations. You can manually download the client binary from [OpenShift repository](https://github.com/openshift/origin/releases) but we recommend you to use 'install-cli' command provided.
 
 To get started, let's review the help:
 

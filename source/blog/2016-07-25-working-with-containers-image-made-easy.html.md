@@ -9,7 +9,7 @@ comments: true
 
 This is the first part of a series of posts about containers' images. In this first part we're going to focus on `skopeo`.
 
-Back in March, I published a [post](http://www.projectatomic.io/blog/2016/03/skopeo-inspect-remote-images/) about [skopeo](https://github.com/projectatomic/skopeo), a new tiny binary to help people interact with Docker registries. Its job has been limited to _inspect_ (_skopeo_ is greek for _looking for_, _observe_) images on remote registries as opposed to `docker inspect`, which is working for locally pulled images. The requirement for such a tool was to move away from carrying a patch in our `projectatomic/docker` because upstream [closed our proposal](https://github.com/docker/docker/pull/14258) of inspecting images on registries.
+Back in March, I published a [post](http://www.projectatomic.io/blog/2016/03/skopeo-inspect-remote-images/) about [skopeo](https://github.com/projectatomic/skopeo), a new tiny binary to help people interact with Docker registries. Its job has been limited to _inspect_ (_skopeo_ is greek for _looking for_, _observe_) images on remote registries as opposed to `docker inspect`, which is working for locally pulled images.
 
 READMORE
 

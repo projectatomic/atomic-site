@@ -44,6 +44,8 @@ To bring up Fedora Atomic Host in a vagrant box, issue a command like:
 vagrant init fedora/24-atomic-host && vagrant up
 ```
 
+If you've previously used vagrant to run a Fedora Atomic 24 VM, first run `vagrant box update --box=fedora/24-atomic-host` to ensure that you have the latest version.
+
 NOTE: Due to [this issue](https://pagure.io/pungi-fedora/issue/26), you'll need to add a line to your Vagrantfile like `config.vm.synced_folder "./", "/vagrant", disabled: 'true'` to disable folder sync.
 
 Fedora Atomic Host is available as a [qcow2 or raw-formatted image](https://getfedora.org/en/cloud/download/atomic.html), both of which require a cloud-init data source, be it from your cloud or virtualization provider, or from a [local source](http://www.projectatomic.io/blog/2014/10/getting-started-with-cloud-init/).

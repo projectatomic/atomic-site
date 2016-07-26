@@ -22,6 +22,8 @@ Fedora Atomic Host includes these core component versions:
 * etcd-2.2.5-5.fc24.x86_64
 * cloud-init-0.7.6-8.20150813bzr1137.fc24.noarch
 
+READMORE
+
 ### Upgrading 
 
 Upgrading from an existing Atomic Host to Fedora Atomic 24 involves replacing the Fedora 23-based fedora-atomic remote with the current one, and then rebasing on the new tree. Due to [this issue](https://bugzilla.redhat.com/show_bug.cgi?id=1309075), it may be necessary to put SELinux into permissive mode for the rebase operation:

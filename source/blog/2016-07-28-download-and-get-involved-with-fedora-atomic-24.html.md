@@ -1,7 +1,7 @@
 ---
 title: Download and Get Involved with Fedora Atomic 24
 author: jbrooks
-date: 2016-07-27 07:00:00 UTC
+date: 2016-07-28 07:00:00 UTC
 tags: fedora, docker, kubernetes
 published: false
 comments: true
@@ -10,6 +10,8 @@ comments: true
 This week, the Fedora Project released updated images for its Fedora 24-based Atomic Host. Fedora Atomic Host is a leading edge operating system designed around Kubernetes and Docker containers.
 
 Fedora Atomic Host images are updated roughly every two weeks, rather than on the main six-month Fedora cadence. Because development is moving quickly, only the latest major Fedora release is supported.
+
+_Note: Due to an issue with the image-building process, the current Fedora Atomic Host images include an older version of the system tree. Be sure to `atomic host upgrade` to  get the latest set of components. The next two-week media refresh will include an up-to-date tree._
 
 Fedora Atomic Host includes these core component versions:
 

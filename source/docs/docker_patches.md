@@ -14,7 +14,7 @@ Patch types are:
 
 * Red Hat: support compatibility with Red Hat Enterprise Linux and related tools.
 * Upstream: Patches which were, or will be, submitted to mainstream docker.  Some have been rejected and are being maintained by the Atomic team.
-* Backports: Patches which backport fixes from later versions of docker to earlier ones.
+* Backports: Patches which backport fixes from later versions of docker to earlier ones.  
 
 ## Table of Patches
 
@@ -30,6 +30,10 @@ Patch types are:
 | System-logging-for-docker-daemon-API-calls | Upstream | [14446](https://github.com/docker/docker/pull/14446) | Blocked |
 | Audit-logging-support-for-daemon-API-calls | Upstream | [109](https://github.com/rhatdan/docker/pull/109) | Blocked |
 | Add-volume-support-to-docker-build | Upstream | See Below | See Below |
+
+Patches which have been accepted by upstream docker are not represented in this chart.
+
+A list of backport patches will be added to this page later.
 
 ## Longer Patch Descriptions
 

@@ -1,5 +1,5 @@
 ---
-title: vagrant-service-manager 1.3.0 Released - Focus on Kubernetes Support
+title: Vagrant Service Manager 1.3.0 Released
 author: budhram
 date: 2016-08-16 12:54:00 UTC
 tags: vagrant, devtools, releases, kubernetes
@@ -7,26 +7,26 @@ published: true
 comments: true
 ---
 
-This release of [vagrant-service-manager](https://github.com/projectatomic/vagrant-service-manager) introduces support for displaying Kubernetes configuration information. This enable users to access the Kubernetes server running inside ADB virtual machine from their host.
+This version of [vagrant-service-manager](https://github.com/projectatomic/vagrant-service-manager) introduces support for displaying Kubernetes configuration information. This enable users to access the Kubernetes server that runs inside ADB virtual machine from their host machine.
 
-Client binary installation support for 'Kubernetes' is included in this release. Support for client binary installation has also been extended to users of the [Red Hat Container Development Kit](http://developers.redhat.com/products/cdk/overview). Information about client binary installation can be found in the previous release announcement ["Client Binary Installation Now Included in the ADB"](../../../../blog/2016/07/vagrant-service-manager-install-cli).
+This version also includes binary installation support for Kubernetes. This support is extended to users of the [Red Hat Container Development Kit](http://developers.redhat.com/products/cdk/overview). For information about client binary installation, see the previous release announcement ["Client Binary Installation Now Included in the ADB"](../../../../blog/2016/07/vagrant-service-manager-install-cli).
 
-The main new features of this release are:
+The full list of features from this version are:
 
 * Configuration information for Kubernetes provided as part of the `env` command
-* Client binary installation support for OpenShift, Kubernetes and docker in the Red Hat Container Development Kit
 * Client binary installation support for Kubernetes added to the ADB
-* Auto-detection of a previously downloaded `oc` executable binary on Windows
+* Client binary installation support for OpenShift, Kubernetes and Docker in the Red Hat Container Development Kit
+* Auto-detection of a previously downloaded `oc` executable binary on Windows operating systems
 * Unit and acceptance tests for the Kubernetes service
-* Option to enable kubernetes from a Vagrantfile as follows:
+* Option to enable Kubernetes from a Vagrantfile  with the following command:
 
 ```
   config.servicemanager.services = 'kubernetes'
 ```
 
-## Install Kubernetes Client Binary
+## 1. Install the kubernetes client binary
 
-The command below will install the kubernetes binary, `kubectl`:
+### Run the following command to install the kubernetes binary, `kubectl`
 
 ```
 $ vagrant service-manager install-cli kubernetes
@@ -40,13 +40,15 @@ export PATH=/home/budhram/.vagrant.d/data/service-manager/bin/kubernetes/1.2.0:$
 
 ```
 
-**Configure your shell as:**
+### Run the following command to configure your shell
 
 ```
 $ eval "$(VAGRANT_NO_COLOR=1 vagrant service-manager install-cli kubernetes | tr -d '\r')"
 ```
 
-## Enable Access to the Kubernetes Server Running Inside of the ADB
+## 2. Enable access to the kubernetes server that runs inside of the ADB
+
+### Run the following command to display environment variable for kubernetes
 
 ```
 $ vagrant service-manager env kubernetes
@@ -58,10 +60,10 @@ export KUBECONFIG=/home/budhram/.vagrant.d/data/service-manager/kubeconfig
 # eval "$(vagrant service-manager env kubernetes)"
 ```
 
-**Configure shell as:**
+### Run the following command to configure your shell
 
 ```
 eval "$(vagrant service-manager env kubernetes)"
 ```
 
-For a full list of changes in version 1.3.0 please see [the release log](https://github.com/projectatomic/vagrant-service-manager/releases/tag/v1.3.0).
+For a full list of changes in version 1.3.0, see [the release log](https://github.com/projectatomic/vagrant-service-manager/releases/tag/v1.3.0).

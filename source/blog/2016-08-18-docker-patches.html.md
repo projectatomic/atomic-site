@@ -1,7 +1,7 @@
 ---
 title: "Project Atomic Docker Patches"
 author: dwalsh
-date: 2016-08-16 12:00:00 UTC
+date: 2016-08-18 12:00:00 UTC
 tags: docker, patches, development
 published: true
 comments: true
@@ -11,7 +11,7 @@ Project Atomic's version of the Docker-based container runtime has been carrying
 
 This post, and the accompanying document, will attempt to describe the patches we are currently carrying:
 
-* Explanation on types of patches. 
+* Explanation on types of patches.
 * Description of patches.
 * Links to GitHub discussions, and pull requests for upstreaming the patches to docker.
 
@@ -39,19 +39,19 @@ Here is a quick overview of the kinds of patches we carry, and then guidance on 
 
 ### Upstream Fixes
 
-The Docker Project upstream tends to fix issues in the **next** version of Docker. This means if a user finds an issue in docker-1.11 and we provide a fix for this to upstream, the patch gets merged in to the master branch, and it will probably not get back ported to docker-1.11. 
+The Docker Project upstream tends to fix issues in the **next** version of Docker. This means if a user finds an issue in docker-1.11 and we provide a fix for this to upstream, the patch gets merged in to the master branch, and it will probably not get back ported to docker-1.11.
 
-Since Docker is releasing at such a rapid rate, they tell users to just install docker-1.12 when it is available. This is fine for people who want to be on the bleeding edge, but in a lot of cases the newer version of Docker comes with new issues along with the fixes. 
+Since Docker is releasing at such a rapid rate, they tell users to just install docker-1.12 when it is available. This is fine for people who want to be on the bleeding edge, but in a lot of cases the newer version of Docker comes with new issues along with the fixes.
 
-For example, docker-1.11 split the docker daemon into three parts: docker daemon, containerd, and runc.  We did not feel this was stable enough to ship to enterprise customers right when it came out, yet it had multiple fixes for the docker-1.10 version. Many users want to only get new fixes to their existing software and not have to re-certify their apps every two months. 
+For example, docker-1.11 split the docker daemon into three parts: docker daemon, containerd, and runc.  We did not feel this was stable enough to ship to enterprise customers right when it came out, yet it had multiple fixes for the docker-1.10 version. Many users want to only get new fixes to their existing software and not have to re-certify their apps every two months.
 
 Another issue with supporting stable software with rapidly changing dependencies is that developers on the stable projects must spend time ensuring that their product remains stable every time one of their dependencies is updated. This is an expensive process, dependencies end up being updated only infrequently. This causes us to "cherry-pick" fixes from upstream Docker and to ship these fixes on older versions so that we can get the benefits from the bug fixes without the cost of updating the entire dependency. This is the same approach we take in order to add capabilities to the Linux kernel, a practice that has proven to be very valuable to our users.
 
 ### Proposed Patches for Upstream
 
-We carry patches that we know our users require right now, but have not yet been merged into the upstream project.  Every patch that we add to the Project Atomic repository also gets proposed to the upstream docker repository. 
+We carry patches that we know our users require right now, but have not yet been merged into the upstream project.  Every patch that we add to the Project Atomic repository also gets proposed to the upstream docker repository.
 
-These sorts of patches remain on the Project Atomic repository briefly while they’re being considered upstream, or forever if the upstream community rejects them. If we don't agree with upstream Docker and feel our users need these patches, we continue to carry them. In some cases we have worked out alternative solutions like building authorization plugins. 
+These sorts of patches remain on the Project Atomic repository briefly while they’re being considered upstream, or forever if the upstream community rejects them. If we don't agree with upstream Docker and feel our users need these patches, we continue to carry them. In some cases we have worked out alternative solutions like building authorization plugins.
 
 For example, users of RHEL images are not supposed to push these image onto public web sites. We wanted a way to prevent users from accidentally pushing RHEL based images to Docker Hub, so we originally created a patch to block the pushing.  When authorization plugins were added we then created a plugin to protect users from pushing RHEL content to a public registry like Docker Hub, and no longer had to carry the custom patch.
 

@@ -4,9 +4,13 @@ Performing a Bare Metal Installation of Fedora Atomic
 
 ## Getting the Installation Image and Creating Media
 
-Download the [**boot.iso**](http://download.fedoraproject.org/pub/fedora/linux/releases/23/Cloud_Atomic/x86_64/iso/Fedora-Cloud_Atomic-x86_64-23.iso) file and use it to create installation media. For example, if you run the GNOME desktop, you can use the *Write to disk* capability of the Nautilus file browser to create an installation DVD. Alternatively, you can write the installation ISO image to a USB device with the `dd` command.
+Download the [**boot.iso**](http://download.fedoraproject.org/pub/fedora/linux/releases/24/Cloud_Atomic/x86_64/iso/Fedora-Cloud_Atomic-x86_64-24.iso) file and use it to create installation media. For example, if you run the GNOME desktop, you can use the *Write to disk* capability of the Nautilus file browser to create an installation DVD. Alternatively, you can write the installation ISO image to a USB device with the `dd` command. For example, if you had a USB thumbdrive mounted as /dev/sdb, you might use this command:
 
-These procedures are described in the [Fedora Installation guide](http://docs.fedoraproject.org/en-US/Fedora/20/html/Installation_Guide/sn-making-media.html) in the second chapter called *Making media*.
+```
+dd if=Fedora-Atomic-dvd-x86_64-24-20160712.0.iso of=/dev/sdb
+```
+
+These procedures are described in the [Fedora Installation guide](https://docs.fedoraproject.org/en-US/Fedora/24/html/Installation_Guide/sect-preparing-boot-media.html) in the second chapter called *Making media*.
 
 ## Installing Fedora Atomic with the Anaconda Installer
 
@@ -18,44 +22,27 @@ Once your system has completed booting, the boot screen is displayed:
 
 The boot media displays a graphical boot menu with three options:
 
-- *Install Fedora 23* - Choose this option to install Fedora Atomic onto your computer system using the graphical installation program.
+- *Install Fedora 24* - Choose this option to install Fedora Atomic onto your computer system using the graphical installation program.
 
-- *Test this media & install Fedora 23* -  With this option, the integrity of the installation media is tested before installing Fedora Atomic onto your computer system using the graphical installation program. This option is selected by default.
+- *Test this media & install Fedora 24* -  With this option, the integrity of the installation media is tested before installing Fedora Atomic onto your computer system using the graphical installation program. This option is selected by default.
 
 - *Troubleshooting* - This item opens a menu with additional boot options. From this screen you can launch a rescue mode for Fedora Atomic, or run a memory test. Also, you can start the installation in the basic graphics mode as well as boot the installation from local media.
 
 If no key is pressed within 60 seconds, the default boot option runs. Press *Enter* to proceed.
 
-After media check, you are directed to the welcome screen, where you can choose the language of the installation:
+After media check, you are directed to the welcome screen.  This interactive install is exactly the same as installing standard Fedora Server, so you can use [Fedora's guide to the Anaconda GUI](https://docs.fedoraproject.org/en-US/Fedora/24/html/Installation_Guide/sect-installation-graphical-mode.html).
 
-![Fedora Atomic Welcome Screen](welcome_screen1.png "Fedora Atomic Welcome Screen")
-
-Select your language of preference and press *Continue*. The *INSTALLATION SUMMARY* screen appears. It is the central menu for configuring localization, software, and system settings for your installation. Items that are not yet configured are marked with orange warning sign.
-
-![Fedora Atomic Installation Summary](installation_summary1.png "Fedora Atomic Installation Summary")
-
-This menu allows you to configure your installation in the order you choose. Each menu item leads to an individual configuration screen. For description of these sub-screens, see the corresponding sections of the Fedora Installation guide:
-
-- [*Time & Date*](http://docs.fedoraproject.org/en-US/Fedora/20/html/Installation_Guide/s1-timezone-x86.html) - lets you configure date, time, time zone, and NTP (Network Time Protocol).
-- [*Keyboard*](http://docs.fedoraproject.org/en-US/Fedora/20/html/Installation_Guide/sn-keyboard-x86.html) - here you can select keyboard layouts to use on your system.  
-- [*Language Support*](http://docs.fedoraproject.org/en-US/Fedora/20/html/Installation_Guide/language-support-x86.html) - this screen provides language options for your installation, it is identical to the welcome screen depicted above.
-- [*Installation Destination*](http://docs.fedoraproject.org/en-US/Fedora/20/html/Installation_Guide/s1-diskpartsetup-x86.html) - allows you to select storage devices and set partitioning. Note that it is recommended to use the default partitioning configured in the boot.iso image.
-- [*Network & Hostname*](http://docs.fedoraproject.org/en-US/Fedora/20/html/Installation_Guide/sn-Netconfig-x86.html) - provides a network management interface.
+The one thing which is different is disk partitioning.  Post-install, Atomic will automatically use some of the unused space on your primary LVM partition to create a Docker pool partition.  You will need this partition in order to have space for containers.  As such, we recommend leaving half your available disk space as unallocated LVM partition space.
 
 Once you configured all required settings, the orange warning signs disappear and you can start the installation by pressing *Begin Installation*.
 
-While the installation proceeds, you can specify the user settings:
-
-![Fedora Atomic Final Screen](final_screen1.png "Fedora Atomic Final Screen")
-
-[Select a root password](http://docs.fedoraproject.org/en-US/Fedora/20/html/Installation_Guide/s1-progresshub-x86.html#sn-account_configuration-x86) and [create a user](http://docs.fedoraproject.org/en-US/Fedora/20/html/Installation_Guide/sn-firstboot-systemuser.html) if desired. When the installation is finished, you are prompted to reboot the system by pressing *Reboot*.
+While the installation proceeds, you can specify user settings, such as a root password and adding one or more system users.  We strongly recommend that you do both, as Atomic Host has no GUI login and you will be unable to log in without one or more valid user logins. When the installation is finished, you are prompted to reboot the system by pressing *Reboot*.
 
 ## Unattended Installation
 
 Kickstart installations offer a means to automate the installation process, either partially or fully. Kickstart files contain answers to all questions normally asked by the installation program, such as what time zone do you want the system to use, how should the drives be partitioned or which packages should be installed.
 
 The installer ISO contains embedded content, and thus works offline.
-
 However, to do a PXE installation, you must download the content
 dynamically.  We strongly recommend mirroring the OSTree repository,
 rather than having each machine contact the upstream provider.
@@ -78,19 +65,26 @@ For example, create *atomic-ks.cfg* file with the following content:
 
     # NOTICE: This will download the content from upstream; this will be very slow.
     # Create your own OSTree repo locally and mirror the content instead.
-    ostreesetup --nogpg --osname=fedora-atomic --remote=fedora-atomic --url=https://dl.fedoraproject.org/pub/fedora/linux/atomic/22/ --ref=fedora-atomic/f22/x86_64/docker-host
+    ostreesetup --nogpg --osname=fedora-atomic --remote=fedora-atomic --url=https://dl.fedoraproject.org/pub/fedora/linux/atomic/24/ --ref=fedora-atomic/f24/x86_64/docker-host
 
-There are several other options you can specify in the kickstart file, see *Kickstart Options* in the [Fedora Installation guide](http://docs.fedoraproject.org/en-US/Fedora/20/html/Installation_Guide/s1-kickstart2-options.html).
+There are several other options you can specify in the kickstart file, see *Kickstart Options* in the [Fedora Installation guide](https://docs.fedoraproject.org/en-US/Fedora/24/html/Installation_Guide/chap-kickstart-installations.html).
 
-After creating the configuration file, you have to ensure that it will be available during the installation. Place the file on hard drive, network, or removable media as described in the [Fedora Installation guide](http://docs.fedoraproject.org/en-US/Fedora/20/html/Installation_Guide/s1-kickstart2-putkickstarthere.html).
+After creating the configuration file, you have to ensure that it will be available during the installation. Place the file on hard drive, network, or removable media as described in the [Fedora Installation guide](https://docs.fedoraproject.org/en-US/Fedora/24/html/Installation_Guide/chap-kickstart-installations.html).  As a simple example, if the kickstart file is on another machine in the same network, you could serve it using a simple HTTP server:
 
-Start the installation as described above. On the boot screen, press *Esc* to view the *boot:* prompt. At this prompt, specify the path to the kickstart configuration file:
+```
+cd kickstart/
+python -m SimpleHTTPServer
+```
 
-    boot: linux inst.ks=kickstart_location
+Start the installation as described above. On the grub menu screen, press the up arrow to select "Install Fedora".  Then press "e" to edit this option.  You will see a `linux` or `linuxefi` line which boots the install kernel; edit this line to add a kickstart file location after the directive `inst.ks`.  If we were serving the kickstarter file on the network with SimpleHTTPServer as above, for example, we would do this:
 
-The *linux* keyword is used here to specify the installation program image file to be loaded. The *inst.ks* option specifies the kickstart configuration file, replace *kickstart_location* with a path or URL of *atomic-ks.cfg*. See the [Fedora Installation guide](http://docs.fedoraproject.org/en-US/Fedora/20/html/Installation_Guide/s1-kickstart2-startinginstall.html) for more information on how to start a kickstart installation.
+```
+linuxefi /images/pxeboot/vmlinuz inst.ks=http://192.168.1.105:8000/atomic-ks.cfg inst.stage2=hd:LABEL=Fedora-Atomic-24-x86_64 quiet
+```
 
-With the kickstart file described above, the installation proceeds automatically until Anaconda prompts you to reboot the system to complete the installation.
+See the [Fedora Installation guide](https://docs.fedoraproject.org/en-US/Fedora/24/html/Installation_Guide/chap-kickstart-installations.html) for more information on how to start a kickstart installation.
+
+With the kickstart file described above, the installation proceeds automatically until Anaconda reboots the system after finishing the installation.  This can be more fully automated if you use a PXEboot server, which can serve up both the OS images and the kickstart file.
 
 ## Updating and Reverting Fedora Atomic
 

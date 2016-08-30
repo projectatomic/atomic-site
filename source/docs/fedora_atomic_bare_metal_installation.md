@@ -4,7 +4,7 @@ Performing a Bare Metal Installation of Fedora Atomic
 
 ## Getting the Installation Image and Creating Media
 
-Download the [**boot.iso**](http://download.fedoraproject.org/pub/fedora/linux/releases/24/Cloud_Atomic/x86_64/iso/Fedora-Cloud_Atomic-x86_64-24.iso) file and use it to create installation media. For example, if you run the GNOME desktop, you can use the *Write to disk* capability of the Nautilus file browser to create an installation DVD. Alternatively, you can write the installation ISO image to a USB device with the `dd` command. For example, if you had a USB thumbdrive mounted as /dev/sdb, you might use this command:
+Download the [**boot.iso**](http://download.fedoraproject.org/pub/fedora/linux/releases/24/Cloud_Atomic/x86_64/iso/Fedora-Cloud_Atomic-x86_64-24.iso) file and use it to create installation media. For example, if you run the GNOME desktop, you can use the *Write to disk* capability of the Nautilus file browser to create an installation DVD. Alternatively, you can write the installation ISO image to a USB device with the `dd` command. For example, if you had a USB thumbdrive mounted as /dev/sdb, you might use this command (be careful to get the drive location right):
 
 ```
 dd if=Fedora-Atomic-dvd-x86_64-24-20160712.0.iso of=/dev/sdb

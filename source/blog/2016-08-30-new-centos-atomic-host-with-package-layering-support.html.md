@@ -3,13 +3,15 @@ title: New CentOS Atomic Host with Package Layering Support
 author: jbrooks
 date: 2016-08-30 18:38:04 UTC
 tags: centos, rpm-ostree
-published: false
+published: true
 comments: true
 ---
 
-Last week, the CentOS Atomic SIG [released](https://seven.centos.org/2016/08/announcing-a-new-release-of-centos-atomic-host-2/) an updated version of CentOS Atomic Host (tree version 7.20160818), featuring support for rpm-ostree package layering. 
+Last week, the CentOS Atomic SIG [released](https://seven.centos.org/2016/08/announcing-a-new-release-of-centos-atomic-host-2/) an updated version of CentOS Atomic Host (tree version 7.20160818), featuring support for rpm-ostree package layering.
 
-CentOS Atomic Host is available as a VirtualBox or libvirt-formatted Vagrant box, or as an installable ISO, qcow2 or Amazon Machine image. Check out the [CentOS wiki](https://wiki.centos.org/SpecialInterestGroup/Atomic/Download) for download links and installation instructions, or read on to learn more about what’s new in this release.
+CentOS Atomic Host is available as a VirtualBox or libvirt-formatted Vagrant box; or as an installable ISO, qcow2, or Amazon Machine image. Check out the [CentOS wiki](https://wiki.centos.org/SpecialInterestGroup/Atomic/Download) for download links and installation instructions, or read on to learn more about what’s new in this release.
+
+READMORE
 
 CentOS Atomic Host includes these core component versions:
 

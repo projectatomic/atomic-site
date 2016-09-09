@@ -1,8 +1,8 @@
 ---
 title: Introduction to System Containers
 author: giuseppe
-date: 2016-09-09 10:00 UTC
-tags: runc, oc, system-containers
+date: 2016-09-12 10:00 UTC
+tags: runc, oc, system-containers, atomic, skopeo, ostree
 published: true
 comments: true
 ---
@@ -10,22 +10,24 @@ comments: true
 As part of our effort to reduce the number of packages that are
 shipped with the Atomic Host image, we faced the problem of how to
 containerize services that are needed before Docker itself is running.
-Here is where system containers fit: a way to run containers in
+The result: "system containers," a way to run containers in
 production using read only images.
 
 System containers use different technologies such as OSTree for the
 storage, Skopeo to pull images from a registry, runC to run the
-containers and systemD to manage their life cycle.
+containers and systemd to manage their life cycle.
 
 READMORE
 
-To use system containers you must have version 1.12 of the 'atomic'
-tool command and 'ostree' installed.
+To use system containers you must have [Atomic CLI](https://github.com/projectatomic/atomic) version 1.12 or later
+and the [ostree utility](https://github.com/ostreedev/ostree) installed.  Currently, this means you must be running the
+[CentOS Continuous Atomic](/blog/2016/07/new-centos-atomic-host-releases-available-for-download/),
+but updates for Fedora Atomic should be coming soon.
 
 # Pull an image
 
 An image must be present in the OSTree system repository before we can
-use it as a system container.  The atomic tool can pull an image from
+use it as a system container.  By using skopeo, the atomic tool can pull an image from
 different locations, a registry, the local Docker engine or a tarball,
 according to how the image is prefixed:
 
@@ -47,10 +49,11 @@ takes advantage of the layered model used by Docker images, since
 `atomic pull` will download only the layers that are not already
 available.  All the images are stored into the OSTree system
 repository.
+
 Using OSTree as storage has the advantage that if the same file is
-present in more layers, it will be stored only once.  A container is
-installed through hardlinks, the storage is shared with the OSTree
-repository "hardlink farm".
+present in more layers, it will be stored only once, just like for container
+image layers.  A container is installed through hardlinks, the storage is
+shared with the OSTree repository "hardlink farm".
 
 `atomic images list` shows the list of the available images:
 
@@ -96,8 +99,8 @@ systemctl enable flannel
 # systemctl start flannel
 ```
 
-The template mechanism allows use to configure settings for images
-that support those, for example we could use the following command to
+The template mechanism allows us to configure settings for images.
+For example, we could use the following command to
 configure Flannel to use another Etcd endpoint instead of the default
 `http://127.0.0.1:2379`:
 
@@ -126,16 +129,14 @@ an installed system container.
 
 # Structure of a System Image
 
-System images are Docker images with a few extra files, that are
-exported as part of the image itself under the directory '/exports'.
+System images are Docker images with a few extra files that are
+exported as part of the image itself, under the directory '/exports'.
 In other words, an existing `Dockerfile` can be converted adding the
 configuration files needed to run it as a system container (which
-translated to an additional `ADD [files] /exports` directive in the
+translate to an additional `ADD [files] /exports` directive in the
 `Dockerfile`).
 
-These files are: config.json.template, manifest.json,
-service.template, tmpfiles.template.  Not all of them are necessary
-for every image.
+These files are:
 
 - config.json.template - template for the OCI configuration file that
   will be used to launch the runC container.
@@ -144,15 +145,16 @@ for every image.
 - service.template - template unit file for systemD.
 - tmpfiles.template - template configuration file for systemd-tmpfiles.
 
+Not all of them are necessary for every image.
+
 All the files with a `.template` suffix are preprocessed and every
 variable in the form `$VARIABLE` or `${VARIABLE}` is replaced with
 its value.  This allows to define variables that are set at
 installation time (through the `--set` option) as we saw with the
 Flannel example.  It is possible to set a default value for these
-settings, if the user does not provide any, and that is done through
-the `manifest.json` file of the system container image.
+settings using the `manifest.json` file of the system container image.
 
-If any of these files is missing, atomic will provide a default one.
+If any of these files are missing, atomic will provide a default one.
 For instance, if `config.json.template` is not included in the image,
 the default configuration will launch the `run.sh` script without any
 tty.
@@ -169,5 +171,9 @@ only `RUN_DIRECTORY` and `STATE_DIRECTORY` can be overriden with
 - `HOST_UID` - uid of the user installing the container.
 - `HOST_GID` - gid of the user installing the container.
 - `RUN_DIRECTORY` - run directory.  `/run` for system containers.
-- `STATE_DIRECTORY` - path to the storage directory. `/var/lib/ for
+- `STATE_DIRECTORY` - path to the storage directory. `/var/lib/` for
   system containers.
+
+We're excited about the ability of system containers to greatly improve administration
+and infrastructure service delivery for Atomic clusters.  Please give them a try
+and tell us what you think.

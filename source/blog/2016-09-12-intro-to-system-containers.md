@@ -1,7 +1,7 @@
 ---
 title: Introduction to System Containers
 author: giuseppe
-date: 2016-09-12 10:00 UTC
+date: 2016-09-12 13:00 UTC
 tags: runc, oc, system-containers, atomic, skopeo, ostree
 published: true
 comments: true
@@ -96,6 +96,7 @@ systemd-tmpfiles --create /etc/tmpfiles.d/flannel.conf
 systemctl enable flannel
 
 # systemctl start etcd
+# runc exec etcd etcdctl set /atomic.io/network/config '{"Network":"10.40.0.0/16"}'
 # systemctl start flannel
 ```
 

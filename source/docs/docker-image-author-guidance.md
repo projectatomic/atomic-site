@@ -118,7 +118,7 @@ It is possible to share the volumes created by one container with another by usi
 `--volumes-from` parameter to docker run.  For example, say we make a container named 'ContainerA'
 that has a volume:
 
-    # docker run -i  -v /var/volume1-name 'ContainerA' -t fedora /bin/bash
+    # docker run -i  -v /var/volume1 -name 'ContainerA' -t fedora /bin/bash
 
 We can share the volumes from this container with another container:
 

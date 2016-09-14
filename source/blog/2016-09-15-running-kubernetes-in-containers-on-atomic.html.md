@@ -1,9 +1,9 @@
 ---
 title: Running Kubernetes and Friends in Containers on CentOS Atomic Host
 author: jbrooks
-date: 2016-08-18 16:57:25 UTC
-tags: atomic, kubernetes, centos, docker
-published: false
+date: 2016-09-15 12:00:00 UTC
+tags: atomic, kubernetes, centos, docker, system containers
+published: true
 comments: true
 ---
 
@@ -20,7 +20,7 @@ READMORE
 
 ## System Containers
 
-Running system components in docker containers can be tricky, because these containers aren't automatically integrated with systemd, like other system services, and because some components, such as flannel, need to modify docker configs, resulting in a bit of a chicken-and-egg situation. 
+Running system components in docker containers can be tricky, because these containers aren't automatically integrated with systemd, like other system services, and because some components, such as flannel, need to modify docker configs, resulting in a bit of a chicken-and-egg situation.
 
 One solution is [system containers for atomic](http://www.projectatomic.io/blog/2016/09/intro-to-system-containers/), which can be run independently from the docker daemon. [Giuseppe Scrivano](https://twitter.com/gscrivano) has built example containers [for flannel](https://hub.docker.com/r/gscrivano/flannel/) and [for etcd](https://hub.docker.com/r/gscrivano/etcd/), and in this post, I'll be using system containers to run flannel and etcd on my atomic hosts.
 
@@ -218,7 +218,7 @@ Then, on your worker node, clean up the `/var/lib/kubelet` directory:
 
 I mentioned that the CentOS repositories contain a v1.2 kubernetes. However, Fedora's [Rawhide](https://fedoraproject.org/wiki/Releases/Rawhide) includes v1.3-based kubernetes packages. howI wanted to try out the most recent rpm-packaged kubernetes, so I rebuilt the containers I used above swapping in `fedora:rawhide` for `centos:centos7` in the `FROM:` lines of the dockerfiles.
 
-You can run the same series of commands listed above, with the container tag changed from `:centos` to `:rawhide`. 
+You can run the same series of commands listed above, with the container tag changed from `:centos` to `:rawhide`.
 
 For instance:
 

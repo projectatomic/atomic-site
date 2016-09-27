@@ -59,7 +59,7 @@ docker exec -it atomicrepo bash
 
 ## Compose Your Custom Tree
 
-The Dockerfile above pulls in the definition files for Atomic CentOS and Atomic Fedora, which may be modified to produce a custom tree. The tree manifest syntax is documented [here](https://github.com/projectatomic/rpm-ostree/blob/master/doc/treefile.md). 
+The Dockerfile above pulls in the definition files for Atomic CentOS and Atomic Fedora, which may be modified to produce a custom tree. The tree manifest syntax is documented [here](https://github.com/projectatomic/rpm-ostree/blob/master/docs/manual/treefile.md). 
 
 For example, here's how to produce a version of the Atomic Fedora 21 tree that adds the `fortune` command:
 

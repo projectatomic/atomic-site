@@ -52,7 +52,8 @@ configuration and load it from the boot prompt as described below. Use
 the `ostreesetup` command in your custom configuration, which is what
 configures anaconda to consume the rpm-ostree generated content.
 
-For example, create *atomic-ks.cfg* file with the following content:
+For example, create *atomic-ks.cfg* file with the following content, for
+Fedora 24 Atomic:
 
     lang en_US.UTF-8
     keyboard us
@@ -60,14 +61,14 @@ For example, create *atomic-ks.cfg* file with the following content:
     zerombr
     clearpart --all --initlabel
     autopart
-    # SSH keys are better than passwords, but this is a simple example
-    rootpw --plaintext atomic
+    # sudo user with an ssh key (use your key)
+    user --name=atomic --groups=wheel --sshkey="ssh-rsa AAAAB3NzaC1yc2EAAAA ..."
 
     # NOTICE: This will download the content from upstream; this will be very slow.
     # Create your own OSTree repo locally and mirror the content instead.
     ostreesetup --nogpg --osname=fedora-atomic --remote=fedora-atomic --url=https://dl.fedoraproject.org/pub/fedora/linux/atomic/24/ --ref=fedora-atomic/f24/x86_64/docker-host
 
-There are several other options you can specify in the kickstart file, see *Kickstart Options* in the [Fedora Installation guide](https://docs.fedoraproject.org/en-US/Fedora/24/html/Installation_Guide/chap-kickstart-installations.html).
+There are several other options you can specify in the kickstart file, see *Kickstart Options* in the [Fedora Installation guide](https://docs.fedoraproject.org/en-US/Fedora/24/html/Installation_Guide/chap-kickstart-installations.html), or this [blog post](/2016/10/install-with-kickstart/) which shows a more complex configuration with disk partitioning.
 
 After creating the configuration file, you have to ensure that it will be available during the installation. Place the file on hard drive, network, or removable media as described in the [Fedora Installation guide](https://docs.fedoraproject.org/en-US/Fedora/24/html/Installation_Guide/chap-kickstart-installations.html).  As a simple example, if the kickstart file is on another machine in the same network, you could serve it using a simple HTTP server:
 
@@ -79,7 +80,7 @@ python -m SimpleHTTPServer
 Start the installation as described above. On the grub menu screen, press the up arrow to select "Install Fedora".  Then press "e" to edit this option.  You will see a `linux` or `linuxefi` line which boots the install kernel; edit this line to add a kickstart file location after the directive `inst.ks`.  If we were serving the kickstarter file on the network with SimpleHTTPServer as above, for example, we would do this:
 
 ```
-linuxefi /images/pxeboot/vmlinuz inst.ks=http://192.168.1.105:8000/atomic-ks.cfg inst.stage2=hd:LABEL=Fedora-Atomic-24-x86_64 quiet
+linuxefi /images/pxeboot/vmlinuz inst.stage2=hd:LABEL=Fedora-Atomic-24-x86_64 inst.ks=http://192.168.1.105:8000/atomic-ks.cfg quiet
 ```
 
 See the [Fedora Installation guide](https://docs.fedoraproject.org/en-US/Fedora/24/html/Installation_Guide/chap-kickstart-installations.html) for more information on how to start a kickstart installation.

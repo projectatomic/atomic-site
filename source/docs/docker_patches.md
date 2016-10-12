@@ -148,13 +148,13 @@ changed to read-only.
 
 These 2 below are open but no progress so far in years:
 
-* [18603](* [18603](https://github.com/docker/docker/issues/18603))
-* [14080](* [14080](https://github.com/docker/docker/issues/14080))
+* [18603](https://github.com/docker/docker/issues/18603)
+* [14080](https://github.com/docker/docker/issues/14080)
 
 Closed proposals:
 
-* [3949](* [3949](https://github.com/docker/docker/issues/3949))
-* [3156](* [3156](https://github.com/docker/docker/issues/3156))
-* [14251](* [14251](https://github.com/docker/docker/issues/14251))
+* [3949](https://github.com/docker/docker/issues/3949)
+* [3156](https://github.com/docker/docker/issues/3156)
+* [14251](https://github.com/docker/docker/issues/14251)
 
 Up until now no satisfactory alternatives have arrived, but there are several projects working to build container images outside of docker, including [Ansible](http://docs.ansible.com/ansible/docker_image_module.html) and potentially [dockerramp](https://github.com/jlhawn/dockramp).

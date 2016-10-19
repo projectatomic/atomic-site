@@ -1,9 +1,9 @@
 ---
 title: New CentOS Atomic Host with Optional Docker 1.12
 author: jbrooks
-date: 2016-10-18 17:50:04 UTC
-tags: docker, centos,  swarm
-published: false
+date: 2016-10-19 10:00:00 UTC
+tags: docker, centos,  swarm, atomic host
+published: true
 comments: true
 ---
 

@@ -9,7 +9,6 @@ tags: docker, skopeo, troubleshooting, registry
 
 Recently people have been reporting unexpected errors when doing a `skopeo copy` versus a `docker pull`:  [1347805](https://bugzilla.redhat.com/show_bug.cgi?id=1347805), [235](https://github.com/projectatomic/skopeo/issues/235), and [27281](https://github.com/docker/docker/issues/27281).
 
-
 [Skopeo](https://github.com/projectatomic/skopeo) is a command-line tool that that does various operations with container images and container image registries, including pulling the images to the host.  It is also used under the covers by the [atomic](https://github.com/projectatomic/atomic) command-line tool.
 
 This post explains why those weird errors can come up when pulling images.
@@ -50,26 +49,27 @@ The docker daemon:
 
 Skopeo:
 
-1. Attempt to contact a V2 registry
+1. Attempts to contact a V2 registry
 2. V2 registry returns 'unauthorized: authentication required'
 3. Skopeo errors out and shows the  'unauthorized: authentication required'
 
 ## Why is docker trying to contact a V1 registry?
 
 Docker still  supports the old V1 registry API (remember [docker-registry](https://github.com/docker/docker-registry)?).
-Some registry deployments use both V1 and V2 registries.  When the  docker engine fails to get a V2 Image, it falls back and tries to contact a V1 registry which may have the image.
+Some registry deployments use both V1 and V2 registries.  When the docker engine fails to get a V2 Image, it falls back and tries to contact a V1 registry that may have the image.
 
 Yes, but:
 
 ## Why does skopeo return 'unauthorized'?
 
 The V2 registry API is designed to prevent information leaks about private repositories (GitHub does the same, if you’re wondering).
+
 From the first example above, *library/imagedoesntexist* could be a private repository/image (or not!).  The registry can't tell you that the repository/image doesn't exist; it can only tell you that you're not authorized to access it.
 
 In fact, if you have a private repository/image on the docker hub and try to pull it with skopeo, you still get 'unauthorized' (unless you're logged in of course).
 Skopeo only supports V2 registries. Since V1 registries are being purged, we decided to not add support for V1 to Skopeo.
 
-Let's give some examples with a private image named *runcom/what*:
+Let's see some examples with a private image named *runcom/what*:
 
 If *runcom/what* is a private image and I'm *not* logged in:
 
@@ -87,7 +87,7 @@ $ skopeo --tls-verify=false copy docker://runcom/what oci:what
 FATA[0002] Error initializing image from source docker://runcom/what:latest: manifest unknown: manifest unknown
 ```
 
-The above error is indeed an 'image not found' (e.g. a 404 from the V2 registry). Since I’m logged in,  I have the rights to understand if the image is on the registry.
+The above error is indeed an 'image not found' (e.g., a 404 from the V2 registry). Since I’m logged in,  I have the rights to understand if the image is on the registry.
 
 Let's see what happens with docker instead when I'm not logged in:
 
@@ -106,9 +106,9 @@ Oct 24 16:51:19 localhost.localdomain docker[1408]: time='2016-10-24T16:51:19.54
 Oct 24 16:51:20 localhost.localdomain docker[1408]: time='2016-10-24T16:51:20.113460151+02:00' level=error msg='Attempting next endpoint for pull after error: unauthorized: authentication required'
 ```
 
-Great, exactly like skopeo, before falling back to V1, it’s correctly telling us that I’m unauthorized to pull the image (note, it’s not telling me anything about the existence of that image on the docker hub!)
+Great. Exactly like skopeo, before falling back to V1, it’s correctly telling us that I’m unauthorized to pull the image (note, it’s not telling me anything about the existence of that image on the docker hub!)
 
-If I try to pull the same image but this time logged in I'll get the same image not found error, but this time I can spot the following in the logs:
+If I try to pull the same image but this time logged in, I'll get the same image not found error, but this time I can spot the following in the logs:
 
 ```
 Oct 24 16:54:11 localhost.localdomain docker[1408]: time='2016-10-24T16:54:11.706002616+02:00' level=debug msg='GET https://registry-1.docker.io/v2/runcom/what/manifests/latest'

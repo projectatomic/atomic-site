@@ -1,7 +1,7 @@
 ---
 title: Containerization and Deployment of application on Atomic host with Ansible-Playbook
 author: trishnag
-date: 2016-10-26 14:00:00 UTC
+date: 2016-10-27 14:00:00 UTC
 published: true
 comments: true
 tags: atomic host, ansible, applications

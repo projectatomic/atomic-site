@@ -15,9 +15,7 @@ Building Docker image for an application and running container/cluster of contai
 
 ## How to automate the containerization and deployment process for a simple Flask application
 
-First, let’s create a simple **Flask Hello-World** application.
-This is the directory structure of the entire application.  You can copy these files
-from the repository [trishnaguha/fedora-cloud-ansible](https://github.com/trishnaguha/fedora-cloud-ansible):
+First, let’s create a simple **Flask Hello-World** application. This is the directory structure of the entire application.  You can copy these files from the repository [trishnaguha/fedora-cloud-ansible](https://github.com/trishnaguha/fedora-cloud-ansible):
 
 ```
 flask-helloworld/
@@ -117,8 +115,7 @@ Hello World</div>
 {% endblock %}
 ```
 
-Here's the **Dockerfile** to build the image.  Remember to put your name and email
-after MAINTAINER:
+Here's the **Dockerfile** to build the image.  Remember to put your name and email after MAINTAINER:
 
 ```
 FROM fedora
@@ -223,7 +220,7 @@ Replace ``[Destination Directory]`` in ``dest_dir`` field in main.yml with your 
 Issue the following command in order to run the playbook. Make sure you are in the ``ansible`` directory.
 ``$ ansible-playbook main.yml``.
 
-To verify whether the application is running or not you can curl the localhost on your remote atomic host by
+To verify whether the application is running, you can curl the localhost on your remote atomic host with
 ``$ curl http://localhost:5000``.
 
 You can also manage your containers running on remote host using [Cockpit](http://cockpit-project.org/). Check this article to know how to use Cockpit to manage your containers: [Manage-Containers-with-Cockpit](https://fedoramagazine.org/deploy-containers-atomic-host-ansible-cockpit).

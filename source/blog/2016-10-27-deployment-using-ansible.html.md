@@ -20,25 +20,17 @@ First, let’s create a simple **Flask Hello-World** application. This is the di
 ```
 flask-helloworld/
 ├── ansible
-│   ├── ansible.cfg
-│   ├── inventory
-│   └── main.yml
+│   ├── ansible.cfg
+│   ├── inventory
+│   └── main.yml
 ├── Dockerfile
-├── flask-helloworld
-│   ├── hello_world.py
-│   ├── static
-│   │   └── style.css
-│   └── templates
-│       ├── index.html
-│       └── master.html
-└── requirements.txt
-```
-
-**requirements.txt**:
-
-```
-Flask==0.11.1
-Jinja2==2.8
+└── flask-helloworld
+    ├── hello_world.py
+    ├── static
+    │   └── style.css
+    └── templates
+        ├── index.html
+        └── master.html
 ```
 
 **hello_world.py**:
@@ -121,17 +113,8 @@ Here's the **Dockerfile** to build the image.  Remember to put your name and ema
 FROM fedora
 MAINTAINER YOUR NAME HERE<your@email.address>
 
-RUN dnf -y update && dnf -y install python-virtualenv && dnf clean all
-
-RUN virtualenv venv
-RUN source venv/bin/activate
-
+RUN dnf -y update && dnf -y install python-flask python-jinja2 && dnf clean all
 RUN mkdir -p /app
-
-COPY requirements.txt /app
-WORKDIR /app
-
-RUN pip install -r requirements.txt
 
 COPY files/ /app/
 WORKDIR /app
@@ -190,11 +173,6 @@ Replace ``USER`` with the user of your remote host (Atomic).
     - name: Copy Dockerfile to host
       copy:
        src: "{{ src_dir }}/Dockerfile"
-       dest: "{{ dest_dir }}"
-
-    - name: Copy requirements.txt to host
-      copy:
-       src: "{{ src_dir }}/requirements.txt"
        dest: "{{ dest_dir }}"
 
     - name: Copy Application to host

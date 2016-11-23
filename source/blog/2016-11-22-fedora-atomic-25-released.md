@@ -12,7 +12,7 @@ including [Fedora Atomic 25](https://getfedora.org/en/atomic/), the latest build
 Fedora's container platform.  Among the features added in this build are:
 
 * [Package Layering](http://www.projectatomic.io/blog/2016/07/hacking-and-extending-atomic-host/)
-* [Docker 12.1](https://blog.docker.com/2016/06/docker-1-12-built-in-orchestration/)
+* [Docker 1.12](https://blog.docker.com/2016/06/docker-1-12-built-in-orchestration/)
 
 You can install Fedora Atomic 25 by any of the various methods listed
 on [the GetFedora Atomic page](https://getfedora.org/en/atomic/).  You can also

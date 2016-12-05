@@ -91,8 +91,11 @@ ttomecek:
 miabbott:
   name: Micah Abbott
 
-dmabe:
+dustymabe:
   name: Dusty Mabe
+  twitter: dustymabe
+  gravatar: 78c5dab261db4bc6ee0e038990fce2d8
+  description: Atomic OpenShift Engineer for Red Hat. Fedora Atomic WG member. Passionate about open source.
 
 adelton:
   name: Jan Pazdziora

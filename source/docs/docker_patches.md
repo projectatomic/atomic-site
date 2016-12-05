@@ -23,7 +23,6 @@ Patch types are:
 | Add-RHEL-super-secrets-patch | Red Hat | [6075](https://github.com/docker/docker/pull/6075) | Maintaining |
 | Add-add-registry-and-block-registry-options-to-docker | Upstream | [11991](https://github.com/docker/docker/pull/11991), [10411](https://github.com/docker/docker/pull/10411) | Rejected, Maintaining |
 | Improved-searching-experience | Upstream | | Rejected, Maintaining |
-| The-following-syscalls-should-not-be-blocked-by-seccomp | Upstream | [24221](https://github.com/docker/docker/pull/24221), [24510](https://github.com/docker/docker/pull/24510) | Rejected, Maintaining |
 | Add-dockerhooks-exec-custom-hooks-for-prestart/poststop-containers | Upstream | [17021](https://github.com/docker/docker/pull/17021) | Pending |
 | Return-rpm-version-of-packages-in-docker-version | Red Hat | [14591](https://github.com/docker/docker/pull/14591) | Maintaining |
 | rebase-distribution-specific-build | Upstream | [15364](https://github.com/docker/docker/pull/15364) | Pending |
@@ -62,35 +61,6 @@ to be accidentally pulled and run on a machine.  Some users also have no access 
 Red Hat wants to allow users to search multiple registries as described above. This patch improves the search experience.
 
 **Status**:  This patch actually works with the Add-add-registry-and-block-registry-options-to-docke.patch so we need to carry it also.
-
-
-### The-following-syscalls-should-not-be-blocked-by-seccomp.patch
-
-Capabilities block these syscalls.
-
-`mount`, `umount2`, `unshare`, `reboot` and `name\_to\_handle\_at` are all needed to run `systemd` as PID 1 in a container. These syscalls work fine without administrator privileges, sys_admin disabled.  These syscalls also provide features that do not require administrative access.  Blocking them by default breaks known work loads for little added security. There is no easy way to discover which syscalls are blocked, so we noticed that users that needed this functionality would simply run their containers without *any* security by using `--privileged`. We feel that adding the capability for `systemd` to run as PID 1 in the container, thereby allowing our users to run with security enabled, far outweighs the negatives for allowing these syscalls with seccomp.
-
-With UserNamespace we want to allow users to potentially setup unshare additional namespaces.
-
-From `man 2 reboot`:
-...
-Behavior inside PID namespaces
-Since Linux 3.4, when reboot() is called from a PID namespace (see
-        pid_namespaces(7)) other than the initial PID namespace, the effect
-        of the call is to send a signal to the namespace "init" process.
-        LINUX_REBOOT_CMD_RESTART and LINUX_REBOOT_CMD_RESTART2 cause a SIGHUP
-        signal to be sent.  LINUX_REBOOT_CMD_POWER_OFF and
-        LINUX_REBOOT_CMD_HALT cause a SIGINT signal to be sent.
-
-* [21287](https://github.com/docker/docker/pull/21287)
-
-**Status**: docker upstream says that systemd inside of a container is not something they want to support, so they do not want this patch merged.  They also claim some of these syscalls open up security risks like allowing unshare(USERNS) to containers.  They have pointed out that this syscall is not blocked by SYS_ADMIN capability, which means it could potentially lead to a privilege escalation.  Since these syscalls are available to non privileged users on most distributions, it is not seen as a big security issue, and some just break functionality like reboot above.  There are lots of other syscalls that are required by admin privs that could be blocked but are not  because they would break common workloads.  There is little difference between that approach and our patch if systemd is to be considered a common workload. Blocking the unshare syscall can actually weaken security since a container process could tighten its security using this syscall, which is not prevented.
-
-We have a patch we are working with upstream docker to externalize the syscall whitelist file from the docker syscalls, this would allow distributions and admins to define their own list of syscalls to be used by default inside of containers. When this patch gets merged we can drop our patch and just ship distribution defaults.
-
-* [24221](https://github.com/docker/docker/pull/24221)
-* [24510](https://github.com/docker/docker/pull/24510)
-
 
 ### Add-dockerhooks-exec-custom-hooks-for-prestart/poststop-containers.patch
 

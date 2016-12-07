@@ -40,22 +40,24 @@ We've tried to make this setup as generic as possible. In this case we
 will be targeting three generic servers that are running Fedora 25
 Atomic Host. As is common with cloud environments these servers each
 have an "internal" private address that can't be accessed from the
-internet, as well as a public NATed address that can be accessed from
+internet, and a public NATed address that can be accessed from
 the outside. Here is the identifying information for the three servers:
 
+```
 |    Role     |  Public IPv4   | Private IPv4 |
 |-------------|----------------|--------------|
 | master,etcd | 54.175.0.44    | 10.0.173.101 |
 | worker      | 52.91.115.81   | 10.0.156.20  |
 | worker      | 54.204.208.138 | 10.0.251.101 |
+```
 
-**NOTE** In a real production setup we would want mutiple master
-nodes and multiple etcd nodes closer to what is shown in the 
-[installation docs](https://docs.openshift.org/latest/install_config/install/advanced_install.html#multiple-masters).
+_**NOTE** In a real production setup we would want multiple master
+nodes and multiple etcd nodes closer to what is shown in the
+[installation docs](https://docs.openshift.org/latest/install_config/install/advanced_install.html#multiple-masters)._
 
-As you can see from the table we've marked one of the nodes as the master
+As you can see from the table, we've marked one of the nodes as the master
 and the other two as what we're calling *worker nodes*. The master node
-will run the api server, scheduler and, controller manager. We'll also
+will run the api server, scheduler, and controller manager. We'll also
 run etcd on it. Since we want to make sure we don't starve the node running
 etcd, we'll mark the master node as **unschedulable** so that
 application containers don't get scheduled to run on it.
@@ -79,9 +81,9 @@ Additionally, to run the installer we'll need to
 [install Ansible](http://docs.ansible.com/ansible/intro_installation.html#installing-the-control-machine)
 on our workstation or laptop.
 
-**NOTE** At this time Ansible 2.2 or greater is **REQUIRED**.
+_**NOTE** At this time Ansible 2.2 or greater is **REQUIRED**._
 
-We already have Ansible installed so we can skip to cloning the repo:
+We already have Ansible 2.2 installed so we can skip to cloning the repo:
 
     $ git clone https://github.com/openshift/openshift-ansible.git &>/dev/null
     $ cd openshift-ansible/
@@ -139,7 +141,7 @@ inventory file:
     52.91.115.81   openshift_hostname=10.0.156.20  openshift_node_labels="{'router':'true','registry':'true'}"
     54.204.208.138 openshift_hostname=10.0.251.101 openshift_node_labels="{'router':'true','registry':'true'}"
 
-Well that is quite a bit to digest isn't it? Don't worry, we'll break
+Well that is quite a bit to digest, isn't it? Don't worry, we'll break
 down this file in detail.
 
 Details of the Inventory File
@@ -196,9 +198,9 @@ Let's run through each of them:
     setting is used to tell OpenShift what subdomain to apply to routes
     that are created when exposing services to the outside world.
 
-Whew.. Quite a bit to run through there! Most of them are relatively
-self explanatory but the `openshift_master_default_subdomain` might need
-a little more explanation. Basically the value of this needs to be a
+Whew ... quite a bit to run through there! Most of them are relatively
+self-explanatory. but the `openshift_master_default_subdomain` might need
+a little more explanation. Basically, the value of this needs to be a
 [Wildcard DNS Record](https://en.wikipedia.org/wiki/Wildcard_DNS_record)
 so that any domain can be prefixed onto the front of the record and it
 will still resolve to the same IP address. We have decided to use a free
@@ -270,7 +272,7 @@ Finally, we have our worker nodes:
     54.204.208.138 openshift_hostname=10.0.251.101 openshift_node_labels="{'router':'true','registry':'true'}"
 
 We include the master node in this group so that the `openshift-sdn`
-will get installed and run there. However we do set the master node as
+will get installed and run there. However, we do set the master node as
 `openshift_schedulable=false` because it is running `etcd`. The last two
 nodes are our worker nodes and we have also added the `router=true` and
 `registry=true` node labels to them so that the registry and the router
@@ -309,7 +311,7 @@ and check their state:
             OSName: fedora-atomic
 
 Looks like they are up and all at the same state. The next step is to
-unleash the installer. Before we do we should note that Fedora has moved
+unleash the installer. Before we do, we should note that Fedora has moved
 to python3 by default. While Atomic Host still has python2 installed
 for legacy package support not all of the modules needed by the installer are
 supported in python2 on Atomic Host. Thus, we'll forge ahead and use python3 as the
@@ -351,7 +353,7 @@ And now we are ready to log in as either the `admin` or `user` users
 using `oc login https://54.175.0.44:8443` from the command line or
 visiting the web frontend at `https://54.175.0.44:8443`.
 
-**NOTE** To install the `oc` CLI tool follow [these instructions](https://docs.openshift.org/latest/cli_reference/get_started_cli.html#installing-the-cli)
+_**NOTE** To install the `oc` CLI tool on your workstation follow [these instructions](https://docs.openshift.org/latest/cli_reference/get_started_cli.html#installing-the-cli)_
 
 To Be Continued
 ===============
@@ -359,9 +361,17 @@ To Be Continued
 In this blog we brought up an OpenShift Origin cluster on three servers
 that were running Fedora 25 Atomic Host. We reviewed the inventory file
 in detail to explain exactly what options were used and why. In a future
-blog post we'll take the system for a spin and inspect some of the
-running system that was generated from the installer and also spin up an
+blog post we'll take the system for a spin, inspect some of the
+running system that was generated from the installer, and spin up an
 application that will run on and be hosted by the Origin cluster.
+
+If you run into issues following these installation instructions, please report
+them in one of the following places:
+
+* The [Project Atomic mailing list](https://lists.projectatomic.io/mailman/listinfo/atomic)
+* The [Fedora Cloud mailing list](https://lists.fedoraproject.org/admin/lists/cloud.lists.fedoraproject.org/)
+* The #atomic channel on [IRC.freenode.net](https://freenode.net/)
+* In the comments below
 
 Cheers!
 

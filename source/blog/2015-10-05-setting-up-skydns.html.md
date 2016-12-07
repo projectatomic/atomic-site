@@ -1,6 +1,6 @@
 ---
 title: 'Setting up SkyDNS '
-author: dmabe
+author: dustymabe
 date: 2015-10-05 08:17:14 UTC
 tags: skydns, dns, fedora, centos, etcd, kubernetes
 comments: true

@@ -4,11 +4,7 @@ Performing a Bare Metal Installation of Fedora Atomic
 
 ## Getting the Installation Image and Creating Media
 
-<<<<<<< HEAD
-Download the [**boot.iso**](http://download.fedoraproject.org/pub/fedora/linux/releases/24/Cloud_Atomic/x86_64/iso/Fedora-Cloud_Atomic-x86_64-24.iso) file and use it to create installation media. For example, if you run the GNOME desktop, you can use the *Write to disk* capability of the Nautilus file browser to create an installation DVD. Alternatively, you can write the installation ISO image to a USB device with the `dd` command. For example, if you had a USB thumbdrive mounted as /dev/sdb, you might use this command (be careful to get the drive location right):
-=======
-Download the [**boot.iso**](http://download.fedoraproject.org/pub/fedora/linux/releases/24/Cloud_Atomic/x86_64/iso/Fedora-Cloud_Atomic-x86_64-24.iso) file and use it to create installation media. For example, if you run the GNOME desktop, you can use the *Write to disk* capability of the Nautilus file browser to create an installation DVD. Alternatively, you can write the installation ISO image to a USB device with the `dd` command. For example, if you had a USB thumbdrive mounted as /dev/sdb, you might use this command:
->>>>>>> master
+Download the **boot.iso** file from [GetFedora.org](https://getfedora.org/atomic/download/) and use it to create installation media. For example, if you run the GNOME desktop, you can use the *Write to disk* capability of the Nautilus file browser to create an installation DVD. Alternatively, you can write the installation ISO image to a USB device with the `dd` command. For example, if you had a USB thumbdrive mounted as /dev/sdb, you might use this command (be careful to get the drive location right):
 
 ```
 dd if=Fedora-Atomic-dvd-x86_64-24-20160712.0.iso of=/dev/sdb
@@ -26,9 +22,9 @@ Once your system has completed booting, the boot screen is displayed:
 
 The boot media displays a graphical boot menu with three options:
 
-- *Install Fedora 24* - Choose this option to install Fedora Atomic onto your computer system using the graphical installation program.
+- *Install Fedora 25* - Choose this option to install Fedora Atomic onto your computer system using the graphical installation program.
 
-- *Test this media & install Fedora 24* -  With this option, the integrity of the installation media is tested before installing Fedora Atomic onto your computer system using the graphical installation program. This option is selected by default.
+- *Test this media & install Fedora 25* -  With this option, the integrity of the installation media is tested before installing Fedora Atomic onto your computer system using the graphical installation program. This option is selected by default.
 
 - *Troubleshooting* - This item opens a menu with additional boot options. From this screen you can launch a rescue mode for Fedora Atomic, or run a memory test. Also, you can start the installation in the basic graphics mode as well as boot the installation from local media.
 
@@ -57,7 +53,7 @@ the `ostreesetup` command in your custom configuration, which is what
 configures anaconda to consume the rpm-ostree generated content.
 
 For example, create *atomic-ks.cfg* file with the following content, for
-Fedora 24 Atomic:
+Fedora 25 Atomic:
 
     lang en_US.UTF-8
     keyboard us
@@ -70,13 +66,9 @@ Fedora 24 Atomic:
 
     # NOTICE: This will download the content from upstream; this will be very slow.
     # Create your own OSTree repo locally and mirror the content instead.
-    ostreesetup --nogpg --osname=fedora-atomic --remote=fedora-atomic --url=https://dl.fedoraproject.org/pub/fedora/linux/atomic/24/ --ref=fedora-atomic/f24/x86_64/docker-host
+    ostreesetup --nogpg --osname=fedora-atomic --remote=fedora-atomic --url=https://dl.fedoraproject.org/pub/fedora/linux/atomic/25/ --ref=fedora-atomic/f25/x86_64/docker-host
 
-<<<<<<< HEAD
 There are several other options you can specify in the kickstart file, see *Kickstart Options* in the [Fedora Installation guide](https://docs.fedoraproject.org/en-US/Fedora/24/html/Installation_Guide/chap-kickstart-installations.html), or this [blog post](/2016/10/install-with-kickstart/) which shows a more complex configuration with disk partitioning.
-=======
-There are several other options you can specify in the kickstart file, see *Kickstart Options* in the [Fedora Installation guide](https://docs.fedoraproject.org/en-US/Fedora/24/html/Installation_Guide/chap-kickstart-installations.html).
->>>>>>> master
 
 After creating the configuration file, you have to ensure that it will be available during the installation. Place the file on hard drive, network, or removable media as described in the [Fedora Installation guide](https://docs.fedoraproject.org/en-US/Fedora/24/html/Installation_Guide/chap-kickstart-installations.html).  As a simple example, if the kickstart file is on another machine in the same network, you could serve it using a simple HTTP server:
 
@@ -88,11 +80,7 @@ python -m SimpleHTTPServer
 Start the installation as described above. On the grub menu screen, press the up arrow to select "Install Fedora".  Then press "e" to edit this option.  You will see a `linux` or `linuxefi` line which boots the install kernel; edit this line to add a kickstart file location after the directive `inst.ks`.  If we were serving the kickstarter file on the network with SimpleHTTPServer as above, for example, we would do this:
 
 ```
-<<<<<<< HEAD
-linuxefi /images/pxeboot/vmlinuz inst.stage2=hd:LABEL=Fedora-Atomic-24-x86_64 inst.ks=http://192.168.1.105:8000/atomic-ks.cfg quiet
-=======
-linuxefi /images/pxeboot/vmlinuz inst.ks=http://192.168.1.105:8000/atomic-ks.cfg inst.stage2=hd:LABEL=Fedora-Atomic-24-x86_64 quiet
->>>>>>> master
+linuxefi /images/pxeboot/vmlinuz inst.stage2=hd:LABEL=Fedora-Atomic-25-x86_64 inst.ks=http://192.168.1.105:8000/atomic-ks.cfg quiet
 ```
 
 See the [Fedora Installation guide](https://docs.fedoraproject.org/en-US/Fedora/24/html/Installation_Guide/chap-kickstart-installations.html) for more information on how to start a kickstart installation.

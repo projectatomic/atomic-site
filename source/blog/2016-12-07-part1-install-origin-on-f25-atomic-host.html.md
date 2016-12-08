@@ -29,6 +29,8 @@ try out OpenShift on a single node instead, you can set up OpenShift with
 the `oc cluster up` command, which we will detail in a later blog
 post.
 
+READMORE
+
 This first post will cover just the installation. In a later blog post
 we'll take the system we just installed for a spin and make sure
 everything is working as expected.

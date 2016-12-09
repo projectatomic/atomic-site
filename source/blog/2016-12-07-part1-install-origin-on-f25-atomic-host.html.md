@@ -210,8 +210,10 @@ service called [xip.io](http://xip.io/) so that we don't have to set up
 wildcard DNS just for this example.
 
 So for our example, a domain like `app1.54.204.208.138.xip.io` will
-resolve to IP address `54.204.208.138`. A domain like
-`app2.54.204.208.138.xip.io` will also resolve to that same address.
+resolve to IP address `54.204.208.138`. This needs to be the address
+of one of the worker nodes, because there will be no routers running
+on the master node. A domain like
+`app2.54.204.208.138.xip.io` will also resolve to the same address.
 These requests will come in to node `54.204.208.138`, which is one of
 our worker nodes where a *router* (HAProxy) is running. HAProxy will
 route the traffic based on the domain used (`app1` vs `app2`, etc) to

@@ -31,7 +31,8 @@ The Fedora Atomic team is hard at work on getting a solution out for Kubernetes
 users and expect to have one before the holidays.  If you are able to help with
 building or testing, please speak up on the Atomic Development mailing list; we
 could use your help.  If you can't help, wait for us to publish documentation
-of the new containerized Kubernetes before you rebase to 25.
+of the new containerized Kubernetes before you rebase to 25.  Bug fixes are
+still available for the Fedora 24 tree.
 
 If you use Fedora Atomic, but do not use Kubernetes, this issue does not affect
 you.  If you are using Kubernetes based on a containerized install already

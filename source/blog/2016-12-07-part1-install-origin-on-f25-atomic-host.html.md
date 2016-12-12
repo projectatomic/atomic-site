@@ -364,8 +364,8 @@ To Be Continued
 
 In this blog we brought up an OpenShift Origin cluster on three servers
 that were running Fedora 25 Atomic Host. We reviewed the inventory file
-in detail to explain exactly what options were used and why. In a future
-blog post we'll take the system for a spin, inspect some of the
+in detail to explain exactly what options were used and why. In a [part 2](blog/2016/12/part2-install-origin-on-f25-atomic-host/),
+we'll take the system for a spin, inspect some of the
 running system that was generated from the installer, and spin up an
 application that will run on and be hosted by the Origin cluster.
 
@@ -376,6 +376,8 @@ them in one of the following places:
 * The [Fedora Cloud mailing list](https://lists.fedoraproject.org/admin/lists/cloud.lists.fedoraproject.org/)
 * The #atomic channel on [IRC.freenode.net](https://freenode.net/)
 * In the comments below
+
+[Click to continue on to Part 2](blog/2016/12/part2-install-origin-on-f25-atomic-host/)
 
 Cheers!
 

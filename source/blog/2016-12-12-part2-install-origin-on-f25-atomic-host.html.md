@@ -1,7 +1,7 @@
 ---
 title: 'Installing an OpenShift Origin Cluster on Fedora 25 Atomic Host: Part 2'
 author: dustymabe
-date: 2016-12-12 15:23:32 UTC
+date: 2016-12-12 16:00:00 UTC
 tags: fedora, atomic, origin, openshift, kubernetes
 published: true
 comments: true
@@ -10,7 +10,7 @@ comments: true
 Introduction
 ============
 
-In [part 1](http://www.projectatomic.io/blog/2016/12/part1-install-origin-on-f25-atomic-host/)
+In [part 1](/blog/2016/12/part1-install-origin-on-f25-atomic-host/)
 of this series, we used the [OpenShift Ansible
 Installer](https://github.com/openshift/openshift-ansible) to install
 [Openshift Origin](https://github.com/openshift/origin) on three servers
@@ -83,36 +83,36 @@ IP address from the `master,etcd` node and that its status contains
 `SchedulingDisabled`. This is because we specified
 `openshift_schedulable=false` for this node when we did the install in
 [part
-1](http://www.projectatomic.io/blog/2016/12/part1-install-origin-on-f25-atomic-host/).
+1](/blog/2016/12/part1-install-origin-on-f25-atomic-host/).
 
 Now let's check the pods, services, and routes that are running in the
 default namespace:
 
 ```
-$ oc get pods -o wide 
+$ oc get pods -o wide
 NAME                       READY     STATUS    RESTARTS   AGE       IP             NODE
 docker-registry-3-hgwfr    1/1       Running   0          9h        10.129.0.3     10.0.156.20
 registry-console-1-q48xn   1/1       Running   0          9h        10.129.0.2     10.0.156.20
 router-1-nwjyj             1/1       Running   0          9h        10.0.156.20    10.0.156.20
 router-1-o6n4a             1/1       Running   0          9h        10.0.251.101   10.0.251.101
-$ 
+$
 $ oc get svc
 NAME               CLUSTER-IP       EXTERNAL-IP   PORT(S)                   AGE
 docker-registry    172.30.2.89      <none>        5000/TCP                  9h
 kubernetes         172.30.0.1       <none>        443/TCP,53/UDP,53/TCP     9h
 registry-console   172.30.147.190   <none>        9000/TCP                  9h
 router             172.30.217.187   <none>        80/TCP,443/TCP,1936/TCP   9h
-$ 
+$
 $ oc get routes
 NAME               HOST/PORT                                        PATH      SERVICES           PORT               TERMINATION
 docker-registry    docker-registry-default.54.204.208.138.xip.io              docker-registry    5000-tcp           passthrough
 registry-console   registry-console-default.54.204.208.138.xip.io             registry-console   registry-console   passthrough
 ```
 
-_**NOTE:** If there are any pods that have failed to run you can try to
+_**NOTE:** If there are any pods that have failed to run, you can try to
 debug with the `oc status -v`, and `oc describe pod/<podname>` commands.
-For any failed deployments you can retry with the `oc deploy <deploymentname> --retry`
-command._ 
+You can retry any failed deployments with the `oc deploy <deploymentname> --retry`
+command._
 
 We can see that we have a pod, service, and route for both a
 `docker-registry` and a `registry-console`. The docker registry is where
@@ -210,8 +210,8 @@ image known as `centos/ruby-22-centos7`. Might as well give it a spin:
 $ oc new-app centos/ruby-22-centos7~https://github.com/openshift/ruby-ex.git
 --> Found Docker image ecd5025 (10 hours old) from Docker Hub for "centos/ruby-22-centos7"
 
-	Ruby 2.2 
-	-------- 
+	Ruby 2.2
+	--------
 	Platform for building and running Ruby 2.2 applications
 
 	Tags: builder, ruby, ruby22
@@ -253,12 +253,12 @@ balanced and discoverable.
 After a short time, we check the status of the application:
 
 ```
-$ oc status 
+$ oc status
 In project myproject on server https://54.175.0.44:8443
 
 svc/ruby-ex - 172.30.213.94:8080
   dc/ruby-ex deploys istag/ruby-ex:latest <-
-	bc/ruby-ex source builds https://github.com/openshift/ruby-ex.git on istag/ruby-22-centos7:latest 
+	bc/ruby-ex source builds https://github.com/openshift/ruby-ex.git on istag/ruby-22-centos7:latest
 	  build #1 running for 26 seconds
 	deployment #1 waiting on image or update
 
@@ -277,12 +277,12 @@ waiting for the build to finish before attempting to run.
 After some more time:
 
 ```
-$ oc status 
+$ oc status
 In project myproject on server https://54.175.0.44:8443
 
 svc/ruby-ex - 172.30.213.94:8080
   dc/ruby-ex deploys istag/ruby-ex:latest <-
-	bc/ruby-ex source builds https://github.com/openshift/ruby-ex.git on istag/ruby-22-centos7:latest 
+	bc/ruby-ex source builds https://github.com/openshift/ruby-ex.git on istag/ruby-22-centos7:latest
 	deployment #1 running for 6 seconds
 
 1 warning identified, use 'oc status -v' to see details.
@@ -293,12 +293,12 @@ The build is now done and the deployment is running.
 And after more time:
 
 ```
-$ oc status 
+$ oc status
 In project myproject on server https://54.175.0.44:8443
 
 svc/ruby-ex - 172.30.213.94:8080
   dc/ruby-ex deploys istag/ruby-ex:latest <-
-	bc/ruby-ex source builds https://github.com/openshift/ruby-ex.git on istag/ruby-22-centos7:latest 
+	bc/ruby-ex source builds https://github.com/openshift/ruby-ex.git on istag/ruby-22-centos7:latest
 	deployment #1 deployed about a minute ago - 1 pod
 
 1 warning identified, use 'oc status -v' to see details.

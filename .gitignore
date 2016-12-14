@@ -19,3 +19,6 @@
 
 # Ignore emacs .. erm its backup files..
 *~
+
+# Ignore swp file for vim
+*.swp

@@ -5,7 +5,7 @@ operating system around principles of "immutable infrastructure",
 using the LDK (Linux, Docker, Kubernetes) stack.  
 
 Many of the components of Project Atomic are upstream components of
-[OpenShift Origin v3]().
+[OpenShift Origin v3](https://www.openshift.org/).
 
 The primary building block of Project Atomic is the "Atomic Host", a lightweight
 container OS which implements these ideas.  Atomic Hosts are immutable, since

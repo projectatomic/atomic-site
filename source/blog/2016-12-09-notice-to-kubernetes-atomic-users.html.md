@@ -7,8 +7,7 @@ published: true
 comments: true
 ---
 
-**TL;DR**: If you are a production user of Kubernetes on Fedora Atomic Host, please
-don't rebase to Fedora Atomic 25 yet.
+**UPDATE**: This issue has been resolved.  Please see [the update blog post]()
 
 One of the features of the [Fedora Atomic Host 25](/blog/2016/11/fedora-atomic-25-released/)
 release was decoupling Kubernetes

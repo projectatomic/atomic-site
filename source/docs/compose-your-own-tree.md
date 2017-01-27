@@ -16,36 +16,39 @@ Project Atomic hosts are built from standard RPM packages which have been compos
 
 The tree compose and hosting functions can both be performed in a container, if you choose. The simple Dockerfile below will suffice, or you may use a similarly-configured Fedora or CentOS machine:
 
-````
-FROM fedora:21
+```
+FROM fedora:25
 
 # install needed packages
 
-RUN yum install -y rpm-ostree git polipo; \
-yum clean all
+RUN dnf install -y rpm-ostree git python; \
+dnf clean all
 
-# create working dir, clone fedora and centos atomic definitions
+# create working dir, clone fedora atomic definitions
 
-RUN mkdir -p /home/working; \
-cd /home/working; \
-git clone https://github.com/CentOS/sig-atomic-buildscripts; \
-git clone https://git.fedorahosted.org/git/fedora-atomic.git; \
+RUN mkdir -p /srv; \
+cd /srv; \
+git clone https://pagure.io/fedora-atomic.git; \
 
 # create and initialize repo directory
 
-mkdir -p /srv/rpm-ostree/repo && \
-cd /srv/rpm-ostree/ && \
-ostree --repo=repo init --mode=archive-z2
+mkdir -p /srv/repo && \
+cd /srv/ && \
+ostree --repo=repo init --mode=archive-z2; \
+
+# make a cache dir
+
+mkdir -p /srv/cache
 
 # expose default SimpleHTTPServer port, set working dir
 
 EXPOSE 8000
-WORKDIR /home/working
+WORKDIR /srv
 
-# start web proxy and SimpleHTTPServer
+# start SimpleHTTPServer
 
-CMD polipo; pushd /srv/rpm-ostree/repo; python -m SimpleHTTPServer; popd
-````
+CMD python -m SimpleHTTPServer
+```
 
 ## Build, Run and Enter the Container
 
@@ -61,34 +64,23 @@ docker exec -it atomicrepo bash
 
 The Dockerfile above pulls in the definition files for Atomic CentOS and Atomic Fedora, which may be modified to produce a custom tree. The tree manifest syntax is documented [here](https://github.com/projectatomic/rpm-ostree/blob/master/docs/manual/treefile.md). 
 
-For example, here's how to produce a version of the Atomic Fedora 21 tree that adds the `fortune` command:
+For example, here's how to produce a version of the Atomic Fedora 25 tree that adds the `fortune` command:
 
 ````
 cd fedora-atomic
 
-git checkout f21
+git checkout f25
 
 vi fedora-atomic-docker-host.json
 ````
 
 Now, in the `"packages":` section of `fedora-atomic-docker-host.json`, and insert a line like this: `"fortune-mod",`. 
 
-Currently, the fedora-atomic git repo is missing the yum repository file for Fedora's updates, so we'll want to add this as well. Change the line `"repos": ["fedora-21"],` to `"repos": ["fedora-21", "updates"],` and then save and close the file. 
-
-Finally, we need to download that Fedora updates repository file into the `fedora-atomic` directory, and replace occurrences of `$releasever` in the file with `21` (important for when the release version of your composer does not match the release version of the tree you're composing). 
-
-````
-curl -o fedora-21-updates.repo https://git.fedorahosted.org/cgit/fedora-repos.git/plain/fedora-updates.repo?h=f21
-sed -i 's/\$releasever/21/g' fedora-21-updates.repo
-````
-
 Next, compose the new tree with the command:
 
 ````
-rpm-ostree compose tree  --proxy=http://127.0.0.1:8123  --repo=/srv/rpm-ostree/repo fedora-atomic-docker-host.json
+rpm-ostree compose tree  --cachedir=/srv/cache  --repo=/srv/repo fedora-atomic-docker-host.json
 ````
-
-The `--proxy` argument is optional but strongly recommended -- with this option you can avoid continually redownloading the packages every compose. The Dockerfile above provides for [Polipo](http://www.pps.univ-paris-diderot.fr/~jch/software/polipo/) as a proxy.
 
 ## Configure Your Atomic Host with the New Repository
 
@@ -97,7 +89,7 @@ To configure an Atomic host to receive updates from your build machine, run a pa
 ````
 sudo ostree remote add withfortune http://$YOUR_IP:8000/repo --no-gpg-verify
 
-sudo rpm-ostree rebase withfortune:fedora-atomic/f21/x86_64/docker-host
+sudo rpm-ostree rebase withfortune:fedora-atomic/25/x86_64/docker-host
 ````
 
 Once the rebase operation is complete, run `sudo systemctl reboot` to reboot into your updated tree.

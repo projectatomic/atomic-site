@@ -20,9 +20,9 @@ At the end of this guide, you will have:
 ### Used in this guide
 |  |  |
 |---|---|
-| Platform Host OS | Fedora 21 Workstation |
+| Platform Host OS | Fedora 25 Workstation |
 | Virtualization | KVM with virt-manager |
-| Atomic Host OS | Fedora 22 Atomic v 22.18 |
+| Atomic Host OS | Fedora 25 Atomic v 25.42 |
 | Additional Storage | 10G per Atomic host |
 
 #### Installing using virt-manager

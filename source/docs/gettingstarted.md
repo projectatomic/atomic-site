@@ -22,7 +22,7 @@ At the end of this guide, you will have:
 |---|---|
 | Platform Host OS | Fedora 25 Workstation |
 | Virtualization | KVM with virt-manager |
-| Atomic Host OS | Fedora 25 Atomic v 25.42 |
+| Atomic Host OS | Fedora 25 Atomic v 25.52 |
 | Additional Storage | 10G per Atomic host |
 
 #### Installing using virt-manager
@@ -49,13 +49,12 @@ Launch an Atomic host to act as the master node for the cluster.  We'll be creat
 
 As a good practice, update to the latest available Atomic tree.
 
-    [fedora@atomic-master ~]$ sudo atomic host upgrade
-    [fedora@atomic-master ~]$ sudo systemctl reboot
+    [fedora@atomic-master ~]$ sudo atomic host upgrade --reboot
 
 ### Local Docker registry
 The Atomic cluster will use a local Docker registry mirror for caching with a local volume for persistence.  You may need to look at the amount of storage available to the Docker storage pool on the master host.  We don't want the container recreated every time the service gets restarted, so we'll create the container locally then set up a systemd unit file that will only start and stop the container.
 
-Create a named container from the Docker Hub registry image, exposing the standard Docker Hub port from the container via the host.  We're using a local host directory as a persistence layer for the images that get cached for use.  The other environment variables passed in to the registry set the source registry.  ~~We're still using the Hub as the source, but you could set this to use a private registry instead of the public registry.~~
+Create a named container from the Docker Hub registry image, exposing the standard Docker Hub port from the container via the host.  We're using a local host directory as a persistence layer for the images that get cached for use.  The other environment variables passed in to the registry set the source registry.
 
     [fedora@atomic-master~]$ sudo docker create -p 5000:5000 \
     -v /var/lib/local-registry:/var/lib/registry \
@@ -65,6 +64,7 @@ Create a named container from the Docker Hub registry image, exposing the standa
 
 We need to change the SELinux context on the directory that docker created for our persistence volume.
 
+    [fedora@atomic-master ~]$ sudo mkdir -p /var/lib/local-registry
     [fedora@atomic-master ~]$ sudo chcon -Rvt svirt_sandbox_file_t /var/lib/local-registry
 
 Since we want to make sure the local cache is always up, we'll create a systemd unit file to start it and make sure it stays running.  Reload the systemd daemon and start the new local-registry service.
@@ -89,11 +89,42 @@ Since we want to make sure the local cache is always up, we'll create a systemd 
     [fedora@atomic-master ~]$ sudo systemctl start local-registry
 
 ### Configuring Kubernetes master
+
+#### Configure etcd
+
 We're using a single etcd server, not a replicating cluster in this guide.  This makes etcd simple, we just need to listen for client connections, then enable and start the daemon with all the rest of the Kubernetes services.  For simplicity, we'll have etcd listen on all IP addresses.  The official port for etcd clients is 2379, but we'll add 4001 as well since that was widely used in guides to this point.
 
     [fedora@atomic-master ~]$ sudo vi /etc/etcd/etcd.conf
     ETCD_LISTEN_CLIENT_URLS="http://0.0.0.0:2379,http://0.0.0.0:4001"
     ETCD_ADVERTISE_CLIENT_URLS="http://0.0.0.0:2379,http://0.0.0.0:4001"
+
+#### Generating certificates
+
+Multiple Kubernetes services rely on certificates for authentication. There are lots of ways to configure this aspect of a cluster, the following method is based on [these steps](https://kubernetes.io/docs/admin/authentication/#easyrsa) from the upstream Kubernetes project.
+
+Download, unpack, and initialize the patched version of easyrsa3.
+
+    [fedora@atomic-master ~]$ curl -L -O https://storage.googleapis.com/kubernetes-release/easy-rsa/easy-rsa.tar.gz
+    [fedora@atomic-master ~]$ tar xzf easy-rsa.tar.gz
+    [fedora@atomic-master ~]$ cd easy-rsa-master/easyrsa3
+    [fedora@atomic-master ~]$ ./easyrsa init-pki
+
+Generate a CA. (--batch set automatic mode. --req-cn default CN to use.)
+
+    [fedora@atomic-master ~]$ MASTER_IP=192.168.122.10
+    [fedora@atomic-master ~]$ ./easyrsa --batch "--req-cn=${MASTER_IP}@`date +%s`" build-ca nopass
+
+Generate server certificate and key. (build-server-full [filename]: Generate a keypair and sign locally for a client or server)
+
+    [fedora@atomic-master ~]$ ./easyrsa --subject-alt-name="IP:${MASTER_IP}" build-server-full server nopass
+
+Copy pki/ca.crt, pki/issued/kubernetes-master.crt, and pki/private/kubernetes-master.key to `/etc/kubernetes/certs`.
+
+    [fedora@atomic-master ~]$ sudo mkdir /etc/kubernetes/certs
+    [fedora@atomic-master ~]$ for i in {pki/ca.crt,pki/issued/server.crt,pki/private/server.key}; do sudo cp $i /etc/kubernetes/certs; done
+    [fedora@atomic-master ~]$ sudo chown -R kube:kube /etc/kubernetes/certs
+
+#### Configure services
 
 For Kubernetes, there's a few config files in /etc/kubernetes we need to set up for this host to act as a master.  First off is the general config file used by all of the services.  Then we'll add service specific variables to those service config files.
 
@@ -111,8 +142,8 @@ We'll be setting up the etcd store that Kubernetes will use.  We're using a sing
     # Comma separated list of nodes in the etcd cluster
     KUBE_ETCD_SERVERS="--etcd_servers=http://192.168.122.10:2379"
 
-    # How the replication controller and scheduler find the kube-apiserver
-    KUBE_MASTER="--master=http://192.168.122.10:8080"
+    # How the controller-manager, scheduler, and proxy find the kube-apiserver
+    KUBE_MASTER="--master=http://192.168.122.10:443"
 
 #### Apiserver service configuration
 The apiserver needs to be set to listen on all IP addresses, instead of just localhost.
@@ -121,11 +152,23 @@ The apiserver needs to be set to listen on all IP addresses, instead of just loc
     # The address on the local server to listen to.
     KUBE_API_ADDRESS="--address=0.0.0.0"
 
-
- If you need to modify the set of IPs that Kubernetes assigns to services, change the KUBE_SERVICE_ADDRESSES value. Since this guide is using the 192.168.122.0/24 and 172.16.0.0/12 networks, we can leave the default.  This address space needs to be unused elsewhere, but doesn't need to be reachable from either of the other networks.
+If you need to modify the set of IPs that Kubernetes assigns to services, change the KUBE_SERVICE_ADDRESSES value. Since this guide is using the 192.168.122.0/24 and 172.16.0.0/12 networks, we can leave the default.  This address space needs to be unused elsewhere, but doesn't need to be reachable from either of the other networks.
 
     # Address range to use for services
     KUBE_SERVICE_ADDRESSES="--portal_net=10.254.0.0/16"
+
+We'll also add parameters for the certificates we generated earlier.
+
+    # Add your own!
+    KUBE_API_ARGS="--tls-cert-file=/etc/kubernetes/certs/server.crt --tls-private-key-file=/etc/kubernetes/certs/server.key --client-ca-file=/etc/kubernetes/certs/ca.crt --service-account-key-file=/etc/kubernetes/certs/server.crt"
+
+#### Controller-manager service configuration
+
+The controller-manager also needs parameters for the certificates we generated.
+
+    [fedora@atomic-master ~]$ sudo vi /etc/kubernetes/controller-manager
+    # Add your own!
+    KUBE_CONTROLLER_MANAGER_ARGS="--service-account-private-key-file=/etc/kubernetes/certs/server.key --root-ca-file=/etc/kubernetes/certs/ca.crt"
 
 Enable and start the Kubernetes services.
 
@@ -146,16 +189,16 @@ Flanneld provides a tunneled network configuration via etcd.  To push the desire
 
 We'll create a keyname specific to this cluster to store the network configuration.  While we're using a single etcd server in a single cluster for this example, setting non-overlapping keys allows us to have a multiple flannel configs for several Atomic clusters.
 
-    [fedora@atomic-master ~]$ curl -L http://localhost:2379/v2/keys/atomic01/network/config -XPUT --data-urlencode value@flanneld-conf.json
+    [fedora@atomic-master ~]$ curl -L http://localhost:2379/v2/keys/atomic.io/network/config -XPUT --data-urlencode value@flanneld-conf.json
 
 Just to make sure we have the right config, we'll pull it via curl and parse the JSON return.
 
-    [fedora@atomic-master ~]$ curl -L http://localhost:2379/v2/keys/atomic01/network/config | python -m json.tool
+    [fedora@atomic-master ~]$ curl -L http://localhost:2379/v2/keys/atomic.io/network/config | python -m json.tool
     {
         "action": "get",
         "node": {
             "createdIndex": 11,
-            "key": "/atomic01/network/config",
+            "key": "/atomic.io/network/config",
             "modifiedIndex": 11,
             "value": "{\n  \"Network\": \"172.16.0.0/12\",\n  \"SubnetLen\": 24,\n  \"Backend\": {\n    \"Type\": \"vxlan\"\n  }\n}\n\n"
         }
@@ -174,42 +217,19 @@ As a good practice, update to the latest available Atomic tree.
 Add the local cache registry running on the master to the docker options that get pulled into the systemd unit file.
 
     [fedora@atomic01 ~]$ sudo vi /etc/sysconfig/docker
-    OPTIONS='--registry-mirror=http://192.168.122.10:5000 --selinux-enabled'
+    OPTIONS='--registry-mirror=http://192.168.122.10:5000 --selinux-enabled --log-driver=journald'
 
 ### Configuring Docker to use the Flannel overlay
 To set up flanneld, we need to tell the local flannel service where to find the etcd service serving up the config. We also give it the right key to find the networking values for this cluster.
 
     [fedora@atomic01 ~]$ sudo vi /etc/sysconfig/flanneld
     # etcd url location.  Point this to the server where etcd runs
-    FLANNEL_ETCD="http://192.168.122.10:2379"
+    FLANNEL_ETCD_ENDPOINTS="http://192.168.122.10:2379"
 
     # etcd config key.  This is the configuration key that flannel queries
     # For address range assignment
-    FLANNEL_ETCD_KEY="/atomic01/network"
+    FLANNEL_ETCD_PREFIX="/atomic.io/network"
 
-
-To get docker using the flanneld overlay, we'll change the networking config to use the flanneld provided bridge IP and MTU settings.  We'll also change the unit definition to wait for flanneld to start.  That way the environment file created by flanneld is available and will provide a usable address for the docker0 bridge.
-
-Using a systemd drop-in file allows us to override the distributed systemd unit file without making direct modifications.  The blank `ExecStart=` line erases all previously defined `ExecStart` directives and only subsequent `ExecStart` lines will be used by systemd.
-
-    [fedora@atomic01 ~]$ sudo mkdir -p /etc/systemd/system/docker.service.d/
-    [fedora@atomic01 ~]$ sudo vi /etc/systemd/system/docker.service.d/10-flanneld-network.conf
-
-    [Unit]
-    After=flanneld.service
-    Requires=flanneld.service
-
-    [Service]
-    EnvironmentFile=/run/flannel/subnet.env
-    ExecStartPre=-/usr/sbin/ip link del docker0
-    ExecStart=
-    ExecStart=/usr/bin/docker daemon \
-          --bip=${FLANNEL_SUBNET} \
-          --mtu=${FLANNEL_MTU} \
-          $OPTIONS \
-          $DOCKER_STORAGE_OPTIONS \
-          $DOCKER_NETWORK_OPTIONS \
-          $INSECURE_REGISTRY
 
 ### Configuring Kubernetes nodes
 
@@ -228,7 +248,7 @@ The address entry in the kubelet config file must match the KUBLET_ADDRESSES ent
 Set the location of the etcd server, here we've got the single service on the master.
 
     [fedora@atomic01 ~]$ sudo vi /etc/kubernetes/config
-    # How the replication controller and scheduler find the kube-apiserver
+    # How the controller-manager, scheduler, and proxy find the kube-apiserver
     KUBE_MASTER="--master=http://192.168.122.10:8080"
 
 If you created the drop-in, reload systemd and then enable the node services.  Reboot the node to make sure everything starts on boot correctly.
@@ -294,20 +314,20 @@ We'll create a simple nginx pod definition on the master.  You can use JSON or Y
 To get the pod up and running, use `kubectl create`
 
     [fedora@atomic-master ~]$ kubectl create -f kube-nginx.yml
-    pods/www
+    pod "www" created
 
 
-To check the status of the containers using `kubectl get`.  At this point, the Nginx containers will be downloaded and running on your nodes.
+To check the status of the containers using `kubectl get`.  At this point, the Nginx container will be downloaded and running on your nodes.
 
     [fedora@atomic-master ~]$ kubectl get pod
-    POD       IP            CONTAINER(S)   IMAGE(S)   HOST                            LABELS    STATUS    CREATED      MESSAGE
-    www       172.16.59.2                             192.168.122.12/192.168.122.12   <none>    Running   48 seconds
-                            nginx          nginx                                                Running   18 seconds
+    NAME      READY     STATUS    RESTARTS   AGE
+    www       1/1       Running   0          1m
 
-Once you see the pod status is Running, you can point a web browser at the host Kubernetes created the container on.  Use port 8080, since that was the host port we connected to the container port 80 in the pod definition.  You should see the nginx welcome page.
+Once you see the pod status is Running, you can check to see which node it's running on.
 
-You've now created and scheduled your first kubernetes pod.  You can explore the kubernetes documentation for more information on how to build pods and services.   This example isn't particularly complex, if you'd like to explore further you can look at the Kubernetes upstream project publishes a Redis guestbook example that works to show off most of the components and use cases.  You can download just the JSON files from the [ Github repo ](https://github.com/GoogleCloudPlatform/kubernetes/tree/master/examples/guestbook) to the master Atomic host.
+    [fedora@atomic-master ~]$ kubectl describe pods www | grep Node
+    Node:		192.168.122.11/192.168.122.11
 
-The upstream guestbook example does require the SkyDNS configuration from the Kubernetes project.  You will need to modify the kubelet config on each node to add the cluster DNS settings and restart before setting up the guestbook.
+Point a web browser at the host Kubernetes created the container on. Use port 8080, since that was the host port we connected to the container port 80 in the pod definition. You should see the nginx welcome page.
 
-You can also explore using Nulecule examples with the `atomic run` command.  The atomicapp team has published a few Nulecule based apps to the Docker Hub under the projectatomic account.  You can run the guestbook atomicapp example by running `atomic run projectatomic/guestbook-go` on the master node.
+You've now created and scheduled your first kubernetes pod.  You can explore the kubernetes documentation for more information on how to build pods and services, and checkout [these ansible scripts](https://github.com/kubernetes/contrib/tree/master/ansible) for a fuller-featured cluster that includes kubernetes addons such as dns.

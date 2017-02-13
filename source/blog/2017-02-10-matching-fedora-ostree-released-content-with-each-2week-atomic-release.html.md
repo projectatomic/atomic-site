@@ -1,8 +1,8 @@
 ---
-title: 'Matching Fedora OSTree Released Content With Each 2 Week Atomic Release' 
+title: 'Matching Fedora OSTree Released Content With Each 2 Week Atomic Release'
 author: dustymabe
-date: 2017-02-10 15:23:32 UTC
-tags: fedora, atomic
+date: 2017-02-13 12:00:00 UTC
+tags: fedora, atomic, ostree
 published: true
 comments: true
 ---
@@ -19,14 +19,14 @@ READMORE
 In Fedora we release a new Atomic Host approximately every two weeks. In the
 past this has meant that we bless and ship new ISO, QCOW, and Vagrant images that
 can then be used to install and or start a new Atomic Host server. But
-what if you already have an Atomic Host server up and running? 
+what if you already have an Atomic Host server up and running?
 
 Servers that are already running are configured to get their updates
 directly from the OSTree repo that is sitting on Fedora Infrastructure
 servers. The client will ask ***What is the newest commit for my
 branch/ref?*** and the server will kindly reply with the most recent commit.
 If the client is at an older version then it will start to pull the
-newer commit and will apply the update. 
+newer commit and will apply the update.
 
 This is exactly how the client is supposed to behave, but one problem
 with the way we have been doing things in the past is that we have
@@ -37,7 +37,7 @@ This has the side effect of meaning that users can get content as soon
 as it has been created, but it also means that the two week release
 process where we perform testing and validation really means nothing
 for these users, as they will get something before we ever did testing
-on it. 
+on it.
 
 We have decided to slow down the cadence of the
 `fedora-atomic/25/x86_64/docker-host` ref within the OSTree
@@ -56,7 +56,7 @@ branch/ref at any time using:
 # rpm-ostree rebase fedora-atomic/25/x86_64/updates/docker-host
 ```
 
-As an example, let's say that we have a Fedora Atomic host which is on 
+As an example, let's say that we have a Fedora Atomic host which is on
 the default ref. That ostree will now be updated every two weeks, and only
 every two weeks:
 
@@ -78,7 +78,7 @@ Updating from: fedora-atomic:fedora-atomic/25/x86_64/docker-host
 No upgrade available.
 ```
 
-If you want the daily ostree update instead, as you previously had, you need 
+If you want the daily ostree update instead, as you previously had, you need
 to switch to the _updates_ ref:
 
 ```
@@ -107,10 +107,10 @@ Deployments:
 ```
 
 We hope you are enjoying using Fedora Atomic Host. Please share your
-success or horror stories with us on the 
+success or horror stories with us on the
 [mailing](https://lists.projectatomic.io/mailman/listinfo/atomic-devel)
 [lists](https://lists.fedoraproject.org/admin/lists/cloud.lists.fedoraproject.org/)
-or in IRC: `#atomic` or `#fedora-cloud` on 
+or in IRC: `#atomic` or `#fedora-cloud` on
 [Freenode](https://freenode.net/).
 
 Cheers!

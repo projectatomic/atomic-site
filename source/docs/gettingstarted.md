@@ -134,6 +134,8 @@ For Kubernetes, there's a few config files in /etc/kubernetes we need to set up 
         controller-manager
         scheduler
 
+> Note: Current versions of **CentOS Atomic** have the kubernetes-master pkg removed from the image, to be run from containers. There's info on that here: [wiki.centos.org](https://wiki.centos.org/SpecialInterestGroup/Atomic/ContainerizedMaster).
+
 
 #### Common service configurations
 We'll be setting up the etcd store that Kubernetes will use.  We're using a single local etcd service, so we'll point that at the master on the standard port.  We'll also set up how the services find the apiserver.

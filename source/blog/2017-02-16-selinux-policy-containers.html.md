@@ -1,7 +1,7 @@
 ---
 title: 'Tightening Up SELinux Policy for Containers'
 author: dwalsh
-date: 2017-02-15 18:00:00 UTC
+date: 2017-02-16 14:00:00 UTC
 tags: selinux, docker, atomic, security
 published: true
 comments: true

@@ -1,7 +1,7 @@
 ---
 title: New CentOS Atomic Host with Updated Docker, Kubernetes and Etcd
 author: jbrooks
-date: 2017-02-16 08:00:00 UTC
+date: 2017-02-17 11:00:00 UTC
 tags: kubernetes, docker, etcd, centos
 comments: true
 published: true

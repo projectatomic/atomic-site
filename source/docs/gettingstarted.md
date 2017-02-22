@@ -52,6 +52,9 @@ As a good practice, update to the latest available Atomic tree.
     [fedora@atomic-master ~]$ sudo atomic host upgrade --reboot
 
 ### Local Docker registry
+
+Normally when you want to go up a container docker, uses [Docker Hub](https://hub.docker.com/) images. This's the default. However, you may want your images stay on your own Infrastructure what ensures privacy, availability, speed, ease of integration, and continuous delivery.
+
 The Atomic cluster will use a local Docker registry mirror for caching with a local volume for persistence.  You may need to look at the amount of storage available to the Docker storage pool on the master host.  We don't want the container recreated every time the service gets restarted, so we'll create the container locally then set up a systemd unit file that will only start and stop the container.
 
 Create a named container from the Docker Hub registry image, exposing the standard Docker Hub port from the container via the host.  We're using a local host directory as a persistence layer for the images that get cached for use.  The other environment variables passed in to the registry set the source registry.
@@ -133,6 +136,8 @@ For Kubernetes, there's a few config files in /etc/kubernetes we need to set up 
         apiserver
         controller-manager
         scheduler
+
+> Note: Current versions of **CentOS Atomic** have the kubernetes-master pkg removed from the image, to be run from containers. There's info on that here: [wiki.centos.org](https://wiki.centos.org/SpecialInterestGroup/Atomic/ContainerizedMaster).
 
 
 #### Common service configurations

@@ -27,4 +27,4 @@ We worked with Intel engineers to give their OCI container runtime, [Clear Conta
 
 We're excited to have CRI-O and Clear Containers running together. I have created a small demo of this integration to show how the kubelet is seamlessly running pods with Clear Containers underneath:
 
-<iframe width="960" height="720" src="https://www.youtube.com/watch?v=gEBSCesjkvA?rel=0" frameborder="0" allowfullscreen></iframe>
+<iframe width="915" height="480" src="https://www.youtube.com/embed/gEBSCesjkvA" frameborder="0"></iframe>

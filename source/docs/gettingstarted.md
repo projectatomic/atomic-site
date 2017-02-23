@@ -52,6 +52,8 @@ As a good practice, update to the latest available Atomic tree.
     [fedora@atomic-master ~]$ sudo atomic host upgrade --reboot
 
 ### Local Docker registry
+Normally when you want to go up a container docker, uses [Docker Hub](https://hub.docker.com/) images. This's the default. However, you may want your images stay on your own Infrastructure what ensures privacy, availability, speed, ease of integration, and continuous delivery. Configure a local registry is an **optional** procedure, you may want to acquire, and manipulate images from a remote repository.
+
 The Atomic cluster will use a local Docker registry mirror for caching with a local volume for persistence.  You may need to look at the amount of storage available to the Docker storage pool on the master host.  We don't want the container recreated every time the service gets restarted, so we'll create the container locally then set up a systemd unit file that will only start and stop the container.
 
 Create a named container from the Docker Hub registry image, exposing the standard Docker Hub port from the container via the host.  We're using a local host directory as a persistence layer for the images that get cached for use.  The other environment variables passed in to the registry set the source registry.
@@ -62,7 +64,7 @@ Create a named container from the Docker Hub registry image, exposing the standa
     -e REGISTRY_PROXY_REMOTEURL=https://registry-1.docker.io \
     --name=local-registry registry:2
 
-We need to change the SELinux context on the directory that docker created for our persistence volume.
+**Note:** We need to change the SELinux context on the directory that docker created for our persistence volume.
 
     [fedora@atomic-master ~]$ sudo mkdir -p /var/lib/local-registry
     [fedora@atomic-master ~]$ sudo chcon -Rvt svirt_sandbox_file_t /var/lib/local-registry
@@ -134,6 +136,7 @@ For Kubernetes, there's a few config files in /etc/kubernetes we need to set up 
         controller-manager
         scheduler
 
+**Note:** If you've been following this documentation starting from CentOs, it is important want you to know, that current versions of CentOS Atomic have the kubernetes-master pkg removed from the image, to be run from containers. There's info on that here: [instructions on the CentOS wiki](https://wiki.centos.org/SpecialInterestGroup/Atomic/ContainerizedMaster).
 
 #### Common service configurations
 We'll be setting up the etcd store that Kubernetes will use.  We're using a single local etcd service, so we'll point that at the master on the standard port.  We'll also set up how the services find the apiserver.

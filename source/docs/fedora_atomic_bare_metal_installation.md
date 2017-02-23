@@ -7,7 +7,7 @@ Performing a Bare Metal Installation of Fedora Atomic
 Download the **boot.iso** file from [GetFedora.org](https://getfedora.org/atomic/download/) and use it to create installation media. For example, if you run the GNOME desktop, you can use the *Write to disk* capability of the Nautilus file browser to create an installation DVD. Alternatively, you can write the installation ISO image to a USB device with the `dd` command. For example, if you had a USB thumbdrive mounted as /dev/sdb, you might use this command (be careful to get the drive location right):
 
 ```
-dd if=Fedora-Atomic-dvd-x86_64-24-20160712.0.iso of=/dev/sdb
+dd if=Fedora-Atomic-dvd-x86_64-25-20170215.1.iso of=/dev/sdb bs=4M
 ```
 
 These procedures are described in the [Fedora Installation guide](https://docs.fedoraproject.org/en-US/Fedora/24/html/Installation_Guide/sect-preparing-boot-media.html) in the second chapter called *Making media*.
@@ -68,7 +68,7 @@ Fedora 25 Atomic:
     # Create your own OSTree repo locally and mirror the content instead.
     ostreesetup --nogpg --osname=fedora-atomic --remote=fedora-atomic --url=https://dl.fedoraproject.org/pub/fedora/linux/atomic/25/ --ref=fedora-atomic/f25/x86_64/docker-host
 
-There are several other options you can specify in the kickstart file, see *Kickstart Options* in the [Fedora Installation guide](https://docs.fedoraproject.org/en-US/Fedora/24/html/Installation_Guide/chap-kickstart-installations.html), or this [blog post](/2016/10/install-with-kickstart/) which shows a more complex configuration with disk partitioning.
+There are several other options you can specify in the kickstart file, see *Kickstart Options* in the [Fedora Installation guide](https://docs.fedoraproject.org/en-US/Fedora/24/html/Installation_Guide/chap-kickstart-installations.html), or this [blog post](/blog/2016/10/install-with-kickstart/) which shows a more complex configuration with disk partitioning.
 
 After creating the configuration file, you have to ensure that it will be available during the installation. Place the file on hard drive, network, or removable media as described in the [Fedora Installation guide](https://docs.fedoraproject.org/en-US/Fedora/24/html/Installation_Guide/chap-kickstart-installations.html).  As a simple example, if the kickstart file is on another machine in the same network, you could serve it using a simple HTTP server:
 
@@ -86,6 +86,9 @@ linuxefi /images/pxeboot/vmlinuz inst.stage2=hd:LABEL=Fedora-Atomic-25-x86_64 in
 See the [Fedora Installation guide](https://docs.fedoraproject.org/en-US/Fedora/24/html/Installation_Guide/chap-kickstart-installations.html) for more information on how to start a kickstart installation.
 
 With the kickstart file described above, the installation proceeds automatically until Anaconda reboots the system after finishing the installation.  This can be more fully automated if you use a PXEboot server, which can serve up both the OS images and the kickstart file.
+
+There is also a kickstart file in repository [https://pagure.io/fedora-kickstarts](https://pagure.io/fedora-kickstarts/tree/master)
+
 
 ## Updating and Reverting Fedora Atomic
 

@@ -51,7 +51,7 @@ The custom ostree is made available via a simple web server. The following playb
 $ ansible-playbook setup.yml --ask-sudo-pass
 ```
 
-Use `ip addr` to check for the IP Address of the HTTP server.  In the example below, we're running it in a VM, so it's the address of the VM:
+Use `ip addr` to check for the IP Address of the HTTP server.  This needs to be the interface by which your workstations communicates with virtual machines running on it, such as "virbr0" for LibVirt on Linux:
 
 ```
 $ ip addr

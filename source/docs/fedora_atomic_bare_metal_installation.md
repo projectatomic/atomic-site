@@ -18,7 +18,7 @@ Disconnect any drives which you do not need for the installation, power on your 
 
 Once your system has completed booting, the boot screen is displayed:
 
-![Fedora Atomic Boot Screen](boot_screen2.png "Fedora Atomic Boot Screen")
+![Fedora Atomic Boot Screen](boot_screen1.png "Fedora Atomic Boot Screen")
 
 The boot media displays a graphical boot menu with three options:
 

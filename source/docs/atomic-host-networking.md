@@ -16,9 +16,9 @@ Consult the upstream docker documentation for more information about docker [net
 
 Kubernetes addresses these multi-host container communication issues with the concepts of pods and services. 
 
-A kubernetes [pod](https://github.com/GoogleCloudPlatform/kubernetes/blob/master/docs/pods.md) corresponds to a colocated group of applications running with a shared context. It may contain one or more applications which are relatively tightly coupled -- in a pre-container world, they would have executed on the same physical or virtual host.
+A kubernetes [pod](https://kubernetes.io/docs/user-guide/pods/) corresponds to a colocated group of applications running with a shared context. It may contain one or more applications which are relatively tightly coupled -- in a pre-container world, they would have executed on the same physical or virtual host.
 
-Kubernetes gives every pod its own IP address allocated from an internal network, but since pods can fail and be scheduled to different nodes, these addresses will likely change over time. [Services](https://github.com/GoogleCloudPlatform/kubernetes/blob/master/docs/services.md) provide a single, stable name and address for applications spanning kubernetes pods.
+Kubernetes gives every pod its own IP address allocated from an internal network, but since pods can fail and be scheduled to different nodes, these addresses will likely change over time. [Services](https://kubernetes.io/docs/user-guide/services/) provide a single, stable name and address for applications spanning kubernetes pods.
 
 In Kubernetes, every machine in the cluster is assigned a full subnet, a model intended to reduce the complexity of doing port mapping, but which can prove challenging to implement in many network environments. Atomic hosts include [flannel](https://github.com/coreos/flannel/blob/master/README.md), which provides an overlay network that gives a subnet to each machine in a kubernetes cluster.
 

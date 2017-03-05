@@ -21,7 +21,7 @@ Most image authors will find that using a `Dockerfile` is a much easier way to r
 an image.  A `Dockerfile` is made up of <i>instructions</i>, several of which will be discussed in this guide.
 
 You can find the complete `Dockerfile` instruction reference
-[here](http://docs.docker.io/en/latest/reference/builder/#id5).
+[here](https://docs.docker.com/engine/reference/builder/).
 
 ## Use `MAINTAINER`
 
@@ -96,7 +96,7 @@ software to use your image by explicitly declaring the ports your software needs
 * Exposed ports will be linked when you link one container to another
 
 For more information about ports and docker, please check out the 
-[docker documentation](http://docs.docker.io/en/latest/use/port_redirection/).
+[docker documentation](https://docs.docker.com/engine/reference/commandline/port/).
 
 ## Use Volumes Appropriately
  
@@ -126,7 +126,7 @@ We can share the volumes from this container with another container:
 
 In `ContainerB`, we will see `/var/volume1` from `ContainerA`.  For more information about sharing
 volumes, please check out the 
-[docker documentation](http://docs.docker.io/en/latest/use/working_with_volumes/)
+[docker documentation](https://docs.docker.com/engine/tutorials/dockervolumes/#mount-a-shared-storage-volume-as-a-data-volume)
 
 ### When to Use Volumes
 

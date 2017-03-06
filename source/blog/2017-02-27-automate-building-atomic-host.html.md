@@ -11,6 +11,8 @@ tags: atomic, fedora, ansible, automation, ostree
 
 One of the primary benefits to Atomic Host and OSTree has been the ability to "configure once, deploy many times" using custom OSTree images. But the process for doing so wasn't streamlined or well-documented. I'm helping change that. I'm going to describe how to build atomic host in automated way. At the end of the article you'll be able to create VM from QCOW2 image which is going to boot your own OSTree.  The VM can also be used for testing Atomic Host releases (please feel free to [open an issue if you find anything](https://pagure.io/atomic-wg/issues)).
 
+READMORE
+
 The procedure and Ansible playbook below will enable you to create your own Atomic Host OSTree image. This is the first step in creating your own "distributions" of Atomic Host to install on your cloud servers. Note that it will install a bunch of requirements on your local server, as well as using system resources heavily. As such, you may want to run it on a development machine instead of your personal laptop.
 
 If you just want to compose an ostree, and don't need the playbook automation or testing, see [the documentation for composing ostrees](http://www.projectatomic.io/docs/compose-your-own-tree/).

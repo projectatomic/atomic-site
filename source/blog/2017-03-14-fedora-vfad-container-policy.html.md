@@ -1,25 +1,25 @@
 ---
 title: Fedora VFAD about Container Guidelines
 author: jberkus
-date: 2017-03-13 12:00:00 UTC
+date: 2017-03-14 20:00:00 UTC
 tags: fedora, containers, FLIBS, docker
 published: true
 comments: true
 ---
 
-The [Fedora Atomic Working Group](https://pagure.io/atomic-wg) had our second [Virtual Fedora Activity Day](https://pagure.io/atomic-wg/issue/238) (VFAD) last Friday in order to resolve a [number of issues and policy questions](https://pagure.io/atomic-wg/roadmap?status=Open&no_stones=&milestone=2017-03-10+VFAD) with the [Container Guidelines](https://fedoraproject.org/wiki/Container:Guidelines). Our decisions will be of interest to anyone submitting software to the [Fedora Layered Image Build Service](https://docs.pagure.org/releng/layered_image_build_service.html) (FLIBS), as well as anyone who runs their own public open source registry.  Among those we discussed were versioning, labeling requirements, help files, volumes and systemd in containers.
+The [Fedora Atomic Working Group](https://pagure.io/atomic-wg) had our second [Virtual Fedora Activity Day](https://pagure.io/atomic-wg/issue/238) (VFAD) last Friday in order to resolve a [number of issues and policy questions](https://pagure.io/atomic-wg/roadmap?status=all&milestone=2017-03-10+VFAD) with the [Container Guidelines](https://fedoraproject.org/wiki/Container:Guidelines). Our decisions will be of interest to anyone submitting software to the [Fedora Layered Image Build Service](https://docs.pagure.org/releng/layered_image_build_service.html) (FLIBS), as well as anyone who runs their own public open source registry.  Among those we discussed were versioning, labeling requirements, help files, volumes and systemd in containers.
 
 READMORE
 
-VFADs are an innovation of the Atomic WG.  Regular [Fedora Activity Days](https://fedoraproject.org/wiki/Fedora_Activity_Day_-_FAD) (FADs), are held in person and thus can only happen once a year or so, due to the cost of flying folks in from all over the world.  Since the Atomic WG wants to "release early and often," we needed a different way, and Adam Miller and Dusty Mabe came up with one.  Instead of flying everyone around the world, once every month we get together on IRC and video chat for VFAD.  In addition to letting us meet more often, this also lets contributors who couldn't travel to a FAD participate.
+VFADs are an innovation of the Atomic WG.  Regular [Fedora Activity Days](https://fedoraproject.org/wiki/Fedora_Activity_Day_-_FAD) (FADs) are held in person, and thus can only happen once a year or so, due to the cost of flying folks in from all over the world.  Since the Atomic WG wants to "release early and often," we needed a different way, and Adam Miller and Dusty Mabe came up with one.  Instead of flying everyone around the world, once every month we get together on IRC and video chat for VFAD.  In addition to letting us meet more often, this also lets contributors who couldn't travel to a FAD participate.  The only painful part is the time zones.
 
-Friday's VFAD demonstrated the success of this, including nine regular Fedora Atomic contributors, as well as several people who just showed up for specific issues.  For example, Dan Walsh dialed in for the conversation about systemd containers.
+Friday's VFAD demonstrated the success of this, attracting nine regular Fedora Atomic contributors, as well as several people who just showed up for specific issues.  For example, Dan Walsh dialed in for the conversation about systemd containers.
 
 We'll discuss a few of the group's decisions below.  For the rest, check out [the VFAD notes](https://fedoraproject.org/wiki/Atomic/VFAD_20170310) on the Fedora wiki.
 
 ## Run and Usage
 
-In order to support the container user, every FLIBS container will have either the `Run` or `Usage` labels defined. `Run` is consumed my the [Atomic CLI](https://github.com/projectatomic/atomic), which uses it to execute a container image. It's machine-readable, and is part of a set with the `Install` and `Uninstall` labels.  System Containers are required to have `Run`.  For example, the Cockpit Dockerfile has this:
+In order to support the container user, every FLIBS container will have either the `RUN` or `Usage` labels defined. `RUN` is consumed by the [Atomic CLI](https://github.com/projectatomic/atomic), which uses it to execute a container image. It's machine-readable, and is part of a set with the `INSTALL` and `UNINSTALL` labels.  System Containers are required to have `RUN`.  For example, the Cockpit Dockerfile has this:
 
 ```
 LABEL RUN /usr/bin/docker run -d --privileged --pid=host -v /:/host IMAGE /container/atomic-run --local-ssh

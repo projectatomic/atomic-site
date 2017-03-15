@@ -8,7 +8,7 @@ Below is an overview of the state of Kubernetes in Fedora Atomic and CentOS Atom
 
 ## Fedora Atomic Host
 
-As of Fedora 25, Kubernetes, as well as Etcd and Flannel, [is included](https://pagure.io/fedora-atomic/blob/f25/f/fedora-atomic-docker-host.json#_113) in the default image.
+As of Fedora 25, Kubernetes, as well as Etcd and Flannel, [is included](https://pagure.io/fedora-atomic/blob/9ca7cc0c806014576a6413ce5aac3db72c421f5d/f/fedora-atomic-docker-host.json#_113) in the default image.
 
 Fedora's Kubernetes [is packaged](https://apps.fedoraproject.org/packages/kubernetes) in three rpms: kubernetes-node (containing the kubelet and kube-proxy), kubernetes-master (containing the scheduler, controller-manager, and apiserver), and kubernetes-client (containing the kubectl cli). Each of master and node components is managed by a systemd service file included in the rpms.
 

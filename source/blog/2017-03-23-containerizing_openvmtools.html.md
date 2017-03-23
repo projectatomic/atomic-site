@@ -6,15 +6,15 @@ published: true
 comments: true
 tags: atomic, fedora, vmware
 ---
+This post was originally published on Red Hat Developers, the community to learn, code, and share faster. To read the original post, click ["here"] (https://developers.redhat.com/blog/2017/03/23/containerizing-open-vm-tools-part-1-the-dockerfile-and-constructing-a-systemd-unit-file/).
 
-
-While validating OpenShift Container Platform on a VMware platform the usage of Atomic OS was also a requirement. In the 
-initial reference architecture, the decision was made to use Red Hat Enterprise Linux as the platform. This platform was then customized and 
-the same packages as in Atomic was installed via Ansible and Red Hat Network. The github repo with those playbooks are ["here"] 
+While validating OpenShift Container Platform on a VMware platform the usage of Atomic OS was also a requirement. In the
+initial reference architecture, the decision was made to use Red Hat Enterprise Linux as the platform. This platform was then customized and
+the same packages as in Atomic was installed via Ansible and Red Hat Network. The github repo with those playbooks are ["here"]
 (https://github.com/openshift/openshift-ansible-contrib/tree/master/reference-architecture/vmware-ansible).
-These playbooks will guide you start to finish to deploying OCP on VMware vCenter utilizing RHEL 7. 
+These playbooks will guide you start to finish to deploying OCP on VMware vCenter utilizing RHEL 7.
 
-The next step in the VMware platform was to prepare a Dockerfile that would suffice in providing the privileges required for VMware’s open-vm-tools 
+The next step in the VMware platform was to prepare a Dockerfile that would suffice in providing the privileges required for VMware’s open-vm-tools
 package. As per VMware’s ["github site"] (https://github.com/vmware/open-vm-tools) for open-vm-tools the package provides the following functionality:
 
 * The ability to perform virtual machine power operations gracefully.
@@ -84,9 +84,9 @@ line number 542
    }
 ```
 
-There is an existing bugzilla for an update to VMware’s vCenter moving forward. 
+There is an existing bugzilla for an update to VMware’s vCenter moving forward.
 
-Once, the Dockerfile image has been built: 
+Once, the Dockerfile image has been built:
 
 ```
 docker built —rm -t openvmtools
@@ -122,7 +122,6 @@ systemctl enable vmtoolsd
 systemctl start vmtoolsd
 ```
 
-This concludes the first part of the containerizing open-vm-tools guide. In the next article, the requirements for utilizing this image as a runc system container will be discussed. 
+This concludes the first part of the containerizing open-vm-tools guide. In the next article, the requirements for utilizing this image as a runc system container will be discussed.
 
 Containerizing open-vm-tools part 2: Turning the Docker image into a system container for consumption in Atomic
-

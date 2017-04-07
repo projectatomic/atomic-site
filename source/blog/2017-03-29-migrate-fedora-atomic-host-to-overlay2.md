@@ -10,7 +10,7 @@ tags: atomic, fedora, docker, overlay2
 On the [Project Atomic mailing list](https://lists.projectatomic.io/projectatomic-archives/atomic/2017-March/msg00015.html), [Colin Walters](https://twitter.com/cgwalters) posted
 a quick set of instructions on how to migrate the Docker storage driver from `devicemapper` to `overlay2` on Fedora Atomic Host.
 
-The `overlay2` driver will be the default storage driver in Fedora 26, so making this change will give you a chance to test out your workloads
+The `overlay2` driver will be the [default storage driver in Fedora 26](https://fedoraproject.org/wiki/Changes/DockerOverlay2), so making this change will give you a chance to test out your workloads
 before the Fedora 26 release.
 
 Colin noted that the folks working on the `atomic` CLI are developing a way to [migrate all of your images and containers](https://trello.com/c/vAunYr5K/310-docker-storage-migrate-images-containers-when-switching-drivers) when you want to switch storage drivers.  Until that work is complete, the only way to switch drivers is destructive and results in a loss of your images and containers.

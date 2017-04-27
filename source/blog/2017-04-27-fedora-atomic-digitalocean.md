@@ -1,8 +1,8 @@
 ---
 title: 'Fedora Atomic Host Available in DigitalOcean'
 author: dustymabe
-date: 2017-04-27 19:30:06 UTC
-tags: fedora, atomic
+date: 2017-04-27 19:30:00 UTC
+tags: fedora, atomic, cloud
 published: true
 comments: true
 ---
@@ -10,9 +10,9 @@ comments: true
 With the [latest release](http://www.projectatomic.io/blog/2017/04/fedora_atomic_apr27/)
 of Fedora Atomic Host we are now live in
 [DigitalOcean](https://www.digitalocean.com/)! This was a popular [user
-request](https://digitalocean.uservoice.com/forums/136585-digitalocean/suggestions/5984177-project-atomic-docker-centos-fedora-scalab)
-and thanks to the folks at DigitalOcean and the
-[Fedora Atomic Working Group](https://pagure.io/atomic-wg/) we now have Fedora Atomic Host as an
+request](https://digitalocean.uservoice.com/forums/136585-digitalocean/suggestions/5984177-project-atomic-docker-centos-fedora-scalab).
+Thanks to the folks at DigitalOcean and the
+[Fedora Atomic Working Group](https://pagure.io/atomic-wg/), we now have Fedora Atomic Host as an
 option when creating a droplet. Go ahead and spin up a droplet in the
 web interface or via the [doctl](https://github.com/digitalocean/doctl)
 CLI today!
@@ -26,7 +26,7 @@ A few things to note:
 
 -   Usually Fedora Atomic images have you log in as user *fedora*. But,
     as with other DigitalOcean images, **log into the Fedora 25
-    DigitalOcean cloud image with your ssh key as the root user**.
+    DigitalOcean cloud image with your ssh key as the `root` user**.
 -   In these images there's **no firewall on by default**. There's also
     **no cloud provided firewall solution**. We recommend that you
     secure your system immediately after you log in.
@@ -40,13 +40,15 @@ A few things to note:
 Preparing to Launch a Droplet
 =============================
 
-In order to secure our system let's create some user-data that will
+In order to secure our system let's create some `user-data` that will
 instruct cloud-init to enable the default system firewall on bringup.
 This default firewall basically blocks everything but ssh:
 
     #cloud-config
     bootcmd:
       - systemctl enable iptables --now
+
+Later, we will have more complete instructions on setting up iptables with the correct ports for Kubernetes or OpenShift.  If you are in the right datacenter region, we also recommend setting up [Private Networking](https://www.digitalocean.com/community/tutorials/how-to-set-up-and-use-digitalocean-private-networking) for your Atomic cluster.
 
 Getting Started with the Web UI
 ===============================
@@ -78,7 +80,7 @@ And finally we should be able to access our droplet:
     Deployments:
     ● fedora-atomic:fedora-atomic/25/x86_64/docker-host
                  Version: 25.113 (2017-04-25 01:47:29)
-                  Commit: 3492546bc1ef6bca1bc7801ed6bb0414f90cc96668e067996dba3dee0d83e6c3
+                  Commit: 3492546bc1ef6bca1bc7801ed6bb041 ...
                   OSName: fedora-atomic
 
 Getting Started with the CLI
@@ -100,7 +102,7 @@ variable to the value of the token.
 First we'll set the access token and retrieve the fingerprint for our
 ssh key we use within DigitalOcean:
 
-    $ export DIGITALOCEAN_ACCESS_TOKEN=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+    $ export DIGITALOCEAN_ACCESS_TOKEN=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ...
     $ doctl compute ssh-key list
     ID       Name     FingerPrint
     84000    Ocean    xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx
@@ -117,26 +119,29 @@ determined in the previous section:
 Now we can spin up the droplet based off the `fedora-25-x64-atomic`
 image. We'll name it `atomicdroplet`:
 
-    $ doctl compute droplet create --image fedora-25-x64-atomic --region nyc3 --size 4gb --ssh-keys xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx --user-data-file ./user-data.txt atomicdroplet
-    ID          Name             Public IPv4    Private IPv4    Public IPv6    Memory    VCPUs    Disk    Region    Image                   Status    Tags 
-    47047971    atomicdroplet                                                  4096      2        60      nyc3      Fedora 25 x64 Atomic    new 
+    $ doctl compute droplet create --image fedora-25-x64-atomic \
+      --region nyc3 --size 4gb \
+      --ssh-keys xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx \
+      --user-data-file ./user-data.txt atomicdroplet
+    ID          Name             Public IPv4    Private IPv4    Public IPv6    Memory    VCPUs    Disk    Region    Image                   Status    Tags
+    47047971    atomicdroplet                                                  4096      2        60      nyc3      Fedora 25 x64 Atomic    new
 
 Next we'll query the API again to see the status and to see what the IP
 address is set to:
 
     $ doctl compute droplet list
     ID          Name             Public IPv4       Private IPv4    Public IPv6    Memory    VCPUs    Disk    Region    Image                   Status    Tags
-    47047971    atomicdroplet    159.203.94.102                                   4096      2        60      nyc3      Fedora 25 x64 Atomic    active 
+    47047971    atomicdroplet    159.203.94.102                                   4096      2        60      nyc3      Fedora 25 x64 Atomic    active
 
 And on to accessing the droplet:
 
-    $ ssh root@159.203.94.102 
+    $ ssh root@159.203.94.102
     [root@atomicdroplet ~]# rpm-ostree status
     State: idle
     Deployments:
     ● fedora-atomic:fedora-atomic/25/x86_64/docker-host
                  Version: 25.113 (2017-04-25 01:47:29)
-                  Commit: 3492546bc1ef6bca1bc7801ed6bb0414f90cc96668e067996dba3dee0d83e6c3
+                  Commit: 3492546bc1ef6bca1bc7801ed6bb0414f90 ...
                   OSName: fedora-atomic
 
 And Beyond
@@ -146,7 +151,9 @@ Now that you have a Fedora Atomic Host droplet you can explore the world
 of containers by either running individual containers by hand or by
 utilizing a more advanced platform for container orchestration and
 life-cycle management. There are some docs on [projectatomic.io](http://www.projectatomic.io/docs) which can
-help get you started.
+help get you started.  
+
+We'll add DigitalOcean to [getfedora.org](https://getfedora.org/en/atomic/download/) as soon as we can.
 
 Thanks
 ======

@@ -17,11 +17,12 @@ As last year, we will have the Atomic Pod in Community Central, and we'll have t
 
 ![microcluster](/images/subatomic_cluster_new_case.jpg)
 
-We're going to have a series of demos at the pod to show you things you might not have seen during the sessions.  So far we have four demos scheduled:
+We're going to have a series of demos at the pod to show you things you might not have seen during the sessions.  So far we have five scheduled demos, and a few more available any time you drop by:
 
 * Tuesday 11:30am &mdash; Atomic Host Upgrades and Management with Colin Walters
 * Tuesday 12:30pm &mdash; Container Trust and Image Signing with Atomic with Bob Kozdemba
-* Wednesday 4pm &mdash; Developing Containerized Applications with Minishift and Kompose with Dusty Mabe
+* Tuesday 4:00pm &mdash; Fedora Atomic Host Features with Dusty Mabe
+* Wednesday 4pm &mdash; Developing Containerized Applications with Minishift and Kompose with Lalatendu Mohanty
 * Thursday 10am &mdash; Container Trust and Image Signing with Atomic with Bob Kozdemba
 * As requested &mdash; Cockpit for System Management
 * As requested &mdash; StatefulSets and Databases

@@ -54,7 +54,7 @@ Package layering is using another method and needs another modification: add the
 Please note: Adding this line in `/etc/yum.conf` doesn't work!
 
 Example: To install open-vm-tools:
-1) Just add line: `proxy=http://<proxy ip-address>:<proxy poprt>` in `/etc/yum.repos.d/CentOS-Base.repo` below `[base]`.
+1) Just add line: `proxy=http://<proxy ip-address>:<proxy port>` in `/etc/yum.repos.d/CentOS-Base.repo` below `[base],[updates],[extras]`.
 2) Try `atomic host install open-vm-tools` to install the package.
 3) `systemctl reboot` to activate.
 4) Try `atomic host status` to reflect the change after reboot.

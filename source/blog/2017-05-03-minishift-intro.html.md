@@ -1,6 +1,6 @@
 ---
 title: Introducing Minishift - Run OpenShift locally
-date: 2017-05-03 05:45 UTC
+date: 2017-05-04 20:00:00 UTC
 author: budhram
 published: true
 comments: true

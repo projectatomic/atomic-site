@@ -41,7 +41,7 @@ $ cd scripts
 $ ./deploy-cluster.sh
 ```
 
-Substitute those hostnames above with ones that match your own test machines. Alternatively, you should be able to use the Vagrantfile in the vagrant directory of that repo, though I haven’t tested that yet.
+Substitute those hostnames above with ones that match your own test machines. For more information on using the ansible scripts, see the [README file](https://github.com/kubernetes/contrib/blob/master/ansible/README.md). Alternatively, you should be able to use the Vagrantfile in the vagrant directory of that repo, though I haven’t tested that yet.
 
 If you run the script as laid out above, you’ll get etcd, flannel and kubernetes containers from my namespace in the docker hub, because the current upstream fedora containers, in the case of etcd and flannel, need a couple of changes , and in the case of kubernetes, the upstream fedora containers aren’t yet modified to run as system containers.  
 

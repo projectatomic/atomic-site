@@ -1,7 +1,7 @@
 ---
 title: Installing One Big Volume with Overlay2
 author: jberkus
-date: 2017-05-12 14:00:00 UTC
+date: 2017-05-15 16:00:00 UTC
 published: true
 comments: true
 tags: atomic, fedora, overlayfs

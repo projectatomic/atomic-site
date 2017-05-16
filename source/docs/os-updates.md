@@ -46,3 +46,15 @@ understands how to traverse history.
 Try `atomic host deploy <version number>` to instruct the client
 to deploy an exact version - one that you may have integration
 tested.
+
+## Proxy Settings
+
+For image upgrades behind a corporate internet proxy you simple add the `proxy=` line in `/etc/ostree/remotes.d/centos-atomic-host.conf`.
+Package layering is using another method and needs another modification: add the `proxy=` line in the corresponding repo file in `/etc/yum.repos.d/`.
+Please note: Adding this line in `/etc/yum.conf` doesn't work!
+
+Example: To install open-vm-tools:
+1) Just add line: `proxy=http://<proxy ip-address>:<proxy port>` in `/etc/yum.repos.d/CentOS-Base.repo` below `[base],[updates],[extras]`.
+2) Try `atomic host install open-vm-tools` to install the package.
+3) `systemctl reboot` to activate.
+4) Try `atomic host status` to reflect the change after reboot.

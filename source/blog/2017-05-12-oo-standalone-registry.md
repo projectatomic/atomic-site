@@ -9,7 +9,7 @@ tags: openshift, atomic, registry, origin, fedora
 
 The Project Atomic site has had a section dedicated to the [Atomic Registry](http://docs.projectatomic.io/registry/latest/registry_quickstart/administrators/index.html) which has been useful for getting a registry up and running as quickly as possible.  However, the software powering the quickstart installation has not always kept up with the [OpenShift Origin](https://www.openshift.org) software which powers the actual registry and web UI.  This has lead to an increase in users reporting issues in the #atomic Freenode IRC channel.  And often it ends with someone pointing to the [stand-alone registry documentation](https://docs.openshift.org/latest/install_config/install/stand_alone_registry.html) that is provided by the OpenShift Origin project.
 
-It turns out that deploying the stand-alone registry on a single Fedora 25 Atomic Host system is quite straight-forward and can quickly provide a usable registry.
+It turns out that deploying the stand-alone registry on a single Fedora 25 Atomic Host system is quite straight-forward and can quickly provide a usable registry. In this blog post, we'll deploy a proof-of-concept stand-alone registry on a single node, which will end up using self-signed certificates in the process.  In a later blog post, we'll show you how to setup a stand-alone registry using multiple nodes and your own SSL certificates.
 
 READMORE
 
@@ -35,6 +35,8 @@ OpenShift Origin provides an excellent [Ansible-based](https://www.ansible.com/)
     HEAD is now at 90f6a70... Automatic commit of package [openshift-ansible] release [3.6.24-1].
 
 The next step is to prepare the inventory file for the installer.  My dedicated system for the registry has a 'public' IP address of `10.8.172.199`, so we use that value throughout.  (I'm using a VM in a private OpenStack instance, so the 'public' IP address is only visible on our corporate network and is not reachable from the Internet.)
+
+Notice how I am using the [xip.io](http://xip.io) service as part of my `openshift_master_default_subdomain` value.  It provides wildcard DNS resolution for any IP address you want to use.  This is a handy solution if the system you are using does not have a DNS resolvable hostname.
 
     # Create an OSEv3 group that contains the masters and nodes groups
     [OSEv3:children]
@@ -83,7 +85,7 @@ Run the Installer
 ==================
 We are ready to feed the inventory file to `ansible-playbook` and run the installer.  We have to use the same workaround mentioned in Dusty's blog post to enable Ansible to use Python3 during execution.
 
-    $ ansible-playbook -i myinventory -e 'ansible_python_interpreter=/usr/bin/python3'
+    $ ansible-playbook -i myinventory playbooks/byo/config.yml -e 'ansible_python_interpreter=/usr/bin/python3'
     ...
     ...
     PLAY RECAP *********************************************************************
@@ -92,11 +94,11 @@ We are ready to feed the inventory file to `ansible-playbook` and run the instal
 
 Running the installer will take a few minutes, but once it finished, we can get right to the registry console.
 
-Assuming you have used a similar value for `openshift_master_default_subdomain`, you'll be able to access your registry console at a URL similar to `https://registry-console-default.10.8.172.199.xip.io/`.  Just append `registry-console-default.` to your `openshift_master_default_subdomain`.
+Assuming you have used a similar value for `openshift_master_default_subdomain`, you'll be able to access your registry console at a URL similar to `https://registry-console-default.10.8.172.199.xip.io/`.  Just append `registry-console-default.` to the value of `openshift_master_default_subdomain`.
 
 ![image](images/2017-05-12-oo-standalone-registry/registry-console.png)
 
-The installer defaults to a self-signed certificate for the registry console, so you will have to instruct your browser to accept the certificate when you access the console.
+As mentioned earlier, we used a self-signed certificate for the registry console, so you will have to instruct your browser to accept the certificate when you access the console.
 
 The inventory file we used defined an `admin` user with the password `OriginAdmin` and we can use that right away to login.
 

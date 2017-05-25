@@ -1,6 +1,6 @@
 ---
 title: Deploying an OpenShift Origin Stand-alone Registry on Fedora 25 Atomic Host
-date: 2017-05-12 20:00:00 UTC
+date: 2017-05-25 18:00:00 UTC
 author: miabbott
 published: true
 comments: true
@@ -27,6 +27,7 @@ Additionally, I decided I would configure Docker to use the `overlay2` storage d
 
 Prepping the Installer
 =======================
+
 OpenShift Origin provides an excellent [Ansible-based](https://www.ansible.com/) installer that we will used to deploy the registry.  So the first thing to do is checkout the installer from the [GitHub repo](https://github.com/openshift/openshift-ansible).  At the time of this writing, I used a specific version ([3.4.24-1](https://github.com/openshift/openshift-ansible/releases/tag/openshift-ansible-3.4.24-1)) of the repo to ensure it would work correctly for me.  We'll checkout the repo to that version as part of this process.
 
     $ git clone https://github.com/openshift/openshift-ansible.git

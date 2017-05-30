@@ -1,7 +1,7 @@
 ---
 title: Testing System-Containerized Kubeadm
 author: jbrooks
-date: 2017-05-26 07:00:00 UTC
+date: 2017-05-30 13:00:00 UTC
 tags: kubernetes, kubeadm, atomic, centos, fedora
 comments: true
 published: true
@@ -11,9 +11,11 @@ Recently, I’ve been experimenting with running [Kubernetes in system container
 
 On a regular CentOS or Fedora host, using kubeadm is a matter of installing rpms for the kubelet, kubectl, kubeadm itself, and for a set of Kubernetes networking tools, kubernetes-cni. On an atomic host, rpm-ostree package layering allows for installing rpms, but if existing kube rpms are already part the atomic host image, as they are for Fedora Atomic Host, you won’t be able to install the prescribed upstream kube versions. And even on a host without built-in kubernetes, like [CentOS Atomic Continuous](https://wiki.centos.org/SpecialInterestGroup/Atomic/Devel), rpm-ostree won’t abide rpm content stored in `/opt`.
 
-I managed to make a [kubadm system container](https://github.com/jasonbrooks/atomic-system-containers/tree/kube-containers/kubeadm) that uses the same tmpfiles.d trick I used to link kubectl and etcdctl from the container into the the host’s `/usr/local/bin` to make the kubeadm tool available from the host. 
+READMORE
 
-For now, this works best on CentOS Atomic Host, with either the [downstream](https://wiki.centos.org/SpecialInterestGroup/Atomic/Download) or [continuous](https://wiki.centos.org/SpecialInterestGroup/Atomic/Devel) branches. 
+I managed to make a [kubadm system container](https://github.com/jasonbrooks/atomic-system-containers/tree/kube-containers/kubeadm) that uses the same tmpfiles.d trick I used to link kubectl and etcdctl from the container into the the host’s `/usr/local/bin` to make the kubeadm tool available from the host.
+
+For now, this works best on CentOS Atomic Host, with either the [downstream](https://wiki.centos.org/SpecialInterestGroup/Atomic/Download) or [continuous](https://wiki.centos.org/SpecialInterestGroup/Atomic/Devel) branches.
 
 With Fedora-based Atomic Hosts, there are two issues. First, Fedora 25 currently ships with an older version of runc. Soon after the [updated version](https://bodhi.fedoraproject.org/updates/FEDORA-2017-f4ccc7cb91) gets enough karma, this kubeadm system container will work with Fedora 25... with SELinux in permissive mode. I’m trying to track down why this is necessary with Fedora but not with CentOS.
 
@@ -40,7 +42,7 @@ $ kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Docum
 $ kubectl apply -f https://raw.githubusercontent.com/jasonbrooks/flannel/support-selinux-kube/Documentation/kube-flannel.yml
 ```
 Assuming you want your master to do double-duty as a node for an all in one setup, run the following command:
- 
+
 ```
 $ kubectl taint nodes --all node-role.kubernetes.io/master-
 ```

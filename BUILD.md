@@ -53,9 +53,13 @@ root directory, run the docker build:
 
 If your local machine has Docker secured, then you'll need to sudo the above command.
 
+This will build the container image `middleman` and then run it using
+`atomic run middleman`.
+
 Once the container is up and running, the site will be available on [127.0.0.1:4567](http://127.0.0.1:4567).
 
-Note that `docker.sh` builds the site's image every time it runs due to cache issues. This may take a significant amount of time on slower machines.
+To restart the container at a later time, you can simply do `atomic run middleman` or if
+you'd like to rebuild the container, `docker.sh`.
 
 ## Manual Build
 

@@ -15,6 +15,4 @@ Starting with either the Fedora 26 to 27 or the 27 to 28 upgrade cycle (dependin
 
 Traditional OS upgrades can be disruptive and error-prone, but due to the image-based technologies that Atomic Hosts use for system components (rpm-ostree) and for applications (Linux containers), upgrading an Atomic Host between major releases is little different than installing updates within a single release. In both scenarios, the system updates are applied by running an rpm-ostree command and rebooting, with rollback to the previous state available in case something goes wrong, and applications running in containers are unaffected by the host upgrade or update.
 
-There’s work that must be done to prepare for this collapsed release structure, but for users that wish to opt for this new behavior starting with the upcoming Fedora 25 to Fedora 26 upgrade cycle, we’ll be preparing a “stable” ostree ref that you can rebase to follow the latest major release. Look for more information on that shortly.
-
 If you'd like to get involved in the Fedora Atomic Workgroup, come talk to us in IRC in #fedora-cloud or #atomic on Freenode, or join the [Atomic WG on Pagure](https://pagure.io/atomic-wg).

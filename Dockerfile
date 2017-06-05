@@ -15,3 +15,8 @@ RUN bundle install
 EXPOSE 4567
 ENTRYPOINT [ "bundle", "exec" ]
 CMD [ "middleman", "server" ]
+
+LABEL RUN="/usr/bin/docker run --rm -ti -p 4567:4567 \
+             -v \"\$PWD/source:/tmp/source:ro\" \
+             -v \"\$PWD/data:/tmp/data\" \
+             \${IMAGE}"

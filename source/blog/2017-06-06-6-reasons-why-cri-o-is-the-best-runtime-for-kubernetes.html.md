@@ -11,6 +11,8 @@ tags: kubernetes, containers, cri-o
 
 Let’s look at the advantages of the CRI-O project.
 
+READMORE
+
 **1. OPEN GOVERNANCE**
 
 CRI-O is intended to be strictly _openly_ governed and operates under the Kubernetes community.  The shared interests of many collaborators in the container space are looking for stability and compatibility with an ideal of meritocracy.

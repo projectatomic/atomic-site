@@ -1,12 +1,15 @@
 ---
 title: Using kubeadm with CRI-O
 author: runcom
-date: 2017-06-06 12:58:13 UTC
+date: 2017-06-09 16:00:00 UTC
 comments: true
 published: true
+tags: kubernetes, centos, cri-o, kubeadm
 ---
 
 **[CRI-O](https://github.com/kubernetes-incubator/cri-o)** is a Kubernetes incubator project which is meant to provide an integration path between Open Containers Initiative (OCI) conformant runtimes and the kubelet. Specifically, it implements the Container Runtime Interface (CRI) using OCI conformant runtimes. CRI-O uses [runc](https://github.com/opencontainers/runc) as its default runtime to run Kubernetes pods. For more information you can read a brief introduction [here](https://www.projectatomic.io/blog/2017/02/crio-runtimes/). If you're interested into why you should use CRI-O instead of other container runtimes you can read more [here](https://www.projectatomic.io/blog/2017/06/6-reasons-why-cri-o-is-the-best-runtime-for-kubernetes/).
+
+READMORE
 
 Introduction
 =
@@ -14,7 +17,7 @@ Introduction
 First things first, I'm pleased to announce that [CRI-O](https://github.com/kubernetes-incubator/cri-o) can be seamlessy used with [kubeadm](https://kubernetes.io/docs/setup/independent/create-cluster-kubeadm/) to install kubernetes. This allows containers to be run under Kubernetes without the docker-engine being present on your servers.
 
 
-Getting  started with CRI-O and `kubeadm`
+Getting  started with CRI-O and kubeadm
 =
 
 To begin, you first provision machines with CRI-O using a [handy ansible playbook](https://github.com/cri-o/cri-o-ansible). The playbook will compile CRI-O from source and is the only installation method currently available. Installation packages for all of the major distributions are under development and should be available in the near future. Stay tuned!
@@ -25,7 +28,7 @@ Environment
 =
 
 You will be creating a three servers cluster using local virtual machines with `libvirt`. The master will be running on Fedora 25, the nodes will be a CentOS 7.3 machine and an Ubuntu 16.04 machine. Here is the identifying information for the two servers:
- 
+
  ```
 | Role       |      IP        | Hostname    |
 |------------|----------------|-------------|
@@ -182,7 +185,7 @@ as root:
   kubeadm join --token 6b7a29.95a2995f65e1d3c9 192.168.122.34:6443
 ```
 
-> do not follow `kubeadm` commands in the output above as we're going to use some custom flags to make `kubeadm` works nicely with CRI-O
+_Do not follow `kubeadm` commands in the output above as we're going to use some custom flags to make `kubeadm` works nicely with CRI-O_
 
 Make a record of the `kubeadm join` token that `kubeadm init` outputs. You will need this in a moment when setting up the nodes.
 
@@ -204,7 +207,7 @@ configmap "kube-flannel-cfg" created
 daemonset "kube-flannel-ds" created
 ```
 
-The master is now fully configured. 
+The master is now fully configured.
 
 Setting up the Nodes
 -
@@ -311,7 +314,7 @@ NAME        STATUS    AGE      VERSION
 centos.vm   Ready     17s      v1.6.4
 fedora.vm   Ready     15m      v1.6.4
 ubuntu.vm   Ready     12m      v1.6.4
-fedora.vm $ 
+fedora.vm $
 ```
 
 Play around with your cluster in any way you want. I suggest following the great examples at [kubernetesbyexample.com](http://kubernetesbyexample.com/).

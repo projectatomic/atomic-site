@@ -92,7 +92,7 @@ Unit docker.service could not be found.
 #
 ```
 
-We don't need any other container runtime, either.  This is very useful because it makes Buildah easily embeddable in automation scripts and inside other container-building tools, since neither a server process nor root access are required.
+We don't need any other container runtime, either. By not installing Docker or another container runtime we save file system space and lessen both memory usage and CPU processing time on the system. The daemons associated with those runtimes are not only not running, they're not even present. As we'll seen in a future blog, Buildah also allows you to build smaller containers than Docker does. In addition to these advantages, Buildah is easily embeddable in automation scripts and inside other container-building tools, since neither a server process nor root access are required.
 
 ## Manipulating the Image
 
@@ -158,7 +158,7 @@ Let's mount the container on a local mount point:
 Now check to see if our `moveit.txt` file is in the new container that we created from the image.
 
 ```
-# ls $mountpoint2/tmp  # Let's see if our file is there
+# ls $mountpoint2/tmp
 anaconda-post.log  ks-script-64xpp1a9  ks-script-sw0bp7j4  moveit.txt
 # cat $mountpoint2/tmp/moveit.txt
 Move this file to the Buildah container's /tmp directory.

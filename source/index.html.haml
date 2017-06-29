@@ -18,12 +18,11 @@ blog_summary_length: 500
     cloud native platforms.
 
   %p
-    %strong new versions of Fedora Atomic Host and CentOS Atomic Host,
-    combined with strong container registries, offer a complete containerized
-    OS platform.
+    %strong Buildah, a different way to build containers, is now
+    available for testing.
 
   %p.buttons
-    %a.btn.btn-default{:href => "/registry" }
+    %a.btn.btn-default{:href => "/blog/2017/06/introducing-buildah/" }
       %i.fa.fa-graduation-cap.text-primary
       Learn more!
       %i.fa.fa-long-arrow-right
@@ -82,21 +81,38 @@ blog_summary_length: 500
       .col-xs-12.col-lg-4
 
         %h2
-          Atomic Registry
+          Container Tools
         %p
-          An enterprise Docker container registry solution run on-premise or in
-          the cloud.
+          Tools from our team help you create, deploy, manage, and secure containers.
 
         %p
-          Atomic Registry uses 100% open source technology to provide
-          enterprise features such as role-based access control (RBAC), diverse
-          authentication options, a rich web console, flexible storage
-          integration and more.
-
-        %p
-          %a( href="/registry" )
+          %a( href="https://github.com/projectatomic/buildah" )
             %i.fa.fa-play-circle
-            Get started with Atomic Registry
+            Build containers with Buildah
+        %p
+          %a( href="http://kompose.io/" )
+            %i.fa.fa-play-circle
+            Compose applications with Kompose
+        %p
+          %a( href="https://github.com/projectatomic/skopeo" )
+            %i.fa.fa-play-circle
+            Pull and move images with Skopeo
+        %p
+          %a( href="https://github.com/kubernetes-incubator/cri-o" )
+            %i.fa.fa-play-circle
+            Deploy using Kubernetes and CRI-O
+        %p
+          %a( href="http://cockpit-project.org/" )
+            %i.fa.fa-play-circle
+            Manage container hosts with Cockpit
+        %p
+          %a( href="https://github.com/projectatomic/atomic" )
+            %i.fa.fa-play-circle
+            Install, run and scan with Atomic CLI
+        %p
+          %a( href="https://github.com/projectatomic/bubblewrap" )
+            %i.fa.fa-play-circle
+            Sandbox apps with Bubblewrap
 
 .row.featurette
   .col-sm-12.col-md-12

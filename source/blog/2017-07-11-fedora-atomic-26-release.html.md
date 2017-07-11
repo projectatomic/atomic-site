@@ -26,7 +26,7 @@ This is the first release for Fedora 26 Atomic Host coming only a week after the
 
 * If you use the Kubernetes software within Atomic Host then please wait until our next release of Atomic Host to upgrade. There is a [bug that is preventing the API server from starting](https://bugzilla.redhat.com/show_bug.cgi?id=1441218). If you don't rely on the built-in Kubernetes (e.g. you run containerized Kubernetes or OpenShift) this should not affect you. Before the next release we will publish a guide to upgrading your atomic host and making any configuration changes for the new version of kubernetes.
 
-* The storage driver now defaults to overlay2 instead of devicemapper for container storage.  This will not change existing installations.
+* The storage driver now defaults to overlay2 instead of devicemapper for container storage.  This will not change existing installations. If you want to make the switch for in-place upgrades, see [this blog entry](/blog/2017/05/migrate-fedora-atomic-host-to-overlay2/).
 
 * The url for the F26 ostree 'remote' is [https://kojipkgs.fedoraproject.org/atomic/26/](https://kojipkgs.fedoraproject.org/atomic/26/)
 
@@ -37,6 +37,8 @@ This is the first release for Fedora 26 Atomic Host coming only a week after the
   of software from the last release of Fedora 25 to this first
   release of Fedora 26 go backwards. The next two week release
   will not have that problem.
+
+* The [generic `updates` ref](http://www.projectatomic.io/blog/2017/02/matching-fedora-ostree-released-content-with-each-2week-atomic-release/) isn't yet available for f26.  It will be enabled in a later biweekly release.
 
 We will write blog posts and documentation over the next few weeks
 to show you new features and guide how to upgrade your existing hosts.
@@ -541,6 +543,8 @@ Added:
 * setools-python-4.1.0-3.fc26.x86_64
 * setools-python3-4.1.0-3.fc26.x86_64
 
+## Download Information
+
 Existing systems can be upgraded [using rebase](https://fedoraproject.org/wiki/Atomic_Host_upgrade).
 
 Corresponding image media for new installations can be [downloaded from GetFedora.org](https://getfedora.org/en/atomic/download/).
@@ -549,3 +553,24 @@ Respective signed CHECKSUM files can be found here:
 
 * [Cloud image checksum](https://alt.fedoraproject.org/pub/alt/atomic/stable/Fedora-Atomic-26-20170707.1/CloudImages/x86_64/images/Fedora-CloudImages-26-20170707.1-x86_64-CHECKSUM)
 * [ISO Checksum](https://alt.fedoraproject.org/pub/alt/atomic/stable/Fedora-Atomic-26-20170707.1/Atomic/x86_64/iso/Fedora-Atomic-26-20170707.1-x86_64-CHECKSUM)
+
+For direct download, the "latest" targets are always available at the following URLs:
+
+* [Latest ISO](https://getfedora.org/atomic_iso_latest)
+* [Latest QCOW](https://getfedora.org/atomic_qcow2_latest)
+* [Latest raw image](https://getfedora.org/atomic_raw_latest)
+* [Latest LibVirt VM](https://getfedora.org/atomic_vagrant_libvirt_latest)
+* [Latest VirtualBox VM](https://getfedora.org/atomic_vagrant_virtualbox_latest)
+
+Filename fetching URLs for downloading to remote systems are available by querying the following links:
+
+* [ISO](https://getfedora.org/atomic_iso_latest_filename)
+* [QCOW](https://getfedora.org/atomic_qcow2_latest_filename)
+* [raw](https://getfedora.org/atomic_raw_latest_filename)
+* [LibVirt](https://getfedora.org/atomic_vagrant_libvirt_latest_filename)
+* [VirtualBox](https://getfedora.org/atomic_vagrant_virtualbox_latest_filename)
+
+For more information about the latest targets, please reference [the Fedora
+Cloud Wiki space](https://fedoraproject.org/wiki/Cloud#Quick_Links).
+
+The Vagrant Cloud Page with Atomic Host has moved, it's [now in app.vagrantup.com](https://app.vagrantup.com/fedora/boxes/26-atomic-host).  This can require some extra steps to upgrade your Vagrant images.

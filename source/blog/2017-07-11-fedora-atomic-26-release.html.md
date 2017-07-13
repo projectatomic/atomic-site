@@ -554,7 +554,7 @@ Respective signed CHECKSUM files can be found here:
 * [Cloud image checksum](https://alt.fedoraproject.org/pub/alt/atomic/stable/Fedora-Atomic-26-20170707.1/CloudImages/x86_64/images/Fedora-CloudImages-26-20170707.1-x86_64-CHECKSUM)
 * [ISO Checksum](https://alt.fedoraproject.org/pub/alt/atomic/stable/Fedora-Atomic-26-20170707.1/Atomic/x86_64/iso/Fedora-Atomic-26-20170707.1-x86_64-CHECKSUM)
 
-For direct download, the "latest" targets are always available at the following URLs:
+For direct download, the &quot;latest&quot; targets are always available at the following URLs:
 
 * [Latest ISO](https://getfedora.org/atomic_iso_latest)
 * [Latest QCOW](https://getfedora.org/atomic_qcow2_latest)

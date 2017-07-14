@@ -146,7 +146,7 @@ We'll be setting up the etcd store that Kubernetes will use.  We're using a sing
     KUBE_ETCD_SERVERS="--etcd_servers=http://192.168.122.10:2379"
 
     # How the controller-manager, scheduler, and proxy find the kube-apiserver
-    KUBE_MASTER="--master=http://192.168.122.10:443"
+    KUBE_MASTER="--master=http://192.168.122.10:8080"
 
 #### Apiserver service configuration
 The apiserver needs to be set to listen on all IP addresses, instead of just localhost.

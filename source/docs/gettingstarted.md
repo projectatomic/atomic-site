@@ -44,6 +44,8 @@ In this guide we'll be using the following networking settings:
     Overlay Docker networking range:
     172.16.0.0/12
 
+Of course, you need to replace "192.168.122.X" with the addresses of your actual machines.  You should be able to use the overlay and application networks as-is, though.
+
 ## Building the cluster master
 Launch an Atomic host to act as the master node for the cluster.  We'll be creating the local docker cache, the etcd source, and the Kubernetes master services here.
 
@@ -146,7 +148,7 @@ We'll be setting up the etcd store that Kubernetes will use.  We're using a sing
     KUBE_ETCD_SERVERS="--etcd_servers=http://192.168.122.10:2379"
 
     # How the controller-manager, scheduler, and proxy find the kube-apiserver
-    KUBE_MASTER="--master=http://192.168.122.10:443"
+    KUBE_MASTER="--master=http://192.168.122.10:6443"
 
 #### Apiserver service configuration
 The apiserver needs to be set to listen on all IP addresses, instead of just localhost.

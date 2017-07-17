@@ -64,8 +64,7 @@ Fedora Atomic 26:
     # sudo user with an ssh key (use your key)
     user --name=atomic --groups=wheel --sshkey="ssh-rsa AAAAB3NzaC1yc2EAAAA ..."
 
-    # NOTICE: This will download the content from upstream; this will be very slow.
-    # Create your own OSTree repo locally and mirror the content instead.
+    # NOTICE: This will download the the latest release from upstream, which could be slow.
     ostreesetup --nogpg --osname="fedora-atomic" --remote="fedora-atomic-26" --url="https://kojipkgs.fedoraproject.org/atomic/26" --ref="fedora/26/x86_64/atomic-host"
 
     # Alternately, install from the ISO media:

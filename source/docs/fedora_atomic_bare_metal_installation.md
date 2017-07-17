@@ -7,10 +7,10 @@ Performing a Bare Metal Installation of Fedora Atomic
 Download the **boot.iso** file from [GetFedora.org](https://getfedora.org/atomic/download/) and use it to create installation media. For example, if you run the GNOME desktop, you can use the *Write to disk* capability of the Nautilus file browser to create an installation DVD. Alternatively, you can write the installation ISO image to a USB device with the `dd` command. For example, if you had a USB thumbdrive mounted as /dev/sdb, you might use this command (be careful to get the drive location right):
 
 ```
-dd if=Fedora-Atomic-dvd-x86_64-25-20170215.1.iso of=/dev/sdb bs=4M
+dd if=Fedora-Atomic-ostree-x86_64-26-20170707.1.iso of=/dev/sdb bs=4M
 ```
 
-These procedures are described in the [Fedora Installation guide](https://docs.fedoraproject.org/en-US/Fedora/24/html/Installation_Guide/sect-preparing-boot-media.html) in the second chapter called *Making media*.
+These procedures are described in the [Fedora Installation guide](https://docs.fedoraproject.org/en-US/Fedora/26/html/Installation_Guide/sect-preparing-boot-media.html) in the second chapter called *Making media*.
 
 ## Installing Fedora Atomic with the Anaconda Installer
 
@@ -22,15 +22,15 @@ Once your system has completed booting, the boot screen is displayed:
 
 The boot media displays a graphical boot menu with three options:
 
-- *Install Fedora 25* - Choose this option to install Fedora Atomic onto your computer system using the graphical installation program.
+- *Install Fedora 26* - Choose this option to install Fedora Atomic onto your computer system using the graphical installation program.
 
-- *Test this media & install Fedora 25* -  With this option, the integrity of the installation media is tested before installing Fedora Atomic onto your computer system using the graphical installation program. This option is selected by default.
+- *Test this media & install Fedora 26* -  With this option, the integrity of the installation media is tested before installing Fedora Atomic onto your computer system using the graphical installation program. This option is selected by default.
 
 - *Troubleshooting* - This item opens a menu with additional boot options. From this screen you can launch a rescue mode for Fedora Atomic, or run a memory test. Also, you can start the installation in the basic graphics mode as well as boot the installation from local media.
 
 If no key is pressed within 60 seconds, the default boot option runs. Press *Enter* to proceed.
 
-After media check, you are directed to the welcome screen.  This interactive install is exactly the same as installing standard Fedora Server, so you can use [Fedora's guide to the Anaconda GUI](https://docs.fedoraproject.org/en-US/Fedora/24/html/Installation_Guide/sect-installation-graphical-mode.html).
+After media check, you are directed to the welcome screen.  This interactive install is exactly the same as installing standard Fedora Server, so you can use [Fedora's guide to the Anaconda GUI](https://docs.fedoraproject.org/en-US/Fedora/26/html/Installation_Guide/sect-installation-graphical-mode.html).
 
 The one thing which is different is disk partitioning.  Post-install, Atomic will automatically use some of the unused space on your primary LVM partition to create a Docker pool partition.  You will need this partition in order to have space for containers.  As such, we recommend leaving half your available disk space as unallocated LVM partition space.
 
@@ -53,7 +53,7 @@ the `ostreesetup` command in your custom configuration, which is what
 configures anaconda to consume the rpm-ostree generated content.
 
 For example, create *atomic-ks.cfg* file with the following content, for
-Fedora 25 Atomic:
+Fedora Atomic 26:
 
     lang en_US.UTF-8
     keyboard us
@@ -64,11 +64,14 @@ Fedora 25 Atomic:
     # sudo user with an ssh key (use your key)
     user --name=atomic --groups=wheel --sshkey="ssh-rsa AAAAB3NzaC1yc2EAAAA ..."
 
-    # NOTICE: This will download the content from upstream; this will be very slow.
-    # Create your own OSTree repo locally and mirror the content instead.
-    ostreesetup --nogpg --osname=fedora-atomic --remote=fedora-atomic --url=https://dl.fedoraproject.org/pub/fedora/linux/atomic/25/ --ref=fedora-atomic/f25/x86_64/docker-host
+    # NOTICE: This will download the the latest release from upstream, which could be slow.
+    ostreesetup --nogpg --osname="fedora-atomic" --remote="fedora-atomic-26" --url="https://kojipkgs.fedoraproject.org/atomic/26" --ref="fedora/26/x86_64/atomic-host"
 
-There are several other options you can specify in the kickstart file, see *Kickstart Options* in the [Fedora Installation guide](https://docs.fedoraproject.org/en-US/Fedora/24/html/Installation_Guide/chap-kickstart-installations.html), or this [blog post](/blog/2016/10/install-with-kickstart/) which shows a more complex configuration with disk partitioning.
+    # Alternately, install from the ISO media:
+    # ostreesetup --osname="fedora-atomic" --remote="fedora-atomic-26" --url="file:///ostree/repo" --ref="fedora/26/x86_64/atomic-host" --nogpg
+    # however, you will need to reset ostree setup afterwards in %post
+
+There are several other options you can specify in the kickstart file, see *Kickstart Options* in the [Fedora Installation guide](https://docs.fedoraproject.org/en-US/Fedora/24/html/Installation_Guide/chap-kickstart-installations.html), or this [blog post](/blog/2017/07/fedora-atomic-26-kickstarts) which shows a more complex configuration with disk partitioning.
 
 After creating the configuration file, you have to ensure that it will be available during the installation. Place the file on hard drive, network, or removable media as described in the [Fedora Installation guide](https://docs.fedoraproject.org/en-US/Fedora/24/html/Installation_Guide/chap-kickstart-installations.html).  As a simple example, if the kickstart file is on another machine in the same network, you could serve it using a simple HTTP server:
 
@@ -80,7 +83,7 @@ python -m SimpleHTTPServer
 Start the installation as described above. On the grub menu screen, press the up arrow to select "Install Fedora".  Then press "e" to edit this option.  You will see a `linux` or `linuxefi` line which boots the install kernel; edit this line to add a kickstart file location after the directive `inst.ks`.  If we were serving the kickstarter file on the network with SimpleHTTPServer as above, for example, we would do this:
 
 ```
-linuxefi /images/pxeboot/vmlinuz inst.stage2=hd:LABEL=Fedora-Atomic-25-x86_64 inst.ks=http://192.168.1.105:8000/atomic-ks.cfg quiet
+linuxefi /images/pxeboot/vmlinuz inst.stage2=hd:LABEL=Fedora-Atomic-26-x86_64 inst.ks=http://192.168.1.105:8000/atomic-ks.cfg inst.text quiet
 ```
 
 See the [Fedora Installation guide](https://docs.fedoraproject.org/en-US/Fedora/24/html/Installation_Guide/chap-kickstart-installations.html) for more information on how to start a kickstart installation.
@@ -96,9 +99,11 @@ NOTE: If you've used a different `ostreesetup` URL or reference, you'll want to 
 
 To receive updates for your Fedora Atomic installation, specify the location of the remote OSTree repository. Execute:
 
-    # ostree remote add --set=gpg-verify=false fedora-atomic https://dl.fedoraproject.org/pub/alt/fedora-atomic/repo/
+    # ostree remote add --if-not-exists \
+    # --set=gpgkeypath=/etc/pki/rpm-gpg/RPM-GPG-KEY-fedora-26-primary \
+    # fedora-atomic-26 https://kojipkgs.fedoraproject.org/atomic/26
 
-Here, *fedora-atomic* is used as a name for the remote repository. The URL is stored in the */etc/ostree/remotes.d/fedora-atomic.conf* configuration file. Today, it is required to disable GPG verification for the remote repository to update Fedora Atomic successfully. Therefore the *--set=gpg-verify=false* option above. Alternatively, you can disable GPG by appending `gpg-verify=false` to */etc/ostree/remotes.d/fedora-atomic.conf*.
+Here, *fedora-atomic-26* is used as a name for the remote repository. The URL is stored in the */etc/ostree/remotes.d/fedora-atomic.conf* configuration file.  While GPG key checking is optional, it's highly recommended to prevent spoofing of installation files.  A new GPG key is required for each major Fedora release at this time, but that will change when Atomic shifts to rolling upgrades.
 
 Now you are able to update your system with the following command:
 

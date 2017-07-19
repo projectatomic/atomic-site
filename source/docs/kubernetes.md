@@ -86,4 +86,4 @@ As packaged by the upstream, kubeadm's kubernetes-cni package wants to place its
 
 ### Using other docker-based methods
 
-It's possible to run kubernetes on an atomic host using upstream-provided containers run by docker by following [this guide](https://github.com/kubernetes/kube-deploy/tree/master/docker-multinode).
+It's possible to run kubernetes on an atomic host using upstream-provided containers run by docker by following [this guide](https://github.com/kubernetes/kube-deploy/).

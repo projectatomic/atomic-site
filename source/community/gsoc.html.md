@@ -55,7 +55,7 @@ ideas is available on the [Fedora GSOC 2016 wiki page](https://fedoraproject.org
 
 * [Support kpatch](https://github.com/projectatomic/rpm-ostree/issues/118): Support live update for the kernel without rebooting or restarting any processes.
 
-* [Atomic Host Automated Updates](https://github.com/projectatomic/rpm-ostree/issues/177http://etherpad.osuosl.org/fedora-atomic-gsoc-2016) implement a service that automatically upgrades the system when a new image is available. If the system is not restarting correctly, the rollback to the previous working version.
+* [Atomic Host Automated Updates](http://etherpad.osuosl.org/fedora-atomic-gsoc-2016) implement a service that automatically upgrades the system when a new image is available. If the system is not restarting correctly, the rollback to the previous working version.
 
 
 ## Applying to Project Atomic GSOC

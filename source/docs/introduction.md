@@ -21,7 +21,7 @@ support different versions on the same host, such as
 [OpenShift v3](https://www.openshift.org/).  The Atomic Host also
 comes with several Kubernetes utilites such as
 [etcd](https://github.com/coreos/etcd) and
-[flannel](https://github.com/coreos/flannel).  Kubernetes curently uses
+[flannel](https://github.com/coreos/flannel).  Kubernetes currently uses
 [Docker](https://www.docker.io/), an open source
 project for creating lightweight, portable, self-sufficient
 application containers.

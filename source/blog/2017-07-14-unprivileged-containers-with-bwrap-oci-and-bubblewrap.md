@@ -35,8 +35,8 @@ If you'd like to try the demo out, you’ll need to build the
 development version for both of them.  You can get the last source
 from the git repos here:
 
-- [bubblewrap](https://github.com/projectatomic/bubblewrap.git)
-- [bwrap-oci](git@github.com:projectatomic/bwrap-oci.git)
+- [bubblewrap](https://github.com/projectatomic/bubblewrap)
+- [bwrap-oci](https://github.com/projectatomic/bwrap-oci)
 
 You can install the needed libraries with `sudo dnf build bubblewrap
 bwrap-oci`.

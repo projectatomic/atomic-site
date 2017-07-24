@@ -7,7 +7,9 @@ comments: true
 published: true
 ---
 
-Fedora Atomic 26 relies primarily on Kubernetes for automating deployment, scaling, and operations of application containers across clusters of hosts. Below is an overview of your options for installing and configuring Kubernetes clusters on Fedora Atomic hosts.
+Fedora Atomic 26 relies on Kubernetes for automating deployment, scaling, and operations of application containers across clusters of hosts. Below is an overview of your options for installing and configuring Kubernetes clusters on Fedora Atomic hosts.
+
+If you're looking to get up and running as quickly as possible with a Fedora Atomic-hosted Kubernetes cluster, skip ahead to the "Kubeadm Deployment" section below.
 
 # Install Kubernetes
 
@@ -16,48 +18,42 @@ Fedora Atomic 26 relies primarily on Kubernetes for automating deployment, scali
 Fedora Atomic 26 ships with Kubernetes packages baked into the system image. The specific version of Kubernetes included matches the latest release marked stable for f26 in Fedora's [updates system](https://bodhi.fedoraproject.org/updates/?packages=kubernetes&release=F26). If this is the version you wish to run, you can move on to the Manual Deployment, Ansible Deployment or Kubeadm Deployment sections.
 
 ### Updates and Testing Packages
- 
+
 If there is a newer stable Kubernetes version available that hasn't yet appeared in a two-weekly Fedora Atomic release, you can access it by rebasing to the updates ref of Fedora Atomic, which is recomposed each night to track the latest stable packages:
 
-```
-rpm-ostree rebase fedora-atomic:fedora/26/x86_64/updates/atomic-host -r
+```bash
+# rpm-ostree rebase fedora-atomic:fedora/26/x86_64/updates/atomic-host -r
 ```
 
 Similarly, if there is a newer Kubernetes version available in Fedora's updates-testing repository, you can access it by rebasing to the testing ref of Fedora Atomic, which is recomposed each night to track the latest testing packages:
 
-```
-rpm-ostree rebase fedora-atomic:fedora/26/x86_64/testing/atomic-host -r
+```bash
+# rpm-ostree rebase fedora-atomic:fedora/26/x86_64/testing/atomic-host -r
 ```
 
 ## Use System Containers
 
-You can install and run versions of Kubernetes packaged for different Fedora releases using [system containers](http://www.projectatomic.io/blog/2016/09/intro-to-system-containers/). For instance, you could run the older Fedora 25 version (currently 1.5.3) or the newer rawhide version (currently 1.7.1) on your Fedora Atomic 26 host. System containers place systemd unit files in `/etc/systemd/system`, where they override the unit files from the packages baked into the image.
+You can install and run versions of Kubernetes packaged for different Fedora releases using [system containers](http://www.projectatomic.io/blog/2016/09/intro-to-system-containers/). For instance, you could run a newer version of Kubernetes from rawhide (currently 1.7.1) on your Fedora Atomic 26 host. System containers place systemd unit files in `/etc/systemd/system`, where they override the unit files from the packages baked into the image. The following system containers are available on my Docker Hub namespace, but you can build your own from [these sources](https://github.com/projectatomic/atomic-system-containers).
 
-_note: this section below needs registry work. Are the f25 containers still being updated? Will the rawhide containers be updated? I'll probably point to my personal docker namespace, but it'd be better if all of these were available on Fedora's_
+### Run on your kubernetes master
 
-### Run on your kubernetes master:
+```bash
+# atomic install --system --system-package=no --name kube-apiserver docker.io/jasonbrooks/kubernetes-apiserver:rawhide
 
-```
-# atomic install --system --name kube-apiserver docker.io/jasonbrooks/kubernetes-apiserver:rawhide
+# atomic install --system --system-package=no --name kube-controller-manager docker.io/jasonbrooks/kubernetes-controller-manager:rawhide
 
-# atomic install --system --name kube-controller-manager docker.io/jasonbrooks/kubernetes-controller-manager:rawhide
-
-# atomic install --system --name kube-scheduler docker.io/jasonbrooks/kubernetes-scheduler:rawhide
-
-# systemctl daemon-reload
+# atomic install --system --system-package=no --name kube-scheduler docker.io/jasonbrooks/kubernetes-scheduler:rawhide
 ```
 
-### Run on your kubernetes node(s):
+### Run on your kubernetes node(s)
 
-```
-# atomic install --system --name kubelet docker.io/jasonbrooks/kubernetes-kubelet:rawhide
+```bash
+# atomic install --system --system-package=no --name kubelet docker.io/jasonbrooks/kubernetes-kubelet:rawhide
 
-# atomic install --system --name kube-proxy docker.io/jasonbrooks/kubernetes-proxy:rawhide
-
-# systemctl daemon-reload
+# atomic install --system --system-package=no --name kube-proxy docker.io/jasonbrooks/kubernetes-proxy:rawhide
 ```
 
-From here, you could proceed with the Manual Deployment or the Ansible Deployment sections. 
+From here, you could proceed with the Manual Deployment or the Ansible Deployment sections.
 
 # Deploy Kubernetes
 
@@ -65,7 +61,7 @@ From here, you could proceed with the Manual Deployment or the Ansible Deploymen
 
 Kubeadm is a tool for bootstrapping Kubernetes clusters that's still [under development](https://kubernetes.io/docs/setup/independent/create-cluster-kubeadm/#kubeadm-maturity) by the Kubernetes project, but offers a really simple method of getting up and running with a single or multi-node cluster. Starting with the Kubernetes version that ships with Fedora Atomic 26, the kubeadm command is available in a Fedora package. It's not currently baked into the image, but you can install it using rpm-ostree package layering:
 
-```
+```bash
 # rpm-ostree install kubernetes-kubeadm
 ```
 
@@ -73,7 +69,7 @@ After installing, you either have to reboot (using `systemctl reboot` or by tack
 
 In order for kubeadm to work with SELinux in enforcing mode, you'll need to create the following directory and set its SELinux context as follows:
 
-```
+```bash
 # mkdir /etc/kubernetes/pki
 
 # chcon -Rt container_share_t /etc/kubernetes/pki
@@ -81,22 +77,21 @@ In order for kubeadm to work with SELinux in enforcing mode, you'll need to crea
 
 From here, you can follow the [upstream kubeadm documentation](https://kubernetes.io/docs/setup/independent/create-cluster-kubeadm/) to bring up a cluster.
 
-
 ## Ansible Deployment
 
 The contrib repository of the upstream Kubernetes project contains [ansible scripts](https://github.com/kubernetes/contrib/tree/master/ansible) for deploying a Kubernetes cluster that work with Fedora Atomic 26 and its default Kubernetes packages, as well as with an Atomic Host with installed system containers.
 
 Grab the scripts by git cloning them:
 
-```
-$ git clone https://github.com/kubernetes/contrib.git
+```bash
+git clone https://github.com/kubernetes/contrib.git
 
-$ cd contrib/ansible
+cd contrib/ansible
 ```
 
 Next, create and populate an inventory file with the hostnames or IP addresses of the systems you intend to use as your master and your nodes:
 
-```
+```bash
 $ vi inventory/inventory
 
 [masters]
@@ -113,10 +108,10 @@ Review and modify `inventory/group_vars/all.yml` as needed, for instance, settin
 
 Finally, run the deploy cluster script:
 
-```
-$ cd scripts
+```bash
+cd scripts
 
-$ ./deploy-cluster.sh
+./deploy-cluster.sh
 ```
 
 For more information, check out the [README file](https://github.com/kubernetes/contrib/blob/master/ansible/README.md).
@@ -124,4 +119,3 @@ For more information, check out the [README file](https://github.com/kubernetes/
 ## Manual Deployment
 
 Finally, the Project Atomic [Getting Started Guide](http://www.projectatomic.io/docs/gettingstarted/) provides manual directions for configuring a cluster that should work with a stock Fedora Atomic 26 host or with a host with Kubernetes installed via system containers.
-

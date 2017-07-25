@@ -1,13 +1,13 @@
 ---
-title: Running Kubernetes on Fedora Atomic Host 26
+title: Running Kubernetes on Fedora Atomic Host
 author: jbrooks
 date: 2017-07-18 23:12:57 UTC
-tags: kubernetes, ansible, kubeadm
+tags: kubernetes, ansible, kubeadm, fedora
 comments: true
 published: true
 ---
 
-Fedora Atomic Host 26 relies on Kubernetes for automating deployment, scaling, and operations of application containers across clusters of hosts. Below is an overview of your options for installing and configuring Kubernetes clusters on Fedora Atomic hosts.
+Fedora 26 Atomic Host relies on Kubernetes for automating deployment, scaling, and operations of application containers across clusters of hosts. Below is an overview of your options for installing and configuring Kubernetes clusters on Fedora Atomic Hosts.
 
 If you're looking to get up and running as quickly as possible with a Fedora Atomic-hosted Kubernetes cluster, skip ahead to the "Kubeadm Deployment" section below.
 
@@ -15,7 +15,7 @@ If you're looking to get up and running as quickly as possible with a Fedora Ato
 
 ## Use Built-in Packages
 
-Fedora Atomic 26 ships with Kubernetes packages baked into the system image. The specific version of Kubernetes included matches the latest release marked stable for f26 in Fedora's [updates system](https://bodhi.fedoraproject.org/updates/?packages=kubernetes&release=F26). If this is the version you wish to run, you can move on to the Manual Deployment, Ansible Deployment or Kubeadm Deployment sections.
+Fedora Atomic Host ships with Kubernetes packages baked into the system image. The specific version of Kubernetes included matches the latest release marked stable for f26 in Fedora's [updates system](https://bodhi.fedoraproject.org/updates/?packages=kubernetes&release=F26). If this is the version you wish to run, you can move on to the Manual Deployment, Ansible Deployment or Kubeadm Deployment sections.
 
 ### Updates and Testing Packages
 
@@ -57,11 +57,13 @@ From here, you could proceed with the Manual Deployment or the Ansible Deploymen
 
 System containers place systemd unit files in `/etc/systemd/system`, where they override the unit files from the packages baked into the image, so it's possible to install system containers built from other versions of Fedora. You could, for instance, build and run containers including the more recent (1.7.2) version of Kubernetes from rawhide from [these sources](https://github.com/projectatomic/atomic-system-containers).
 
+Keep in mind that unlike standard containers, which are stored under `/var/lib/docker` and may reside on a separate partition, system containers are stored in the root partition, so you may need to provide that partition with more space.
+
 # Deploy Kubernetes
 
 ## Kubeadm Deployment
 
-Kubeadm is a tool for bootstrapping Kubernetes clusters that's still [under development](https://kubernetes.io/docs/setup/independent/create-cluster-kubeadm/#kubeadm-maturity) by the Kubernetes project, but offers a really simple method of getting up and running with a single or multi-node cluster. Starting with the Kubernetes version that ships with Fedora Atomic 26, the kubeadm command is available in a Fedora package. It's not currently baked into the image, but you can install it using rpm-ostree package layering:
+Kubeadm is a tool for bootstrapping Kubernetes clusters that's still [under development](https://kubernetes.io/docs/setup/independent/create-cluster-kubeadm/#kubeadm-maturity) by the Kubernetes project, but offers a really simple method of getting up and running with a single or multi-node cluster. Starting with the Kubernetes version that ships with Fedora Atomic Host, the kubeadm command is available in a Fedora package. It's not currently baked into the image, but you can install it using rpm-ostree package layering:
 
 ```bash
 # rpm-ostree install kubernetes-kubeadm ethtool ebtables
@@ -115,7 +117,7 @@ I've opened [an issue](https://pagure.io/atomic/kubernetes-sig/issue/3) here to 
 
 ## Ansible Deployment
 
-For a more advanced installation option, the contrib repository of the upstream Kubernetes project contains [ansible scripts](https://github.com/kubernetes/contrib/tree/master/ansible) for deploying a Kubernetes cluster that work with Fedora Atomic Host 26 and its default Kubernetes packages, as well as with an Atomic Host with installed system containers.
+For a more advanced installation option, the contrib repository of the upstream Kubernetes project contains [ansible scripts](https://github.com/kubernetes/contrib/tree/master/ansible) for deploying a Kubernetes cluster that work with Fedora Atomic Host and its default Kubernetes packages, as well as with an Atomic Host with installed system containers.
 
 Grab the scripts by git cloning them:
 
@@ -154,7 +156,7 @@ For more information, check out the [README file](https://github.com/kubernetes/
 
 ## Manual Deployment
 
-Finally, the Project Atomic [Getting Started Guide](http://www.projectatomic.io/docs/gettingstarted/) provides manual directions for configuring a cluster that should work with a stock Fedora Atomic 26 host or with a host with Kubernetes installed via system containers.
+Finally, the Project Atomic [Getting Started Guide](http://www.projectatomic.io/docs/gettingstarted/) provides manual directions for configuring a cluster that should work with a stock Fedora Atomic Host or with a host with Kubernetes installed via system containers.
 
 # Openshift Origin
 

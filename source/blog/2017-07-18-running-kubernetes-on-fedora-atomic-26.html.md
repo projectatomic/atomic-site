@@ -1,5 +1,5 @@
 ---
-title: Running Kubernetes on Fedora Atomic 26
+title: Running Kubernetes on Fedora Atomic Host 26
 author: jbrooks
 date: 2017-07-18 23:12:57 UTC
 tags: kubernetes, ansible, kubeadm
@@ -7,7 +7,7 @@ comments: true
 published: true
 ---
 
-Fedora Atomic 26 relies on Kubernetes for automating deployment, scaling, and operations of application containers across clusters of hosts. Below is an overview of your options for installing and configuring Kubernetes clusters on Fedora Atomic hosts.
+Fedora Atomic Host 26 relies on Kubernetes for automating deployment, scaling, and operations of application containers across clusters of hosts. Below is an overview of your options for installing and configuring Kubernetes clusters on Fedora Atomic hosts.
 
 If you're looking to get up and running as quickly as possible with a Fedora Atomic-hosted Kubernetes cluster, skip ahead to the "Kubeadm Deployment" section below.
 
@@ -33,7 +33,7 @@ Similarly, if there is a newer Kubernetes version available in Fedora's updates-
 
 ## Use System Containers
 
-You can also install and Kubernetes using [system containers](http://www.projectatomic.io/blog/2016/09/intro-to-system-containers/), a new approach that will eventually replace baked-in Kubernetes packages in the atomic host. You can begin trying it out now, however:
+You can also install Kubernetes using [system containers](http://www.projectatomic.io/blog/2016/09/intro-to-system-containers/), a new approach that will eventually replace baked-in Kubernetes packages in the atomic host. You can begin trying it out now, however:
 
 ### Run on your kubernetes master
 
@@ -67,7 +67,7 @@ Kubeadm is a tool for bootstrapping Kubernetes clusters that's still [under deve
 # rpm-ostree install kubernetes-kubeadm ethtool ebtables
 ```
 
-After installing, you either have to reboot (using `systemctl reboot` or by tacking an `-r` onto the end of the install command above) or you can apply the changes using the experimental command `rpm-ostree ex livefs`.
+After installing, you either have to reboot (using `systemctl reboot` or by tacking an `-r` onto the end of the install command above) or you can skip the reboot and apply the changes using the experimental command `rpm-ostree ex livefs`.
 
 In order for kubeadm to work with SELinux in enforcing mode, you'll need to [for now](https://github.com/kubernetes/kubeadm/issues/279) create the following directory and set its SELinux context as follows:
 
@@ -115,7 +115,7 @@ I've opened [an issue](https://pagure.io/atomic/kubernetes-sig/issue/3) here to 
 
 ## Ansible Deployment
 
-The contrib repository of the upstream Kubernetes project contains [ansible scripts](https://github.com/kubernetes/contrib/tree/master/ansible) for deploying a Kubernetes cluster that work with Fedora Atomic 26 and its default Kubernetes packages, as well as with an Atomic Host with installed system containers.
+For a more advanced installation option, the contrib repository of the upstream Kubernetes project contains [ansible scripts](https://github.com/kubernetes/contrib/tree/master/ansible) for deploying a Kubernetes cluster that work with Fedora Atomic Host 26 and its default Kubernetes packages, as well as with an Atomic Host with installed system containers.
 
 Grab the scripts by git cloning them:
 

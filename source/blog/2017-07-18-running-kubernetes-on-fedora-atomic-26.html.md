@@ -33,27 +33,29 @@ Similarly, if there is a newer Kubernetes version available in Fedora's updates-
 
 ## Use System Containers
 
-You can install and run versions of Kubernetes packaged for different Fedora releases using [system containers](http://www.projectatomic.io/blog/2016/09/intro-to-system-containers/). For instance, you could run a newer version of Kubernetes from rawhide (currently 1.7.1) on your Fedora Atomic 26 host. System containers place systemd unit files in `/etc/systemd/system`, where they override the unit files from the packages baked into the image. The following system containers are available on my Docker Hub namespace, but you can build your own from [these sources](https://github.com/projectatomic/atomic-system-containers).
+You can also install and Kubernetes using [system containers](http://www.projectatomic.io/blog/2016/09/intro-to-system-containers/), a new approach that will eventually replace baked-in Kubernetes packages in the atomic host. You can begin trying it out now, however:
 
 ### Run on your kubernetes master
 
 ```bash
-# atomic install --system --system-package=no --name kube-apiserver docker.io/jasonbrooks/kubernetes-apiserver:rawhide
+# atomic install --system --system-package=no --name kube-apiserver registry.fedoraproject.org/f26/kubernetes-apiserver
 
-# atomic install --system --system-package=no --name kube-controller-manager docker.io/jasonbrooks/kubernetes-controller-manager:rawhide
+# atomic install --system --system-package=no --name kube-controller-manager registry.fedoraproject.org/f26/kubernetes-controller-manager
 
-# atomic install --system --system-package=no --name kube-scheduler docker.io/jasonbrooks/kubernetes-scheduler:rawhide
+# atomic install --system --system-package=no --name kube-scheduler registry.fedoraproject.org/f26/kubernetes-scheduler
 ```
 
 ### Run on your kubernetes node(s)
 
 ```bash
-# atomic install --system --system-package=no --name kubelet docker.io/jasonbrooks/kubernetes-kubelet:rawhide
+# atomic install --system --system-package=no --name kubelet registry.fedoraproject.org/f26/kubernetes-kubelet
 
-# atomic install --system --system-package=no --name kube-proxy docker.io/jasonbrooks/kubernetes-proxy:rawhide
+# atomic install --system --system-package=no --name kube-proxy registry.fedoraproject.org/f26/kubernetes-proxy
 ```
 
 From here, you could proceed with the Manual Deployment or the Ansible Deployment sections.
+
+System containers place systemd unit files in `/etc/systemd/system`, where they override the unit files from the packages baked into the image, so it's possible to install system containers built from other versions of Fedora. You could, for instance, build and run containers including the more recent (1.7.2) version of Kubernetes from rawhide from [these sources](https://github.com/projectatomic/atomic-system-containers).
 
 # Deploy Kubernetes
 
@@ -62,12 +64,12 @@ From here, you could proceed with the Manual Deployment or the Ansible Deploymen
 Kubeadm is a tool for bootstrapping Kubernetes clusters that's still [under development](https://kubernetes.io/docs/setup/independent/create-cluster-kubeadm/#kubeadm-maturity) by the Kubernetes project, but offers a really simple method of getting up and running with a single or multi-node cluster. Starting with the Kubernetes version that ships with Fedora Atomic 26, the kubeadm command is available in a Fedora package. It's not currently baked into the image, but you can install it using rpm-ostree package layering:
 
 ```bash
-# rpm-ostree install kubernetes-kubeadm
+# rpm-ostree install kubernetes-kubeadm ethtool ebtables
 ```
 
 After installing, you either have to reboot (using `systemctl reboot` or by tacking an `-r` onto the end of the install command above) or you can apply the changes using the experimental command `rpm-ostree ex livefs`.
 
-In order for kubeadm to work with SELinux in enforcing mode, you'll need to create the following directory and set its SELinux context as follows:
+In order for kubeadm to work with SELinux in enforcing mode, you'll need to [for now](https://github.com/kubernetes/kubeadm/issues/279) create the following directory and set its SELinux context as follows:
 
 ```bash
 # mkdir /etc/kubernetes/pki
@@ -75,7 +77,40 @@ In order for kubeadm to work with SELinux in enforcing mode, you'll need to crea
 # chcon -Rt container_share_t /etc/kubernetes/pki
 ```
 
-From here, you can follow the [upstream kubeadm documentation](https://kubernetes.io/docs/setup/independent/create-cluster-kubeadm/) to bring up a cluster.
+Also, kubeadm requires a different restart-on-fail behavior from the kubelet, so we'll need to add three lines to this drop-in file (this step won't be necessary once [this commit](http://pkgs.fedoraproject.org/cgit/rpms/kubernetes.git/commit/?id=e1f50eb5233848580ed354b1ec8b0c886ce8caaf) makes its way into the stable kubeadm rpm):
+
+```bash
+# vi /etc/systemd/system/kubelet.service.d/kubeadm.conf
+
+Restart=always
+StartLimitInterval=0
+RestartSec=10
+
+# systemctl daemon-reload
+```
+
+From here, you can follow the [upstream kubeadm documentation](https://kubernetes.io/docs/setup/independent/create-cluster-kubeadm/) to bring up a cluster. Note, though, that you'll have to append `--skip-preflight-checks` to the `kubeadm init` command because kubeadm currently does not know where to look for Fedora's kernel module configuration. See this [pull request](https://github.com/kubernetes/kubernetes/pull/49410) for more information.
+
+Also, most of the network plugins I've tested with Kubeadm have an issue running with SELinux confinement, which is one of the reasons why the upstream docs suggest putting SELinux into permissive mode. There are a couple of ways to avoid disabling this security feature on your host, however. I typically edit the yaml file that configures the network plugin to tell Kubernetes to run the plugin as type [`spc_t`](http://danwalsh.livejournal.com/74754.html), which leaves its containers unconfined by SELinux. 
+
+For instance, here's a portion of the Flannel plugin yaml that I've edited:
+
+```bash
+spec:
+  template:
+    metadata:
+      labels:
+        tier: node
+        app: flannel
+    spec:
+      securityContext:
+        seLinuxOptions:
+          type: "spc_t"
+      hostNetwork: true
+```
+The three lines beginning with `securityContext:` go in right before the `hostNetwork: true` line. This same trick should work in any of the network plugin yaml files.
+
+I've opened [an issue ](https://pagure.io/atomic/kubernetes-sig/issue/3) here to track efforts to get SELinux-compatible changes into these upstream plugins. Head over there to track progress or help out.
 
 ## Ansible Deployment
 
@@ -119,3 +154,7 @@ For more information, check out the [README file](https://github.com/kubernetes/
 ## Manual Deployment
 
 Finally, the Project Atomic [Getting Started Guide](http://www.projectatomic.io/docs/gettingstarted/) provides manual directions for configuring a cluster that should work with a stock Fedora Atomic 26 host or with a host with Kubernetes installed via system containers.
+
+# Openshift Origin
+
+Another set of routes to running Kubernetes on Fedora Atomic Host involve installing and configuring Openshift Origin, a container application platform built from Kubernetes. Openshift Origin's [`oc cluster up`](https://github.com/openshift/origin/blob/master/docs/cluster_up_down.md) command provides a similar experience to Kubeadm, and there are also [Anisble scripts available](http://www.projectatomic.io/blog/2016/12/part1-install-origin-on-f25-atomic-host/) for deploying a full-fledged cluster.

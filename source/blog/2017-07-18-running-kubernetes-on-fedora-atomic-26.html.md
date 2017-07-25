@@ -91,7 +91,7 @@ RestartSec=10
 
 From here, you can follow the [upstream kubeadm documentation](https://kubernetes.io/docs/setup/independent/create-cluster-kubeadm/) to bring up a cluster. Note, though, that you'll have to append `--skip-preflight-checks` to the `kubeadm init` command because kubeadm currently does not know where to look for Fedora's kernel module configuration. See this [pull request](https://github.com/kubernetes/kubernetes/pull/49410) for more information.
 
-Also, most of the network plugins I've tested with Kubeadm have an issue running with SELinux confinement, which is one of the reasons why the upstream docs suggest putting SELinux into permissive mode. There are a couple of ways to avoid disabling this security feature on your host, however. I typically edit the yaml file that configures the network plugin to tell Kubernetes to run the plugin as type [`spc_t`](http://danwalsh.livejournal.com/74754.html), which leaves its containers unconfined by SELinux. 
+Also, most of the network plugins I've tested with Kubeadm have an issue running with SELinux confinement, which is one of the reasons why the upstream docs suggest putting SELinux into permissive mode. There are a couple of ways to avoid disabling this security feature on your host, however. I typically edit the yaml file that configures the network plugin to tell Kubernetes to run the plugin as type [`spc_t`](http://danwalsh.livejournal.com/74754.html), which leaves its containers unconfined by SELinux.
 
 For instance, here's a portion of the Flannel plugin yaml that I've edited:
 
@@ -108,9 +108,10 @@ spec:
           type: "spc_t"
       hostNetwork: true
 ```
+
 The three lines beginning with `securityContext:` go in right before the `hostNetwork: true` line. This same trick should work in any of the network plugin yaml files.
 
-I've opened [an issue ](https://pagure.io/atomic/kubernetes-sig/issue/3) here to track efforts to get SELinux-compatible changes into these upstream plugins. Head over there to track progress or help out.
+I've opened [an issue](https://pagure.io/atomic/kubernetes-sig/issue/3) here to track efforts to get SELinux-compatible changes into these upstream plugins. Head over there to track progress or help out.
 
 ## Ansible Deployment
 

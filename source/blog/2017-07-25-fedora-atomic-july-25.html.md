@@ -168,17 +168,18 @@ Filename fetching URLs for downloading to remote systems are available by queryi
 For more information about the latest targets, please reference [the Fedora
 Cloud Wiki space](https://fedoraproject.org/wiki/Cloud#Quick_Links).
 
-The Vagrant Atlas page with the new atomic host:
+The Vagrant Cloud page with the new atomic host:
 
-* [All Fedora boxes](https://atlas.hashicorp.com/fedora/boxes/)
-* [Fedora Atomic 25](https://atlas.hashicorp.com/fedora/boxes/25-atomic-host/versions/20170418)
+* [All Fedora boxes](https://app.vagrantup.com/fedora/)
+* [Fedora Atomic 26](https://app.vagrantup.com/fedora/boxes/26-atomic-host/versions/26.20170723.0)
+
 
 ```
-vagrant init fedora/25-atomic-host; vagrant up
+vagrant init fedora/26-atomic-host; vagrant up
 ```
 
 or, if you already have the box, to get the new one:
 
 ```
-vagrant box update --box fedora/25-atomic-host
+vagrant box update --box fedora/26-atomic-host
 ```

@@ -115,6 +115,12 @@ The three lines beginning with `securityContext:` go in right before the `hostNe
 
 I've opened [an issue](https://pagure.io/atomic/kubernetes-sig/issue/3) here to track efforts to get SELinux-compatible changes into these upstream plugins. Head over there to track progress or help out.
 
+Another item to keep in mind for Kubeadm on Fedora Atomic Host is that the 1.13.x version of the docker container runtime that's stable in Fedora 26 [isn't yet validated](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG.md#external-dependency-version-information) for Kubernetes. Due to [this issue](https://github.com/kubernetes/kubernetes/issues/40182), you may have to run `sudo iptables -P FORWARD ACCEPT` on each Kubeadm node in order to access your services over the network.
+
+### Kubeadm system container
+
+It's also possible to run Kubeadm in a system container, although there isn't yet an official Fedora container image for this system container. Check out [this git pull request](https://github.com/projectatomic/atomic-system-containers/pull/96) for more information.
+
 ## Ansible Deployment
 
 For a more advanced installation option, the contrib repository of the upstream Kubernetes project contains [ansible scripts](https://github.com/kubernetes/contrib/tree/master/ansible) for deploying a Kubernetes cluster that work with Fedora Atomic Host and its default Kubernetes packages, as well as with an Atomic Host with installed system containers.

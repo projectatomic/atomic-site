@@ -7,9 +7,11 @@ comments: true
 published: true
 ---
 
-Fedora 26 Atomic Host relies on Kubernetes for automating deployment, scaling, and operations of application containers across clusters of hosts. Below is an overview of your options for installing and configuring Kubernetes clusters on Fedora Atomic Hosts.
+Fedora 26 Atomic Host relies on Kubernetes for automating deployment, scaling, and operations of application containers across clusters of hosts.
 
-If you're looking to get up and running as quickly as possible with a Fedora Atomic-hosted Kubernetes cluster, skip ahead to the "Kubeadm Deployment" section below.
+Getting up and running with Kubernetes on Fedora Atomic Host involves installing Kubernetes (or sticking with the version of the software that's currently baked into the images), and then configuring a cluster. This can be done manually, with the Kubeadm utility, or with Ansible scripts (among other methods).
+
+Below is an overview of your options for installing and configuring Kubernetes clusters on Fedora Atomic Hosts. If you're looking to get up and running as quickly as possible with a Fedora Atomic-hosted Kubernetes cluster, skip ahead to the "Kubeadm Deployment" section below. For a more configurable installation, check out the Ansible Deployment section.
 
 # Install Kubernetes
 

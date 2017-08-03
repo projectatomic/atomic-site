@@ -9,7 +9,7 @@ published: false
 
 # Introduction
 
-Earlier this month we put out the
+In July we put out the
 [first](http://www.projectatomic.io/blog/2017/07/fedora-atomic-26-release/)
 and
 [second](http://www.projectatomic.io/blog/2017/07/fedora-atomic-july-25/)
@@ -58,7 +58,7 @@ any free space:
 
 We can see that we have `22.60g` free and that our `atomicos/root`
 logical volume is `2.93g` in size. We'll go ahead and increase the
-size of the root volume group to 3 GiB.
+size of the root volume group by 3 GiB.
 
 ```nohighlight
 [vagrant@host ~]$ sudo lvresize --size=+3g --resizefs atomicos/root
@@ -239,9 +239,13 @@ will continue to be found by Kubernetes once you've completed your upgrade.
 
 ### Moving To etcd3
 
-If you later wish to migrate your etcd data to the v3 api, stop your
-etcd and kube-apiserver services and run the following command to
+If you later wish to migrate your etcd data to the v3 API, stop your
+etcd and kube-apiserver services and, run the following command to
 migrate to etcd3:
+
+**NOTE:** The following command assumes your data is stored in
+          `/var/lib/etcd`.
+
 
 ```nohighlight
 # ETCDCTL_API=3 etcdctl --endpoints https://YOUR-ETCD-IP:2379 migrate --data-dir=/var/lib/etcd
@@ -259,7 +263,8 @@ to keep updating the `fedora-atomic/25/x86_64/docker-host`
 ref every day when Bodhi runs within Fedora. A new update will
 get created every day. However, we recommend you upgrade to Fedora 26,
 because we are focusing future testing and development efforts on on
-Fedora 26 Atomic Host.
+Fedora 26 Atomic Host and thus the Fedora 25 OSTrees don't get
+tested.
 
 
 # Conclusion

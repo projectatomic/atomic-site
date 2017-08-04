@@ -9,9 +9,11 @@ published: true
 
 The [Fedora Atomic Working Group](https://fedoraproject.org/wiki/Atomic_WG), a major part of Project Atomic, is changing where to join and participate, including mailing lists, IRC, and where to work on Kubernetes integration. Among other things, the Fedora team is becoming more tightly integrated with the rest of Atomic ... and vice-versa.  Read on for details.
 
+READMORE
+
 ## The Atomic WG and Fedora Cloud
 
-The Atomic Working Group is responsible for Fedora's Fedora Atomic Host and the [Fedora Layered Images Build System](https://fedoraproject.org/wiki/Changes/Layered_Docker_Image_Build_Service) & [Repository](https://fedoraproject.org/wiki/Atomic/FLIBS_Catalog) (FLIBS).  As Atomic is now one of the three primary spins for Fedora, the WG spends most of its time on releases and integrating new container technologies into the OS.
+The Atomic Working Group is responsible for Fedora's Fedora Atomic Host and the Fedora Layered Images Build System](https://fedoraproject.org/wiki/Changes/Layered_Docker_Image_Build_Service) & [Repository](https://fedoraproject.org/wiki/Atomic/FLIBS_Catalog) (FLIBS).  As Atomic is now one of the three primary spins for Fedora, the WG spends most of its time on releases and integrating new container technologies into the OS.
 
 At Flock to Fedora 2016, the Atomic WG was split off from the Cloud Working Group, and became its own team with its own PRD.  However, we continued to use the #fedora-cloud IRC channel and the cloud@ mailing list, as we gradually transitioned responsibility for the cloud images to a smaller, [dedicated Cloud WG](https://fedoraproject.org/wiki/Cloud).  Having separated responsibilities entirely, it's now time for us to start using our own channels to communicate.
 

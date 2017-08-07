@@ -1,5 +1,5 @@
 ---
-title: Buildah Blocks Getting Fit
+title: Buildah Blocks &mdash; Getting Fit
 author: tsweeney
 date: 2017-08-07 13:00:00 UTC
 tags: buildah, fedora, containers

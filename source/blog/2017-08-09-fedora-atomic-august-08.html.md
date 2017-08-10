@@ -15,7 +15,7 @@ Version: 26.101
 ```
 
 In this release we have fixed [an issue](https://pagure.io/atomic-wg/issue/307)
-with our qcow and vagrant images from the 20170723 images. If you used the qcow 
+with our qcow and vagrant images from the 20170723 release. If you used the qcow 
 or vagrant images from that release then please make sure you are
 following the `fedora/26/x86_64/atomic-host` ref. See [this](https://pagure.io/atomic-wg/issue/307)
 Atomic Working Group issue for more details.
@@ -103,7 +103,7 @@ Corresponding image media for new installations can be
 
 Respective signed CHECKSUM files can be found here:
 
-* [Cloud image checksum](https://alt.fedoraproject.org/pub/alt/atomic/stable/Fedora-Atomic-26-20170807.0/Atomic/x86_64/iso/Fedora-Atomic-26-20170807.0-x86_64-CHECKSUM)
+* [Cloud image checksums](https://alt.fedoraproject.org/pub/alt/atomic/stable/Fedora-Atomic-26-20170807.0/CloudImages/x86_64/images/Fedora-CloudImages-26-20170807.0-x86_64-CHECKSUM)
 * [ISO Checksum](https://alt.fedoraproject.org/pub/alt/atomic/stable/Fedora-Atomic-26-20170807.0/Atomic/x86_64/iso/Fedora-Atomic-26-20170807.0-x86_64-CHECKSUM)
 
 For direct download, the "latest" targets are always available at the following URLs:

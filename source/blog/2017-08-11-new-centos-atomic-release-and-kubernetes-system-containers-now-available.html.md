@@ -72,10 +72,5 @@ The CentOS Atomic Host image follows the upstream Red Hat Enterprise Linux Atomi
 
 CentOS Atomic Host is produced by the [CentOS Atomic SIG](http://wiki.centos.org/SpecialInterestGroup/Atomic), based on upstream work from  [Project Atomic](http://www.projectatomic.io/). If you'd like to work on testing images, help with packaging, documentation -- join us! 
 
-The SIG meets weekly on Thursdays at 16:00 UTC in the #centos-devel channel, and you'll often find us in #atomic and/or #centos-devel if you have questions. You can also join the [atomic-devel](https://lists.projectatomic.io/mailman/listinfo/atomic-devel) mailing list if you'd like to discuss the direction of Project Atomic, its components, or have other questions. 
+The SIG meets every two weeks on Tuesday at 04:00 UTC in #centos-devel, and on the alternating weeks, meets as part of the Project Atomic community meeting at 16:00 UTC on Monday in the #atomic channel. You'll often find us in #atomic and/or #centos-devel if you have questions. You can also join the [atomic-devel](https://lists.projectatomic.io/mailman/listinfo/atomic-devel) mailing list if you'd like to discuss the direction of Project Atomic, its components, or have other questions.
 
-## Getting Help
-
-If you run into any problems with the images or components, feel free to ask on the [centos-devel](http://lists.centos.org/mailman/listinfo/centos-devel) mailing list. 
-
-Have questions about using Atomic? See the [atomic](https://lists.projectatomic.io/mailman/listinfo/atomic) mailing list or find us in the #atomic channel on Freenode.

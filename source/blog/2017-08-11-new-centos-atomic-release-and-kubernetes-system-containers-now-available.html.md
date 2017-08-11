@@ -11,6 +11,8 @@ Last week, the CentOS Atomic SIG released an [updated version](https://wiki.cent
 
 The release, which came as part of the monthly CentOS release stream, was a modest one, including only a single [glibc bugfix update](https://lists.centos.org/pipermail/centos-announce/2017-July/022505.html). The next Atomic Host release will be based on the [RHEL 7.4 source code](https://seven.centos.org/2017/08/centos-linux-7-1708-based-on-rhel-7-4-source-code/) and will include support for overlayfs container storage, among other enhancements.
 
+READMORE
+
 Outside of the Atomic Host itself, the SIG has updated its Kubernetes container images to be usable as [system containers](http://www.projectatomic.io/blog/2016/09/intro-to-system-containers/). What's more, in addition to the Kubernetes 1.5.x-based containers that derive from RHEL, the Atomic SIG is now producing packages and containers that provide the current 1.7.x version of Kubernetes.
 
 ## Containerized Master
@@ -70,7 +72,6 @@ The CentOS Atomic Host image follows the upstream Red Hat Enterprise Linux Atomi
 
 ## Getting Involved
 
-CentOS Atomic Host is produced by the [CentOS Atomic SIG](http://wiki.centos.org/SpecialInterestGroup/Atomic), based on upstream work from  [Project Atomic](http://www.projectatomic.io/). If you'd like to work on testing images, help with packaging, documentation -- join us! 
+CentOS Atomic Host is produced by the [CentOS Atomic SIG](http://wiki.centos.org/SpecialInterestGroup/Atomic), based on upstream work from  [Project Atomic](http://www.projectatomic.io/). If you'd like to work on testing images, help with packaging, documentation -- join us!
 
 The SIG meets every two weeks on Tuesday at 04:00 UTC in #centos-devel, and on the alternating weeks, meets as part of the Project Atomic community meeting at 16:00 UTC on Monday in the #atomic channel. You'll often find us in #atomic and/or #centos-devel if you have questions. You can also join the [atomic-devel](https://lists.projectatomic.io/mailman/listinfo/atomic-devel) mailing list if you'd like to discuss the direction of Project Atomic, its components, or have other questions.
-

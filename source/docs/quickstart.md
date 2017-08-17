@@ -101,12 +101,13 @@ virt-install --name atomic-host \
 --vcpus 4 \
 --disk path=/var/lib/libvirt/images/Fedora-Atomic-26/Fedora-Atomic-26-20170723.0.x86_64.qcow2 \
 --os-type linux \
---os-variant fedora25 \ # at the time of this writing, fedora26 has not yet been implemented as an option
+--os-variant fedora25 \
 --network bridge=virbr0 \
---graphics vnc,listen=127.0.0.1,port=5901 \ # you can tunnel vnc through ssh
+--graphics vnc,listen=127.0.0.1,port=5901 \
 --cdrom /var/lib/libvirt/images/Fedora-Atomic-26/init.iso \
 --noautoconsole
 ```
+>Example notes: At the time of this writing, "fedora26" has not yet been implemented as an option in the os-variant parameter, so the example above will use "fedora25" as the os-variant parameter value instead. For the graphics parameter, we're setting the vnc listener to localhost because it's more secure to tunnel your VNC connection through SSH so that you don't expose VNC to anyone with access to the network.
 
 ### Creating with VirtualBox
 

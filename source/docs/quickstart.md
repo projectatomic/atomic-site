@@ -56,8 +56,7 @@ You'll add this ISO as a CD-ROM device in the virtual machine.
 
 ## Create the Atomic host virtual machine
 
-We'll start with the QCOW2 format image for both virt-manager and VirtualBox.  For virt-manager, you will use this image directly. For VirtualBox, convert the QCOW2 to VDI in order to create an image suitable for VirtualBox.
-
+We'll start with the QCOW2 format image for either virt-manager, virt-install, or VirtualBox.  For virt-manager and virt-install, you will use this image directly. For VirtualBox, convert the QCOW2 to VDI in order to create an image suitable for VirtualBox.
 
 ````
 $ qemu-img convert -f qcow2 [filename].qcow2 -O vdi [filename].vdi
@@ -86,12 +85,29 @@ Here's how to get started with Atomic on your machine using virt-manager on Linu
 
 **Note**: When running virt-manager on Red Hat Enterprise Linux 6 or CentOS 6, the VM **will not boot** until the disk storage format is changed from raw to qcow2.
 
-
 #### Adding the CD-ROM device for the metadata source
 
 1. In the virt-manager GUI, click to open your Atomic machine. Then on the top bar click *View > Details*
 2. Click on *Add Hardware* on the bottom left corner.
 3. Choose *Storage*, and *Select managed or other existing storage*. Browse and select the `init.iso` image you created. Change the *Device type* to CD-ROM device.  Click on *Finish* to create and attach this storage.
+
+### Creating with virt-install (Command-Line Method)
+1. Use the following example virt-install command, **modifying each parameter to fit
+your requirements**.  In this example, a new directory, `Fedora-Atomic-26/`, was created under `/var/lib/libvirt/images` so that the `init.iso` created earlier, the vm image `Fedora-Atomic-26-20170723.0.x86_64.qcow2`, the `meta-data` file, and the `user-data` file are all in one folder.
+```
+virt-install --name atomic-host \
+--description 'Fedora Atomic Host' \
+--ram 4096 \
+--vcpus 4 \
+--disk path=/var/lib/libvirt/images/Fedora-Atomic-26/Fedora-Atomic-26-20170723.0.x86_64.qcow2 \
+--os-type linux \
+--os-variant fedora25 \
+--network bridge=virbr0 \
+--graphics vnc,listen=127.0.0.1,port=5901 \
+--cdrom /var/lib/libvirt/images/Fedora-Atomic-26/init.iso \
+--noautoconsole
+```
+>Example notes: At the time of this writing, "fedora26" has not yet been implemented as an option in the os-variant parameter, so the example above will use "fedora25" as the os-variant parameter value instead. For the graphics parameter, we're setting the vnc listener to localhost because it's more secure to tunnel your VNC connection through SSH so that you don't expose VNC to anyone with access to the network.
 
 ### Creating with VirtualBox
 
@@ -115,6 +131,12 @@ Here's how to get started with Atomic on your machine using VirtualBox on Window
 
 Boot the virtual machine with the CD-ROM attached and cloud-init will populate the default user information with the password or SSH keys you provided in the `user-data` file. **For a Fedora image, the default user is `fedora`, for CentOS the default user is `centos`.**
 
+If you created the Atomic host with `virt-manager` or `virt-install` and wish to access
+the VM from the command-line, you can use `virsh console`:
+```
+virsh console atomic-host # where "atomic-host" is the name of the vm;
+```
+
 Once you've booted and logged in to your Atomic host, you can update the system software with `$ sudo rpm-ostree upgrade` to pull in any updates.
 
 ### Add and configure storage for Docker
@@ -128,6 +150,40 @@ Docker is ready to go at this point, but there's another fairly important bit of
 2. Click the Add Hardware. The Add New Virtual Hardware dialog box will open.
 
 3. Select Storage, change disk size to what you want, change bus type to VirtIO, and click Finish. The Add New Virtual Hardware dialog box will close.
+
+#### Add a New Drive (qemu-img and virsh) from Command-Line
+
+1. Create the New Disk Image.  Change the disk size to what you want.
+```
+qemu-img create -f qcow2 atomic-host-disk2-8G 8G
+```
+Expected Output:
+```
+Formatting 'atomic-host-disk2-8G', fmt=qcow2 size=8589934592 encryption=off cluster_size=65536 lazy_refcounts=off refcount_bits=16
+```
+2. Figure out what device names are available **inside the guest VM**
+```
+fdisk -l | grep '^Disk /dev/vd[a-z]'
+```
+Expected Output:
+```
+Disk /dev/vda: 6 GiB, 6442450944 bytes, 12582912 sectors
+```
+If your vm just has /dev/vda, then you would use `vdb` in the next step.  If
+vdb is taken, you would use `vdc`, and so on.
+
+3. Attach the disk to the VM **from the host**
+```
+virsh attach-disk atomic-host \
+--source /var/lib/libvirt/images/Fedora-Atomic-26/atomic-host-disk2-8G \
+--target vdb \
+--targetbus virtio \
+--persistent
+```
+Expected Output:
+```
+Disk attached successfully
+```
 
 #### Add A New Drive in VirtualBox
 

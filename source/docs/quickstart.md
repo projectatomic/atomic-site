@@ -134,10 +134,10 @@ Here's how to get started with Atomic on your machine using VirtualBox on Window
 Boot the virtual machine with the CD-ROM attached and cloud-init will populate the default user information with the password or SSH keys you provided in the `user-data` file. **For a Fedora image, the default user is `fedora`, for CentOS the default user is `centos`.**
 
 If you created the Atomic host with `virt-manager` or `virt-install` and wish to access
-the VM from the command-line, you can use `virsh console`:
+the VM from the command-line, you can use `virsh console` (where "atomic-host" is the name of the vm):
 
 ````
-virsh console atomic-host # where "atomic-host" is the name of the vm;
+virsh console atomic-host;
 ````
 
 Once you've booted and logged in to your Atomic host, you can update the system software with `$ sudo rpm-ostree upgrade` to pull in any updates.
@@ -158,36 +158,34 @@ Docker is ready to go at this point, but there's another fairly important bit of
 
 1. Create the New Disk Image.  Change the disk size to what you want.
 
-````
+```
 qemu-img create -f qcow2 atomic-host-disk2-8G 8G
-````
-Expected Output:
-````
+
 Formatting 'atomic-host-disk2-8G', fmt=qcow2 size=8589934592 encryption=off cluster_size=65536 lazy_refcounts=off refcount_bits=16
-````
+```
+
 2. Figure out what device names are available **inside the guest VM**
-````
+
+```
 fdisk -l | grep '^Disk /dev/vd[a-z]'
-````
-Expected Output:
-````
+
 Disk /dev/vda: 6 GiB, 6442450944 bytes, 12582912 sectors
-````
+```
+
 If your vm just has /dev/vda, then you would use `vdb` in the next step.  If
 vdb is taken, you would use `vdc`, and so on.
 
 3. Attach the disk to the VM **from the host**
-````
+
+```
 virsh attach-disk atomic-host \
 --source /var/lib/libvirt/images/Fedora-Atomic-26/atomic-host-disk2-8G \
 --target vdb \
 --targetbus virtio \
 --persistent
-````
-Expected Output:
-````
+
 Disk attached successfully
-````
+```
 
 #### Add A New Drive in VirtualBox
 

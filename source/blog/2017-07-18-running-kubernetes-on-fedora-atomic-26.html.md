@@ -40,19 +40,19 @@ You can also install Kubernetes using [system containers](http://www.projectatom
 ### Run on your kubernetes master
 
 ```bash
-# atomic install --system --system-package=no --name kube-apiserver registry.fedoraproject.org/f26/kubernetes-apiserver
+# atomic install --system --system-package=no --name kube-apiserver candidate-registry.fedoraproject.org/f26/kubernetes-apiserver
 
-# atomic install --system --system-package=no --name kube-controller-manager registry.fedoraproject.org/f26/kubernetes-controller-manager
+# atomic install --system --system-package=no --name kube-controller-manager candidate-registry.fedoraproject.org/f26/kubernetes-controller-manager
 
-# atomic install --system --system-package=no --name kube-scheduler registry.fedoraproject.org/f26/kubernetes-scheduler
+# atomic install --system --system-package=no --name kube-scheduler candidate-registry.fedoraproject.org/f26/kubernetes-scheduler
 ```
 
 ### Run on your kubernetes node(s)
 
 ```bash
-# atomic install --system --system-package=no --name kubelet registry.fedoraproject.org/f26/kubernetes-kubelet
+# atomic install --system --system-package=no --name kubelet candidate-registry.fedoraproject.org/f26/kubernetes-kubelet
 
-# atomic install --system --system-package=no --name kube-proxy registry.fedoraproject.org/f26/kubernetes-proxy
+# atomic install --system --system-package=no --name kube-proxy candidate-registry.fedoraproject.org/f26/kubernetes-proxy
 ```
 
 From here, you could proceed with the Manual Deployment or the Ansible Deployment sections.

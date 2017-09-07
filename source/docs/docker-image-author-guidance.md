@@ -23,9 +23,9 @@ an image.  A `Dockerfile` is made up of <i>instructions</i>, several of which wi
 You can find the complete `Dockerfile` instruction reference
 [here](https://docs.docker.com/engine/reference/builder/).
 
-## Use `MAINTAINER`
+## Use `LABEL maintainer`
 
-The `MAINTAINER` instruction sets the <i>Author</i> field of the image.  This is useful for
+The `LABEL maintainer` instruction sets the <i>Author</i> field of the image.  This is useful for
 providing an email contact for your users if they have questions for you.
 
 ## Know the Differences Between CMD and ENTRYPOINT

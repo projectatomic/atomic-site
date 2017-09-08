@@ -25,8 +25,10 @@ You can find the complete `Dockerfile` instruction reference
 
 ## Use `MAINTAINER`
 
-The `MAINTAINER` instruction sets the <i>Author</i> field of the image.  This is useful for
-providing an email contact for your users if they have questions for you.
+The `MAINTAINER` instruction sets the <i>Author</i> field of the image. This is useful for
+providing an email contact for your users if they have questions for you. The `LABEL` version is a much more flexible version of this and you should use this instead, as it enables setting any metadata you require and can be viewed easily. To set a label corresponding to the `MAINTAINER` field you could use: 
+
+    # LABEL maintainer="email@example.com"
 
 ## Know the Differences Between CMD and ENTRYPOINT
 

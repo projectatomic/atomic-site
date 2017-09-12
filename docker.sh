@@ -1,4 +1,6 @@
 #!/bin/bash
+set -euo pipefail
+
 # install everything in a docker container based on Fedora 25
 # permit to have the same env on any system without any issue
 

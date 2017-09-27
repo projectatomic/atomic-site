@@ -7,9 +7,9 @@ comments: true
 published: true
 ---
 
-![][1]
-
 The Fedora 27 Beta is getting close to release, and the [Fedora Atomic Working Group][2] and [Fedora Cloud SIG][3] want to get the community together next week to find and squash bugs. We are organizing a test day for Friday, September 29th.
+
+READMORE
 
 During the Test Day, participants can test both Atomic Host content and Fedora Cloud Base content. Vagrant Boxes will be available to test with as well. See the [wiki page][4] for links to artifacts for Atomic Host and Cloud Base Images. We have qcow2, AMIs, and ISO images ready for testing.
 

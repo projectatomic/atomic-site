@@ -21,6 +21,6 @@ Also, while not strictly part of Atomic, [Container Migration](https://osseu17.s
 looks pretty cool.  Plus, come visit the Red Hat booth where Cockpit contributors will
 demonstrate the latest releases of the most modern server GUI.
 
-**Usenix LISA**: We will have a BOF on the evening of November 1st on Migrating to
-Containers, OpenShift, or Atomic Host.  Join us in the Garden Room at 7pm.  Plus,
+**Usenix LISA**: On Sunday, you can choose between [two workshops](https://www.usenix.org/conference/lisa17/training-program): Mark Lamourine's *Container Hosts: CoreOS and Project Atomic* and Ryan Jarvinen's *Hands-on Intro to Kubernetes*  We will also have a [BOF on the evening of Wednesday, November 1st](https://www.usenix.org/conference/lisa17/bofs) on Migrating to
+Containers, OpenShift, or Atomic Host.  Join us in the Garden Room at 7pm. Then on Friday you can learn about [OpenSCAP](https://www.usenix.org/conference/lisa17/conference-program/presentation/preisler) with Martin Preisler and Marek Haicman. Plus,
 we'll have Atomic Host and OpenShift contributors at the Red Hat booth.

@@ -10,8 +10,11 @@ GEM
       tzinfo (~> 1.1)
     addressable (2.3.8)
     asciidoctor (1.5.6.1)
-    bootstrap-sass (3.0.0.0)
-      sass (~> 3.2)
+    autoprefixer-rails (7.1.6)
+      execjs
+    bootstrap-sass (3.3.7)
+      autoprefixer-rails (>= 5.2.1)
+      sass (>= 3.3.4)
     builder (3.2.3)
     celluloid (0.16.0)
       timers (~> 4.0.0)
@@ -207,7 +210,7 @@ PLATFORMS
 
 DEPENDENCIES
   asciidoctor
-  bootstrap-sass (= 3.0.0.0)
+  bootstrap-sass (~> 3)
   builder (~> 3.0)
   chronic
   coderay

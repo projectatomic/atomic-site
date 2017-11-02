@@ -17,7 +17,7 @@ tags:
 
 I've been working with Linux containers at Red Hat since OpenShift built containers using what it called cartridges. Red Hat had made use of the technology when they acquired Makara. With the help of some colleagues in Redwood City I built a Red Hat MRG Messaging (Qpid) broker cartridge. When OpenShift moved to Docker, in 2013, I contributed all of the original Docker man pages. I also got to contribute some of the original content to the [Project Atomic](https://www.projectatomic.io/) web site. 
 
-I'm very excited to see the Project Atomic efforts in the area of the Open Container Initiative (OCI), and specifically Buildah. After trying out Buildah I discovered I had the start of a pretty useful introductory turtorial. I decided to see if I could contribute that content upstream. The pull request (#302) was merged recently. So let's get started.
+I'm very excited to see the Project Atomic efforts in the area of the Open Container Initiative (OCI), and specifically Buildah. After trying out Buildah I discovered I had the start of a pretty useful introductory turtorial. I decided to see if I could contribute that content [upstream](https://github.com/projectatomic/buildah/blob/master/docs/tutorials/01-intro.md). The pull request was merged recently. So let's get started.
  
 ## Building OCI container images
 

@@ -7,7 +7,7 @@ comments: false
 tags: atomic, fedora, docker, CRI-O
 ---
 
-The Fedora Atomic Working Group needs your help to decide how Docker will be included in Fedora Atomic Host in the future.  If you're already familiar with this issue, you can [skip straight to the survey]().  Otherwise, read on for some background.
+The Fedora Atomic Working Group needs your help to decide how Docker will be included in Fedora Atomic Host in the future.  If you're already familiar with this issue, you can [skip straight to the survey](https://goo.gl/forms/2WTX3EHTX6IxVldp1).  Otherwise, read on for some background.
 
 READMORE
 
@@ -34,6 +34,6 @@ atomic install --system docker
 
 Given this tradeoff, we need to know how this possible change would affect Atomic Host users.  Will it make life simpler for you, not affect you at all, or blow up your infrastructure and cause you to migrate to RancherOS?  Let us know by filling out our [survey]() on your Docker and Atomic Host usage.
 
-If you want to express additional opinions about this change, you can talk to Atomic Host developers directly, either on channel [#atomic on irc.freenode.net](), or on email at [atomic-devel@projectatomic.io]().  Or you can comment on [this Pagure issue]().
+If you want to express additional opinions about this change, you can talk to Atomic Host developers directly, either on channel [#atomic on irc.freenode.net](https://webchat.freenode.net/), or on email at [atomic-devel@projectatomic.io](https://lists.projectatomic.io/mailman/listinfo/atomic-devel).  Or you can comment on [this Pagure issue](https://pagure.io/atomic-wg/issue/360).
 
-Note that we are currently only discussing this change for Fedora Atomic Host.  CentOS Atomic Host and Red Hat Atomic host might or might not adopt the same change at some later date, depending on their strategies.  To support this change, we would also simplify the commands for installing system containers.
+*Note that we are currently only discussing this change for Fedora Atomic Host.  CentOS Atomic Host and Red Hat Atomic host might or might not adopt the same change at some later date, depending on their strategies.  To support this change, we would also simplify the commands for installing system containers.*

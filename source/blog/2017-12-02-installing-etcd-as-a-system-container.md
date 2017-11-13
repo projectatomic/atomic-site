@@ -29,7 +29,7 @@ Let's install the [etcd system container](https://admin.fedoraproject.org/pkgdb/
 [Fedora Layered Image Build System](https://docs.pagure.org/releng/layered_image_build_service.html) with the following command:
 
 ```
-$ sudo atomic install --system --storage ostree --name=etcd registry.fedoraproject.org/f26/etcd:latest
+$ sudo atomic install --system --name=etcd registry.fedoraproject.org/f26/etcd:latest
 Pulling layer 01aae00bf9e4a7301133bac6641015fc1677a19ef13844f5b274cf6233515fdf
 Pulling layer 9dbaf15c249f7ed8a76b8f2b785cc603172af8271e18cf28884bca36f7e39311
 Extracting to /var/lib/containers/atomic/etcd.0
@@ -46,7 +46,6 @@ What did we do? Let's break it down:
 * ``sudo atomic``: We are executing the atomic command with root privileges
 * ``install``: We are denoting we want to install a container
 * ``--system``: And the type of the container we want to install is a system container
-* ``--storage ostree``: We'd like the image to be stored in ostree
 * ``--name etcd``: The name of the container should be etcd
 * ``registry.fedoraproject.org/f26/etcd:latest``: This is the image to use when creating the container
 
@@ -102,7 +101,7 @@ to install the etcd container with, say, ``ETCD_DEBUG`` set to ``true`` and
 ``ETCD_SNAPSHOT_COUNT`` set to ``10500`` we would do the following install command:
 
 ```
-$ sudo atomic install --system --storage ostree --name=etcd \
+$ sudo atomic install --system --name=etcd \
   --set ETCD_DEBUG=true \
   --set ETCD_SNAPSHOT_COUNT=10500 \
   registry.fedoraproject.org/f26/etcd:latest

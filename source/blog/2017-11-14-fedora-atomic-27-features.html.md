@@ -21,7 +21,7 @@ READMORE
 * **One Big OverlayFS2 Volume**: New Atomic Host systems will now get a single filesystem volume by default, which will share binaries, system containers, and OCI/docker containers using OverlayFS2.  Users who need to partition container images and storage onto a separate volume can still do so using kickstart options and `container-storage-setup` configuration.
 * **OSTree Package Layering Improvements**: RPM-OStree has added two capabilities supporting modifying individula systems: [remove and replace overrides](/blog/2017/07/rpm-ostree-v2017.7-released/), and [LiveFS layering](/blog/2017/06/rpm-ostree-v2017.6-released/).
 
-With the release of Fedora 27 Atomic Host, updates to the Fedora 26 Atomic Host will be strictly on a best-effort basis.  As such, we strongly encourage users to upgrade to the new release soon. We will have several blog posts addressing specific upgrade steps over the next few days.
+With the release of Fedora 27 Atomic Host, updates to the Fedora 26 Atomic Host will be strictly on a best-effort basis.  As such, we strongly encourage users to upgrade to the new release soon. Our upgrade guide begins with [this post](/blog/2017/11/fedora-atomic-26-to-27-upgrade/).
 
 ## Release Details
 
@@ -38,8 +38,8 @@ that x86_64 architecture is the only one that undergoes automated
 testing at this time.
 
 Existing systems can be upgraded in place via `atomic host rebase`, `atomic host upgrade` or
-`atomic host deploy`.  However, see the Upgrading post in this blog for more information
-about upgrading from Fedora 26.
+`atomic host deploy`.  However, see the Upgrading post in this blog for [more information
+about upgrading from Fedora 26](/blog/2017/11/fedora-atomic-26-to-27-upgrade/).
 
 Corresponding image media for new installations can be [downloaded from Fedora](https://getfedora.org/en/atomic/download/).
 

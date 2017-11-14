@@ -26,6 +26,8 @@ For today we'll talk about updating an existing Fedora 26 Atomic Host
 system to Fedora 27. We'll cover preparing the system for upgrade and
 performing the upgrade.
 
+READMORE
+
 **NOTE:** If you really don't want to upgrade to Fedora 26 see the
           end section: *Appendix B: Fedora 26 Atomic Host Life Support*.
 

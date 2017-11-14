@@ -1,46 +1,89 @@
 ---
-title: Fedora 27 Atomic Features
+title: Fedora 27 Atomic Released
 author: jberkus
-date: 2017-11-13 14:00:00 UTC
+date: 2017-11-14 16:00:00 UTC
 published: true
 comments: false
-tags: atomic, fedora, ostree, ARM, kubernetes
+tags: atomic, fedora, ostree, ARM, PPC, kubernetes, workstation
 ---
 
-[Fedora 27 Atomic Host](https://getfedora.org/en/atomic/download/) is now available, and the project has included a bunch of changes and features to make it an even better platform for your container cloud.  Highlights of this version include multi-architecture support, containerized Kubernetes, a single OverlayFS volume by default, and new OSTree layering capabilities.
+[Fedora 27 Atomic Host](https://getfedora.org/en/atomic/download/) is now available.  Highlights of this version include multi-architecture support, containerized Kubernetes, a single OverlayFS volume by default, and new OSTree layering capabilities.
 
 Over the next week or so, we will have additional posts on each of these features, giving technical details and use-cases.  But today, for the release, we'll have quick summary of the major changes.
 
-Multi-Architecture Support
---------------------------
+READMORE
 
-Thanks to tremendous efforts across the Fedora project, Fedora 27 Atomic Host is available for [64-bit ARM]() and [Power8]() processor architectures as well as 64-bit Intel (i.e. AArch64, ppc64le and x86_64).  Not only are we distributing ISOs and cloud images for all three architectures, we will also be providing two-week OSTree updates for them as well.  More on this in a later post.
+## Features
 
-Containerized Kubernetes
--------------------------
+* **Multi-Architecture Support**: Fedora 27 Atomic Host is available for [64-bit ARM]() and [Power8]() processor architectures as well as 64-bit Intel (i.e. AArch64, ppc64le and x86_64).  Not only are we distributing ISOs and cloud images for all three architectures, we will also be providing two-week OSTree updates for them as well.
+* **Containerized Kubernetes**: As planned, the Kubernetes binaries have been removed from the base image for Atomic Host.  This change both shrinks the base image size, and allows users to install the container orchestration platform and version of their choice, whether it's Kubernetes, OpenShift, or something else.  Look for a blog post tommorrow on how to migrate your Kubernetes install.
+* **Atomic Workstation Updates**: For over a year, Fedora contributors have been experimenting with an RPM-OStree build of Fedora Workstation, with all of their applications running in containers or Flatpaks. This build, now called "Atomic Workstation", will be receiving regular updates starting with this release.
+* **One Big OverlayFS2 Volume**: New Atomic Host systems will now get a single filesystem volume by default, which will share binaries, system containers, and OCI/docker containers using OverlayFS2.  Users who need to partition container images and storage onto a separate volume can still do so using kickstart options and `container-storage-setup` configuration.
+* **OSTree Package Layering Improvements**: RPM-OStree has added two capabilities supporting modifying individula systems: [remove and replace overrides](/blog/2017/07/rpm-ostree-v2017.7-released/), and [LiveFS layering](/blog/2017/06/rpm-ostree-v2017.6-released/).
 
-As planned, the Kubernetes binaries have been removed from the base image for Atomic Host.  This change both shrinks the base image size, and allows users to install the container orchestration platform and version of their choice, whether it's Kubernetes, OpenShift, or something else.
+With the release of Fedora 27 Atomic Host, updates to the Fedora 26 Atomic Host will be strictly on a best-effort basis.  As such, we strongly encourage users to upgrade to the new release soon. We will have several blog posts addressing specific upgrade steps over the next few days.
 
-Users will now need to install Kubernetes using package layering, or, preferably, as [system containers](/blog/2017/09/running-kubernetes-on-fedora-atomic-26/).  To support this, the Fedora Layered Image Build System (FLIBS) [repository](https://fedoraproject.org/wiki/Atomic/FLIBS_Catalog) now includes supported system container images for Kubernetes, etcd, and flannel.  Look for a blog post soon which will explain how to migrate from Fedora 26 Atomic's built-in Kubernetes to the new version.
+## Release Details
 
-"Atomic Workstation" Updates
-------------------
+The OSTree update hash for Fedora 27 Atomic is:
 
-For over a year, Fedora contributors have been experimenting with an RPM-OStree build of Fedora Workstation, with all of their applications running in containers or Flatpaks. This spin is informally known as "Atomic Workstation." We are now expanding that experiment, by [offering regular automated updates]() to the Atomic Workstation image and OStree refs, starting with Fedora 27.  While not yet ready for most users, Atomic Workstation offers benefits, such as rollback, to developers who want to test the latest builds of Fedora.
+Version: 27.1
 
-One Big OverlayFS2 Volume
--------------------------
+* Commit(x86_64): d428d3ad8ecf44e53d138042bad56a10308883a0c5d64b9c51eff27fdc9da82c
+* Commit(aarch64): da1bd08012699a0aacaa11481d3ed617477858aab0f2ea7300168ce106202255
+* Commit(ppc64le): 362888edfac04f8848072ae4fb8193b3da2f4fd226bef450326faff4be290abd
 
-Having tested OverlayFS2 through the Fedora 26 cycle, we are now committing to it.  New Atomic Host systems will now get a single filesystem volume by default, which will share binaries, system containers, and OCI/docker containers using OverlayFS2.  This change will make installing Atomic simpler for new users, as well as being appropriate for small public cloud instances.  Users who need to partition container images and storage onto a separate volume can still do so using kickstart options and `container-storage-setup` configuration.
+We are releasing images from multiple architectures but please note
+that x86_64 architecture is the only one that undergoes automated
+testing at this time.
 
-More OSTree Package Layering
-----------------------------
+Existing systems can be upgraded in place via `atomic host rebase`, `atomic host upgrade` or
+`atomic host deploy`.  However, see the Upgrading post in this blog for more information
+about upgrading from Fedora 26.
 
-In the biweekly Atomic Host updates, we've tested out some additional capabilities for RPM-OSTree that give administrators more flexibility in how to add software to hosts.  First, [remove and replace overrides](/blog/2017/07/rpm-ostree-v2017.7-released/) allow system owners to experiment with changes to the software mix on their host image, including replacing existing binaries with different versions.  Second, [LiveFS layering](/blog/2017/06/rpm-ostree-v2017.6-released/) eliminates the need to reboot when the only RPM-OSTree change a user makes is adding software.
+Corresponding image media for new installations can be [downloaded from Fedora](https://getfedora.org/en/atomic/download/).
 
-Upgrading and Support Policy
-----------------------------
+Respective signed CHECKSUM files can be found here:
 
-With the release of Fedora 27 Atomic Host, updates to the Fedora 26 Atomic Host will be strictly on a best-effort basis.  As such, we strongly encourage users to upgrade to the new release soon. We will have several blog posts addressing specific upgrade steps and issues within then next couple of weeks.  
+* [Aarch64  ISO](https://alt.fedoraproject.org/pub/alt/atomic/stable/Fedora-Atomic-27-20171110.1/Atomic/aarch64/iso/Fedora-Atomic-27-20171110.1-aarch64-CHECKSUM)
+* [ppc64le ISO](https://alt.fedoraproject.org/pub/alt/atomic/stable/Fedora-Atomic-27-20171110.1/Atomic/ppc64le/iso/Fedora-Atomic-27-20171110.1-ppc64le-CHECKSUM)
+* [x86_64 ISO](https://alt.fedoraproject.org/pub/alt/atomic/stable/Fedora-Atomic-27-20171110.1/Atomic/x86_64/iso/Fedora-Atomic-27-20171110.1-x86_64-CHECKSUM)
+* [Aarch64 CloudImage](https://alt.fedoraproject.org/pub/alt/atomic/stable/Fedora-Atomic-27-20171110.1/CloudImages/aarch64/images/Fedora-CloudImages-27-20171110.1-aarch64-CHECKSUM)
+* [ppc64le CloudImage](https://alt.fedoraproject.org/pub/alt/atomic/stable/Fedora-Atomic-27-20171110.1/CloudImages/ppc64le/images/Fedora-CloudImages-27-20171110.1-ppc64le-CHECKSUM)
+* [x86_64 CloudImage](https://alt.fedoraproject.org/pub/alt/atomic/stable/Fedora-Atomic-27-20171110.1/CloudImages/x86_64/images/Fedora-CloudImages-27-20171110.1-x86_64-CHECKSUM)
 
-The Fedora team is proud of the new release of Atomic Host, and hopes that you will find it more powerful and easier to use.  [Download it](https://getfedora.org/en/atomic/download/) and try it out soon.
+For direct download, the "latest" targets are always available here:
+
+* [ISO](https://getfedora.org/atomic_iso_latest)
+* [QCOW2](https://getfedora.org/atomic_qcow2_latest)
+* [Raw](https://getfedora.org/atomic_raw_latest)
+* [Libvirt](https://getfedora.org/atomic_vagrant_libvirt_latest)
+* [VirtualBox](https://getfedora.org/atomic_vagrant_virtualbox_latest)
+
+Filename fetching URLs are available here:
+
+* [ISO](https://getfedora.org/atomic_iso_latest_filename)
+* [QCOW2](https://getfedora.org/atomic_qcow2_latest_filename)
+* [Raw](https://getfedora.org/atomic_raw_latest_filename)
+* [Libvirt](https://getfedora.org/atomic_vagrant_libvirt_latest_filename)
+* [VirtualBox](https://getfedora.org/atomic_vagrant_virtualbox_latest_filename)
+
+Alternatively, image artifacts can be found at the following links:
+
+* [Fedora-Atomic-ostree-aarch64-27-20171110.1.iso](https://alt.fedoraproject.org/pub/alt/atomic/stable/Fedora-Atomic-27-20171110.1/Atomic/aarch64/iso/Fedora-Atomic-ostree-aarch64-27-20171110.1.iso)
+* [Fedora-Atomic-ostree-ppc64le-27-20171110.1.iso](https://alt.fedoraproject.org/pub/alt/atomic/stable/Fedora-Atomic-27-20171110.1/Atomic/ppc64le/iso/Fedora-Atomic-ostree-ppc64le-27-20171110.1.iso)
+* [Fedora-Atomic-ostree-x86_64-27-20171110.1.iso](https://alt.fedoraproject.org/pub/alt/atomic/stable/Fedora-Atomic-27-20171110.1/Atomic/x86_64/iso/Fedora-Atomic-ostree-x86_64-27-20171110.1.iso)
+* [Fedora-Atomic-27-20171110.1.aarch64.qcow2](https://alt.fedoraproject.org/pub/alt/atomic/stable/Fedora-Atomic-27-20171110.1/CloudImages/aarch64/images/Fedora-Atomic-27-20171110.1.aarch64.qcow2)
+* [Fedora-Atomic-27-20171110.1.aarch64.raw.xz](https://alt.fedoraproject.org/pub/alt/atomic/stable/Fedora-Atomic-27-20171110.1/CloudImages/aarch64/images/Fedora-Atomic-27-20171110.1.aarch64.raw.xz)
+* [Fedora-Atomic-27-20171110.1.ppc64le.qcow2](https://alt.fedoraproject.org/pub/alt/atomic/stable/Fedora-Atomic-27-20171110.1/CloudImages/ppc64le/images/Fedora-Atomic-27-20171110.1.ppc64le.qcow2)
+* [Fedora-Atomic-27-20171110.1.ppc64le.raw.xz](https://alt.fedoraproject.org/pub/alt/atomic/stable/Fedora-Atomic-27-20171110.1/CloudImages/ppc64le/images/Fedora-Atomic-27-20171110.1.ppc64le.raw.xz)
+* [Fedora-Atomic-27-20171110.1.x86_64.qcow2](https://alt.fedoraproject.org/pub/alt/atomic/stable/Fedora-Atomic-27-20171110.1/CloudImages/x86_64/images/Fedora-Atomic-27-20171110.1.x86_64.qcow2)
+* [Fedora-Atomic-27-20171110.1.x86_64.raw.xz](https://alt.fedoraproject.org/pub/alt/atomic/stable/Fedora-Atomic-27-20171110.1/CloudImages/x86_64/images/Fedora-Atomic-27-20171110.1.x86_64.raw.xz)
+* [Fedora-Atomic-Vagrant-27-20171110.1.x86_64.vagrant-libvirt.box](https://alt.fedoraproject.org/pub/alt/atomic/stable/Fedora-Atomic-27-20171110.1/CloudImages/x86_64/images/Fedora-Atomic-Vagrant-27-20171110.1.x86_64.vagrant-libvirt.box)
+* [Fedora-Atomic-Vagrant-27-20171110.1.x86_64.vagrant-virtualbox.box](https://alt.fedoraproject.org/pub/alt/atomic/stable/Fedora-Atomic-27-20171110.1/CloudImages/x86_64/images/Fedora-Atomic-Vagrant-27-20171110.1.x86_64.vagrant-virtualbox.box)
+
+For more information about the latest targets, please reference the [Fedora
+Atomic Wiki space](https://fedoraproject.org/wiki/Atomic_WG#Fedora_Atomic_Image_Download_Links).
+
+Do note that it can take some of the mirrors up to 12 hours to "check-in" at
+their own discretion.

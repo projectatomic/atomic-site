@@ -1,7 +1,7 @@
 ---
 title: Migrating Kubernetes on Fedora Atomic Host 27
 author: jbrooks
-date: 2017-11-08 21:43:56 UTC
+date: 2017-11-15 00:00:00 UTC
 tags: atomic, kubernetes, fedora, system containers, rpm-ostree
 comments: true
 published: true
@@ -13,11 +13,11 @@ System containers can serve as drop-in replacements for components that had been
 
 Package layering makes it possible to install regular rpm packages from configured repositories. These additional "layered" packages are persistent across upgrades, rebases, and deploys. You must typically reboot after layering on packages, and not all packages may be installed in this way. For instance, rpms that install content to `/opt` aren't currently installable via package layering. Unlike with system containers, the packages you layer onto your host must be compatible with the version of Fedora the host is running.
 
-I've you're running a Kubernetes cluster on Fedora Atomic Host that depends on the baked in versions of these components, such as a cluster installed via the Ansible scripts in the [kubernetes/contrib repo](https://github.com/kubernetes/contrib/tree/master/ansible), you'll need to choose one of these methods to migrate your cluster when [upgrading to Fedora Atomic 27](TK LINK to Fedora upgrade post).
+I've you're running a Kubernetes cluster on Fedora Atomic Host that depends on the baked in versions of these components, such as a cluster installed via the Ansible scripts in the [kubernetes/contrib repo](https://github.com/kubernetes/contrib/tree/master/ansible), you'll need to choose one of these methods to migrate your cluster when [upgrading to Fedora Atomic 27](http://www.projectatomic.io/blog/2017/11/fedora-atomic-26-to-27-upgrade/).
 
 ## Migrating Kubernetes and related components using System Containers
 
-To replace Kubernetes, Flannel and Etcd with system containers, you would run the following commands. You could run these commands on a Fedora Atomic 26 host, [upgrade to 27](TK LINK to Fedora upgrade post), and, upon rebooting, your components and any cluster based on them should be up and running. 
+To replace Kubernetes, Flannel and Etcd with system containers, you would run the following commands. You could run these commands on a Fedora Atomic 26 host, [upgrade to 27](http://www.projectatomic.io/blog/2017/11/fedora-atomic-26-to-27-upgrade/), and, upon rebooting, your components and any cluster based on them should be up and running. 
 
 ### System containers for master nodes
 
@@ -43,7 +43,7 @@ Note: the kube-apiserver system container provides the `kubectl` client.
 ### System container for etcd
 
 ```bash
-# atomic install --system --system-package=no --name etcd registry.fedoraproject.org/f27/etcd
+# atomic install --system --system-package=no --storage=ostree --name etcd registry.fedoraproject.org/f27/etcd
 ```
 
 When installed with the name "etcd," the etcd system container expects to find stores etcd data in `/var/lib/etcd/etcd.etcd`. The etcd rpm is configured by default to store data in `/var/lib/etcd/default.etcd`, and the ansible scripts in [kubernetes/contrib](https://github.com/kubernetes/contrib/tree/master/ansible) use `/var/lib/etcd`. On a system running etcd as configured by the kubernetes/contrib ansible scripts, you'd move your data as follows:
@@ -79,7 +79,7 @@ System container updates are independent of host updates. You can update a syste
 
 ## Migrating Kubernetes and related components using Package Layering
 
-You won't be able to layer new package versions on until the existing ones are removed during the [upgrade to 27](TK LINK to Fedora upgrade post).  Upon rebooting in to 27, you can run the following commands to replace Kubernetes, Flannel and Etcd with package layering. after which your components and any cluster based on them should be up and running. 
+You won't be able to layer new package versions on until the existing ones are removed during the [upgrade to 27](http://www.projectatomic.io/blog/2017/11/fedora-atomic-26-to-27-upgrade/).  Upon rebooting in to 27, you can run the following commands to replace Kubernetes, Flannel and Etcd with package layering. after which your components and any cluster based on them should be up and running. 
 
 ### Package layering on master nodes
 

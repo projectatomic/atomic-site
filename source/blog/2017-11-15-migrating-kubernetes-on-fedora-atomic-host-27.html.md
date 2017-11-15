@@ -21,7 +21,7 @@ To replace Kubernetes, Flannel and Etcd with system containers, you would run th
 
 ### System containers for master nodes
 
-```bash
+```
 # atomic install --system --system-package=no --name kube-apiserver registry.fedoraproject.org/f27/kubernetes-apiserver
 
 # atomic install --system --system-package=no --name kube-controller-manager registry.fedoraproject.org/f27/kubernetes-controller-manager
@@ -34,7 +34,7 @@ Note: the kube-apiserver system container provides the `kubectl` client.
 
 ### System containers for worker nodes
 
-```bash
+```
 # atomic install --system --system-package=no --name kubelet registry.fedoraproject.org/f27/kubernetes-kubelet
 
 # atomic install --system --system-package=no --name kube-proxy registry.fedoraproject.org/f27/kubernetes-proxy
@@ -42,13 +42,13 @@ Note: the kube-apiserver system container provides the `kubectl` client.
 
 ### System container for etcd
 
-```bash
+```
 # atomic install --system --system-package=no --storage=ostree --name etcd registry.fedoraproject.org/f27/etcd
 ```
 
 When installed with the name **etcd**, the etcd system container expects to find stores etcd data in `/var/lib/etcd/etcd.etcd`. The etcd rpm is configured by default to store data in `/var/lib/etcd/default.etcd`, and the ansible scripts in [kubernetes/contrib](https://github.com/kubernetes/contrib/tree/master/ansible) use `/var/lib/etcd`. On a system running etcd as configured by the kubernetes/contrib ansible scripts, you'd move your data as follows:
 
-```bash
+```
 # systemctl stop etcd
 
 # cp -r /var/lib/etcd/member /var/lib/etcd/etcd.etcd/
@@ -58,7 +58,7 @@ Note: the etcd container provides the `etcdctl` client.
 
 ### System container for flannel
 
-```bash
+```
 # atomic install --system --system-package=no --name flanneld registry.fedoraproject.org/f27/flannel
 ```
 
@@ -83,13 +83,13 @@ During the [upgrade to 27](http://www.projectatomic.io/blog/2017/11/fedora-atomi
 
 ### Package layering on master + etcd nodes
 
-```bash
+```
 # rpm-ostree rebase fedora-atomic-27:fedora/27/x86_64/atomic-host --install kubernetes-master --install flannel --install etcd -r
 ```
 
 ### Package layering on worker nodes
 
-```bash
+```
 # rpm-ostree rebase fedora-atomic-27:fedora/27/x86_64/atomic-host --install kubernetes-node --install flannel -r
 ```
 

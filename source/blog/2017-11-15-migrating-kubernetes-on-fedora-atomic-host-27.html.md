@@ -7,17 +7,17 @@ comments: true
 published: true
 ---
 
-Starting with version 27 of Fedora Atomic Host, the rpms for Kubernetes, Flannel and Etcd are no longer baked into the host's image, but are installable instead either as [system containers](http://www.projectatomic.io/blog/2016/09/intro-to-system-containers/) or via [package layering](https://rpm-ostree.readthedocs.io/en/latest/manual/administrator-handbook/#hybrid-imagepackaging-via-package-layering).
+Starting with Fedora 27 Atomic Host, the rpms for Kubernetes, Flannel and Etcd are no longer baked into the host's image, but are installable instead either as [system containers](http://www.projectatomic.io/blog/2016/09/intro-to-system-containers/) or via [package layering](https://rpm-ostree.readthedocs.io/en/latest/manual/administrator-handbook/#hybrid-imagepackaging-via-package-layering).
 
 System containers can serve as drop-in replacements for components that had been included in the Fedora Atomic image. Once installed, these components will be manageable using the same systemctl commands that apply to regular rpm-installed components. System containers are very flexible -- you can easily run system container images based on CentOS or on older (or newer) versions of Fedora on a Fedora Atomic 27 host.
 
-Package layering makes it possible to install regular rpm packages from configured repositories. These additional "layered" packages are persistent across upgrades, rebases, and deploys. You must typically reboot after layering on packages, and not all packages may be installed in this way. For instance, rpms that install content to `/opt` aren't currently installable via package layering. Unlike with system containers, the packages you layer onto your host must be compatible with the version of Fedora the host is running.
+Package layering makes it possible to install regular rpm packages from configured repositories. These additional "layered" packages are persistent across upgrades, rebases, and deploys. You must typically reboot after layering on packages, and not all packages may be installed in this way. For instance, rpms that install content to `/opt` [aren't currently installable](https://github.com/projectatomic/rpm-ostree/issues/233) via package layering. Unlike with system containers, the packages you layer onto your host must be compatible with the version of Fedora the host is running.
 
-I've you're running a Kubernetes cluster on Fedora Atomic Host that depends on the baked in versions of these components, such as a cluster installed via the Ansible scripts in the [kubernetes/contrib repo](https://github.com/kubernetes/contrib/tree/master/ansible), you'll need to choose one of these methods to migrate your cluster when [upgrading to Fedora Atomic 27](http://www.projectatomic.io/blog/2017/11/fedora-atomic-26-to-27-upgrade/).
+If you're running a Kubernetes cluster on Fedora Atomic Host that depends on the baked in versions of these components, such as a cluster installed via the Ansible scripts in the [kubernetes/contrib repo](https://github.com/kubernetes/contrib/tree/master/ansible), you'll need to choose one of these methods to migrate your cluster when [upgrading to Fedora Atomic 27](http://www.projectatomic.io/blog/2017/11/fedora-atomic-26-to-27-upgrade/).
 
 ## Migrating Kubernetes and related components using System Containers
 
-To replace Kubernetes, Flannel and Etcd with system containers, you would run the following commands. You could run these commands on a Fedora Atomic 26 host, [upgrade to 27](http://www.projectatomic.io/blog/2017/11/fedora-atomic-26-to-27-upgrade/), and, upon rebooting, your components and any cluster based on them should be up and running. 
+To replace Kubernetes, Flannel and Etcd with system containers, you would run the following commands. You could run these commands on a Fedora 26 Atomic Host, and then [upgrade to 27](http://www.projectatomic.io/blog/2017/11/fedora-atomic-26-to-27-upgrade/). Upon rebooting, your components and any cluster based on them should be up and running. 
 
 ### System containers for master nodes
 
@@ -46,7 +46,7 @@ Note: the kube-apiserver system container provides the `kubectl` client.
 # atomic install --system --system-package=no --storage=ostree --name etcd registry.fedoraproject.org/f27/etcd
 ```
 
-When installed with the name "etcd," the etcd system container expects to find stores etcd data in `/var/lib/etcd/etcd.etcd`. The etcd rpm is configured by default to store data in `/var/lib/etcd/default.etcd`, and the ansible scripts in [kubernetes/contrib](https://github.com/kubernetes/contrib/tree/master/ansible) use `/var/lib/etcd`. On a system running etcd as configured by the kubernetes/contrib ansible scripts, you'd move your data as follows:
+When installed with the name **etcd**, the etcd system container expects to find stores etcd data in `/var/lib/etcd/etcd.etcd`. The etcd rpm is configured by default to store data in `/var/lib/etcd/default.etcd`, and the ansible scripts in [kubernetes/contrib](https://github.com/kubernetes/contrib/tree/master/ansible) use `/var/lib/etcd`. On a system running etcd as configured by the kubernetes/contrib ansible scripts, you'd move your data as follows:
 
 ```bash
 # systemctl stop etcd

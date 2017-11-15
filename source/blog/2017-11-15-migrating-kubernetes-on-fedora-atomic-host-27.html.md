@@ -77,7 +77,7 @@ System container updates are independent of host updates. You can update a syste
  # atomic containers rollback etcd
  ```
 
-## Migrating Kubernetes and related components using Package Layering
+## Migrating Kubernetes and related components using RPM Package Layering
 
 During the [upgrade to 27](http://www.projectatomic.io/blog/2017/11/fedora-atomic-26-to-27-upgrade/), you can opt to layer on particular packages by appending `--install PACKAGE` to the `rpm-ostree rebase` commands. Upon rebooting into 27, your components and any cluster based on them should be up and running. 
 

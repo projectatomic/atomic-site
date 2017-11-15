@@ -206,8 +206,8 @@ kubernetes if they want to and also gives the users that are using
 kubernetes the flexibility to use whatever version they may want.
 
 You can still install kubernetes via package layering, or you can use
-system containers to run kubernetes fully containerized. Tomorrow (November
-15) we will have instructions on how to make the transition.
+system containers to run kubernetes fully containerized. Check out [this post](http://www.projectatomic.io/blog/2017/11/migrating-kubernetes-on-fedora-atomic-host-27/)
+for instructions on how to make the transition.
 
 # Appendix B: Fedora 26 Atomic Host Life Support
 

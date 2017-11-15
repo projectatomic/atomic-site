@@ -1,7 +1,7 @@
 ---
 title: Fedora 27 Atomic Host Availability on Multiple Architectures
 author: sinnykumari
-date: 2017-11-15 11:00:00 UTC
+date: 2017-11-16 11:00:00 UTC
 published: true
 comments: false
 tags: atomic, fedora, multi-arch, ppc64le, aarch64

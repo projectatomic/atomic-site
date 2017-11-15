@@ -79,24 +79,18 @@ System container updates are independent of host updates. You can update a syste
 
 ## Migrating Kubernetes and related components using Package Layering
 
-You won't be able to layer new package versions on until the existing ones are removed during the [upgrade to 27](http://www.projectatomic.io/blog/2017/11/fedora-atomic-26-to-27-upgrade/).  Upon rebooting in to 27, you can run the following commands to replace Kubernetes, Flannel and Etcd with package layering. after which your components and any cluster based on them should be up and running. 
+During the [upgrade to 27](http://www.projectatomic.io/blog/2017/11/fedora-atomic-26-to-27-upgrade/), you can opt to layer on particular packages by appending `--install PACKAGE` to the `rpm-ostree rebase` commands. Upon rebooting into 27, your components and any cluster based on them should be up and running. 
 
-### Package layering on master nodes
+### Package layering on master + etcd nodes
 
 ```bash
-# rpm-ostree install kubernetes-master flannel -r
+# rpm-ostree rebase fedora-atomic-27:fedora/27/x86_64/atomic-host --install kubernetes-master --install flannel --install etcd -r
 ```
 
 ### Package layering on worker nodes
 
 ```bash
-# rpm-ostree install kubernetes-node flannel -r
-```
-
-### Package layering for etcd
-
-```bash
-# rpm-ostree install etcd -r
+# rpm-ostree rebase fedora-atomic-27:fedora/27/x86_64/atomic-host --install kubernetes-node --install flannel -r
 ```
 
 ## Updating package layers

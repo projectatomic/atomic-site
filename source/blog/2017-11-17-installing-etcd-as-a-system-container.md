@@ -1,18 +1,19 @@
 ---
 title: Installing etcd as a System container
 author: smilner
-date: 2017-10-20 20:00:00 UTC
-published: false
-comments: true
+date: 2017-11-17 11:00:00 UTC
+published: true
+comments: false
 tags: atomic, etcd, system containers, runc, containers
 ---
 
-System Containers exist as a way to provide containerized services to a host before traditional container runtimes are ready. System
-Containers do this by utilizing a runc and systemd units and do not deviate from the OCI standards. Let's look at how someone can
+Since Fedora 27 Atomic recommends [installing Kubernetes as a system container](/blog/2017/11/migrating-kubernetes-on-fedora-atomic-host-27/), what follows is a refresher on them featuring etcd.
+
+System containers exist as a way to provide containerized services to a host before traditional container runtimes are ready. System
+containers do this by utilizing a runc and systemd units and do not deviate from the OCI standards. Let's look at how someone can
 use a system containers to install the ever popular etcd today on Fedora 27 Atomic Host!
 
 READMORE
-
 
 ## Atomic Host
 
@@ -21,10 +22,9 @@ to deploy and scale your containerized applications. Project Atomic builds OSes,
 
 To grab a copy of the Fedora 27 version of Atomic Host head on over to the [get fedora page for atomic](https://getfedora.org/en/atomic/download/).
 
-
 ## Installing etcd
 
-As one would expect the ``atomic`` command is used for pulling, installing, updating, deleting, and manipulating system containers.
+As one would expect, the ``atomic`` command is used for pulling, installing, updating, deleting, and manipulating system containers.
 Let's install the [etcd system container](https://admin.fedoraproject.org/pkgdb/package/container/etcd/) from the
 [Fedora Layered Image Build System](https://docs.pagure.org/releng/layered_image_build_service.html) with the following command:
 
@@ -59,7 +59,7 @@ The output shows us:
 
 ## Configuration at Install Time
 
-System Containers allow for options to be set at install time. These options may be used for templating file
+System containers allow for options to be set at install time. These options may be used for templating file
 contents, file names, and directory names. How does one figure out what options are available? The
 ``atomic`` command of course!
 
@@ -69,26 +69,26 @@ Image Name: registry.fedoraproject.org/f26/etcd:latest
 <snip/>
 
 Template variables with default value, but overridable with --set:
-ADDTL_MOUNTS: 
+ADDTL_MOUNTS:
 CONF_DIRECTORY: {SET_BY_OS}
 <snip/>
 ETCD_DEBUG: false
-ETCD_DISCOVERY: 
+ETCD_DISCOVERY:
 ETCD_DISCOVERY_FALLBACK: proxy
-ETCD_DISCOVERY_PROXY: 
-ETCD_DISCOVERY_SRV: 
+ETCD_DISCOVERY_PROXY:
+ETCD_DISCOVERY_SRV:
 ETCD_ELECTION_TIMEOUT: 1000
 ETCD_ENABLE_PPROF: false
 ETCD_HEARTBEAT_INTERVAL: 100
-ETCD_INITIAL_ADVERTISE_PEER_URLS: 
-ETCD_INITIAL_CLUSTER: 
+ETCD_INITIAL_ADVERTISE_PEER_URLS:
+ETCD_INITIAL_CLUSTER:
 ETCD_INITIAL_CLUSTER_STATE: new
 ETCD_INITIAL_CLUSTER_TOKEN: etcd-cluster
 <snip/>
 ETCD_SNAPSHOT_COUNT: 10000
 ETCD_STRICT_RECONFIG_CHECK: false
-ETCD_TRUSTED_CA_FILE: 
-ETCD_WAL_DIR: 
+ETCD_TRUSTED_CA_FILE:
+ETCD_WAL_DIR:
 PIDFILE: {SET_BY_OS}
 RUN_DIRECTORY: {SET_BY_OS}
 STATE_DIRECTORY: {SET_BY_OS}
@@ -110,8 +110,8 @@ $ sudo atomic install --system --name=etcd \
 
 ## Running etcd
 
-Since we named the container etcd the systemd service will also be called etcd. We could have called it anything
-but for the sake of simplicity etcd was used. So let's take a look at the service:
+Since we named the container "etcd" the systemd service will also be called "etcd". We could have called it anything,
+but for the sake of simplicity "etcd" works. So let's take a look at the service:
 
 ```
 $ sudo systemctl status etcd    
@@ -141,7 +141,7 @@ $ sudo systemctl status etcd
 Well, that was easy!
 
 
-## Using Etcd
+## Using etcd
 
 The quickest way to check an etcd service is making REST calls. Atomic Host already has ``curl``
 installed so let's use that:
@@ -188,7 +188,7 @@ $ sudo systemctl restart etcd
 
 ## Conclusion
 
-System Containers provide a way of running containerized system services early in the boot process and exposing
+System containers provide a way of running containerized system services early in the boot process and exposing
 administration in a way that operators have come to expect. Find more system containers via the
 [system containers development](https://github.com/projectatomic/atomic-system-containers/) and start
 containerizing your system services on Atomic Host!

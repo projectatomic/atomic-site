@@ -39,5 +39,5 @@ check_call(["git", "pull", "origin", "master"])
 check_call(["git", "checkout", "-b", prname, "master"])
 check_call(["git", "pull", prfrom, prsrc.ref])
 
-# launch the container using Nulecule
-check_call(["sudo", "atomicapp", "run", "-a", "answers.conf", "Nulecule/"])
+# launch the container using docker
+check_call(["sudo", "./docker.sh"])

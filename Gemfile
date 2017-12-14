@@ -62,7 +62,7 @@ gem 'middleman-piwik'
 # Bootstrap
 
 # Bootstrap, as SASS
-gem "bootstrap-sass", "3.0.0.0"
+gem "bootstrap-sass", "~> 3"
 
 
 #####

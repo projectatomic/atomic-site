@@ -24,12 +24,13 @@ title: Welcome to the Atomic community
   <a href="https://github.com/projectatomic/rpm-ostree">rpm-ostree</a>
   for updates,
   <a href="https://www.docker.io/">Docker</a>,
-  <a href="https://www.docker.io/">runc</a>,
-   and <a href="https://www.docker.io/">CRI-O</a>
+  <a href="https://github.com/opencontainers/runc">runc</a>,
+  and <a href="http://cri-o.io/">CRI-O</a>
   for application deployment,
-  <a href="https://github.com/kubernetes/kubernetes">Kubernetes</a>
+  <a href="https://github.com/kubernetes/kubernetes">Kubernetes</a> or
+  <a href="https://github.com/openshift/origin">OpenShift</a>
   for orchestration, and of course our two primary Linux distributions,
-  Fedora and CentOS.
+  <a href="https://getfedora.org/">Fedora</a> and <a href="https://www.centos.org/">CentOS</a>.
   The Atomic community works toward development of the Atomic project
   in an inclusive way by contributing to the related upstream projects,
   solving integration issues in the various distributions being used and
@@ -43,30 +44,35 @@ title: Welcome to the Atomic community
     %h2 Discussions and Meetings
 
     %p
+
       The main project mailing list is the
       <a href="http://lists.projectatomic.io/mailman/listinfo/atomic-devel">"atomic-devel list"</a>,
       which hosts both development and usage discussions.  There's also a low traffic list for
       <a href="http://lists.projectatomic.io/mailman/listinfo/atomic-announce">announcements</a>.
       (Please note that the atomic@projectatomic.io mailing list has no traffic, and is
-       reserved for future use.)
+      reserved for future use.)
 
     %p
+
       For chat, we use the Freenode IRC servers in the
       <a href="irc://irc.freenode.net/#atomic">#atomic</a>
       channel.
 
     %p
-      The general Atomic community meeting is every two weeks at 1600 UTC / 1200 EDT on
-      Mondays.  Please check the <a href="http://lists.projectatomic.io/mailman/listinfo/atomic-devel">atomic-devel list</a>
+
+      The general Atomic community meeting is every two weeks at 16:00 UTC on
+      Mondays on channel <a href="irc://irc.freenode.net:6667/atomic">#atomic</a>.
+      Please check the <a href="http://lists.projectatomic.io/mailman/listinfo/atomic-devel">atomic-devel list</a>
       for meeting announcements and agendas.
 
-      Several Project Atomic's member projects have public meetings, which you are also encouraged
-      to attend.  These include:
+    %p
 
-      * Fedora Atomic Host and FLIBS: every Wednesday at 1700 UTC / 1300 EDT on #fedora-meeting-1
-        on irc.freenode.net.  This meeting time will change in November 2017.
-      * CentOS Container Pipeline: every Tuesday at , in #centos-devel on irc.freenode.net.
-      * Cockpit: every ____, in #cockpit on irc.freenode.net.
+      Several Project Atomic's member projects have public meetings, which you are also encouraged
+      to attend.
+
+    %ul
+      %li Fedora Atomic Host and FLIBS: every Wednesday at 16:30 UTC in <a href="irc://irc.freenode.net:6667/fedora-meeting-1">#fedora-meeting-1</a>.
+      %li Cockpit: every Monday at 15:00 CET / 06:00 Pacific, in <a href="irc://irc.freenode.net:6667/cockpit">#cockpit</a>.
 
   .col-md-4.col-sm-12
     %h2 Report Issues
@@ -75,7 +81,7 @@ title: Welcome to the Atomic community
 
       Before reporting issues, please check in chat or on the mailing list that
       you've found a new issue.  You can also search
-      <a href="http://ask.projectatomic.io/en/questions/">Server Fault</a>
+      <a href="https://serverfault.com/search?q=atomic+host">Server Fault</a>
       for responses to other users with the same issue.
 
     %p
@@ -83,14 +89,15 @@ title: Welcome to the Atomic community
       As Project Atomic covers multiple sub-projects and distributions, where
       to report issues depends on which distribution or component you're reporting
       and issue against.  In general, it's useful to check on chat or the
-      mailing list where to report things.  Here's links to a few of the issue trackers:
+      mailing list where to report things.  Here's links to a few of the issue trackers
 
-      * CentOS Atomic Host and Red Hat Atomic Host: first
-        <a href="https://bugzilla.redhat.com/buglist.cgi?product=Atomic">check existing issues</a>, then
-        <a href="https://bugzilla.redhat.com/enter_bug.cgi?product=Atomic">enter a new bug</a>. We appreciate your bugs!
-      * Fedora Atomic Host and FLIBS:
-      * Cockpit:
-      * CRI-O:
+    %ul
+      %li CentOS Atomic Host and Red Hat Atomic Host: first <a href="https://bugzilla.redhat.com/buglist.cgi?product=Atomic">check existing issues</a>, then <a href="https://bugzilla.redhat.com/enter_bug.cgi?product=Atomic">enter a new bug</a>. We appreciate your bugs!
+      %li <a href="https://pagure.io/atomic-wg/issues">Fedora Atomic Host and FLIBS issues</a> on Pagure.
+      %li <a href="https://github.com/cockpit-project/cockpit/issues">Cockpit Issues</a> on Github.
+      %li <a href="https://github.com/kubernetes-incubator/cri-o/issues">CRI-O Issues</a> on Github.
+
+    %p
 
       Other projects use their issue trackers in their individual git repos, under
       the <a href="https://github.com/projectatomc">Project Atomic organization</a>.
@@ -102,19 +109,18 @@ title: Welcome to the Atomic community
 
       Most of the source code for our member projects is hosted under the
       <a href="https://github.com/projectatomic/">Project Atomic organization</a>
-      on GitHub.
+      on GitHub.  See the Github organization for a list of projects. This includes
 
-    %p
-
-      The source to build this web site is available
-      #{link_to "there", "https://github.com/projectatomic/atomic-site"},
-      as well as code for
-      #{link_to "rpm-ostree", "https://github.com/projectatomic/rpm-ostree"},
-      #{link_to "anaconda", "https://github.com/projectatomic/anaconda"},
-      and
-      #{link_to "Docker image examples", "https://github.com/projectatomic/docker-image-examples"}.
-
-      There is also a <
+    %ul
+      %li <a href="https://github.com/projectatomic/rpm-ostree">rpm-ostree</a>
+      %li <a href="https://github.com/projectatomic/atomic">Atomic CLI</a>
+      %li <a href="https://github.com/projectatomic/buildah">Buildah</a>
+      %li <a href="https://github.com/projectatomic/skopeo">Skopeo</a>
+      %li <a href="https://github.com/projectatomic/atomic-host-docs">Atomic Host documentation</a>
+      %li <a href="https://github.com/projectatomic/docker">docker/moby patches</a>
+      %li <a href="https://github.com/kubernetes-incubator/cri-o">CRI-O</a>
+      %li <a href="https://github.com/cockpit-project/cockpit">Cockpit</a>
+      %li <a href="https://github.com/projectatomic/atomic-site">Source for this website</a>
 
 %h2
   %a( name="contributing")
@@ -126,10 +132,13 @@ title: Welcome to the Atomic community
   of every type.  In addition to many core projects needing Go, C or Python code,
   we also need:
 
-  * help <a href="https://github.com/projectatomic/atomic-host-docs">writing documentation</a>
-  * container maintainers for <a href="">FLIBS</a> or <a href="">CentOS Container Pipeline</a>
-  * expert users to answer questions on the mailing list and Server Fault
-  * testers who can try out new releases and features
+%ul
+  %li help <a href="https://github.com/projectatomic/atomic-host-docs">writing documentation</a>
+  %li container maintainers for <a href="https://fedoraproject.org/wiki/Atomic/FLIBS_Catalog">FLIBS</a> or <a href="https://wiki.centos.org/ContainerPipeline">CentOS Container Pipeline</a>
+  %li expert users to answer questions on the mailing list and Server Fault
+  %li testers who can try out new releases and features
+
+%p
 
   If you are a programmer, please check out any of the many projects under the
   <a href="https://github.com/projectatomic/">Project Atomic organization</a> on

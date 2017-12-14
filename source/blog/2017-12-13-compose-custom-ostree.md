@@ -2,15 +2,18 @@
 title: Composing custom OSTree update for Fedora 27 Atomic Host
 author: sinnykumari
 date: 2017-12-13
-published: true
+published: false
 comments: false
 tags: atomic, fedora, multi-arch, ostree
 ---
 
 With Fedora 27, we ship [Atomic Host on multiple architectures](http://www.projectatomic.io/blog/2017/11/fedora-atomic-27-on-multiarch/) which includes aarch64, ppc64le, and x86_64. We also provide Atomic Host updates for these arches every two weeks so that we can provide a tested, stable, and up-to-date OS. Fedora Atomic Host is built using traditional RPM packages available in the Fedora repository. For example, Fedora 27 Atomic Host is formed using  packages from the Fedora 27 repository which are further composed into [OSTree repository](https://ostree.readthedocs.io/en/latest/manual/introduction/) using rpm-ostree. It is possible to compose and host your own custom-built OSTree repository containing additional features. This article will further guide you on how to compose your own custom OSTree repository and update system from your own hosted OSTree repo.
 
+READMORE
+
 # Composing and hosting custom Atomic OSTree
 We will be composing a custom Fedora 27 OSTree repository on x86_64. For ease of use, we will compose and host OSTree repo in a Docker container. You can also compose it on a Virtual Machine or bare metal.
+
 > `Note:` If you are trying this on aarch64 or ppc64le, replace any mention of x86_64 with the right architecture value wherever used in commands.
 
 ## Requirement

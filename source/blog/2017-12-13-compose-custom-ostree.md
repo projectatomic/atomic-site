@@ -1,8 +1,8 @@
 ---
 title: Composing custom OSTree update for Fedora 27 Atomic Host
 author: sinnykumari
-date: 2017-12-13
-published: false
+date: 2017-12-19 12:00:00 UTC
+published: true
 comments: false
 tags: atomic, fedora, multi-arch, ostree
 ---

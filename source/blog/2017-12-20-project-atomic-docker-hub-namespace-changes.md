@@ -1,8 +1,8 @@
 ---
 title: Project Atomic Docker Hub Namespace Changes
 author: smilner
-date: 2018-01-04 11:00:00 UTC
-published: false
+date: 2017-12-20 10:00:00 UTC
+published: true
 comments: false
 tags: atomic, docker, registry, image
 ---

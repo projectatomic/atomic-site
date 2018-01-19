@@ -12,6 +12,7 @@ In this week's release of Fedora Atomic Host we have an updated kernel (the [spe
 The new Fedora Atomic Host update is available via an OSTree update:
 
 ***Version: 27.61***
+
 * Commit(x86_64): 772ab185b0752b0d6bc8b2096d08955660d80ed95579e13e136e6a54e3559ca9
 * Commit(aarch64): 598626fd61dc6ed4b702159e50b6029ee70a527e855fce7d8e61a870b141f893
 * Commit(ppc64le): 16ce78ee689066f582dbfc0672dab1706051fefab496fcebd8109d58738eb8fe
@@ -85,6 +86,7 @@ Added:
 Corresponding image media for new installations can be downloaded from [Fedora Downloads](https://getfedora.org/en/atomic/download/).
 
 Alternatively, image artifacts can be found at the following links:
+
 * [aarch64 ISO](https://alt.fedoraproject.org/pub/alt/atomic/stable/Fedora-Atomic-27-20180117.1/Atomic/aarch64/iso/Fedora-Atomic-ostree-aarch64-27-20180117.1.iso)
 * [ppc64le ISO](https://alt.fedoraproject.org/pub/alt/atomic/stable/Fedora-Atomic-27-20180117.1/Atomic/ppc64le/iso/Fedora-Atomic-ostree-ppc64le-27-20180117.1.iso)
 * [x86_64 ISO](https://alt.fedoraproject.org/pub/alt/atomic/stable/Fedora-Atomic-27-20180117.1/Atomic/x86_64/iso/Fedora-Atomic-ostree-x86_64-27-20180117.1.iso)
@@ -124,8 +126,8 @@ Filename fetching URLs are available here:
 
 For more information about the latest targets, please reference the [Fedora Atomic Wiki](https://fedoraproject.org/wiki/Atomic_WG#Fedora_Atomic_Image_Download_Links).
 
-Do note that it can take some of the mirrors up to 12 hours to "check-in" at
-their own discretion.
+*Do note that it can take some of the mirrors up to 12 hours to "check-in" at
+their own discretion.*
 
 Vagrant Cloud page: [new Atomic Host](https://app.vagrantup.com/fedora/boxes/27-atomic-host/versions/27.20180117.1)
 

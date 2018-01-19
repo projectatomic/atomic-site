@@ -3,7 +3,7 @@ title: Buildah Blocks - OCI Shell Game
 author: tsweeney
 date: 2018-01-16 00:00:00 UTC
 published: true
-comments: true
+comments: false
 tags: atomic, buildah, containers
 ---
 

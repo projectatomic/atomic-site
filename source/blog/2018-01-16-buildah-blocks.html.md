@@ -45,9 +45,11 @@ I then modified the privileges on `runecho.sh` with:
 # chmod +x runecho.sh
 ```
 
-The [demo](https://asciinema.org/a/biE5aEvLRJK6uMBwd106eB7S1) shows the results of these steps.  I’ve included the commands used in the video at the bottom of this blog.  I will note that Red Hat is currently developing [Podman](https://github.com/projectatomic/libpod). Once that is fully developed, the `podman run` command will be the suggested way to run your container; the Buildah variant of that command will be positioned for quick testing purposes.
+The [demo](https://asciinema.org/a/biE5aEvLRJK6uMBwd106eB7S1) shows an image built by Buildah being placed on Docker Hub and then run by both Docker and Buildah from there.  I’ve included the commands used in the video at the bottom of this blog.  I will note that Red Hat is currently developing [Podman](https://github.com/projectatomic/libpod). Once that is fully developed, the `podman run` command will be the suggested way to run your container; the Buildah variant of that command will be positioned for quick testing purposes.
 
-I hope that you enjoyed the video and this article gives you a little more information on the Buildah project. Buildah is for simplicity - it is an Open Source project and contributors are always welcome. We’d love to see you there!
+I hope that you enjoyed the video and this article gives you a little more information on the Buildah project. Buildah is an Open Source project and contributors are always welcome. We’d love to see you there!
+
+Buildah == Simplicity
 
 Commands used in the video for your perusal:
 
@@ -55,14 +57,11 @@ Commands used in the video for your perusal:
 docker --version
 buildah --version
 docker login docker.io
-cat Dockerfile
-ls -alF runecho.sh
-cat runecho.sh
 buildah bud -t echo .
 buildah push echo docker.io/tomsweeneyredhat/blog:echo
+docker run docker.io/tomsweeneyredhat/blog:echo
 buildah images
 docker images
-docker run docker.io/tomsweeneyredhat/blog:echo
 buildah from docker.io/tomsweeneyredhat/blog:echo --name echo
 buildah run echo
 ```

@@ -1,17 +1,13 @@
 ---
 title: Using OCI Image Registries with Buildah
 author: ipbabble
-date: 2017-12-19
+date: 2018-01-26 00:00:00 UTC
 layout: post
-comments: true
-categories:
-- Blog
-tags:
-- buildah
-- oci
-- containers
-- registry
+published: true
+comments: false
+tags: buildah, oci, containers, registry
 ---
+
 ![Buildah](https://github.com/projectatomic/buildah/blob/master/logos/buildah-logo.png)
 
 # Using Buildah with container registries
@@ -23,15 +19,15 @@ First some terminology. In the container image space, Docker popularized two ter
 * Container image registry
 * Container image repository
 
-The container image registry, or registry, is a shared data store for pushing and pulling container images. It has a well known API for such requests. Docker Hub is an example of a public registry. Various vendors and developers store there images on Docker Hub. Most organizations I've dealt with don't wish to pull images from a public registry for reasons such as security or network bandwidth usage. Instead they would prefer to use a local private registry.  
+The container image registry, or registry, is a shared data store for pushing and pulling container images. It has a well-known API for such requests. Docker Hub is an example of a public registry. Various vendors and developers store their images on Docker Hub. Most organizations I've dealt with don't wish to pull images from a public registry for reasons such as security or network bandwidth usage. Instead they would prefer to use a local private registry.  
 
-The second term is a container image repository, A repository is a local storage area on a host. Images are often pulled from a registry to the host's repository and run on the host. Sometimes they are modified, tagged and pushed back into a registry as a new image or a new version of an image. On a host that is using Buildah, and it's underlying OCI based technology, this repository is located in `/var/lib/containers/storage`.  This is used by, but not to be confused with, the containers/storage and containers/image library projects. These projects use the `/var/lib/containers/storage` directory by default. 
+The second term is a container image repository, A repository is a local storage area on a host. Images are often pulled from a registry to the host's repository and run on the host. Sometimes they are modified, tagged and pushed back into a registry as a new image or a new version of an image. On a host that is using Buildah, and its underlying OCI-based technology, this repository is located in `/var/lib/containers/storage`.  This is used by, but not to be confused with, the containers/storage and containers/image library projects. These projects use the `/var/lib/containers/storage` directory by default. 
  
-When you develop a useful container image using Buildah you may wish to share it with others either in a local container image registry or a remote or public container image registry. The purpose of this tutorial is to demonstrate how Buildah can be used to move OCI compliant images in and out of private or public registries.
+When you develop a useful container image using Buildah you may wish to share it with others either in a local container image registry or a remote or public container image registry. The purpose of this tutorial is to demonstrate how Buildah can be used to move OCI-compliant images in and out of private or public registries.
 
 In the [first tutorial](https://github.com/projectatomic/buildah/blob/master/docs/tutorials/01-intro.md) we built an image from scratch that we called `fedora-bashecho` and we pushed it to a local Docker repository using the `docker-daemon` protocol. We are going to use the same image to push to a private Docker registry. If you have not performed the first tutorial it is important that you do that now, before you proceed.
 
-## Starting a local image Registry
+## Starting a local Image Registry
 
 First we must pull down a registry image. We are going to use the registry image from Docker Hub. As a shortcut we will save the container name that is returned from the `buildah from` command, into a bash shell variable called `registry`. This is just like we did in Tutorial 1:
 
@@ -61,7 +57,7 @@ Let's push our image to the private registry. By default, Buildah is set up to e
 
 ## Inspecting an image with Skopeo
 
-[Skopeo](https://github.com/projectatomic/skopeo) is a ProjectAtomic tool that was created to inspect images in registries without having to pull the image from the registry. It has grown to have many other uses. We will verify that the image has been stored by using Skopeo to inspect the image in the registry:
+[Skopeo](https://github.com/projectatomic/skopeo) is a Project Atomic tool that was created to inspect images in registries without having to pull the image from the registry. It has grown to have many other uses. We will verify that the image has been stored by using Skopeo to inspect the image in the registry:
 
     # skopeo inspect --tls-verify=false docker://localhost:5000/ipbabble/fedora-bashecho:latest
     {
@@ -110,7 +106,7 @@ We can verify that it is still portable with Docker by starting Docker again, as
 
 ## Pushing to and pulling from a public registry
 
-Pushing to Docker hub is just as easy. Of course you must have an account with credentials. In this example I'm using a Docker hub API key, which has the form "username:password" (example password has been edited for privacy), that I created with my Docker hub account. I use the `--creds` flag to use my API key. I also specify my local image name `fedora-bashecho` as my image source and I use the `docker` protocol with no host or port so that it will look at the default Docker hub registry:
+Pushing to Docker Hub is just as easy. Of course you must have an account with credentials. In this example I'm using a Docker Hub API key, which has the form "username:password" (example password has been edited for privacy), that I created with my Docker Hub account. I use the `--creds` flag to use my API key. I also specify my local image name `fedora-bashecho` as my image source and I use the `docker` protocol with no host or port so that it will look at the default Docker Hub registry:
 
     #  buildah push --creds ipbabble:5bbb9990-6eeb-1234-af1a-aaa80066887c fedora-bashecho docker://ipbabble/fedora-bashecho:latest
 
@@ -135,7 +131,7 @@ And let's inspect that with Skopeo:
         ]
     }
 
-We can use Buildah to pull down the image using the `buildah from` command. But before we do let's clean up our local containers-storage so that we don't have an existing fedora-bashecho - otherwise Buildah will know it already exists and not bother pulling it down.
+We can use Buildah to pull down the image using the `buildah from` command. But before we do that, let's clean up our local containers-storage so that we don't have an existing fedora-bashecho - otherwise Buildah will know it already exists and not bother pulling it down.
 
     #  buildah images
     IMAGE ID             IMAGE NAME                                               CREATED AT             SIZE
@@ -148,7 +144,7 @@ We can use Buildah to pull down the image using the `buildah from` command. But 
     IMAGE ID             IMAGE NAME                                               CREATED AT             SIZE
     d4cd7d73ee42         docker.io/library/registry:latest                        Dec 1, 2017 22:15      31.74 MB
 
-Okay, so we don't have a fedora-bashecho anymore. Let's pull the image from Docker hub:
+Okay, so we don't have a fedora-bashecho anymore. Let's pull the image from Docker Hub:
 
     # buildah from ipbabble/fedora-bashecho
 

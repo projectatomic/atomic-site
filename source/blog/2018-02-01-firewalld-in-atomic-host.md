@@ -35,6 +35,8 @@ disabled by default. Existing users should observe no change in behavior.
 Users who want to use `firewalld` can enable/start the service and start
 using it immediately.
 
+READMORE
+
 # Scenarios
 
 So you're an existing or new user of Atomic Host. What does this mean

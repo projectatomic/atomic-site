@@ -88,6 +88,7 @@ Added:
 Corresponding image media for new installations can be downloaded from: [Fedora Downloads](https://getfedora.org/en/atomic/download/).
 
 Alternatively, image artifacts can be found at the following links:
+
 * [aarch64 ISO](https://alt.fedoraproject.org/pub/alt/atomic/stable/Fedora-Atomic-27-20180201.0/Atomic/aarch64/iso/Fedora-Atomic-ostree-aarch64-27-20180201.0.iso)
 * [ppc64le ISO](https://alt.fedoraproject.org/pub/alt/atomic/stable/Fedora-Atomic-27-20180201.0/Atomic/ppc64le/iso/Fedora-Atomic-ostree-ppc64le-27-20180201.0.iso)
 * [x86_64 ISO](https://alt.fedoraproject.org/pub/alt/atomic/stable/Fedora-Atomic-27-20180201.0/Atomic/x86_64/iso/Fedora-Atomic-ostree-x86_64-27-20180201.0.iso)
@@ -109,6 +110,7 @@ Respective signed CHECKSUM files can be found here:
 * [x86_64 Cloud Image](https://alt.fedoraproject.org/pub/alt/atomic/stable/Fedora-Atomic-27-20180201.0/CloudImages/x86_64/images/Fedora-CloudImages-27-20180201.0-x86_64-CHECKSUM)
 
 For direct download, the "latest" targets are always available here:
+
 * [ISO](https://getfedora.org/atomic_iso_latest)
 * [QCOW](https://getfedora.org/atomic_qcow2_latest)
 * [raw](https://getfedora.org/atomic_raw_latest)
@@ -116,6 +118,7 @@ For direct download, the "latest" targets are always available here:
 * [VirtualBox](https://getfedora.org/atomic_vagrant_virtualbox_latest)
 
 Filename fetching URLs are available here:
+
 * [ISO](https://getfedora.org/atomic_iso_latest_filename)
 * [QCOW](https://getfedora.org/atomic_qcow2_latest_filename)
 * [raw](https://getfedora.org/atomic_raw_latest_filename)

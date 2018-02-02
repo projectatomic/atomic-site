@@ -33,19 +33,12 @@ trees from upstream RPM content. This and several other components are wrapped
 in the [atomic](https://github.com/projectatomic/atomic) command which provides
 a unified entrypoint.  
 
-The Project Atomic umbrella also encompasses many other tools which are essential
+The Project Atomic umbrella also encompasses other tools which are essential
 to immutable, container-based infrastructures, including:
 
 * [Cockpit](http://cockpit-project.org/) gives visibility into your hosts
   and your container cluster.
-* Many patches and extensions to Docker for better SELinux and Systemd integration.
-* [AtomicApp](https://github.com/projectatomic/atomicapp)
-  and [Nulecule](https://github.com/projectatomic/nulecule)
-  for composing mulit-container applications.
-* [Atomic Registry](http://docs.projectatomic.io/registry/) for registering
-  your containers.
-* [Commissaire](https://github.com/projectatomic/commissaire) to provide a
-  better API for Kubernetes hosts.
+* Many patches and extensions to Docker for better SELinux and systemd integration.
 * The [Atomic Developer Bundle](https://github.com/projectatomic/adb-atomic-developer-bundle)
   to make development of containerized applications easy.
 

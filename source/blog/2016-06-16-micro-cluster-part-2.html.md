@@ -106,7 +106,7 @@ What Ansible just set up for me included the following:
 
 Things it did not set up for me include:
 
-* Docker or Atomic registry
+* Docker registry
 * Cockpit Kubernetes
 * applications
 * high availability

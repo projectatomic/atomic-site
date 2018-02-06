@@ -9,10 +9,9 @@ tags: atomic, fedora, workstation, desktop
 
 For the last few Fedora releases, the Workstation WG has been working on
 combining the best of the Project Atomic pattern with the Fedora Workstation
-Edition into a deliverable dubbed &quot;Fedora Atomic Workstation&quot; (often
-shortened as &quot;Atomic WS&quot;). In Fedora 27, we have reached a point where
-we feel comfortable inviting other developers and enthusiasts to try it out and
-even make it their daily driver.
+Edition into a deliverable dubbed &quot;Fedora Atomic Workstation&quot;. In
+Fedora 27, we have reached a point where we feel comfortable inviting other
+developers and enthusiasts to try it out and even make it their daily driver.
 
 Read on to discover what Fedora Atomic Workstation is, what its benefits are,
 and how you can get started today!
@@ -24,20 +23,20 @@ to it.
 
 READMORE
 
-# What is Atomic WS?
+# What is Atomic Workstation?
 
-Just like Atomic Host, Atomic WS uses RPM-OSTree as its update manager.
-However, Atomic WS is geared towards all the same use cases that the regular
-Workstation Edition is meant to fulfill. Though there are some differences
-between the two beyond the update model.
+Just like Atomic Host, Atomic Workstation uses RPM-OSTree as its update manager.
+However, Atomic Workstation is geared towards all the same use cases that the
+regular Workstation Edition is meant to fulfill. Though there are some
+differences between the two beyond the update model.
 
-In an Atomic WS, desktop applications are shipped and run as
+In an Atomic Workstation, desktop applications are shipped and run as
 [flatpaks](https://flatpak.org/), and development mostly happens inside
 containers. For example, you may have a pet container with your development
 environment set up as well as an `oc cluster up` OpenShift cluster to develop
 server applications.
 
-# Why should I use Atomic WS?
+# Why should I use Atomic Workstation?
 
 So what are the advantages of this strategy? Many of the reasons below are
 shared with Atomic Host. Though I will try to give a more Workstation-centric
@@ -45,11 +44,11 @@ point-of-view.
 
 ## 1. Transactional Updates
 
-The main reason to use Atomic WS of course is transactional updates. This is as
-relevant in the server case as it is for desktops. Most people would consider
-their workstations to be the stereotypical pet system: set up and customized
-just the way they want them, and a huge hindrance to productivity if anything
-should happen to them. Using an update model which greatly reduces
+The main reason to use Atomic Workstation of course is transactional updates.
+This is as relevant in the server case as it is for desktops. Most people would
+consider their workstations to be the stereotypical pet system: set up and
+customized just the way they want them, and a huge hindrance to productivity if
+anything should happen to them. Using an update model which greatly reduces
 [risks](https://www.happyassassin.net/2016/10/04/x-crash-during-fedora-update-when-system-has-hybrid-graphics-and-systemd-udev-is-in-update/)
 of
 [failures](https://bugzilla.redhat.com/show_bug.cgi?id=1398698) is thus well
@@ -69,8 +68,8 @@ As discussed in
 [a previous blog entry](../../../2016/07/hacking-and-extending-atomic-host/),
 all the great features of an OSTree-based system require immutability of the
 base OS. For example, `/usr` is *not* writable by default. This is equally true
-in Atomic WS as it is in Atomic Host. This is a *good* thing, because (1) it
-protects you from
+in Atomic Workstation as it is in Atomic Host. This is a *good* thing, because
+(1) it protects you from
 [accidental damage](https://github.com/MrMEEE/bumblebee-Old-and-abbandoned/issues/123),
 and (2) it encourages a healthier workflow.
 
@@ -132,8 +131,8 @@ testing is limited to the package-level.
 
 In an OSTree model however, it's possible to gate updates on higher-level
 integration tests such as what we've been doing in the two-week releases of
-Fedora Atomic Host. Note though that Atomic WS updates are not currently being
-gated on tests; we are still at the onset of these discussions.
+Fedora Atomic Host. Note though that Atomic Workstation updates are not
+currently being gated on tests; we are still at the onset of these discussions.
 
 ## 5. Automatic Updates
 
@@ -150,7 +149,7 @@ In the future, we'd like to get to a point where (if enabled) the system
 automatically prepares updates in the background and "upgrading" simply involves
 rebooting your computer for minimal downtime.
 
-# How can I get started with Atomic WS?
+# How can I get started with Atomic Workstation?
 
 You can either
 [download the ISO](https://dl.fedoraproject.org/pub/fedora/linux/releases/27/WorkstationOstree/x86_64/iso/)

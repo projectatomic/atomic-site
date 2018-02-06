@@ -15,8 +15,10 @@ we feel comfortable inviting other developers and enthusiasts to try it out and
 even make it their daily driver.
 
 Read on to discover what Fedora Atomic Workstation is, what its benefits are,
-and how you can get started today! This blog post is based on a talk I gave at
-DevConf.cz 2018. Head over to
+and how you can get started today!
+
+Note: this blog post is based on a talk I gave at
+[DevConf.cz 2018](https://devconf.cz/cz/2018). Head over to
 [YouTube](https://www.youtube.com/watch?v=7c3GdfhWzcc) if you'd prefer listening
 to it.
 
@@ -89,7 +91,7 @@ year (linked below).
 
 ## 3. Effortless Change Tracking
 
-Now, part of customizing your workstation will undoutedly require installing
+Now, part of customizing your workstation will undoubtedly require installing
 packages that are not part of the base OSTree and aren't quite fit for
 containerization (e.g. drivers, virtualization stacks, `$FAVOURITE_EDITOR`).
 Because RPM-OSTree is a *hybrid* model, it understands both RPMs and OSTrees.
@@ -158,6 +160,12 @@ using the steps from
 document. The latter also allows you to switch back and forth between the two
 models if you're not yet ready to dive in.
 
+Once booted into Atomic Workstation, check out the &quot;Using the system&quot;
+section [here](https://pagure.io/workstation-ostree-config). To learn more about
+how to manage upgrades, check out the Project Atomic
+[docs](http://www.projectatomic.io/docs/os-updates/) and the RPM-OSTree
+[docs](http://rpm-ostree.readthedocs.io/en/latest/manual/administrator-handbook/).
+
 If you need any help, you can pop into the `freenode/#atomic` channel, or send
 an email to the
 [atomic-devel](http://lists.projectatomic.io/mailman/listinfo/atomic-devel)
@@ -169,4 +177,4 @@ mailing list.
 - [workstation-ostree-config](https://pagure.io/workstation-ostree-config)
 - [Kalev Lember: Atomic Workstation](https://www.youtube.com/watch?v=Yc7lvkl5atE)
 - [Sanja Bonic and Colin Walters: You want a Clean Desktop OS? Containerize it.](https://www.youtube.com/watch?v=a4IPWlf)
-- [Jan Pazdziora: Minimizing workstation installation](Jan Pazdziora: Minimizing workstation installation)
+- [Jan Pazdziora: Minimizing workstation installation](https://www.youtube.com/watch?v=eWoFpOoA-tE)

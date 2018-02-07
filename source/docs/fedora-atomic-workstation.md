@@ -22,7 +22,7 @@ If you rather want to install FAW inside an existing system, please follow the s
 
 ## Support
 
-For now, you can ask us questions in the #atomic channel on IRC Freenode or via Twitter [https://twitter.com/projectatomic](@projectatomic). You can also use the [](atomic-devel) mailing list. Contributions are welcome.
+For now, you can ask us questions in the #atomic channel on IRC Freenode or via Twitter [https://twitter.com/projectatomic](@projectatomic). You can also use the [atomic-devel](https://lists.projectatomic.io/mailman/listinfo/atomic-devel) mailing list. Contributions are welcome.
 
 We are also in the process of creating a [https://fedoraproject.org/wiki/Workstation/AtomicWorkstation/SIG](Special Interest Group) - if you are interested in joining, let us know via one of the mentioned channels and we can add you.
 

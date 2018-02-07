@@ -152,7 +152,7 @@ rebooting your computer for minimal downtime.
 # How can I get started with Atomic Workstation?
 
 You can either
-[download the ISO](https://dl.fedoraproject.org/pub/fedora/linux/releases/27/WorkstationOstree/x86_64/iso/)
+[download the ISO](https://download.fedoraproject.org/pub/fedora/linux/releases/27/WorkstationOstree/x86_64/iso/)
 and re-install from scratch, or you can convert your existing `dnf`-based system
 using the steps from
 [this](https://pagure.io/workstation-ostree-config/blob/master/f/README-install-inside.md)

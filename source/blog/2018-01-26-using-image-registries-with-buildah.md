@@ -8,7 +8,7 @@ comments: false
 tags: buildah, oci, containers, registry
 ---
 
-![Buildah](http://www.projectatomic.io/images/buildah-logo.png?1517062481)
+![Buildah](/images/buildah-logo.png?1517062481)
 
 # Using Buildah with container registries
 

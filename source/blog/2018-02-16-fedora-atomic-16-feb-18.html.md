@@ -1,5 +1,5 @@
 ---
-title: Fedora 27 Atomic Host February 16nd Release
+title: Fedora 27 Atomic Host February 16th Release
 author: dustymabe
 date: 2018-02-16 00:00:00 UTC
 published: true

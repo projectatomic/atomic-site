@@ -1,6 +1,6 @@
 ---
 title: Buildah Alpha version 0.12 Release Announcement
-author: dustymabe
+author: tsweeney
 date: 2018-02-21 00:00:00 UTC
 published: true
 comments: false

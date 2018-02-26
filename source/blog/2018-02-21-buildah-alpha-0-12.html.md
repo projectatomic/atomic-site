@@ -11,6 +11,8 @@ We're pleased to announce the release of Buildah Alpha version 0.12 on both Fedo
 
 The Buildah project has been building some steam over the past several weeks, welcoming several new contributors to the mix, launching new functionality and creating a number of improvements and bug fixes. The major highlights for this release are:
 
+READMORE
+
 * Added better handling of error messages for Unknown Dockerfile instructions.
 * Set the default certificate directory to /etc/containers/certs.d.
 * Vendored in the latest containers/image and containers/Storage packages.

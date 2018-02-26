@@ -45,7 +45,7 @@ Podman implements 38 of the 40 Docker CLI commands defined in Docker 1.13, but t
 
 Podman is implemented as a standalone command. Unlike the Docker CLI which talks to the Docker daemon when examining the content, Podman requires no such daemon to get work done. Podman can examine registry server content directly without any daemon involved.
 
-This gives Podman a big advantage in many operations scenarios. For example, imagine that the docker daemon hangs in a Kubernetes environment - you can’t inspect images nor inspect which containers are running.  No Docker daemon, no diagnosis.  With podman, you can because it doesn’t rely on daemon.
+This gives Podman a big advantage in many operations scenarios. For example, imagine that the docker daemon hangs in a Kubernetes environment - you can’t inspect images nor inspect which containers are running.  No Docker daemon, no diagnosis.  With podman, you can because it doesn't rely on a daemon.
 
 # libpod
 

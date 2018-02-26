@@ -9,7 +9,7 @@ tags: atomic, buildah, containers, podman, kubernetes
 
 Podman (formerly kpod) has been kicking around since last summer.  It was originally part of the [CRI-O](https://github.com/kubernetes-incubator/cri-o&sa=D&ust=1519653090854000&usg=AFQjCNGVeTeYAfYk3RH27hK5ykSNrATy1w) project.  We moved podman into a separate project, [libpod](https://github.com/projectatomic/libpod).  We wanted Podman and CRI-O to develop at their own pace.  Both CRI-O and Podman work fine as independent tools and also work well together.
 
-The goal of Podman (Pod Manager) is to offer an experience similar to the docker command line - to allow users to run standalone (non-orchestrated)Containers.  Podman also allows users to run groups of containers called Pods. For those that don’t know, a Pod is a term developed for the Kubernetes Project which describes an object that has one or more containerized processes sharing multiple namespaces (Network, IPC and optionally PID).
+The goal of Podman (Pod Manager) is to offer an experience similar to the docker command line - to allow users to run standalone (non-orchestrated) containers.  Podman also allows users to run groups of containers called pods. For those that don’t know, a Pod is a term developed for the Kubernetes Project which describes an object that has one or more containerized processes sharing multiple namespaces (Network, IPC and optionally PID).
 
 Podman brings innovation to container tools in the spirit of Unix commands which do “one thing” well. Podman doesn’t require a daemon to run containers and pods. This makes it a great asset for your container tools arsenal.
 

@@ -45,7 +45,7 @@ buildah --debug=false run $cid -- rpmbuild --define "_topdir /rpmbuild" -ba /rpm
 Then a second container is built again using Fedora 27 and the rpm file that was built on the first container is copied into this new container. Then the rpm is installed using dnf. Buildah has now been installed onto the new container with the latest bits from GitHub.
 
 ```
-	# Build a second new container.
+# Build a second new container.
 cid2=$(buildah --debug=false from --pull --signature-policy ${TESTSDIR}/policy.json registry.fedoraproject.org/fedora:
 root2=$(buildah --debug=false mount $cid2)
 
@@ -79,6 +79,6 @@ test $bv = $rv
 
 There you have it, Buildah building and testing itself.  Granted I’m not too worried if Buildah doesn’t follow the "Three Laws of Robotics" at this point, but this technique is really powerful. This test runs on each and every pull request to Buildah. If the RPM can’t be built, installed and minimal operations completed, the tests won’t run and the code won’t get committed.
 
-For more information on Buildah check it out on [GitHub](https://github.com/projectatomic/buildah) - also checkout the [rpm.bats](https://github.com/projectatomic/buildah/blob/master/tests/rpm.bats) file there which is where code examples in this blog came from.  If you’re interested, we’d love to have you become a contributor on the product.
+For more information on Buildah check it out on [GitHub](https://github.com/projectatomic/buildah) - also checkout the [rpm.bats](https://github.com/projectatomic/buildah/blob/master/tests/rpm.bats) file there which is where code examples in this blog came from.  If you’re interested, we’d love to have you become a contributor on the project.
 
 **Buildah == Simplicity**

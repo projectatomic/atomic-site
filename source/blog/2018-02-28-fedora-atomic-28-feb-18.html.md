@@ -9,7 +9,7 @@ tags: atomic, fedora
 
 Fedora Atomic Host 27.93 is available. We have a new kernel (4.15), [ostree](https://github.com/ostreedev/ostree/releases/tag/v2018.2), and [rpm-ostree](https://github.com/projectatomic/rpm-ostree/releases/tag/v2018.3) in this release.
 
-It is also worth noting that now the `rpm-ostree status` output will prefix the remote:ref with `ostree://` in order to denote the system is following an ostree repository remote (see example below). This is in preparation of some upstream changes related to rpm-ostree jigdo, where updates can be delivered via a special rpm in a yum repo rather than an ostree server/remote.
+It is also worth noting that now the `rpm-ostree status` output will prefix the remote:ref with `ostree://` in order to denote the system is following an ostree repository remote (see example below). This is in preparation of some upstream changes related to [rpm-ostree rojig](https://github.com/projectatomic/rpm-ostree/issues/1081), where updates can be delivered via a special rpm in a yum repo rather than an ostree server/remote.
 
 READMORE
 

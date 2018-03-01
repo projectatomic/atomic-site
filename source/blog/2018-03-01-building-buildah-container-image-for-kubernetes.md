@@ -1,8 +1,8 @@
 ---
 title: Building a Buildah container image for Kubernetes
 author: ipbabble
-date: 2018-28-02 12:00:00 UTC
-published: false
+date: 2018-03-01 00:00:00 UTC
+published: true
 comments: false
 tags:
 - buildah

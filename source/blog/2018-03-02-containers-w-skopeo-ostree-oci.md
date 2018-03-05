@@ -222,6 +222,8 @@ You can edit the file `config.json` for example you can:
 - adjust `namespaces`: to add `{"type": "network"}` to make a separated network stack otherwise it would use host networking
 - you can adjust mapping between users `"linux": { "uidMappings": [ ... ] }` typically containers root is the current user
 
+Atomic system containers can ship a template for config.json as in [flannel's config.json.template](https://src.fedoraproject.org/container/flannel/blob/master/f/config.json.template)
+
 here is how you can attach a writable directory for `/data` (which is `cont1/data` we have created before)
 
 ```
@@ -299,3 +301,12 @@ redis                         23369     running   /home/alsadi/ostree/cont1
 
 Unfortunately there is no `bwrap-oci exec`, 
 
+## Atomic Options
+
+Atomic Install has corresponding options to the choices we have demonistrated in this artcile like
+
+- `--storage=ostree|docker` weither to use `docker` or `ostree` to store the image
+- `--runtime=/bin/bwrap-oci` for user containers or when `--user` is passed
+- `--runtime=/bin/runc` for system containers or when `--system` is passed
+
+For more details type `man atomic install`

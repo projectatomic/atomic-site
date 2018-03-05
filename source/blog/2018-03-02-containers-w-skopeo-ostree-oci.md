@@ -12,8 +12,6 @@ tags:
 - skopeo
 ---
 
-![buildah logo](https://cdn.rawgit.com/projectatomic/buildah/master/logos/buildah-logo_large.png)
-
 # How does Atomic run system containers without Docker Daemon?
 ## Introduction
 
@@ -25,7 +23,8 @@ and `flunneld` is the cluster network overlay (SDN).
 
 In this blog post we are going to demonstrate how to use the same components used by
 [Project Atomic](http://www.projectatomic.io/)
-to run the containers without a Docker daemon, namely:
+in the so called [system containers](https://www.projectatomic.io/blog/2016/09/intro-to-system-containers/)
+that is to run the containers without a Docker daemon, namely:
 [skopeo](https://github.com/projectatomic/skopeo),
 [ostree](https://github.com/ostreedev/ostree), and an OCI runtime like
 [runc](https://github.com/opencontainers/runc)
@@ -50,6 +49,25 @@ and you need a running docker daemon to start flanneld or etcd if they are shipp
 
 In this blog post, we are going to demonstrate how to pull docker container images
 and run them the same way [Atomic tool](https://github.com/projectatomic/atomic) does.
+
+If you inspected the `flannel` container image (either using `docker inspect` or remotely with `skopeo inspect`)
+you would see that it has a label called `atomic.type` indicating being a system container
+
+```
+$ skopeo inspect docker://registry.fedoraproject.org/f27/flannel
+{
+    "Name": "registry.fedoraproject.org/f27/flannel",
+    "Labels": {
+        "atomic.type": "system",
+// ...
+```
+
+Either that or by passing `--system` after `atomic install`,
+those are special containers that are executed without Docker daemon,
+those containers have [a special directory structure](http://www.projectatomic.io/blog/2016/09/intro-to-system-containers/)
+like their `systemd` service template as you can see in the source of [Fedora's flannel container source](https://src.fedoraproject.org/container/flannel/blob/master/f/Dockerfile#_23).
+
+The steps in this article are inspired by [how atomic tool work under the hood](https://github.com/projectatomic/atomic/blob/v1.22/Atomic/syscontainers.py).
 
 You can follow those steps on atomic host or in your regular OS (I've tested them on regular Fedora Workstation),
 and you don't need to be root.

@@ -303,7 +303,7 @@ Unfortunately there is no `bwrap-oci exec`.
 
 Atomic Install has corresponding options to the choices we have demonstrated in this article like:
 
-- `--storage=ostree|docker` weither to use `docker` or `ostree` to store the image
+- `--storage=ostree|docker` whether to use `docker` or `ostree` to store the image
 - `--runtime=/bin/bwrap-oci` for user containers or when `--user` is passed
 - `--runtime=/bin/runc` for system containers or when `--system` is passed
 

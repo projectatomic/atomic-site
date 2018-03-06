@@ -189,4 +189,4 @@ or join #atomic on freenode to ask questions. Thanks for reading!
 - [Upstream pull request](https://github.com/projectatomic/rpm-ostree/pull/1013)
 - [Original proposal](https://github.com/projectatomic/rpm-ostree/issues/594)
 - [rpm-ostree repo](https://github.com/projectatomic/rpm-ostree/)
-
+- [rpm-ostree doc](https://rpm-ostree.readthedocs.io/en/latest/)

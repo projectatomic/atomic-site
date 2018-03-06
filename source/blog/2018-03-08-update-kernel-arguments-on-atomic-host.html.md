@@ -1,7 +1,7 @@
 ---
 title: Update Kernel arguments on Atomic Host
 author: rubao
-date: 2018-03-06 17:00:00 UTC
+date: 2018-03-08 17:00:00 UTC
 published: true
 comments: false
 tags:
@@ -10,23 +10,22 @@ tags:
 ---
 
 Users or adminstrators may want to change [kernel arguments](https://www.kernel.org/doc/html/v4.14/admin-guide/kernel-parameters.html) of Atomic Host for various reasons.
-Before, it seemed hard for the users to do so due to many of
-the steps involved, and the harmful consequeces that can occur if users accidentally
-make a mistake in the changing process.
+Previously, it was hard for the users due to many of the steps involved,
+and the harmful consequeces that can occur if users accidentally make a mistake
+in the changing process.
 
-In this post, I want to introduce a command(rpm-ostree ex kargs) that
+In this post, I want to introduce a command(`rpm-ostree ex kargs`) that
 allows users to change kernel arguments on Atomic Host. This command simplifies
-the process of changing kernel arguments into few simple commands. This command also
-currently lies beneath [rpm-ostree](https://github.com/projectatomic/rpm-ostree),
+the process of changing kernel arguments. This command also lies
+beneath [rpm-ostree](https://github.com/projectatomic/rpm-ostree),
 and because of that, it benefits from many of the cool features from rpm-ostree.
 One of them is `rpm-ostree rollback`, which can allow users to undo their old changes
 they do not want.
 
-Note: This command is still under experimentation, so if you have seen any
+Note: This command is still experimental, so if you have seen any
 unexpected behavior happening, please report an issue to rpm-ostree. This
-post also might be a bit difficult to understand without prior knowledge to
-rpm-ostree and Atomic Host, please bear that in mind when reading this.
-
+post also requires some knowledge of Atomic Host and rpm-ostree, please
+bear that in mind when reading this.
 
 READMORE
 
@@ -34,48 +33,49 @@ Let's demonstrate some of the options that can be done with this command!
 
 # Display the current kernel arguments
 
-The rpm-ostree ex kargs command can allow users to see the kernel arguments
+The `rpm-ostree ex kargs` command can allow users to see the kernel arguments
 from different locations, including the current kernel arguments, arguments
-from /proc/cmdline as well as kernel arguments from a specific deployment
+from /proc/cmdline as well as kernel arguments from a specific deployment.
 
 
 The command following will show the kernel arguments from first bootable entry
 in your grub.cfg:
+
 ```
 [root@localhost ~]# rpm-ostree ex kargs
 The kernel arguments are:
 no_timer_check console=tty1 console=ttyS0,115200n8 net.ifnames=0 biosdevname=0 rd.lvm.lv=atomicos/root root=/dev/mapper/atomicos-root ostree=/ostree/boot.0/fedora-atomic/9a9b350be75846811cbb0b1fd7b3d42a49908ed1265bc59e292bb4a34674332c/0
 ```
 
-This command will show you the kernel arguments from the first deployment
+This command will show you the kernel arguments from the first deployment:
+
 ```
 [root@localhost ~]# rpm-ostree ex kargs --deploy-index=0
 The kernel arguments are:
 no_timer_check console=tty1 console=ttyS0,115200n8 net.ifnames=0 biosdevname=0 rd.lvm.lv=atomicos/root root=/dev/mapper/atomicos-root ostree=/ostree/boot.0/fedora-atomic/9a9b350be75846811cbb0b1fd7b3d42a49908ed1265bc59e292bb4a34674332c/0
 ```
 
-This will show you the current kernel arguments being used in /proc/cmdline
+This will show you the current kernel arguments being used in /proc/cmdline:
 ```
 [root@localhost ~]# rpm-ostree ex kargs  --import-proc-cmdline
 The kernel arguments are:
 no_timer_check console=tty1 console=ttyS0,115200n8 net.ifnames=0 biosdevname=0 rd.lvm.lv=atomicos/root root=/dev/mapper/atomicos-root ostree=/ostree/boot.0/fedora-atomic/9a9b350be75846811cbb0b1fd7b3d42a49908ed1265bc59e292bb4a34674332c/0
-
 ```
 
 # Changing the kernel arguments
 
 Similarly, you can fetch kernel arguments from three different locations mentioned above,
-but for readability and simplicty, we are only demoing with the first one(first
+but for readability and simplicty, we are only demoing with the first one (first
 bootable entry) here.
 
-You have four different options of changing kernel arguments in the command, all of those
-will create a deployment, meaning its changes can be revertable. A more detailed description
-will be shown by `rpm-ostree ex kargs --help`
+You have four different options of changing kernel arguments in the command. All of those
+will create a deployment, and can be revertible through `rpm-ostree rollback`. A more
+detailed description of the commands will be shown by `rpm-ostree ex kargs --help`
 
 ## 1: Add one or multiple kernel arguments to the list
 
 The user can append the argument using append option, and the format for the value
-pair will be in terms of key=value. The changes are rollbackable as mentioned earlier.
+pair will be in terms of key=value. The changes can be rolled back as mentioned earlier.
 
 ```
 [root@localhost ~]# rpm-ostree ex kargs --append=test_add=test
@@ -86,7 +86,7 @@ Run "systemctl reboot" to start a reboot
 ```
 
 Now we want to verify if the changes got added to the grub.cfg, because
-that is what is going to be used when user boots into the system
+that is what is going to be used when user boots into the system.
 
 ```
 [root@localhost ~]# cat /boot/grub2/grub.cfg | grep test_add=test
@@ -94,7 +94,7 @@ linux16 /ostree/fedora-atomic-9a9b350be75846811cbb0b1fd7b3d42a49908ed1265bc59e29
 linux16 /ostree/fedora-atomic-9a9b350be75846811cbb0b1fd7b3d42a49908ed1265bc59e292bb4a34674332c/vmlinuz-4.14.13-300.fc27.x86_64 no_timer_check console=tty1 console=ttyS0,115200n8 net.ifnames=0 biosdevname=0 rd.lvm.lv=atomicos/root root=/dev/mapper/atomicos-root ostree=/ostree/boot.1/fedora-atomic/9a9b350be75846811cbb0b1fd7b3d42a49908ed1265bc59e292bb4a34674332c/0 test_add=test ds=nocloud\;h=localhost\;i=devmode\;s=/usr/share/atomic-devmode/cloud-init.
 ```
 
-Now we want to show that changes are rollbackable
+Now we want to show that changes can be rolled back:
 ```
 [root@localhost ~]# systemctl reboot
 Connection to 192.168.121.188 closed by remote host.
@@ -107,14 +107,13 @@ Run "systemctl reboot" to start a reboot
 [root@localhost ~]# rpm-ostree ex kargs
 The kernel arguments are:
 no_timer_check console=tty1 console=ttyS0,115200n8 net.ifnames=0 biosdevname=0 rd.lvm.lv=atomicos/root root=/dev/mapper/atomicos-root ostree=/ostree/boot.0/fedora-atomic/9a9b350be75846811cbb0b1fd7b3d42a49908ed1265bc59e292bb4a34674332c/0
-
 ```
 
 ## 2: Replace one or multiple arguments
 
 To replace the value, the input will be in the form of key=oldvalue=newvalue, or when there
 is only one single key value pair, you can replace it by key=newvalue. Note, to avoid duplication,
-we skip the process of changing the actual grub.cfg here.
+we skip modifying grub.cfg here.
 
 ```
 [root@localhost ~]# rpm-ostree ex kargs --replace no_timer_check=""=test_val --replace net.ifnames=0=new_val
@@ -150,7 +149,6 @@ Run "systemctl reboot" to start a reboot
 [root@localhost ~]# rpm-ostree ex kargs
 The kernel arguments are:
 console=ttyS0,115200n8 net.ifnames=0 biosdevname=0 rd.lvm.lv=atomicos/root root=/dev/mapper/atomicos-root ostree=/ostree/boot.1/fedora-atomic/9a9b350be75846811cbb0b1fd7b3d42a49908ed1265bc59e292bb4a34674332c/0
-
 ```
 
 ## 4: Allow user to do all above actions using an editor
@@ -179,8 +177,14 @@ The kernel arguments are:
 test=test console=ttyS0,115200n8 biosdevname=0 rd.lvm.lv=atomicos/root root=/dev/mapper/atomicos-root ostree=/ostree/boot.0/fedora-atomic/9a9b350be75846811cbb0b1fd7b3d42a49908ed1265bc59e292bb4a34674332c/0
 ```
 
+# Conclusion:
+
+Those are all the major functionalities for `rpm-ostree ex kargs`. Feel free to try this out, feedbacks are always welcome!
+To post feedback about this command, you can post a issue on [rpm-ostree repo](https://github.com/projectatomic/rpm-ostree/issues),
+or join #atomic on freenode to ask questions. Thank you for reading this document!
+
 # More information:
 - [Upstream pull request](https://github.com/projectatomic/rpm-ostree/pull/1013)
 - [Original proposal](https://github.com/projectatomic/rpm-ostree/issues/594)
-```
+- [rpm-ostree repo](https://github.com/projectatomic/rpm-ostree/)
 

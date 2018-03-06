@@ -12,8 +12,6 @@ tags:
 - skopeo
 ---
 
-# How does Atomic run system containers without Docker Daemon?
-
 ## Introduction
 
 In 2016, we started to [Containerize the Kubernetes stack](https://www.projectatomic.io/blog/2016/09/running-kubernetes-in-containers-on-atomic/),

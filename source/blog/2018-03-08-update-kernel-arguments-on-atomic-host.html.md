@@ -27,18 +27,18 @@ unexpected behavior happening, please report an issue to rpm-ostree. This
 post also requires some knowledge of Atomic Host and rpm-ostree, please
 bear that in mind when reading this.
 
-READMORE
-
 Let's demonstrate some of the options that can be done with this command!
+
+READMORE
 
 # Display the current kernel arguments
 
 The `rpm-ostree ex kargs` command can allow users to see the kernel arguments
 from different locations, including the current kernel arguments, arguments
-from /proc/cmdline as well as kernel arguments from a specific deployment.
+from `/proc/cmdline` as well as kernel arguments from a specific deployment.
 
 
-The command following will show the kernel arguments from first bootable entry
+The command following shows the kernel arguments from first bootable entry
 in your grub.cfg:
 
 ```
@@ -47,7 +47,7 @@ The kernel arguments are:
 no_timer_check console=tty1 console=ttyS0,115200n8 net.ifnames=0 biosdevname=0 rd.lvm.lv=atomicos/root root=/dev/mapper/atomicos-root ostree=/ostree/boot.0/fedora-atomic/9a9b350be75846811cbb0b1fd7b3d42a49908ed1265bc59e292bb4a34674332c/0
 ```
 
-This command will show you the kernel arguments from the first deployment:
+This command shows you the kernel arguments from the first deployment:
 
 ```
 [root@localhost ~]# rpm-ostree ex kargs --deploy-index=0
@@ -55,7 +55,8 @@ The kernel arguments are:
 no_timer_check console=tty1 console=ttyS0,115200n8 net.ifnames=0 biosdevname=0 rd.lvm.lv=atomicos/root root=/dev/mapper/atomicos-root ostree=/ostree/boot.0/fedora-atomic/9a9b350be75846811cbb0b1fd7b3d42a49908ed1265bc59e292bb4a34674332c/0
 ```
 
-This will show you the current kernel arguments being used in /proc/cmdline:
+This shows you the current kernel arguments being used in `/proc/cmdline`:
+
 ```
 [root@localhost ~]# rpm-ostree ex kargs  --import-proc-cmdline
 The kernel arguments are:
@@ -69,13 +70,13 @@ but for readability and simplicty, we are only demoing with the first one (first
 bootable entry) here.
 
 You have four different options of changing kernel arguments in the command. All of those
-will create a deployment, and can be revertible through `rpm-ostree rollback`. A more
-detailed description of the commands will be shown by `rpm-ostree ex kargs --help`
+creates a deployment, and can be revertible through `rpm-ostree rollback`. A more
+detailed description of the commands can be shown by `rpm-ostree ex kargs --help`
 
 ## 1: Add one or multiple kernel arguments to the list
 
 The user can append the argument using append option, and the format for the value
-pair will be in terms of key=value. The changes can be rolled back as mentioned earlier.
+pair is in terms of key=value. The changes can be rolled back as mentioned earlier.
 
 ```
 [root@localhost ~]# rpm-ostree ex kargs --append=test_add=test
@@ -95,6 +96,7 @@ linux16 /ostree/fedora-atomic-9a9b350be75846811cbb0b1fd7b3d42a49908ed1265bc59e29
 ```
 
 Now we want to show that changes can be rolled back:
+
 ```
 [root@localhost ~]# systemctl reboot
 Connection to 192.168.121.188 closed by remote host.
@@ -111,9 +113,9 @@ no_timer_check console=tty1 console=ttyS0,115200n8 net.ifnames=0 biosdevname=0 r
 
 ## 2: Replace one or multiple arguments
 
-To replace the value, the input will be in the form of key=oldvalue=newvalue, or when there
+To replace the value, the input is in the form of key=oldvalue=newvalue, or when there
 is only one single key value pair, you can replace it by key=newvalue. Note, to avoid duplication,
-we skip modifying grub.cfg here.
+we skip showing the modified grub.cfg here.
 
 ```
 [root@localhost ~]# rpm-ostree ex kargs --replace no_timer_check=""=test_val --replace net.ifnames=0=new_val
@@ -137,7 +139,7 @@ no_timer_check console=tty1 console=ttyS0,115200n8 net.ifnames=0 biosdevname=0 r
 
 ## 3: Delete one or multiple arguments
 
-To delete one or more kernel arguments, the input will be in the form of key=value format. Similarly, when
+To delete one or more kernel arguments, the input is in the form of key=value format. Similarly, when
 there is only one single key=value pair, we allow users to delete argument by key name.
 
 ```
@@ -179,9 +181,9 @@ test=test console=ttyS0,115200n8 biosdevname=0 rd.lvm.lv=atomicos/root root=/dev
 
 # Conclusion:
 
-Those are all the major functionalities for `rpm-ostree ex kargs`. Feel free to try this out, feedbacks are always welcome!
-To post feedback about this command, you can post a issue on [rpm-ostree repo](https://github.com/projectatomic/rpm-ostree/issues),
-or join #atomic on freenode to ask questions. Thank you for reading this document!
+This covers all the major functionalities for `rpm-ostree ex kargs`. Feel free to try this out, feedback is always welcome!
+To post feedback about this command, you can post an issue on [rpm-ostree repo](https://github.com/projectatomic/rpm-ostree/issues),
+or join #atomic on freenode to ask questions. Thanks for reading!
 
 # More information:
 - [Upstream pull request](https://github.com/projectatomic/rpm-ostree/pull/1013)

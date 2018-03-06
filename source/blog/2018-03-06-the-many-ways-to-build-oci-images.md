@@ -18,7 +18,9 @@ tags:
 When containers initially made their big splash into the industry via Docker,
 users were almost required to use the `docker` CLI and daemon to create and
 manage their container images.  But a lot has happened since then and now it
-is easier than ever to create a container image without using `docker` at all.
+is easier than ever to create a container image without using `docker` at all,
+since the Docker image format has been standardized as the
+[OCI Image format](https://github.com/opencontainers/image-spec).
 
 In this post, we'll review some of the ways you can create and manage your
 container images without ever having to start the `docker` daemon.

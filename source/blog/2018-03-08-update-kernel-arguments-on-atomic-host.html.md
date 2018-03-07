@@ -11,10 +11,10 @@ tags:
 
 Users or adminstrators may want to change [kernel arguments](https://www.kernel.org/doc/html/v4.14/admin-guide/kernel-parameters.html) of Atomic Host for various reasons.
 Previously, it was hard for the users due to many of the steps involved,
-and the harmful consequeces that can occur if users accidentally make a mistake
+and the harmful consequences that can occur if users accidentally make a mistake
 in the changing process.
 
-In this post, I want to introduce a command(`rpm-ostree ex kargs`) that
+In this post, I want to introduce a command (`rpm-ostree ex kargs`) that
 allows users to change kernel arguments on Atomic Host. This command simplifies
 the process of changing kernel arguments. This command also lies
 beneath [rpm-ostree](https://github.com/projectatomic/rpm-ostree),
@@ -23,7 +23,8 @@ One of them is `rpm-ostree rollback`, which can allow users to undo their old ch
 they do not want.
 
 Note: This command is still experimental, so if you have seen any
-unexpected behavior happening, please report an issue to rpm-ostree. This
+unexpected behavior happening, please report an issue to
+[rpm-ostree](https://github.com/projectatomic/rpm-ostree/issues/new). This
 post also requires some knowledge of Atomic Host and rpm-ostree, please
 bear that in mind when reading this.
 
@@ -70,7 +71,7 @@ but for readability and simplicty, we are only demoing with the first one (first
 bootable entry) here.
 
 You have four different options of changing kernel arguments in the command. All of those
-creates a deployment, and can be revertible through `rpm-ostree rollback`. A more
+creates a deployment, and can be reverted through `rpm-ostree rollback`. A more
 detailed description of the commands can be shown by `rpm-ostree ex kargs --help`
 
 ## 1: Add one or multiple kernel arguments to the list

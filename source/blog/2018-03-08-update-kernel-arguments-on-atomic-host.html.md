@@ -1,7 +1,7 @@
 ---
 title: Update Kernel arguments on Atomic Host
 author: rubao
-date: 2018-03-08 17:00:00 UTC
+date: 2018-03-08 00:00:00 UTC
 published: true
 comments: false
 tags:

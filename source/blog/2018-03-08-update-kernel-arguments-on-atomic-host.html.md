@@ -67,7 +67,7 @@ no_timer_check console=tty1 console=ttyS0,115200n8 net.ifnames=0 biosdevname=0 r
 # Changing the kernel arguments
 
 Similarly, you can fetch kernel arguments from three different locations mentioned above,
-but for readability and simplicty, we are only demoing with the first one (first
+but for readability and simplicity, we are only demoing with the first one (first
 bootable entry) here.
 
 You have four different options of changing kernel arguments in the command. All of those

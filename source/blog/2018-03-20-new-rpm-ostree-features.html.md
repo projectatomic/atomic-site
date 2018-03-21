@@ -3,7 +3,7 @@ title: Latest rpm-ostree features
 author: jlebon
 date: 2018-03-20 17:00:00 UTC
 tags: rpm-ostree, rpm, ostree, atomic, atomic host
-comments: true
+comments: false
 published: true
 ---
 

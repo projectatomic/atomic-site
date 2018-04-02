@@ -11,6 +11,8 @@ I recently joined Red Hat after many years working for another tech company whos
 
 Fast forward to a year ago when I joined Red Hat, and developed a completely different mindset. One of the first things I jumped into was the Buildah project. It facilitates building Open Container Initiative (OCI) images and it is especially good at allowing you to tailor the size of the image that is created.  At that time Buildah was in its very early stages and there were some warts here and there that weren't quite production ready.
 
+READMORE
+
 Being new on the project, I made a few minor changes then asked where the company's internal git repository was that I could push my changes to.  The answer was nothing internal, just push your changes to GitHub.  I was baffled, sending my changes out to GitHub would mean anyone could look at that code and use it for their own projects!  Plus the code still had a few warts, so that just seemed so counter-intuitive.  But being the new guy, I shook my head in wonder and pushed the changes out.
 
 Now a year later, I’m very convinced of the power and value of Open Source software. I’m still working on Buildah and we recently had an issue that really illustrates that power and value.  The issue titled ["Buildah images not so small"](https://github.com/projectatomic/buildah/issues/532), was raised by Tim Dudgeion (@tdudgeon). To summarize, he noted that images created by Buildah were bigger than those created by Docker even though the Buildah images didn’t contain the extra “fluff” he saw in the Docker images.

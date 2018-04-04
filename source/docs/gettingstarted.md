@@ -54,7 +54,7 @@ As a good practice, update to the latest available Atomic tree.
     [fedora@atomic-master ~]$ sudo atomic host upgrade --reboot
 
 ### Local Docker registry
-Normally when you want to go up a container docker, uses [Docker Hub](https://hub.docker.com/) images. This's the default. However, you may want your images stay on your own Infrastructure what ensures privacy, availability, speed, ease of integration, and continuous delivery. Configure a local registry is an **optional** procedure, you may want to acquire, and manipulate images from a remote repository.
+Normally when you want to bring up a docker container it uses [Docker Hub](https://hub.docker.com/) images. This's the default. However, you may want your images stay on your own Infrastructure what ensures privacy, availability, speed, ease of integration, and continuous delivery. Configure a local registry is an **optional** procedure, you may want to acquire, and manipulate images from a remote repository.
 
 The Atomic cluster will use a local Docker registry mirror for caching with a local volume for persistence.  You may need to look at the amount of storage available to the Docker storage pool on the master host.  We don't want the container recreated every time the service gets restarted, so we'll create the container locally then set up a systemd unit file that will only start and stop the container.
 

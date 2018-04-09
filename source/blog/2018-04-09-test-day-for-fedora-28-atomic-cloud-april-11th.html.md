@@ -1,13 +1,15 @@
 ---
 title: Test Day for Fedora 28 Atomic/Cloud April 11th
 author: sinnykumari
-date: 2018-04-06
-comments: true
+date: 2018-04-09
+comments: false
 published: true
 tags: atomic, fedora, test_day, cloud
 ---
 
 With the Fedora 28 Beta [official release announcement](https://fedoramagazine.org/announcing-fedora-28-beta/), the [Fedora Atomic Working Group](https://fedoraproject.org/wiki/Atomic_WG) and [Fedora Cloud SIG](https://fedoraproject.org/wiki/Cloud_SIG) would like to invite members of the community to join us in finding and squashing bugs. We are organizing a Test Day on Wednesday, April 11th 2018.
+
+READMORE
 
 In this Test Day, you can test Fedora Atomic Host, Fedora Atomic Workstation and Fedora Cloud Base content. See the [Fedora Atomic Host Pre-Release Page](https://getfedora.org/en/atomic/prerelease/) for links to the artifacts for Fedora Atomic Host, [here](https://download.fedoraproject.org/pub/fedora/linux/releases/test/28_Beta/AtomicWorkstation/x86_64/iso/Fedora-AtomicWorkstation-ostree-x86_64-28_Beta-1.3.iso) for Atomic Workstation ISO link and the [Alternative Downloads Beta Page](https://alt.fedoraproject.org/prerelease/index.html) for links to Cloud Base Beta images. We have qcow, AMI and ISO images ready for testing.  Additionally, Vagrant Boxes will be available for testing as well.
 

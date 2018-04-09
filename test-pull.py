@@ -12,13 +12,13 @@ import sys
 from subprocess import check_call
 
 if len(sys.argv) < 2:
-    print "usage: test-pull.py #PRNUM"
+    print ("usage: test-pull.py #PRNUM")
     sys.exit(-1)
 else:
     prnum = sys.argv[1]
 
 # connect anonymously
-gh = github3.GitHub();
+gh = github3.GitHub()
 rep = gh.repository('projectatomic','atomic-site')
 # pull the pull request using the user-supplied number
 pr = rep.pull_request(prnum)
@@ -27,10 +27,10 @@ prsrc = pr.head
 if prsrc.repo[0] == u'projectatomic':
     prname = prsrc.ref
 else:
-    #otherwise it's user + branch
+    #otherwise it's user + branchpip install github3.py
     prname = '{}-{}'.format(prsrc.repo[0],prsrc.ref)
 
-prfrom = 'git://github.com/{}/{}'.format(prsrc.repo[0], prsrc.repo[1], prsrc.ref)
+prfrom = 'git://github.com/{}/{}/{}'.format(prsrc.repo[0], prsrc.repo[1], prsrc.ref)
 
 # make sure we're up to date
 check_call(["git", "checkout", "master"])

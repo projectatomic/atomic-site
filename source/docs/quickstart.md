@@ -221,7 +221,7 @@ Disk attached successfully
 
 ## Finding Help
 
-For more help, check out the Project Atomic mailing lists for [general discussions](http://lists.projectatomic.io/mailman/listinfo/atomic) or [technical issues](http://lists.projectatomic.io/mailman/listinfo/atomic-devel) or ask a question in our [forum](http://ask.projectatomic.io).
+For more help, check out the Project Atomic mailing lists for [general discussions](http://lists.projectatomic.io/mailman/listinfo/atomic) or [technical issues](http://lists.projectatomic.io/mailman/listinfo/atomic-devel).
 
 ## Reporting Bugs
 

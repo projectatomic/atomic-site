@@ -4,7 +4,7 @@ author: smilner
 date: 2017-06-08 16:00:00 UTC
 published: true
 comments: true
-tags: atomic, contianers, runc, system containers
+tags: atomic, containers, runc, system containers
 ---
 
 As we continue to push the boundaries of Linux containers, we increasingly see value in containerizing operating system-level components. It’s common for developers and administrators to turn towards containers to improve application isolation, portability, deployment scenarios, and so on. These, and plenty of other advantages, [are well proven across the industry today](https://www.theregister.co.uk/2014/05/23/google_containerization_two_billion/), and the value extends to components that aren’t traditionally delivered as container images, like the Docker engine. Breaking out components like the container engine, cloud/guest agents, and storage clients, into containers isolates these stacks and allows them to move independently from the container host’s operating system.

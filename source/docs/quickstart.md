@@ -12,6 +12,11 @@ We recommend reading the [Getting Started Guide](http://www.projectatomic.io/doc
 
     `$ qemu-img convert -f qcow2 [filename].qcow2 -O vdi [filename].vdi`
 
+For the very impatient Vagrant users there is a [Fedora box](https://atlas.hashicorp.com/fedora/boxes/23-atomic-host) and [CentOS box](https://atlas.hashicorp.com/centos/boxes/atomic-host): 
+   
+   `$ vagrant init fedora/23-atomic-host; vagrant up`
+   `$ vagrant init centos/atomic-host; vagrant up`
+
 ## Step by Step
 There are three basic steps we'll do for each virtualization provider before booting the virtual machine:
 

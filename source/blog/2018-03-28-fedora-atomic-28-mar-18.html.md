@@ -125,7 +125,7 @@ For more information about the latest targets, please reference the [Fedora Atom
 
 The Vagrant Cloud page with the new Atomic Host:
 
-* p.vagrantup.com/fedora/boxes/27-atomic-host
+* https://app.vagrantup.com/fedora/boxes/27-atomic-host
 * https://app.vagrantup.com/fedora/boxes/27-atomic-host/versions/27.20180326.1
 
 The AMIs for this release are here:

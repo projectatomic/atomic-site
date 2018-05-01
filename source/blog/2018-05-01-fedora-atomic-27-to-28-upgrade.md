@@ -21,6 +21,8 @@ For today we'll talk about updating an existing Fedora 27 Atomic Host
 system to Fedora 28. We'll cover preparing the system for upgrade and
 performing the upgrade.
 
+READMORE
+
 **NOTE:** If you really don't want to upgrade to Fedora 28 see the
           later section: *Appendix B: Fedora 27 Atomic Host Life Support*.
 

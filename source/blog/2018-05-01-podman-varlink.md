@@ -3,16 +3,19 @@ title: A remote API for Podman
 author: baude
 date: 2018-05-01
 layout: post
-comments: true
+comments: false
 categories:
 - Blog
 tags:
 - crio
 - libpod
+- podman
 ---
 ## Podman grows a remote API using Varlink
 
-[Podman](https://github.com/projectatomic/libpod) up to now has been a simple CLI for managing pods and containers. But I wanted to allow other tools like atomic CLI and Cockpit to interact with the pods/containers created by Podman and other tools.  Execing a CLI tool to do this and screen scraping the output never quite works, so we wanted to add an API.  But I did not want to add a daemon to implement a restAPI.  #nobigfatdaemons.
+[Podman](https://github.com/projectatomic/libpod) up to now has been a simple CLI for managing pods and containers. But I wanted to allow other tools like Atomic CLI and Cockpit to interact with the pods/containers created by Podman and other tools.  Execing a CLI tool to do this and screen scraping the output never quite works, so we wanted to add an API.  But I did not want to add a daemon to implement a restAPI.  #nobigfatdaemons.
+
+READMORE
 
 Someone pointed out a new technology that seemed meet most of our needs called [varlink](https://github.com/varlink).  After reviewing the project and talking with the upstream owners, I decided to build the Podman API based on varlink so users and developers can interact with Podman programmatically.
 
@@ -45,6 +48,7 @@ Installing dependencies:
 Podman relies on a Systemd feature called [socket activation](http://0pointer.de/blog/projects/socket-activation.html).  Systemd allows developers to create socket unit files that tells systemd to listen on a particular socket like the unix domain socket /run/io.projectatomic.podman.  When a process connects to this socket, systemd will launch the command specified in the service file with the same name.  The launched command then handles the socket communications.
 
 Podman ships a systemd socket file `io.projectatomic.podman.socket` that will listen for requests.  It must be started for the varlink backend to work.
+
 ```
 $ cat /usr/lib/systemd/system/io.projectatomic.podman.socket
 [Unit]
@@ -56,7 +60,9 @@ ListenStream=/run/io.projectatomic.podman
 [Install]
 WantedBy=sockets.target
 ```
+
 Podman also ships a service file `io.projectatomic.podman.service`, which systemd activates when connections come into the socket.
+
 ```
 $ cat /usr/lib/systemd/system/io.projectatomic.podman.service
 [Unit]
@@ -72,7 +78,9 @@ ExecStart=/usr/bin/podman --varlink=unix:/run/io.projectatomic.podman
 WantedBy=multi-user.target
 Also=io.projectatomic.podman.socket
 ```
+
 Notice the ExecStart line, this is the command that systemd executes when the connection comes in.  You enable the service with the following commands.
+
 ```
 $ sudo systemctl enable io.projectatomic.podman.socket
 Created symlink /etc/systemd/system/multi-user.target.wants/io.projectatomic.podman.service → /usr/lib/systemd/system/io.projectatomic.podman.service.
@@ -93,6 +101,7 @@ As you can see, the socket is now active and located at _/run/io.projectatomic.p
 ### Is it alive?
 
 We can check if the service is alive and responding using the the varlink utility and an endpoint called Ping.
+
 ```
 $ varlink call unix:/run/io.projectatomic.podman/io.projectatomic.podman.Ping
 {
@@ -101,11 +110,13 @@ $ varlink call unix:/run/io.projectatomic.podman/io.projectatomic.podman.Ping
  }
 }
 ```
+
 The path beginning with “unix://” is considered to be a varlink URI of sorts. The “/run/io.projectatomic.podman” portion refers to the listening socket. And the latter parts refer to the path of the endpoint (or function if you prefer).
 
 ### Varlink info and help
 
 One unique design point of the varlink implementation is that it has the ability to help you discover its interfaces and endpoints. The _info_ subcommand will show basic information about the setup.
+
 ```
 $ varlink info unix:/run/io.projectatomic.podman
 Vendor: Atomic
@@ -116,7 +127,9 @@ Interfaces:
  org.varlink.service
  io.projectatomic.podman
 ```
+
 Notice the URI for that call is to the socket itself. Using the _help_ subcommand, we can discover more about the implemented API.
+
 ```
 $ varlink help unix:/run/io.projectatomic.podman/io.projectatomic.podman
 # Podman Service Interface
@@ -142,6 +155,7 @@ error ImageNotFound (imagename: string)
 error ErrorOccurred (reason: string)
 error RuntimeError (reason: string)
 ```
+
 Here we can see the interface that is implemented called “io.projectatomic.podman” following by a type definition for _Version_. It describes the construct that _GetVersion_ will return. Following the type definitions, we can also see a series of method declarations. The syntax of the method definition is:
 
 _method MethodName(input param:input type) -> (return name: return type)_
@@ -149,6 +163,7 @@ _method MethodName(input param:input type) -> (return name: return type)_
 And finally, you can see the declaration of known errors that can be returned. In languages such as Python, these are handy because you can “catch” them.
 
 Lets see what GetVersion returns.
+
 ```
 $ varlink call unix:/run/io.projectatomic.podman/io.projectatomic.podman.GetVersion
 {
@@ -161,9 +176,11 @@ $ varlink call unix:/run/io.projectatomic.podman/io.projectatomic.podman.GetVers
  }
 }
 ```
+
 ### Cool, I want more
 
 When working with a container runtime, one of the first things users do is see what images have been pulled locally.
+
 ```
 $ varlink call unix:/run/io.projectatomic.podman/io.projectatomic.podman.ListImages
 {
@@ -191,7 +208,9 @@ $ varlink call unix:/run/io.projectatomic.podman/io.projectatomic.podman.ListIma
  ]
 }
 ```
+
 Here you can see the Fedora 28 image is local. We also provide some basic information about the image (similar to podman ps) but nothing compared to an image inspection. Suppose we want to create a shorthand name for the Fedora image. We can use the _TagImage_ endpoint for that.
+
 ```
 $ varlink call unix:/run/io.projectatomic.podman/io.projectatomic.podman.TagImage '{"name": "388e3e5f0e20ab4cf", "tagged": "f28:latest"}'
 {}

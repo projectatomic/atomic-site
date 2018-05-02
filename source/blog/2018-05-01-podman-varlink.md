@@ -24,6 +24,7 @@ Varlink describes itself as an “interface description format and protocol that
 ### Installation
 
 First we need to install the Podman and varlink packages.  You will need a minimal version of podman-0.4.4-2 to work with the varlink backend.
+
 ```
 $ sudo dnf --enablerepo=updates-testing install podman libvarlink-util libvarlink
 Last metadata expiration check: 0:00:14 ago on Tue 01 May 2018 07:08:49 PM UTC.
@@ -215,7 +216,9 @@ Here you can see the Fedora 28 image is local. We also provide some basic inform
 $ varlink call unix:/run/io.projectatomic.podman/io.projectatomic.podman.TagImage '{"name": "388e3e5f0e20ab4cf", "tagged": "f28:latest"}'
 {}
 ````
+
 For simplicity, we can verify the tag with podman.
+
 ```
 $ sudo podman images
 REPOSITORY                          TAG      IMAGE ID       CREATED      SIZE
@@ -229,6 +232,6 @@ The varlink command line utility was meant for simple varlink interactions, API 
 
 ### Upcoming
 
-If you do test our the varlink setup, you will notice that we have implemented most of the image related methods. I just began to implement the container related functions recently and will likely implement most of those within the upcoming week. The Python bindings will trail these slightly.  
+If you do test our the varlink setup, you will notice that we have implemented most of the image related methods. I just began to implement the container related functions recently and will likely implement most of those within the upcoming week. The Python bindings will trail these slightly.
 
 We are always looking for help. Testing? Documentation? Additional Language Bindings?  Additional Interfaces.  Lots of work to be done...

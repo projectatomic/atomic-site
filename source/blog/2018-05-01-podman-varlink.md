@@ -216,7 +216,9 @@ Here you can see the Fedora 28 image is local. We also provide some basic inform
 $ varlink call unix:/run/io.projectatomic.podman/io.projectatomic.podman.TagImage '{"name": "388e3e5f0e20ab4cf", "tagged": "f28:latest"}'
 {}
 ````
+
 For simplicity, we can verify the tag with podman.
+
 ```
 $ sudo podman images
 REPOSITORY                          TAG      IMAGE ID       CREATED      SIZE

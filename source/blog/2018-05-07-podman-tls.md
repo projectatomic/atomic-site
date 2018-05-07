@@ -11,8 +11,11 @@ tags:
 - libpod
 - podman
 ---
+
 ## Podman and insecure registries
 The last few weeks, we have had a number of bugs and questions about how to pull from an insecure registry. The obvious advice here is that you should always be using a registry which implements _tls-verify_. But if you are a container or image developer or you are just plain breaking new ground, your registry may not use _tls-verify_. And [Podman](https://github.com/projectatomic/libpod/) can handle this; and I wanted to spend a minute or two explaining how it does and the logic behind it.
+
+READMORE
 
 ### Podman pull
 

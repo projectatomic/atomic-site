@@ -333,7 +333,7 @@ Once you see the pod status is Running, you can check to see which node it's run
     [fedora@atomic-master ~]$ kubectl describe pods www | grep Node
     Node:		192.168.122.11/192.168.122.11
 
-Point a web browser at the host Kubernetes created the container on. Use port 8080, since that was the host port we connected to the container port 80 in the pod definition. You should see the nginx welcome page. For example:
+Point a web browser at the host Kubernetes created the container on. Use port 8080, since that was the host port we connected to the container port 80 in the pod definition. You should see the nginx welcome page.For example:
 
     curl your-host:8080
 

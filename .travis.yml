@@ -1,9 +1,8 @@
-language: ruby
-rvm:
-- 2.0.0
+sudo: required
+services:
+- docker
 install:
-- sudo apt-get update -qq
-- sudo apt-get install -y ruby-dev git make gcc
-- bundle install
-script: bundle exec middleman build --verbose
+- wget https://github.com/openshift/source-to-image/releases/download/v1.1.8/source-to-image-v1.1.8-e3140d01-linux-amd64.tar.gz
+- tar -xf source-to-image*.tar.gz
+script: ./s2i build . quay.io/osas/s2i-middleman test-image
  

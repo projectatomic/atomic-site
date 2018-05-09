@@ -12,7 +12,6 @@ We're looking for anything which relates to the various open source sub-projects
 * Atomic Developer Bundle
 * Cockpit
 * OStree and RPM-OStree
-* Atomic.app and Nulecule
 * Fedora Atomic Workstation
 * Running Docker and/or RunC on Fedora/CentOS/RHEL
 * Linux container technology and news
@@ -33,7 +32,7 @@ If you are contributing to the Project Atomic site, please look at the following
 * Blogs reside in the source/blog directory
 * Naming convention is date-title *yyyy-mm-dd-this-is-a-blog*
 * Create a pull request to submit for editorial review
- 
+
 #### Template
 The header for the post should contain the following information, tags are a free form list.  Your post will start immediately following the header.  Add a 'READMORE' tag on a separate line to define at a good place to continue reading the full post.
 
@@ -43,19 +42,19 @@ The header for the post should contain the following information, tags are a fre
     date: 2014-10-21
     layout: post
     comments: true
-    categories: 
+    categories:
     - Blog
-    tags: 
+    tags:
     - cloud-init
     - Kubernetes
     ---
 
-#### Images: 
+#### Images:
 Place in correct directory,  use relative links (?)
 
 #### Administrivia:
-Add yourself to data/authors.yml 
-    
+Add yourself to data/authors.yml
+
     jzb:
     name: Joe Brockmeier
     twitter: jzb
@@ -83,7 +82,7 @@ Complete environment description and skills / understanding required before star
 
 #### Guide:
 The meat of the instruction set, lay out in some logical order, provide expected outputs where needed.  Only provide enough detail as needed for the objectives, if more detail can be helpful to learn but not needed, link  to an outside resource.
-* Provide copy/paste sections, make sure Markdown is correct for leading / trailing whitespace 
+* Provide copy/paste sections, make sure Markdown is correct for leading / trailing whitespace
 
 ## Approval and Publishing Process
 
@@ -127,5 +126,3 @@ All content going to projectatomic.io must be vetted and approved by the Maintai
    * @dwalsh and/or @jbrooks for technical review
 4. Once cleared by the above, Maintainer merges to master and pushes
    new site version to production.
-
-

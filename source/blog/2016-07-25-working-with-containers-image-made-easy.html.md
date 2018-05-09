@@ -89,7 +89,6 @@ The new `skopeo copy` command isn't just limited to download to local directorie
 
 - docker registries -> local diretories
 - docker registries -> docker registries (`skopeo copy docker://myimage docker://anotherrepo/myimage`)
-- docker registries -> [Atomic registry](http://www.projectatomic.io/registry/) (`atomic:` prefix)
 - docker registries -> [OCI image-layout](https://github.com/opencontainers/image-spec/blob/master/image-layout.md) directories (`oci:` prefix)
 - and viceversa in any combination!
 

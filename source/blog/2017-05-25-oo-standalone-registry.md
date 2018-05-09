@@ -7,7 +7,9 @@ comments: true
 tags: openshift, atomic, registry, origin, fedora
 ---
 
-The Project Atomic site has had a section dedicated to the [Atomic Registry](http://docs.projectatomic.io/registry/latest/registry_quickstart/administrators/index.html) which has been useful for getting a registry up and running as quickly as possible.  However, the software powering the quickstart installation has not always kept up with the [OpenShift Origin](https://www.openshift.org) software which powers the actual registry and web UI.  This has lead to an increase in users reporting issues in the #atomic Freenode IRC channel.  And often it ends with someone pointing to the [stand-alone registry documentation](https://docs.openshift.org/latest/install_config/install/stand_alone_registry.html) that is provided by the OpenShift Origin project.
+**Update: Removed links to Atomic Registry as discontinued.**
+
+The Project Atomic site has had a section dedicated to the Atomic Registry, which has been discontinued in favor of [OpenShift Registry](https://docs.openshift.com/enterprise/3.0/architecture/infrastructure_components/image_registry.html). It was useful for getting a registry up and running as quickly as possible.  However, the software powering the quickstart installation has not always kept up with the [OpenShift Origin](https://www.openshift.org) software which powers the actual registry and web UI.  This has lead to an increase in users reporting issues in the #atomic Freenode IRC channel.  And often it ends with someone pointing to the [stand-alone registry documentation](https://docs.openshift.org/latest/install_config/install/stand_alone_registry.html) that is provided by the OpenShift Origin project.
 
 It turns out that deploying the stand-alone registry on a single Fedora 25 Atomic Host system is quite straight-forward and can quickly provide a usable registry. In this blog post, we'll deploy a proof-of-concept stand-alone registry on a single node, which will end up using self-signed certificates in the process.  In a later blog post, we'll show you how to setup a stand-alone registry using multiple nodes and your own SSL certificates.
 

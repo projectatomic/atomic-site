@@ -13,9 +13,9 @@ This post, and the accompanying document, will attempt to describe the patches w
 
 * Explanation on types of patches.
 * Description of patches.
-* Links to GitHub discussions, and pull requests for upstreaming the patches to docker.
+* Links to GitHub discussions, and pull requests for upstreaming the patches to Docker.
 
-Some people have asserted that [our docker repo](https://github.com/projectatomic/docker) is a fork of the upstream docker project.
+Some people have asserted that [our repo](https://github.com/projectatomic/docker) is a fork of the upstream Docker project.
 
 ##  What Does It Mean To Be a Fork?
 
@@ -29,9 +29,9 @@ At the end of the day, we continue to track the changes made to the upstream Doc
 
 ## How Can I Find Out About Patches for a Particular Version of Docker?
 
-All of the patches we ship are described in the README.md file on the appropriate branch of [our docker  repository](https://github.com/projectatomic/docker). If you want to look at the patches for docker-1.12 you would look at [the docker-1.12 branch](https://github.com/projectatomic/docker/tree/docker-1.12).
+All of the patches we ship are described in the README.md file on the appropriate branch of [our repository](https://github.com/projectatomic/docker). If you want to look at the patches for Docker 1.12 you would look at [the 1.12 branch](https://github.com/projectatomic/docker/tree/docker-1.12).
 
-You can then look on the [docker patches list page](/docs/docker_patches) for information about these patches.
+You can then look on the [patches list page](/docs/docker_patches) for information about these patches.
 
 ## What Kind of Patches does Project Atomic Include?
 
@@ -39,22 +39,22 @@ Here is a quick overview of the kinds of patches we carry, and then guidance on 
 
 ### Upstream Fixes
 
-The Docker Project upstream tends to fix issues in the **next** version of Docker. This means if a user finds an issue in docker-1.11 and we provide a fix for this to upstream, the patch gets merged in to the master branch, and it will probably not get back ported to docker-1.11.
+The Docker Project upstream tends to fix issues in the **next** version of Docker. This means if a user finds an issue in Docker 1.11 and we provide a fix for this to upstream, the patch gets merged in to the master branch, and it will probably not get back ported to Docker 1.11.
 
-Since Docker is releasing at such a rapid rate, they tell users to just install docker-1.12 when it is available. This is fine for people who want to be on the bleeding edge, but in a lot of cases the newer version of Docker comes with new issues along with the fixes.
+Since Docker is releasing at such a rapid rate, they tell users to just install Docker 1.12 when it is available. This is fine for people who want to be on the bleeding edge, but in a lot of cases the newer version of Docker comes with new issues along with the fixes.
 
-For example, docker-1.11 split the docker daemon into three parts: docker daemon, containerd, and runc.  We did not feel this was stable enough to ship to enterprise customers right when it came out, yet it had multiple fixes for the docker-1.10 version. Many users want to only get new fixes to their existing software and not have to re-certify their apps every two months.
+For example, Docker 1.11 split the Docker daemon into three parts: Docker daemon, containerd, and runc.  We did not feel this was stable enough to ship to enterprise customers right when it came out, yet it had multiple fixes for the Docker 1.10 version. Many users want to only get new fixes to their existing software and not have to re-certify their apps every two months.
 
 Another issue with supporting stable software with rapidly changing dependencies is that developers on the stable projects must spend time ensuring that their product remains stable every time one of their dependencies is updated. This is an expensive process, dependencies end up being updated only infrequently. This causes us to "cherry-pick" fixes from upstream Docker and to ship these fixes on older versions so that we can get the benefits from the bug fixes without the cost of updating the entire dependency. This is the same approach we take in order to add capabilities to the Linux kernel, a practice that has proven to be very valuable to our users.
 
 ### Proposed Patches for Upstream
 
-We carry patches that we know our users require right now, but have not yet been merged into the upstream project.  Every patch that we add to the Project Atomic repository also gets proposed to the upstream docker repository.
+We carry patches that we know our users require right now, but have not yet been merged into the upstream project.  Every patch that we add to the Project Atomic repository also gets proposed to the upstream Docker repository.
 
 These sorts of patches remain on the Project Atomic repository briefly while they’re being considered upstream, or forever if the upstream community rejects them. If we don't agree with upstream Docker and feel our users need these patches, we continue to carry them. In some cases we have worked out alternative solutions like building authorization plugins.
 
-For example, users of RHEL images are not supposed to push these image onto public web sites. We wanted a way to prevent users from accidentally pushing RHEL based images to Docker Hub, so we originally created a patch to block the pushing.  When authorization plugins were added we then created a plugin to protect users from pushing RHEL content to a public registry like Docker Hub, and no longer had to carry the custom patch.
+For example, users of RHEL images are not supposed to push these images onto public web sites. We wanted a way to prevent users from accidentally pushing RHEL based images to Docker Hub, so we originally created a patch to block the pushing.  When authorization plugins were added we then created a plugin to protect users from pushing RHEL content to a public registry like Docker Hub, and no longer had to carry the custom patch.
 
 ## Detailed List of Patches
 
-Want to know more about specific patches? You can find the current table and list of patches on our new [docker patches list page](/docs/docker_patches).
+Want to know more about specific patches? You can find the current table and list of patches on our new [patches list page](/docs/docker_patches).

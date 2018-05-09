@@ -26,7 +26,7 @@ READMORE
 
 Before I get into the some of the details of doing a custom `ostree` compose, I found it was helpful to do a vanilla `ostree` compose to learn some of the mechanics.
 
-I used Brent Baude's [post on the Red Hat Developer Blog](http://developerblog.redhat.com/2015/01/08/creating-custom-atomic-trees-images-and-installers-part-1/) as a guide for doing my first compose. It was critical to my success in this task! I would recommend reviewing that post for more details about how this works.
+I used Brent Baude's [post on the Red Hat Developer Blog](https://developers.redhat.com/blog/2015/01/08/creating-custom-atomic-trees-images-and-installers-part-1/) as a guide for doing my first compose. It was critical to my success in this task! I would recommend reviewing that post for more details about how this works.
 
 For this example, I booted up the latest [Fedora 22 Cloud image](https://getfedora.org/en/cloud/download/) in a VM on my workstation. (Additionally, Fedora 22 Server or Workstation should work.)
 
@@ -34,11 +34,11 @@ The first step was to install the necessary tools, which are `git` and `rpm-ostr
 
     # dnf install git rpm-ostree-toolbox
 
-With the tools installed, we are going to do a `git clone` of the [fedora-atomic git repo](https://git.fedorahosted.org/cgit/fedora-atomic.git) which contains the necessary input files for creating a Fedora Atomic `ostree` compose. (Additionally, I first made a 'working' directory to perform the compose in.)
+With the tools installed, we are going to do a `git clone` of the [fedora-atomic git repo](https://pagure.io/fedora-atomic.git) which contains the necessary input files for creating a Fedora Atomic `ostree` compose. (Additionally, I first made a 'working' directory to perform the compose in.)
 
     # mkdir /home/working
     # cd /home/working
-    # git clone https://git.fedorahosted.org/cgit/fedora-atomic.git
+    # git clone https://pagure.io/fedora-atomic.git
 
 This cloned repo includes a number of branches, including **f22**, which contains the files necessary for doing a Fedora 22 Atomic compose. Since I had the best luck with this branch, we're going to use this for the example.
 
@@ -83,7 +83,7 @@ First, we'll make the new `ostree` compose available on the network with the bui
 
 Note the number that is printed out; this is the port which the `ostree` compose is being served via HTTP. We'll need this number in the next step.
 
-Next, I booted up a [Fedora 22 Atomic host](https://getfedora.org/cloud/download/atomic.html) in a VM and checked the existing `rpm-ostree status`.
+Next, I booted up a [Fedora 22 Atomic host](https://getfedora.org/atomic/download/) in a VM and checked the existing `rpm-ostree status`.
 
 <pre><code>f22-atomic-host# rpm-ostree status
   TIMESTAMP (UTC)         VERSION   ID             OSNAME            REFSPEC
@@ -228,10 +228,10 @@ To start, we are going to need all the tools and dependencies that building `ost
 
     # yum-builddep ostree
 
-Once those dependencies have been installed, we can clone the [ostree repo](https://github.com/GNOME/ostree.git)
+Once those dependencies have been installed, we can clone the [ostree repo](https://github.com/ostreedev/ostree.git)
 
 <pre><code># cd /home/working 
-# git clone https://github.com/GNOME/ostree.git
+# git clone https://github.com/ostreedev/ostree.git
 Cloning into 'ostree'...
 remote: Counting objects: 15576, done.
 remote: Compressing objects: 100% (29/29), done.
@@ -241,7 +241,7 @@ Resolving deltas: 100% (10184/10184), done.
 Checking connectivity... done.
 </code></pre>
 
-Then we can try building it. The [README.md](https://github.com/GNOME/ostree/blob/master/README.md) in the `ostree` repo has some straightforward instructions on how to do this. I picked up some additional options to be used from [Colin Walters](https://github.com/cgwalters) along the way.
+Then we can try building it. The [README.md](https://github.com/ostreedev/ostree/blob/master/README.md) in the `ostree` repo has some straightforward instructions on how to do this. I picked up some additional options to be used from [Colin Walters](https://github.com/cgwalters) along the way.
 
 First, we use the `autogen.sh` script:
 

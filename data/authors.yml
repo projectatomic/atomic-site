@@ -90,6 +90,9 @@ ttomecek:
 
 miabbott:
   name: Micah Abbott
+  twitter: rageear
+  gravatar: b582aa830fe6ffcd445ff2d4f2ed4bcf
+  description: Quality Enginer for Red Hat focused on Atomic Host.
 
 dustymabe:
   name: Dusty Mabe
@@ -161,3 +164,20 @@ amiller:
 
 tsweeney:
   name: Tom Sweeney
+  twitter: TSweeneyRedHat
+
+nmhicks:
+  name: Nathan Hicks
+
+sayan:
+  name: Sayan Chowdhury
+
+sinnykumari:
+  name: Sinny Kumari
+
+rubao:
+  name: Ruixin Bao
+
+lobocode:
+  name: Vitor Lobo Ramos
+  twitter: loboc0de

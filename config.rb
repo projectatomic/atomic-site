@@ -188,7 +188,7 @@ require 'lib/monkeypatch_blog_date.rb'
 
 activate :piwik do |f|
     f.id = 4
-    f.domain = 'piwik-osasteam.rhcloud.com'
+    f.domain = 'tracker.osci.io'
     f.url = 'piwik'
 end
 

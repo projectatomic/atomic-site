@@ -22,7 +22,7 @@ At the end of this guide, you will have:
 |---|---|
 | Platform Host OS | Fedora 25 Workstation |
 | Virtualization | KVM with virt-manager |
-| Atomic Host OS | Fedora 25 Atomic v 25.52 |
+| Atomic Host OS | Fedora 28 Atomic v 25.89 |
 | Additional Storage | 10G per Atomic host |
 
 #### Installing using virt-manager
@@ -333,6 +333,14 @@ Once you see the pod status is Running, you can check to see which node it's run
     [fedora@atomic-master ~]$ kubectl describe pods www | grep Node
     Node:		192.168.122.11/192.168.122.11
 
-Point a web browser at the host Kubernetes created the container on. Use port 8080, since that was the host port we connected to the container port 80 in the pod definition. You should see the nginx welcome page.
+Point a web browser at the host Kubernetes created the container on. Use port 8080, since that was the host port we connected to the container port 80 in the pod definition. You should see the nginx welcome page.For example:
+
+    curl your-host:8080
+
+**Note**: In this case here we are using multiple partitions where etcd stays in the kub master. If you want to try install atomic project on single host, it's interesting to increase the size of the root partition. Let’s add a significant amount of space to the root filesystem to accommodate this:
+
+    [fedora@atomic-master ~]$ sudo lvresize --resizefs --size=+3G /dev/mapper/cah-root
+
+Or, if you prefer, allocate the data to another partition and with more available disk space.
 
 You've now created and scheduled your first kubernetes pod.  You can explore the kubernetes documentation for more information on how to build pods and services, and checkout [these ansible scripts](https://github.com/kubernetes/contrib/tree/master/ansible) for a fuller-featured cluster that includes kubernetes addons such as dns.

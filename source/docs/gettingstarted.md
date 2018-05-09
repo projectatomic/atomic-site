@@ -337,7 +337,6 @@ Point a web browser at the host Kubernetes created the container on. Use port 80
 
     curl your-host:8080
 
-
 **Note**: In this case here we are using multiple partitions where etcd stays in the kub master. If you want to try install atomic project on single host, it's interesting to increase the size of the root partition. Let’s add a significant amount of space to the root filesystem to accommodate this:
 
     [fedora@atomic-master ~]$ sudo lvresize --resizefs --size=+3G /dev/mapper/cah-root

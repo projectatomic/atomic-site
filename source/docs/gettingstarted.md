@@ -88,9 +88,12 @@ Since we want to make sure the local cache is always up, we'll create a systemd 
     [Install]
     WantedBy=multi-user.target
 
+Now reload daemon, enable, start and check status service:
+
     [fedora@atomic-master ~]$ sudo systemctl daemon-reload
     [fedora@atomic-master ~]$ sudo systemctl enable local-registry
     [fedora@atomic-master ~]$ sudo systemctl start local-registry
+    [fedora@atomic-master ~]$ sudo systemctl status local-registry
 
 ### Configuring Kubernetes master
 
@@ -148,7 +151,7 @@ We'll be setting up the etcd store that Kubernetes will use.  We're using a sing
     KUBE_ETCD_SERVERS="--etcd_servers=http://192.168.122.10:2379"
 
     # How the controller-manager, scheduler, and proxy find the kube-apiserver
-    KUBE_MASTER="--master=http://192.168.122.10:6443"
+    KUBE_MASTER="--master=http://192.168.122.10:8080"
 
 #### Apiserver service configuration
 The apiserver needs to be set to listen on all IP addresses, instead of just localhost.
@@ -175,10 +178,9 @@ The controller-manager also needs parameters for the certificates we generated.
     # Add your own!
     KUBE_CONTROLLER_MANAGER_ARGS="--service-account-private-key-file=/etc/kubernetes/certs/server.key --root-ca-file=/etc/kubernetes/certs/ca.crt"
 
-Enable and start the Kubernetes services.
+Enable, start and check the Kubernetes services.
 
-    [fedora@atomic-master ~]$ sudo systemctl enable etcd kube-apiserver kube-controller-manager kube-scheduler
-    [fedora@atomic-master ~]$ sudo systemctl start etcd kube-apiserver kube-controller-manager kube-scheduler
+    [fedora@atomic-master ~]$ sudo for SERVICES in etcd kube-apiserver kube-controller-manager kube-scheduler; do systemctl enable $SERVICES; systemctl start $SERVICES; systemctl status $SERVICES ; done
 
 ### Configuring the Flannel overlay network
 Flanneld provides a tunneled network configuration via etcd.  To push the desired config into etcd, we'll create a JSON file with the options we want and use curl to push the data.  We've selected a /12 network to create a /24 subnet per node.
@@ -217,7 +219,6 @@ As a good practice, update to the latest available Atomic tree.
     [fedora@atomic01 ~]$ sudo atomic host upgrade
     [fedora@atomic01 ~]$ sudo systemctl reboot
 
-
 ### Configuring Docker to use the cluster registry cache
 Add the local cache registry running on the master to the docker options that get pulled into the systemd unit file.
 
@@ -234,7 +235,6 @@ To set up flanneld, we need to tell the local flannel service where to find the 
     # etcd config key.  This is the configuration key that flannel queries
     # For address range assignment
     FLANNEL_ETCD_PREFIX="/atomic.io/network"
-
 
 ### Configuring Kubernetes nodes
 
@@ -320,7 +320,6 @@ To get the pod up and running, use `kubectl create`
 
     [fedora@atomic-master ~]$ kubectl create -f kube-nginx.yml
     pod "www" created
-
 
 To check the status of the containers using `kubectl get`.  At this point, the Nginx container will be downloaded and running on your nodes.
 

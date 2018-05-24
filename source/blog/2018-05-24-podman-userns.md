@@ -8,8 +8,6 @@ categories:
 - Blog
 ---
 
-## User namespaces support in Podman
-
 We recently added support for user namespaces to
 [Podman](https://github.com/projectatomic/libpod).  This has some major
 benefits for security and added flexibility when running
@@ -43,7 +41,7 @@ Discretionary Access Control at its best.
 # Changes to the Podman CLI
 
 Podman offers two ways to use user namespaces:
-### Directly specify the mappings
+## Directly specify the mappings
 
 Podman can specify the uids/gids directly using `--uidmap` and `--gidmap`.
 
@@ -62,8 +60,8 @@ mappings in place for the specified process.
 The `uid_map` table has three columns, the first one is the initial ID
 for the range in the new namespace, the second one is the initial ID
 in the parent namespace, and the third is the size of the mapping.  In
-this case, we have specified only one mapping where the UIDs [0-6999]
-in the container are mapped to the host UIDs [100000-16999].
+this case, we have specified only one mapping where the UIDs [0-69999]
+in the container are mapped to the host UIDs [100000-169999].
 Similarly for the GIDs, we can look up the `gid_map` file.
 
 
@@ -83,7 +81,7 @@ $ pgrep -U 11111 -a
 27574 sleep 10
 ```
 
-### Use /etc/subuid and /etc/subgid
+## Use /etc/subuid and /etc/subgid
 Podman can specify the mappings defined in /etc/subuid and /etc/subgid
 with the --subuidname and --subgidname options.
 On my system I have allocated 65536 UIDs/GIDs starting at 110000 for
@@ -97,12 +95,13 @@ gscrivano:110000:65536
 ```
 
 I can use these settings with:
+
 ```console
-# podman  run --subuidname gscrivano --subgidname=gscrivano alpine cat /proc/self/uid_map
+# podman  run --subuidname=gscrivano --subgidname=gscrivano alpine cat /proc/self/uid_map
          0     110000      65536
 ```
 
-## Drawbacks
+# Drawbacks
 The linux kernel does not currently support user namespace in the file
 system.  We have been working for a few years to get file system
 support (Shifting file system), but the work continues, we don’t know
@@ -148,7 +147,7 @@ have merged soon.
 But the real nirvana would be to get file UID Shifting into the file
 system which would be instantaneous.
 
-## Bottom Line
+# Bottom Line
 Podman has grown support for running one or more containers in user
 namespace.  Users can choose to run all containers in a single user
 Namespace giving them better security against container breakout

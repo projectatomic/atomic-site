@@ -53,7 +53,7 @@ mappings in place for the specified process.
 # cat /proc/self/uid_map
          0          0 4294967295
 
-# podman  run --uidmap=0:100000:70000 --gidmap=0:200000:70000 alpine cat /proc/self/uid_map
+# podman  run --uidmap=0:100000:70000 --gidmap=0:200000:70000 fedora-minimal cat /proc/self/uid_map
          0          100000      70000
 ```
 
@@ -69,7 +69,7 @@ The process has a different UID/GID inside the container than it has
 from the host:
 
 ```console
-# bin/podman run --rm  --uidmap=0:11111:70000 --gidmap=0:20000:70000 alpine sh -c 'id - u; sleep 10'
+# bin/podman run --rm  --uidmap=0:11111:70000 --gidmap=0:20000:70000 fedora-minimal sh -c 'id - u; sleep 10'
 0
 ```
 
@@ -97,7 +97,7 @@ gscrivano:110000:65536
 I can use these settings with:
 
 ```console
-# podman  run --subuidname=gscrivano --subgidname=gscrivano alpine cat /proc/self/uid_map
+# podman  run --subuidname=gscrivano --subgidname=gscrivano fedora-minimal cat /proc/self/uid_map
          0     110000      65536
 ```
 
@@ -123,14 +123,15 @@ to match the new user namespace, this will cause a long pause, while
 new inodes are created for every object in the images file system, a
 Fedora image can take 30 seconds.
 
-While we wait for a better support from the kernel, we are looking
-into using reflinks where possible, like XFS, for copying files.
-Reflinks permit to share the data blocks from different inodes, so
-that we can have files with different attributes but pointing to the
-same data blocks on the file system, this also speeds-up the copy of a
-file as we don’t have to copy all of its data.  If you have a file
-system you can mount at /var/lib/containers, you should turn on
-reflink.
+Long term, we would like to see better support in the kernel.  But,
+while we wait for better support from the kernel, we are looking into
+using a feature of XFS called reflinks.  Reflinks supports transparent
+copy-on-write within the filesystem, which will allow files to share
+the data blocks from different inodes.  This allows files to have
+different attributes while pointing to the same data blocks on the
+file system. This also speeds-up the copy of a file as we don’t have
+to copy all of its data.  If you have a file system you can mount at
+/var/lib/containers, you should turn on reflink.
 
 ```console
 # mkfs.xfs -m reflink=1 /dev/sda1

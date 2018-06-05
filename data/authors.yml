@@ -82,7 +82,7 @@ shishir:
 jeder:
   name: Jeremy Eder
   twitter: jeremyeder
-  description: Jeremy Eder is a  Principal Software Engineer, Network and Container Performance Lead at Red Hat. Jeremy specializes in measurement and analysis of kernel-related performance metrics, and using that analysis to guide performance-tuning of real-world infrastructure.
+  description: Jeremy Eder is a Principal Software Engineer, Network and Container Performance Lead at Red Hat. Jeremy specializes in measurement and analysis of kernel-related performance metrics, and using that analysis to guide performance-tuning of real-world infrastructure.
 
 ttomecek:
   name: Tomáš Tomeček
@@ -181,3 +181,9 @@ rubao:
 lobocode:
   name: Vitor Lobo Ramos
   twitter: loboc0de
+
+jdoss:
+  name: Joe Doss
+  twitter: jdoss
+  gravatar: fc455d4c6882eb88dfccb6378da6abb5
+  description: Director of Engineering Operations @KennaSecurity. Fedora/RHEL/CentOS Linux user. Passionate about enabling others to improve their lives with Open Source Software.

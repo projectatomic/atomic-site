@@ -1,9 +1,9 @@
 ---
 title: Building Kernel Modules with Podman
 author: jdoss
-date: 2018-06-06
+date: 2018-06-06 00:00:00 UTC
 layout: post
-comments: true
+comments: false
 categories:
 - Blog
 tags:
@@ -39,7 +39,7 @@ The last surrounds how packages are created in the bi-weekly Fedora Atomic Host 
 
 In this example we are building the [WireGuard](https://www.wireguard.com) kernel module, which is an extremely simple yet fast and modern VPN. For non-Atomic Fedora/CentOS/RHEL based installs, you can use the `wireguard-dkms` [RPM](https://copr.fedorainfracloud.org/coprs/jdoss/wireguard/). It uses DKMS to build and load the kernel module on boot. This doesn't help us get WireGuard running on Atomic as it will only result in failure. This leads us to building the kernel module inside of a container.
 
-Let's Check out the Dockerfile below:
+Let's check out the Dockerfile below:
 
 ```
 FROM fedora as builder

@@ -75,7 +75,9 @@ FROM rhel7
 RUN ls -l /run/walsh
 _EOF
 ```
+
 Executed Buildah
+
 ```
 # buildah bud -t secrets .
 buildah bud -t secrets -f Dockerfile.RHEL ~

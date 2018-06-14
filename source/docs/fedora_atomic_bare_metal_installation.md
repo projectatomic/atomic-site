@@ -58,7 +58,7 @@ For example, create *atomic-ks.cfg* file with the following content, for Fedora 
     user --name=atomic --groups=wheel --sshkey="ssh-rsa AAAAB3NzaC1yc2EAAAA ..."
 
     # NOTICE: This will download the the latest release from upstream, which could be slow.
-    ostreesetup --nogpg --osname="fedora-atomic" --remote="fedora-atomic-28" --url="https://kojipkgs.fedoraproject.org/atomic/28" --ref="fedora/28/x86_64/atomic-host"
+    ostreesetup --nogpg --osname="fedora-atomic" --remote="fedora-atomic-28" --url="https://kojipkgs.fedoraproject.org/atomic/repo" --ref="fedora/28/x86_64/atomic-host"
 
     # Alternately, install from the ISO media:
     # ostreesetup --osname="fedora-atomic" --remote="fedora-atomic-28" --url="file:///ostree/repo" --ref="fedora/28/x86_64/atomic-host" --nogpg
@@ -94,7 +94,7 @@ To receive updates for your Fedora Atomic installation, specify the location of 
 
     # ostree remote add --if-not-exists \
     # --set=gpgkeypath=/etc/pki/rpm-gpg/RPM-GPG-KEY-fedora-28-primary \
-    # fedora-atomic-28 https://kojipkgs.fedoraproject.org/atomic/28
+    # fedora-atomic-28 https://kojipkgs.fedoraproject.org/atomic/repo
 
 Here, *fedora-atomic-28* is used as a name for the remote repository. The URL is stored in the */etc/ostree/remotes.d/fedora-atomic.conf* configuration file. While GPG key checking is optional, it's highly recommended to prevent spoofing of installation files. A new GPG key is required for each major Fedora release at this time, but that will change when Atomic shifts to rolling upgrades.
 

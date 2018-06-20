@@ -175,5 +175,5 @@ mailing list.
 - [Fedora Change Proposal](https://fedoraproject.org/wiki/Changes/WorkstationOstree)
 - [workstation-ostree-config](https://pagure.io/workstation-ostree-config)
 - [Kalev Lember: Atomic Workstation](https://www.youtube.com/watch?v=Yc7lvkl5atE)
-- [Sanja Bonic and Colin Walters: You want a Clean Desktop OS? Containerize it.](https://www.youtube.com/watch?v=a4IPWlf)
+- [Sanja Bonic and Colin Walters: You want a Clean Desktop OS? Containerize it.](https://www.youtube.com/watch?v=a4IPWlfkJSo)
 - [Jan Pazdziora: Minimizing workstation installation](https://www.youtube.com/watch?v=eWoFpOoA-tE)

@@ -103,7 +103,7 @@ We're using a single etcd server, not a replicating cluster in this guide.  This
 
     [fedora@atomic-master ~]$ sudo vi /etc/etcd/etcd.conf
     ETCD_LISTEN_CLIENT_URLS="http://0.0.0.0:2379,http://0.0.0.0:4001"
-    ETCD_ADVERTISE_CLIENT_URLS="http://0.0.0.0:2379,http://0.0.0.0:4001"
+    ETCD_ADVERTISE_CLIENT_URLS="http://192.168.122.10:2379,http://192.168.122.10:4001"
 
 #### Generating certificates
 
@@ -158,12 +158,12 @@ The apiserver needs to be set to listen on all IP addresses, instead of just loc
 
     [fedora@atomic-master ~]$ sudo vi /etc/kubernetes/apiserver
     # The address on the local server to listen to.
-    KUBE_API_ADDRESS="--address=0.0.0.0"
+    KUBE_API_ADDRESS="--insecure-bind-address=0.0.0.0"
 
 If you need to modify the set of IPs that Kubernetes assigns to services, change the KUBE_SERVICE_ADDRESSES value. Since this guide is using the 192.168.122.0/24 and 172.16.0.0/12 networks, we can leave the default.  This address space needs to be unused elsewhere, but doesn't need to be reachable from either of the other networks.
 
     # Address range to use for services
-    KUBE_SERVICE_ADDRESSES="--portal_net=10.254.0.0/16"
+    KUBE_SERVICE_ADDRESSES="--service-cluster-ip-range=10.254.0.0/16"
 
 We'll also add parameters for the certificates we generated earlier.
 
@@ -212,7 +212,7 @@ Just to make sure we have the right config, we'll pull it via curl and parse the
     }
 
 ## Atomic Nodes
-We'll be configuring Docker to use Flannel and our cache, the configuring the Kubernetes services.  These nodes will act as the workers and run Pods and containers.  You can repeat this on as many nodes as you like to provide resources to the cluster.  In this guide, we'll set up 4 nodes.
+We'll be configuring Docker to use Flannel and our cache for configuring the Kubernetes services.  These nodes will act as the workers and run Pods and containers.  You can repeat this on as many nodes as you like to provide resources to the cluster.  In this guide, we'll set up 4 nodes.
 
 As a good practice, update to the latest available Atomic tree.
 
@@ -245,10 +245,10 @@ The address entry in the kubelet config file must match the KUBLET_ADDRESSES ent
     KUBELET_ADDRESS="--address=192.168.122.11"
 
     # You may leave this blank to use the actual hostname
-    KUBELET_HOSTNAME="--hostname_override=192.168.122.11"
+    KUBELET_HOSTNAME="--hostname-override=192.168.122.11"
 
     # location of the api-server
-    KUBELET_API_SERVER="--api_servers=http://192.168.122.10:8080"
+    KUBELET_API_SERVER="--api-servers=http://192.168.122.10:8080"
 
 Set the location of the etcd server, here we've got the single service on the master.
 
@@ -256,11 +256,18 @@ Set the location of the etcd server, here we've got the single service on the ma
     # How the controller-manager, scheduler, and proxy find the kube-apiserver
     KUBE_MASTER="--master=http://192.168.122.10:8080"
 
+Set the cluster CIDR for Kubernetes Proxy.
+
+    [fedora@atomic01 ~]$ sudo vi /etc/kubernetes/proxy
+    # Add your own!
+    KUBE_PROXY_ARGS="--cluster-cidr=10.254.0.0/16"
+
 If you created the drop-in, reload systemd and then enable the node services.  Reboot the node to make sure everything starts on boot correctly.
 
+    [fedora@atomic01 ~]$ sudo iptables --policy FORWARD ACCEPT
     [fedora@atomic01 ~]$ sudo systemctl daemon-reload
     [fedora@atomic01 ~]$ sudo systemctl enable flanneld kubelet kube-proxy
-    {fedora@atomic01 ~]$ sudo systemctl reboot
+    [fedora@atomic01 ~]$ sudo systemctl reboot
 
 ### Confirm network configuration and cluster health
 Once all of your services are started, the networking should look something like what's below.  You'll see the Flannel device that shows the selected range for this host and the docker0 bridge that has a specific subnet assigned.

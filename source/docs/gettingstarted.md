@@ -60,40 +60,16 @@ The Atomic cluster will use a local Docker registry mirror for caching with a lo
 
 Create a named container from the Docker Hub registry image, exposing the standard Docker Hub port from the container via the host.  We're using a local host directory as a persistence layer for the images that get cached for use.  The other environment variables passed in to the registry set the source registry.
 
-    [fedora@atomic-master~]$ sudo docker create -p 5000:5000 \
+    [fedora@atomic-master~]$ sudo docker run -d -p 5000:5000 --restart always \
     -v /var/lib/local-registry:/var/lib/registry \
     -e REGISTRY_STORAGE_FILESYSTEM_ROOTDIRECTORY=/var/lib/registry \
     -e REGISTRY_PROXY_REMOTEURL=https://registry-1.docker.io \
-    --name=local-registry registry:2
+    --name local-registry registry:2
 
 **Note:** We need to change the SELinux context on the directory that docker created for our persistence volume.
 
     [fedora@atomic-master ~]$ sudo mkdir -p /var/lib/local-registry
     [fedora@atomic-master ~]$ sudo chcon -Rvt svirt_sandbox_file_t /var/lib/local-registry
-
-Since we want to make sure the local cache is always up, we'll create a systemd unit file to start it and make sure it stays running.  Reload the systemd daemon and start the new local-registry service.
-
-    [fedora@atomic-master ~]$ sudo vi /etc/systemd/system/local-registry.service
-    [Unit]
-    Description=Local Docker Mirror registry cache
-    Requires=docker.service
-    After=docker.service
-
-    [Service]
-    Restart=on-failure
-    RestartSec=10
-    ExecStart=/usr/bin/docker start -a %p
-    ExecStop=-/usr/bin/docker stop -t 2 %p
-
-    [Install]
-    WantedBy=multi-user.target
-
-Now reload daemon, enable, start and check status service:
-
-    [fedora@atomic-master ~]$ sudo systemctl daemon-reload
-    [fedora@atomic-master ~]$ sudo systemctl enable local-registry
-    [fedora@atomic-master ~]$ sudo systemctl start local-registry
-    [fedora@atomic-master ~]$ sudo systemctl status local-registry
 
 ### Configuring Kubernetes master
 

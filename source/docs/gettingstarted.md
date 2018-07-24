@@ -77,6 +77,12 @@ Create a named container from the Docker Hub registry image, exposing the standa
 
 We're using a single etcd server, not a replicating cluster in this guide.  This makes etcd simple, we just need to listen for client connections, then enable and start the daemon with all the rest of the Kubernetes services.  For simplicity, we'll have etcd listen on all IP addresses.  The official port for etcd clients is 2379, but we'll add 4001 as well since that was widely used in guides to this point.
 
+We first install the etcd package:
+
+    [fedora@atomic-master ~]$ sudo rpm-ostree install etcd
+
+Then edit the configuration file:
+
     [fedora@atomic-master ~]$ sudo vi /etc/etcd/etcd.conf
     ETCD_LISTEN_CLIENT_URLS="http://0.0.0.0:2379,http://0.0.0.0:4001"
     ETCD_ADVERTISE_CLIENT_URLS="http://192.168.122.10:2379,http://192.168.122.10:4001"

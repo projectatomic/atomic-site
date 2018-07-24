@@ -2,7 +2,6 @@
 - First Steps:
   Introduction: /docs/introduction
   Quick Start Guide: /docs/quickstart
-  Getting Started Guide: /docs/gettingstarted
   Bare Metal Installation (Fedora): /docs/fedora_atomic_bare_metal_installation
 - In Depth:
   rpm-ostree OS Update System: /docs/os-updates
@@ -11,7 +10,6 @@
   Building Images: /docs/docker-building-images
   Image Author Guidance: /docs/docker-image-author-guidance
   About SELinux: /docs/docker-and-selinux
-  Managing Containers: /docs/kubernetes
   Atomic Host Networking: /docs/atomic-host-networking
 - Contributing:
   How to Contribute: /docs/#contribute

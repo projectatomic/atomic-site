@@ -1,6 +1,6 @@
 # Project Atomic Quick Start Guide
 
-We recommend reading the [Getting Started Guide](http://www.projectatomic.io/docs/gettingstarted) and Concepts Guide if you're entirely new to the concept of Atomic and Docker. But, we also wanted to provide a **Quick Start Guide** (or "guide for the impatient") for folks who just want to set up a single Atomic host and see what all the fuss around Docker and Atomic is about.
+This a **Quick Start Guide** (or "guide for the impatient") for folks who just want to set up a single Atomic Host and see what all the fuss around Docker and Atomic is about.
 
 ## What You Need
 
@@ -23,7 +23,7 @@ There are three basic steps we'll do for each virtualization provider before boo
 
 ## Prep the cloud-init source ISO
 
-In order to pass run time customizations to an Atomic host, we use [**cloud-init**](http://cloudinit.readthedocs.org/en/latest/) .  
+In order to pass run time customizations to an Atomic host, we use [**cloud-init**](http://cloudinit.readthedocs.org/en/latest/) .
 
 You will need to create a metadata ISO to supply critical data when your Atomic host boots.  System data is presented via the `meta-data` file and configuration data via the `user-data` file.  We will be setting up the password and ssh key for the default user.  The metatdata ISO is created on the machine running your virtualization provider.
 

@@ -8,7 +8,7 @@ For a summary of the why and how, please read [Atomic Workstation](https://fedor
 
 ## Quickstart
 
-Download the [.iso](https://download.fedoraproject.org/pub/fedora/linux/releases/27/WorkstationOstree/x86_64/iso/) and use it to create installation media.
+Download the [.iso](https://download.fedoraproject.org/pub/fedora/linux/releases/28/Workstation/x86_64/iso/) and use it to create installation media.
 
 For example, if you run the GNOME desktop, you can use the *Write to disk* capability of the Nautilus file browser to create an installation DVD. Alternatively, you can write the installation ISO image to a USB device with the `dd` command or by using the application `ISO Image Writer` which comes pre-installed with Fedora. With dd, if you had a USB thumbdrive mounted as `/dev/sdb`, you might use this command (be careful to get the drive location right):
 

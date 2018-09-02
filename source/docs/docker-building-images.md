@@ -13,9 +13,9 @@ Docker is known primarily for the following features:
 
 Resource management and process isolation come from Linux Containers (LXC). Some security is built into resource management and process isolation. The added security of SELinux is also separate from Docker. The first three features demonstrate the value of containers. Docker, however, provides extra tooling beyond lxc-tools.  
 
-One of the more important features of Docker is *image content management*, or *image layering*. Docker's layered approach to images (or content) provides a very powerful abstraction for building up application containers.  An image provides the foundation layer for a container.  New tools, applications, content, patches, etc. form additional layers on the foundation.  Containers are instantiations of these combined entities, which can then be bundled into it's own image.
+One of the more important features of Docker is *image content management*, or *image layering*. Docker's layered approach to images (or content) provides a very powerful abstraction for building up application containers.  An image provides the foundation layer for a container.  New tools, applications, content, patches, etc. form additional layers on the foundation.  Containers are instantiations of these combined entities, which can then be bundled into its own image.
 
-Docker allows you to build containers using a Dockerfile.  The Dockerfile describes a base image for the build using the `FROM` instruction. `FROM` implicitly uses a image registry from which the base image is pulled. This can be `docker.io` or some other (perhaps internal) registry. 
+Docker allows you to build containers using a Dockerfile.  The Dockerfile describes a base image for the build using the `FROM` instruction. `FROM` implicitly uses an image registry from which the base image is pulled. This can be `docker.io` or some other (perhaps internal) registry. 
 
 The additional layers of a Docker container are created with directives within the Dockerfile.  The `RUN` directive is used to run commands in running image.  Extra packages can be installed using the `RUN` instruction and the Linux distribution's package installation tool. For Fedora and Red Hat Enterprise Linux this tool is `yum`.  Scripts and other content can be added to the layer by using the `ADD` instruction from local directories or a URL.
 
@@ -73,7 +73,7 @@ Check that this worked by running:
 
 You should see both `fedora-httpd` and `fedora` listed.
 
-The administrator now has a new image that contains a Apache Web server. The administrator can build a Dockerfile based on that image and add the appropriate files. Given the relative path to a tarball of the site content, Docker automatically untars or unzips the files in a source tar or zip file into the target directory. Create a simple index.html and add it to a tarball called `mysite.tar` in the current directory.  
+The administrator now has a new image that contains an Apache Web server. The administrator can build a Dockerfile based on that image and add the appropriate files. Given the relative path to a tarball of the site content, Docker automatically untars or unzips the files in a source tar or zip file into the target directory. Create a simple index.html and add it to a tarball called `mysite.tar` in the current directory.  
 
 Here is the Dockerfile to add the web site content to the new base image and launch Apache on port 80:
 
@@ -109,7 +109,7 @@ This approach is a great way to learn about Docker and building images. It is al
 
 The administrator may decide that building interactively is tedious and error-prone. Instead the administrator could create a Dockerfile that layers on the Apache Web server and the web site content in one build. 
 
-A good practice is to make a sub-directory with a related name and create a Dockerfile in that directory. E.g. a directory called mongo may contain a Dockerfile for a MongoDB image, or a directory called httpd may container an Dockerfile for an Apache web server. Copy or create all other content that you wish to add to the image into the new directory.  Keep in mind that the ADD directive context is relative to this new directory.
+A good practice is to make a sub-directory with a related name and create a Dockerfile in that directory. E.g. a directory called mongo may contain a Dockerfile for a MongoDB image, or a directory called httpd may contain a Dockerfile for an Apache web server. Copy or create all other content that you wish to add to the image into the new directory.  Keep in mind that the ADD directive context is relative to this new directory.
 
     # mkdir httpd
     # cp mysite.tar httpd/
@@ -157,7 +157,7 @@ If prototyping and trouble shooting then the user probably wants to do an intera
 
 ### Complete Satisfactory Single Build
 
-If the user is satisfied with a specific image that has been build using the interactive approach and they believe it might be reused elsewhere, then it is recommended to use the single Dockerfile approach that builds it all in one build.
+If the user is satisfied with a specific image that has been built using the interactive approach and they believe it might be reused elsewhere, then it is recommended to use the single Dockerfile approach that builds it all in one build.
 
 ## Filesystem Considerations
 

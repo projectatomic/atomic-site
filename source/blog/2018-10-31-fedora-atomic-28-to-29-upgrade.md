@@ -10,7 +10,9 @@ published: true
 # Introduction
 
 This week we put out the [first](https://lists.projectatomic.io/projectatomic-archives/atomic-devel/2018-October/msg00006.html)
-release of Fedora 29 Atomic Host.
+release of Fedora 29 Atomic Host. This will be the last major release
+of Fedora Atomic Host as we prepare for [Fedora CoreOS](https://coreos.fedoraproject.org/)
+which will be released in Fedora 30.
 
 In this post we'll quickly list some known issues and then talk about updating 
 an existing Fedora 28 Atomic Host system to Fedora 29. We'll cover preparing
@@ -19,7 +21,7 @@ the system for upgrade and performing the upgrade.
 READMORE
 
 **NOTE:** If you really don't want to upgrade to Fedora 29 see the
-          later section: *Appendix B: Fedora 29 Atomic Host Life Support*.
+          later section: *Appendix B: Fedora 28 Atomic Host Life Support*.
 
 # Known Issues
 
@@ -59,14 +61,6 @@ retrieve more than 1 GiB of new content (not shared with Fedora
 
 Now we should be ready for the upgrade. If you are hosting any services
 on your instance you may want to prepare for them to have some downtime.
-
-**NOTE:** If you are running Kubernetes you should check out the later
-          section on Kubernetes: *Appendix A: Upgrading Systems with Kubernetes*.
-
-**NOTE:** If you are running OpenShift Origin (i.e. via being set up
-          by the
-          [openshift-ansible installer](http://www.projectatomic.io/blog/2016/12/part1-install-origin-on-f25-atomic-host/))
-          the upgrade should not need any preparation.
 
 Currently we are on Fedora 28 Atomic Host using the
 `fedora/28/x86_64/atomic-host` ref.
@@ -210,8 +204,7 @@ take advantage of regular testing and formal releases every two weeks.
 # Conclusion
 
 As in the past, the transition to Fedora 29 Atomic Host should be an
-easy process. If you have issues or want to be involved in the future
-direction of Atomic Host please join us in IRC (#atomic on
+easy process. If you have issues please join us in IRC (#atomic on
 [freenode](https://freenode.net/)) or on the
 [atomic-devel](https://lists.projectatomic.io/mailman/listinfo/atomic-devel)
 mailing list.

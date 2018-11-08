@@ -78,7 +78,7 @@ Deployments:
 
 
 In order to do the upgrade we need to add the location of
-the Fedora 28 repository as a new remote (similar to a
+the Fedora 29 repository as a new remote (similar to a
 git remote) for `ostree` to know about:
 
 ```nohighlight

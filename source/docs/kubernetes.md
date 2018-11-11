@@ -14,7 +14,7 @@ Fedora's Kubernetes [is packaged](https://apps.fedoraproject.org/packages/kubern
 
 ### Deployment
 
-The simplest and most complete way to bring up a Kubernetes cluster with Fedora Atomic Host is to use the upstream [kubernetes ansible scripts](https://github.com/kubernetes/contrib/tree/master/ansible). For a more manual approach, consult the [getting started guide](http://www.projectatomic.io/docs/gettingstarted/).
+The simplest and most complete way to bring up a Kubernetes cluster with Fedora Atomic Host is to use the upstream [kubernetes ansible scripts](https://github.com/kubernetes-incubator/kubespray). For a more manual approach, consult the [getting started guide](http://www.projectatomic.io/docs/gettingstarted/).
 
 Up until late 2016, Fedora's kubernetes packages were based on a version of kubernetes adapted from openshift origin, which itself was adapted from upstream kubernetes. This arrangement led to delays between upstream kubernetes releases and Fedora's kubernetes releases. Currently, Fedora's kubernetes is based directly on upstream, which has enabled Fedora to significantly narrow the release gap.
 

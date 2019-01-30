@@ -81,6 +81,8 @@ We first install the etcd package:
 
     [fedora@atomic-master ~]$ sudo rpm-ostree install etcd
 
+**Note:** If you have installed etcd [as a system container](https://www.projectatomic.io/blog/2017/11/migrating-kubernetes-on-fedora-atomic-host-27/), do not perform this step.
+
 Then edit the configuration file:
 
     [fedora@atomic-master ~]$ sudo vi /etc/etcd/etcd.conf

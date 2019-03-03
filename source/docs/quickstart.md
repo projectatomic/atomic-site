@@ -37,7 +37,7 @@ You will need to create a metadata ISO to supply critical data when your Atomic 
 
     **Note:** The #cloud-config directive at the beginning of the file is mandatory, not a comment.
 
-    If you have multiple admins and ssh keys you'd like to access the default user, you can add a new `ssh-rsa` line.
+    This file is the configuration of a user with a temporary, single-use password and an ssh key.  Since no username is specified; the default username is fedora or centos, depending on the virtual machine image used.  If you have multiple admins and ssh keys you'd like to access the default user, you can add a new `ssh-rsa` line.
 
         $ vi user-data
         #cloud-config

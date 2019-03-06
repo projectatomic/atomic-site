@@ -132,7 +132,7 @@ We'll be setting up the etcd store that Kubernetes will use.  We're using a sing
 
     [fedora@atomic-master ~]$ sudo vi /etc/kubernetes/config
     # Comma separated list of nodes in the etcd cluster
-    KUBE_ETCD_SERVERS="--etcd_servers=http://192.168.122.10:2379"
+    KUBE_ETCD_SERVERS="--etcd-servers=http://192.168.122.10:2379"
 
     # How the controller-manager, scheduler, and proxy find the kube-apiserver
     KUBE_MASTER="--master=http://192.168.122.10:8080"

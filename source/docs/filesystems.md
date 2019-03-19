@@ -57,7 +57,7 @@ backend that works everywhere.
 
 The devicemapper backend uses the device-mapper thin provisioning
 module (dm-thinp) to implement layers. Device-mapper is the kernel
-part of the LVM2 logical volumes system, so this is is a block-level
+part of the LVM2 logical volumes system, so this is a block-level
 copy-on-write system.
 
 The thin provisioning module takes two block devices (the data and the

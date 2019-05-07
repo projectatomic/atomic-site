@@ -25,7 +25,8 @@ Cockpit also makes it easy to monitor and administer Docker containers running o
 
 ## Starting and Using Cockpit
 
-1. After starting your atomic host, you need to run the `cockpit` container:
+1. After starting your atomic host, you need to install and run the `cockpit` container:
+    * `$ sudo atomic install cockpit/ws`
     * `$ sudo atomic run cockpit/ws`
 2. You can now use the `cockpit` management interface at `http://yourhost:9090`
 

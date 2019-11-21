@@ -7,7 +7,7 @@ published: true
 ---
 
 **TL;DR** *Fedora 29 will be End Of Life [soon](https://lists.fedoraproject.org/archives/list/devel@lists.fedoraproject.org/message/VUK3CJ5LO4ROUH3JTCDVHYAVVYAOCU62/).*
-          *With it Fedora Atomic Host will have it's last incremental release (based on*
+          *With it Fedora Atomic Host will have its last incremental release (based on*
           *the Fedora 29 stream). Please move to the Fedora CoreOS preview if you can.*
 
 READMORE
@@ -21,7 +21,6 @@ Fedora Atomic Host to be released.
 Fedora 29 Atomic Host has served us well, but with Fedora 29 End of
 Life [coming soon](https://lists.fedoraproject.org/archives/list/devel@lists.fedoraproject.org/message/VUK3CJ5LO4ROUH3JTCDVHYAVVYAOCU62/)
 , so will the last release of Fedora 29 Atomic Host.
-
 The next release of Fedora 29 Atomic Host (in the next few weeks) will be
 the last two-week release. It will contain all of the latest content
 from Fedora 29. After that release, Fedora 29, and Fedora 29 Atomic

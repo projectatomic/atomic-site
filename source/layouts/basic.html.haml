@@ -41,6 +41,8 @@
     - if data.page.stylesheet
       = stylesheet_link_tag "global", data.page.stylesheet
 
+    = partial 'eol'
+
   %body{:class => (current_page.data.page_classes || '') + " " + page_classes + " source-#{current_page.source_file.split('.').last}" }
 
     = yield
@@ -48,7 +50,6 @@
     = javascript_include_tag 'application'
 
     = yield_content :tail
-
 
     - if build?
 

@@ -2,11 +2,10 @@ GEM
   remote: https://rubygems.org/
   remote: https://rails-assets.org/
   specs:
-    activesupport (4.2.10)
-      i18n (~> 0.6, >= 0.6.9)
-      json (~> 2.1.0, >= 1.7.7)
+    activesupport (4.2.11.3)
+      i18n (~> 0.7)
       minitest (~> 5.1)
-      thread_safe (~> 0.1)
+      thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
     addressable (2.3.8)
     asciidoctor (1.5.2)
@@ -62,13 +61,13 @@ GEM
     htmlentities (4.3.3)
     http_parser.rb (0.6.0)
     i18n (0.7.0)
-    json (2.1.0)
+    json (2.5.1)
     kramdown (1.6.0)
     launchy (2.4.3)
       addressable (~> 2.3)
     less (2.6.0)
       commonjs (~> 0.2.7)
-    libv8 (3.16.14.7)
+    libv8 (3.16.14.19)
     listen (2.10.0)
       celluloid (~> 0.16.0)
       rb-fsevent (>= 0.9.3)
@@ -124,7 +123,7 @@ GEM
       middleman-core (~> 3.2)
       rouge (~> 1.0)
     mini_portile2 (2.3.0)
-    minitest (5.5.1)
+    minitest (5.14.4)
     multi_json (1.11.0)
     net-sftp (2.1.2)
       net-ssh (>= 2.6.5)
@@ -150,7 +149,7 @@ GEM
     rb-inotify (0.9.5)
       ffi (>= 0.5.0)
     redcarpet (3.2.3)
-    ref (1.0.5)
+    ref (2.0.0)
     rouge (1.8.0)
     ruby18_source_location (0.2)
     sass (3.4.13)
@@ -168,16 +167,16 @@ GEM
       tilt (~> 1.1)
     stringex (2.5.2)
     therubyracer (0.12.3)
-      libv8 (~> 3.16.14.0)
+      libv8 (~> 3.16.14.15)
       ref
     thor (0.19.1)
-    thread_safe (0.3.5)
+    thread_safe (0.3.6)
     tilt (1.4.1)
     timers (4.0.1)
       hitimes
     twitter-text (1.11.0)
       unf (~> 0.1.0)
-    tzinfo (1.2.2)
+    tzinfo (1.2.9)
       thread_safe (~> 0.1)
     uber (0.0.13)
     uglifier (2.7.2)
@@ -198,7 +197,7 @@ PLATFORMS
 
 DEPENDENCIES
   asciidoctor
-  bootstrap-sass (= 3.0.0.0)
+  bootstrap-sass (~> 3)
   builder (~> 3.0)
   chronic
   coderay
@@ -225,3 +224,6 @@ DEPENDENCIES
   therubyracer
   wdm (~> 0.1.0)
   wikicloth
+
+BUNDLED WITH
+   1.17.3

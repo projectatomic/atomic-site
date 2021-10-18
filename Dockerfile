@@ -1,7 +1,6 @@
-FROM fedora:25
-MAINTAINER jberkus@redhat.com
+FROM docker.io/fedora:26
 WORKDIR /tmp
-RUN dnf install -y tar libcurl-devel zlib-devel patch rubygem-bundler ruby-devel git make gcc gcc-c++ redhat-rpm-config && dnf clean all
+RUN dnf update -y && dnf install -y tar libcurl-devel zlib-devel patch rubygem-bundler ruby-devel git make gcc gcc-c++ redhat-rpm-config ImageMagick && dnf clean all
 
 ADD config.rb /tmp/config.rb
 #ADD data /tmp/data
